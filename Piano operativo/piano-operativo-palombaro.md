@@ -176,13 +176,13 @@ Sono le sottofasi che, se ritardano, fanno slittare la consegna. Le altre hanno 
 - **Quando:** lun 12 → mer 14 ott (mentre arrivano i pacchi) · **Scadenza:** mer 14 ott · **Impegno:** ~2,5 h · **Prerequisiti:** nessuno
 - **Obiettivo:** avere tutti gli strumenti installati e verificati prima di toccare l'hardware.
 - **Attività:**
-  - [ ] Creare le cartelle del progetto (vedi "Struttura della cartella di progetto").
-  - [ ] Inizializzare git e configurare il backup (T2).
-  - [ ] Creare `diario.md` dal modello (T1).
-  - [ ] Installare VS Code + PlatformIO e compilare un programma di prova per ESP32 (basta che compili, l'ESP32 può non essere ancora arrivato).
-  - [ ] Installare Python 3 con ambiente virtuale e le librerie OpenCV, pyserial, numpy, matplotlib.
-  - [ ] Verificare che il Mac veda l'iPhone come webcam (Continuity Camera) e che OpenCV ne mostri il video.
-  - [ ] Verificare MATLAB con Control System Toolbox e Simulink (licenza Sapienza).
+  - [x] Creare le cartelle del progetto (vedi "Struttura della cartella di progetto").
+  - [x] Inizializzare git e configurare il backup (T2).
+  - [x] Creare `diario.md` dal modello (T1).
+  - [x] Installare VS Code + PlatformIO e compilare un programma di prova per ESP32 (basta che compili, l'ESP32 può non essere ancora arrivato).
+  - [x] Installare Python 3 con ambiente virtuale e le librerie OpenCV, pyserial, numpy, matplotlib.
+  - [x] Verificare che il Mac veda l'iPhone come webcam (Continuity Camera) e che OpenCV ne mostri il video.
+  - [x] Verificare MATLAB con Control System Toolbox e Simulink (licenza Sapienza).
 - **Output:** cartelle create, primo commit, ambiente funzionante.
 - **Fatto quando:** OpenCV mostra il video dell'iPhone, PlatformIO compila, MATLAB apre Simulink.
 

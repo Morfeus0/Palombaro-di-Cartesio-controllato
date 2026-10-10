@@ -10,14 +10,16 @@
 - Aggiunti `.gitignore` e questo diario.
 - Creato l'ambiente virtuale Python (`.venv`) con OpenCV, pyserial, numpy, matplotlib; versioni congelate in `pc/requirements.txt`.
 - Creato `pc/test_camera.py` per provare l'iPhone come webcam.
-- Creato il progetto PlatformIO di prova in `firmware/` (ESP32 Dev Module, framework Arduino).
+- Creato il progetto PlatformIO di prova in `firmware/` (ESP32 Dev Module, framework Arduino); compila (RAM 6,6 %, Flash 20,4 %).
+- Creato il repository privato su GitHub e fatto il primo push (T2).
+- Provato l'iPhone come webcam con `pc/test_camera.py`: funziona. Indice telecamera **0**, collegamento **Wi-Fi** (stessa rete del Mac) con Bluetooth attivo, senza cavo. Il contatore mostra la media dall'avvio, quindi sale piano: da 24,4 a 28,5 fps nei primi secondi, in avvicinamento ai 30 fps nominali (soglia del piano: 25 fps).
 
-**Ancora da fare per chiudere la 1.1:**
-- Installare MATLAB + Simulink + Control System Toolbox (licenza Sapienza) e verificare `tf(1,[1 1])` e `simulink`.
-- Provare `pc/test_camera.py` con l'iPhone (Continuity Camera) e annotare qui indice della telecamera e fps.
-- Creare il repository privato su GitHub e fare il primo push (T2).
+- Installato MATLAB R2026b (licenza accademica) con Simulink e Control System Toolbox. Verificato: `tf(1,[1 1])` stampa `1/(s+1)` (funzione di trasferimento a tempo continuo) e `simulink` apre la Start Page.
+
+**Sottofase 1.1 chiusa:** OpenCV mostra il video dell'iPhone, PlatformIO compila, MATLAB apre Simulink.
 
 **Problemi:**
+- Il contatore fps di `pc/test_camera.py` è la media dall'avvio, non il valore istantaneo: sale lentamente verso i 30 fps. Per la misura vera (2.2) servirà una media mobile.
 
 **Decisioni (e perché):**
 - Video (`media/*.mp4`, `*.mov`) fuori da git perché pesanti; i CSV di `dati/` restano versionati per poter riprodurre i risultati.
@@ -25,4 +27,4 @@
 
 **Foto/file:**
 
-**Prossimo passo:** chiudere le tre voci sopra, poi sottofase 1.2 (costruire e tarare il palombaro).
+**Prossimo passo:** sottofase 1.2 (costruire e tarare il palombaro).
