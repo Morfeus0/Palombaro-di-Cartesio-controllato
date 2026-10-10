@@ -1,0 +1,338 @@
+<!doctype html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<title>Proposta – Palombaro di Cartesio</title>
+<style>
+  @page { size: A4; margin: 0; }
+  :root {
+    --ink: #0f2233;
+    --muted: #55687a;
+    --line: #c8d5de;
+    --water: #1f86ad;
+    --water-soft: #e3f2f8;
+    --alert: #c8412b;
+    --alert-soft: #fbe9e5;
+    --ok: #2d7a4f;
+    --paper: #ffffff;
+    --font-body: "Avenir Next", "Helvetica Neue", Arial, sans-serif;
+    --font-display: "Charter", "Iowan Old Style", Georgia, serif;
+    --font-mono: "SF Mono", Menlo, monospace;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { background: var(--paper); }
+  body {
+    width: 210mm; height: 297mm; overflow: hidden;
+    padding: 8mm 9mm 7mm;
+    font-family: var(--font-body); font-size: 7.15pt; line-height: 1.3; color: var(--ink);
+    -webkit-print-color-adjust: exact; print-color-adjust: exact;
+    display: flex; flex-direction: column; gap: 2.1mm;
+  }
+  h2 {
+    font-family: var(--font-body); font-size: 7.4pt; font-weight: 700;
+    letter-spacing: .09em; text-transform: uppercase; color: var(--water);
+    border-bottom: 1px solid var(--line); padding-bottom: .6mm; margin-bottom: 1.2mm;
+    display: flex; align-items: baseline; gap: 1.6mm;
+  }
+  h2 .n { color: var(--ink); font-family: var(--font-mono); font-size: 7pt; }
+  p + p { margin-top: 1mm; }
+  b { font-weight: 650; }
+  .mono { font-family: var(--font-mono); font-size: 7pt; }
+  .alert { color: var(--alert); font-weight: 650; }
+
+  header { display: grid; grid-template-columns: 1fr auto; align-items: end; gap: 4mm;
+           border-bottom: 2.2px solid var(--ink); padding-bottom: 2mm; }
+  .kicker { font-size: 6.8pt; letter-spacing: .12em; text-transform: uppercase; color: var(--muted); font-weight: 600; }
+  h1 { font-family: var(--font-display); font-size: 18.5pt; line-height: 1.05; font-weight: 700; letter-spacing: -.01em; margin-top: .8mm; }
+  h1 em { font-style: italic; font-weight: 400; color: var(--water); }
+  .sub { font-family: var(--font-display); font-size: 9.6pt; font-style: italic; color: var(--muted); margin-top: .6mm; }
+  .who { text-align: right; font-size: 7.4pt; line-height: 1.45; }
+  .who strong { font-size: 8.6pt; }
+
+  .row { display: grid; gap: 4mm; }
+  .r1 { grid-template-columns: 1.14fr .86fr; }
+  .r3 { grid-template-columns: 1.25fr .75fr; }
+  .r5 { grid-template-columns: 1fr 1fr 1fr; }
+
+  .eq { font-family: var(--font-mono); font-size: 6.9pt; background: var(--water-soft);
+        border-left: 2px solid var(--water); padding: 1mm 1.6mm; margin: 1mm 0; line-height: 1.5; }
+  .callout { background: var(--alert-soft); border-left: 2px solid var(--alert); padding: 1mm 1.6mm; margin-top: 1mm; }
+
+  figure svg { width: 100%; height: auto; display: block; }
+  figcaption { font-size: 6.6pt; color: var(--muted); margin-top: .6mm; }
+
+  table { width: 100%; border-collapse: collapse; font-size: 6.75pt; }
+  th { text-align: left; font-weight: 650; font-size: 6.5pt; text-transform: uppercase; letter-spacing: .06em;
+       color: var(--muted); border-bottom: 1px solid var(--ink); padding: .4mm 1mm; }
+  td { border-bottom: 1px solid var(--line); padding: .3mm 1mm; vertical-align: top; }
+  td:first-child { font-weight: 600; white-space: nowrap; }
+  td.wrap { white-space: normal; }
+  tr.grp td { background: var(--water-soft); font-weight: 700; font-size: 6.4pt; letter-spacing: .07em;
+              text-transform: uppercase; color: var(--water); padding: .3mm 1mm; border-bottom: none; }
+  .cost td:last-child, .cost th:last-child { text-align: right; white-space: nowrap; }
+  .cost td:first-child { font-weight: 400; white-space: normal; }
+  .cost tr.tot td { border-top: 1.4px solid var(--ink); border-bottom: none; font-weight: 700; font-size: 7.6pt; }
+  .note { font-size: 6.6pt; color: var(--muted); margin-top: .8mm; }
+
+  ul { list-style: none; }
+  li { padding-left: 3mm; position: relative; margin-bottom: .55mm; }
+  li::before { content: ""; position: absolute; left: .4mm; top: 1.45mm; width: 1.2mm; height: 1.2mm; background: var(--water); }
+  .lv { display: grid; grid-template-columns: 13mm 1fr; gap: .8mm 1.5mm; }
+  .tag { font-size: 6.2pt; font-weight: 700; letter-spacing: .07em; text-align: center; color: #fff; padding: .2mm 0; align-self: start; margin-top: .2mm; }
+  .t-base { background: var(--ok); } .t-target { background: var(--water); } .t-extra { background: var(--ink); }
+  .risk li::before { background: var(--alert); }
+
+  footer { margin-top: auto; border-top: 1px solid var(--line); padding-top: 1.2mm; font-size: 6.3pt; color: var(--muted); line-height: 1.4; }
+  footer b { color: var(--ink); }
+</style>
+</head>
+<body>
+
+<header>
+  <div>
+    <div class="kicker">Proposta di progetto · Automazione (1041466) · A.A. 2026/27</div>
+    <h1>Il Palombaro di Cartesio <em>controllato</em></h1>
+    <div class="sub">Stabilizzazione in quota di un sistema idrostatico instabile in anello aperto</div>
+  </div>
+  <div class="who">
+    <strong>Gabriele Caruso</strong><br>
+    Matricola 2169927<br>
+    Docente: Prof. Alessandro Giuseppi<br>
+    Sapienza – DIAG · Ottobre 2026
+  </div>
+</header>
+
+<section class="row r1">
+  <div>
+    <h2><span class="n">01</span>Obiettivo</h2>
+    <p>Realizzare un sistema di controllo in retroazione che mantenga un <b>diavoletto di Cartesio</b> (contagocce con bolla d'aria) <b>sospeso a una quota arbitraria</b> in una bottiglia d'acqua sigillata, agendo <b>solo sulla pressione dell'aria</b> tramite una siringa motorizzata. Senza controllo il palombaro non resta mai a mezz'acqua: <span class="alert">affonda o riemerge</span>.</p>
+
+    <h2 style="margin-top:2mm"><span class="n">02</span>Principio fisico e modello</h2>
+    <p><b>Pascal</b>: la pressione imposta in testa si trasmette a tutta l'acqua. <b>Boyle</b>: la bolla si comprime (<span class="mono">pV = cost</span>). <b>Archimede</b>: meno volume ⇒ meno spinta ⇒ il palombaro scende. Con <i>z</i> = profondità (verso il basso):</p>
+    <div class="eq">
+      m·z̈ = m·g − ρg·[V<sub>s</sub> + V<sub>a0</sub>·p<sub>0</sub> / (p + ρgz)] − c·ż<br>
+      G(s) = Δz/Δp = b / (m·s² + c·s − <span class="alert">k</span>),&nbsp; k = ρ²g²V<sub>a</sub>/(p+ρgz*) &gt; 0
+    </div>
+    <p>Scendendo, la pressione idrostatica (~1 kPa ogni 10 cm) comprime ancora la bolla: <b>retroazione positiva naturale</b> ⇒ polo reale positivo (stima ≈ +0,5 rad/s). È la <i>fold catastrophe</i> descritta in letteratura [2].</p>
+    <div class="callout">Routh con controllore PD: stabilità in anello chiuso ⇔ <span class="mono">K<sub>p</sub> &gt; k/b</span> e <span class="mono">K<sub>d</sub> &gt; −c/b</span>. Il termine derivativo fornisce lo smorzamento che l'acqua da sola non garantisce.</div>
+  </div>
+
+  <figure>
+    <svg viewBox="0 0 320 236" font-family="Avenir Next, Helvetica Neue, Arial" font-size="7.4" fill="#0f2233">
+      <defs>
+        <marker id="ar" viewBox="0 0 6 6" refX="5" refY="3" markerWidth="5" markerHeight="5" orient="auto"><path d="M0,0 L6,3 L0,6 z" fill="#0f2233"/></marker>
+      </defs>
+      <!-- bottle -->
+      <rect x="146" y="16" width="26" height="8" rx="1.5" fill="#0f2233"/>
+      <path d="M150 24 L150 36 Q128 44 128 60 L128 214 Q128 222 136 222 L182 222 Q190 222 190 214 L190 60 Q190 44 168 36 L168 24 Z" fill="#fff" stroke="#0f2233" stroke-width="1.4"/>
+      <path d="M129.2 72 L188.8 72 L188.8 214 Q188.8 220.8 182 220.8 L136 220.8 Q129.2 220.8 129.2 214 Z" fill="#e3f2f8"/>
+      <line x1="129" y1="72" x2="189" y2="72" stroke="#1f86ad" stroke-width="1" stroke-dasharray="3 2"/>
+      <text x="172" y="64" text-anchor="middle" fill="#55687a" font-size="6.6">aria</text>
+      <!-- BMP280 -->
+      <rect x="152" y="38" width="14" height="8" fill="#0f2233"/>
+      <line x1="166" y1="42" x2="194" y2="42" stroke="#0f2233" stroke-width=".6"/>
+      <text x="196" y="44" font-size="6.6">BMP280 (pressione p)</text>
+      <!-- diver -->
+      <g transform="translate(159 128)">
+        <rect x="-4" y="-16" width="8" height="5" rx="2.5" fill="#c8412b"/>
+        <rect x="-4.5" y="-11" width="9" height="24" rx="1.5" fill="#fff" stroke="#0f2233" stroke-width="1"/>
+        <rect x="-3.6" y="2" width="7.2" height="10.2" fill="#9fd2e6"/>
+        <path d="M-4.5 13 L-2 19 L2 19 L4.5 13" fill="#fff" stroke="#0f2233" stroke-width="1"/>
+        <rect x="-2.2" y="19" width="4.4" height="3" fill="#7a5a2e"/>
+      </g>
+      <line x1="200" y1="138" x2="166" y2="124" stroke="#0f2233" stroke-width=".6"/>
+      <text x="202" y="140" font-size="6.6">palombaro: bolla</text>
+      <text x="202" y="148" font-size="6.6">d'aria + zavorra</text>
+      <!-- z arrow -->
+      <line x1="138" y1="73" x2="138" y2="110" stroke="#c8412b" stroke-width="1.1" marker-end="url(#ar)"/>
+      <text x="140.5" y="94" fill="#c8412b" font-weight="700" font-size="9" font-style="italic">z</text>
+      <!-- tube network -->
+      <path d="M159 16 L159 8 L84 8 L84 40" fill="none" stroke="#1f86ad" stroke-width="1.6"/>
+      <path d="M84 24 L104 24 L104 84" fill="none" stroke="#1f86ad" stroke-width="1.6"/>
+      <circle cx="84" cy="24" r="2.4" fill="#1f86ad"/>
+      <text x="80" y="20" text-anchor="end" font-size="6.2" fill="#55687a">raccordo a T</text>
+      <!-- syringe -->
+      <rect x="64" y="40" width="40" height="11" fill="#fff" stroke="#0f2233" stroke-width="1"/>
+      <rect x="72" y="41" width="31" height="9" fill="#e3f2f8"/>
+      <rect x="54" y="43" width="18" height="5" fill="#0f2233"/>
+      <rect x="51" y="40" width="3" height="11" fill="#0f2233"/>
+      <text x="84" y="60" text-anchor="middle" font-size="6.6">siringa 10 ml</text>
+      <!-- servo -->
+      <rect x="16" y="36" width="26" height="18" rx="1.5" fill="#0f2233"/>
+      <circle cx="35" cy="45" r="4" fill="#55687a"/>
+      <line x1="35" y1="45" x2="51" y2="45" stroke="#0f2233" stroke-width="2"/>
+      <text x="29" y="32" text-anchor="middle" font-size="6.6">servo MG996R</text>
+      <!-- accumulator -->
+      <rect x="98" y="84" width="12" height="5" fill="#0f2233"/>
+      <path d="M100 89 L100 94 Q88 100 88 112 L88 156 Q88 160 92 160 L116 160 Q120 160 120 156 L120 112 Q120 100 108 94 L108 89 Z" fill="#fff" stroke="#0f2233" stroke-width="1.1"/>
+      <text x="119" y="170" text-anchor="end" font-size="6.6">volume d'aria</text>
+      <text x="119" y="178" text-anchor="end" font-size="6.6">aggiuntivo (~300 ml)</text>
+      <!-- ESP32 -->
+      <rect x="12" y="186" width="52" height="24" rx="2" fill="#1f86ad"/>
+      <text x="38" y="197" text-anchor="middle" fill="#fff" font-weight="700" font-size="7.6">ESP32</text>
+      <text x="38" y="205" text-anchor="middle" fill="#fff" font-size="6">anelli di controllo</text>
+      <path d="M29 186 L29 54" stroke="#0f2233" stroke-width=".7" stroke-dasharray="2 1.5"/>
+      <path d="M64 198 L124 198 L124 12 L149 12 L149 20 L155 38" fill="none" stroke="#0f2233" stroke-width=".7" stroke-dasharray="2 1.5"/>
+      <!-- iPhone -->
+      <path d="M262 132 L192 82 M262 146 L192 212" stroke="#1f86ad" stroke-width=".7" stroke-dasharray="3 2"/>
+      <rect x="262" y="122" width="22" height="42" rx="4" fill="#0f2233"/>
+      <circle cx="267.5" cy="128" r="2" fill="#55687a"/>
+      <text x="273" y="174" text-anchor="middle" font-size="6.6">iPhone 15 Pro</text>
+      <text x="273" y="182" text-anchor="middle" font-size="6.2" fill="#55687a">Continuity Camera</text>
+      <!-- Mac -->
+      <rect x="236" y="192" width="58" height="22" rx="2" fill="#fff" stroke="#0f2233" stroke-width="1"/>
+      <text x="265" y="202" text-anchor="middle" font-weight="700" font-size="7.2">Mac · OpenCV</text>
+      <text x="265" y="209.5" text-anchor="middle" font-size="6" fill="#55687a">tracking → z [cm]</text>
+      <path d="M273 184 L273 192" stroke="#0f2233" stroke-width=".7"/>
+      <path d="M236 204 L66 204" fill="none" stroke="#0f2233" stroke-width=".8" marker-end="url(#ar)"/>
+      <text x="212" y="231" text-anchor="middle" font-size="6.4" fill="#55687a">USB seriale · z misurata a 30 Hz</text>
+    </svg>
+    <figcaption>Fig. 1 – Schema del banco. Spingendo la siringa aumenta p, il palombaro scende; tirando, risale.</figcaption>
+  </figure>
+</section>
+
+<section>
+  <h2><span class="n">03</span>Architettura di controllo – cascata pressione / quota con supervisore SFC</h2>
+  <figure>
+    <svg viewBox="0 0 760 118" font-family="Avenir Next, Helvetica Neue, Arial" font-size="9" fill="#0f2233">
+      <defs>
+        <marker id="a2" viewBox="0 0 6 6" refX="5.5" refY="3" markerWidth="6" markerHeight="6" orient="auto"><path d="M0,0 L6,3 L0,6 z" fill="#0f2233"/></marker>
+        <marker id="a3" viewBox="0 0 6 6" refX="5.5" refY="3" markerWidth="6" markerHeight="6" orient="auto"><path d="M0,0 L6,3 L0,6 z" fill="#1f86ad"/></marker>
+        <marker id="a4" viewBox="0 0 6 6" refX="5.5" refY="3" markerWidth="6" markerHeight="6" orient="auto"><path d="M0,0 L6,3 L0,6 z" fill="#c8412b"/></marker>
+      </defs>
+      <rect x="4" y="2" width="300" height="20" fill="#0f2233"/>
+      <text x="154" y="15.5" text-anchor="middle" fill="#fff" font-size="8.6" font-weight="600">Supervisore SFC: CALIBRAZIONE → HOLD → TRACKING → SAFE</text>
+      <path d="M30 22 L30 50" stroke="#0f2233" stroke-width="1" stroke-dasharray="3 2" marker-end="url(#a2)"/>
+      <text x="34" y="40" font-size="8">z<tspan font-size="6" dy="2">ref</tspan></text>
+      <line x1="4" y1="58" x2="54" y2="58" stroke="#0f2233" stroke-width="1.2" marker-end="url(#a2)"/>
+      <circle cx="63" cy="58" r="7" fill="#fff" stroke="#0f2233" stroke-width="1.2"/>
+      <text x="63" y="61.5" text-anchor="middle" font-size="9">Σ</text>
+      <text x="52" y="74" font-size="9">−</text>
+      <line x1="70" y1="58" x2="88" y2="58" stroke="#0f2233" stroke-width="1.2" marker-end="url(#a2)"/>
+      <rect x="90" y="42" width="112" height="32" fill="#fff" stroke="#0f2233" stroke-width="1.3"/>
+      <text x="146" y="55" text-anchor="middle" font-weight="700" font-size="9">C<tspan font-size="6.5" dy="2">z</tspan><tspan dy="-2">(z) – PID digitale</tspan></text>
+      <text x="146" y="67" text-anchor="middle" font-size="7.4" fill="#55687a">anti-windup · filtro su D · FF p<tspan font-size="5.5" dy="2">eq</tspan></text>
+      <line x1="202" y1="58" x2="238" y2="58" stroke="#0f2233" stroke-width="1.2" marker-end="url(#a2)"/>
+      <text x="210" y="53" font-size="8">p<tspan font-size="6" dy="2">ref</tspan></text>
+      <circle cx="247" cy="58" r="7" fill="#fff" stroke="#0f2233" stroke-width="1.2"/>
+      <text x="247" y="61.5" text-anchor="middle" font-size="9">Σ</text>
+      <text x="236" y="74" font-size="9">−</text>
+      <line x1="254" y1="58" x2="270" y2="58" stroke="#0f2233" stroke-width="1.2" marker-end="url(#a2)"/>
+      <rect x="272" y="42" width="78" height="32" fill="#fff" stroke="#0f2233" stroke-width="1.3"/>
+      <text x="311" y="55" text-anchor="middle" font-weight="700" font-size="9">C<tspan font-size="6.5" dy="2">p</tspan><tspan dy="-2">(z) – PI</tspan></text>
+      <text x="311" y="67" text-anchor="middle" font-size="7.4" fill="#55687a">anello interno</text>
+      <line x1="350" y1="58" x2="374" y2="58" stroke="#0f2233" stroke-width="1.2" marker-end="url(#a2)"/>
+      <text x="359" y="53" font-size="8">u</text>
+      <rect x="376" y="42" width="98" height="32" fill="#fff" stroke="#0f2233" stroke-width="1.3"/>
+      <text x="425" y="55" text-anchor="middle" font-weight="700" font-size="9">Servo + siringa</text>
+      <text x="425" y="67" text-anchor="middle" font-size="7.4" fill="#55687a">saturazione · zona morta</text>
+      <line x1="474" y1="58" x2="534" y2="58" stroke="#0f2233" stroke-width="1.2" marker-end="url(#a2)"/>
+      <text x="482" y="53" font-size="8">p</text>
+      <text x="592" y="14" text-anchor="middle" font-size="8" fill="#c8412b">d: perdite d'aria, urti, ΔT</text>
+      <path d="M592 18 L592 40" stroke="#c8412b" stroke-width="1.1" marker-end="url(#a4)"/>
+      <rect x="536" y="42" width="112" height="32" fill="#fbe9e5" stroke="#c8412b" stroke-width="1.5"/>
+      <text x="592" y="55" text-anchor="middle" font-weight="700" font-size="9">Palombaro</text>
+      <text x="592" y="67" text-anchor="middle" font-size="7.6">b / (ms² + cs − k)</text>
+      <line x1="648" y1="58" x2="752" y2="58" stroke="#0f2233" stroke-width="1.2" marker-end="url(#a2)"/>
+      <text x="738" y="53" font-size="9" font-style="italic" font-weight="700">z</text>
+      <path d="M500 58 L500 88 L247 88 L247 67" fill="none" stroke="#1f86ad" stroke-width="1.2" marker-end="url(#a3)"/>
+      <rect x="330" y="80" width="96" height="16" fill="#e3f2f8" stroke="#1f86ad"/>
+      <text x="378" y="91" text-anchor="middle" font-size="7.8">BMP280 · 100 Hz</text>
+      <path d="M700 58 L700 108 L63 108 L63 67" fill="none" stroke="#1f86ad" stroke-width="1.2" marker-end="url(#a3)"/>
+      <rect x="420" y="100" width="210" height="16" fill="#e3f2f8" stroke="#1f86ad"/>
+      <text x="525" y="111" text-anchor="middle" font-size="7.8">iPhone + OpenCV → filtro α-β / Kalman · 30 Hz</text>
+      <text x="708" y="80" font-size="7.4" fill="#55687a">polo instabile</text>
+      <text x="708" y="89" font-size="7.4" fill="#55687a">≈ +0,5 rad/s</text>
+      <text x="320" y="16" font-size="7.4" fill="#55687a">ESP32 (FreeRTOS): task periodici a priorità fissa</text>
+      <text x="320" y="26" font-size="7.4" fill="#55687a">anello interno 100 Hz · esterno 30 Hz · logging</text>
+    </svg>
+  </figure>
+</section>
+
+<section class="row r3">
+  <div>
+    <h2><span class="n">04</span>Argomenti del corso dimostrati sul banco</h2>
+    <table>
+      <tr><th>Argomento</th><th>Dove compare nel progetto</th></tr>
+      <tr class="grp"><td colspan="2">Automazione</td></tr>
+      <tr><td>PID digitali e tuning</td><td>Discretizzazione (Tustin), anti-windup, filtro sul derivativo; tuning su modello identificato vs. empirico</td></tr>
+      <tr><td>Controllori avanzati</td><td>Cascata pressione/quota, feedforward della pressione di equilibrio p<sub>eq</sub>(z); extra: predittore di Smith sulla latenza della visione</td></tr>
+      <tr><td>Attuazione e moto</td><td>Servo + siringa: saturazione, zona morta, quantizzazione; On-Off con isteresi come riferimento</td></tr>
+      <tr><td>PLC e SFC</td><td>Logica di supervisione in SFC: calibrazione, mantenimento, inseguimento, allarmi e stato sicuro</td></tr>
+      <tr><td>Reti e real-time</td><td>Anello chiuso su iPhone → Mac → ESP32: latenza e jitter misurati; task FreeRTOS periodici</td></tr>
+      <tr><td>Automi e reti di Petri</td><td>Supervisore modellato come automa / rete di Petri e verificato (assenza di blocchi)</td></tr>
+      <tr class="grp"><td colspan="2">Corsi propedeutici</td></tr>
+      <tr><td>Sist. dinamici, Controlli,<br>Modellistica e sim.</td><td>Linearizzazione e stabilità (Routh); luogo delle radici, Bode e margini; gemello digitale in Simulink, ciclo limite On-Off; extra: retroazione dallo stato + osservatore</td></tr>
+    </table>
+  </div>
+  <div>
+    <h2><span class="n">05</span>Hardware e costi</h2>
+    <table class="cost">
+      <tr><th>Componente</th><th>€</th></tr>
+      <tr><td>ESP32 DevKit</td><td>8</td></tr>
+      <tr><td>Servo MG996R</td><td>8</td></tr>
+      <tr><td>Sensore di pressione BMP280</td><td>4</td></tr>
+      <tr><td>Alimentatore 5 V 3 A + condensatore</td><td>9</td></tr>
+      <tr><td>Breadboard e cavi</td><td>7</td></tr>
+      <tr><td>Siringhe, tubicini, raccordo a T</td><td>6</td></tr>
+      <tr><td>Contagocce + zavorra in rame</td><td>4</td></tr>
+      <tr><td>Epossidica + colla a caldo</td><td>16</td></tr>
+      <tr><td>Legno, fascette, supporto telefono</td><td>8</td></tr>
+      <tr class="tot"><td>Totale stimato</td><td>≈ 70</td></tr>
+    </table>
+    <p class="note">Visione: iPhone 15 Pro come webcam (Continuity Camera, 0 €); webcam USB opzionale (+20 €). Software: Python + OpenCV, MATLAB/Simulink, PlatformIO.</p>
+  </div>
+</section>
+
+<section>
+  <h2><span class="n">06</span>Pianificazione – consegna interna 13 dicembre, margine fino a fine dicembre</h2>
+  <svg viewBox="0 0 760 114" font-family="Avenir Next, Helvetica Neue, Arial" font-size="8.4" fill="#0f2233" style="width:100%;height:auto;display:block">
+    <rect x="402.3" y="12" width="47.7" height="91" fill="#e3f2f8"/>
+    <text x="426" y="111" text-anchor="middle" font-size="6.8" fill="#1f86ad">pausa lezioni 11–17/11</text>
+    <g stroke="#c8d5de" stroke-width=".6"><line x1="150" y1="12" x2="150" y2="103"/><line x1="197.7" y1="12" x2="197.7" y2="103"/><line x1="245.5" y1="12" x2="245.5" y2="103"/><line x1="293.2" y1="12" x2="293.2" y2="103"/><line x1="340.9" y1="12" x2="340.9" y2="103"/><line x1="388.6" y1="12" x2="388.6" y2="103"/><line x1="436.4" y1="12" x2="436.4" y2="103"/><line x1="484.1" y1="12" x2="484.1" y2="103"/><line x1="531.8" y1="12" x2="531.8" y2="103"/><line x1="579.5" y1="12" x2="579.5" y2="103"/><line x1="627.3" y1="12" x2="627.3" y2="103"/><line x1="675" y1="12" x2="675" y2="103"/><line x1="722.7" y1="12" x2="722.7" y2="103"/><line x1="750" y1="12" x2="750" y2="103"/></g>
+    <g font-size="7" fill="#55687a"><text x="151.5" y="9">5/10</text><text x="199.2" y="9">12/10</text><text x="247.0" y="9">19/10</text><text x="294.7" y="9">26/10</text><text x="342.4" y="9">2/11</text><text x="390.1" y="9">9/11</text><text x="437.9" y="9">16/11</text><text x="485.6" y="9">23/11</text><text x="533.3" y="9">30/11</text><text x="581.0" y="9">7/12</text><text x="628.8" y="9">14/12</text><text x="676.5" y="9">21/12</text><text x="724.2" y="9">28/12</text></g>
+    <g font-size="8"><text x="0" y="22.5"><tspan font-weight="700">F0</tspan> Approvazione e ordini</text><text x="0" y="33.5"><tspan font-weight="700">F1</tspan> Costruzione e tenuta</text><text x="0" y="44.5"><tspan font-weight="700">F2</tspan> Sensori, visione, logging</text><text x="0" y="55.5"><tspan font-weight="700">F3</tspan> Modello, identificazione, Simulink</text><text x="0" y="66.5"><tspan font-weight="700">F4</tspan> On-Off, PI interno, P → PD</text><text x="0" y="77.5"><tspan font-weight="700">F5</tspan> Cascata, PID digitale, SFC, RT</text><text x="0" y="88.5"><tspan font-weight="700">F6</tspan> Validazione, video, relazione</text><text x="0" y="99.5" fill="#55687a">Margine correzioni</text></g>
+    <g><rect x="170.5" y="16" width="27.2" height="8" fill="#55687a"/><rect x="197.7" y="27" width="95.5" height="8" fill="#1f86ad"/><rect x="293.2" y="38" width="95.4" height="8" fill="#1f86ad"/><rect x="388.6" y="49" width="47.8" height="8" fill="#1f86ad"/><rect x="436.4" y="60" width="47.7" height="8" fill="#0f2233"/><rect x="484.1" y="71" width="95.4" height="8" fill="#0f2233"/><rect x="579.5" y="82" width="47.8" height="8" fill="#2d7a4f"/><rect x="627.3" y="93" width="122.7" height="8" fill="none" stroke="#55687a" stroke-dasharray="3 2"/></g>
+    <g fill="#c8412b" font-size="7" font-weight="700"><path d="M293.2 27 l4 4 -4 4 -4 -4z"/><text x="299.2" y="34">M1 il palombaro si muove con la siringa</text><path d="M388.6 38 l4 4 -4 4 -4 -4z"/><text x="394.6" y="45">M2 z(t), p(t) a ≥ 20 Hz</text><path d="M436.4 49 l4 4 -4 4 -4 -4z"/><text x="442.4" y="56">M3 G(s) validata</text><path d="M484.1 60 l4 4 -4 4 -4 -4z"/><text x="490.1" y="67">M4 quota stabile</text><path d="M579.5 71 l4 4 -4 4 -4 -4z"/><text x="585.5" y="78">M5 ±5 mm, tracking</text><path d="M627.3 82 l4 4 -4 4 -4 -4z"/><text x="633.3" y="89">M6 consegna 13/12</text></g>
+    <line x1="634.1" y1="12" x2="634.1" y2="103" stroke="#0f2233" stroke-width=".8" stroke-dasharray="1.5 1.5"/>
+    <text x="636" y="111" font-size="6.6" fill="#55687a">fine lezioni 15/12</text>
+  </svg>
+</section>
+
+<section class="row r5">
+  <div>
+    <h2><span class="n">07</span>Criteri di successo</h2>
+    <ul>
+      <li>Errore di quota RMS <b>&lt; 5 mm</b> su 3 setpoint</li>
+      <li>Gradino di 5 cm: assestamento <b>&lt; 10 s</b>, sovraelongazione <b>&lt; 20%</b></li>
+      <li>Reiezione di un disturbo (pressione manuale sulla bottiglia) in <b>&lt; 10 s</b></li>
+      <li><b>Fail-safe</b>: se il tracking si perde o la pressione esce dai limiti → stato SAFE (risalita)</li>
+      <li>Confronto sperimentale anello aperto / On-Off / PID</li>
+    </ul>
+  </div>
+  <div>
+    <h2><span class="n">08</span>Livelli di risultato</h2>
+    <div class="lv">
+      <span class="tag t-base">BASE</span><span>On-Off con isteresi + PID su un solo anello + macchina a stati. <b>Garantito entro F4.</b></span>
+      <span class="tag t-target">TARGET</span><span>Cascata, PID digitale completo, filtro α-β/Kalman, SFC, analisi real-time.</span>
+      <span class="tag t-extra">EXTRA</span><span>Retroazione dallo stato + osservatore; predittore di Smith; dashboard WiFi.</span>
+    </div>
+  </div>
+  <div class="risk">
+    <h2><span class="n">09</span>Rischi e contromisure</h2>
+    <ul>
+      <li><b>Perdite d'aria</b>: sigillatura in epossidica, test di tenuta in F1, compensazione dall'anello interno</li>
+      <li><b>Risoluzione del servo</b> (~17 Pa/passo): volume d'aria regolabile; piano B passo-passo + barra filettata</li>
+      <li><b>Latenza della visione</b> (~50–100 ms): misurata; molto inferiore alla costante di tempo del polo</li>
+    </ul>
+  </div>
+</section>
+
+<footer>
+  <b>Riferimenti.</b> [1] A. Koike, Y. Ochiai et al., “Syringe-worked Mermaid”, <i>SIGGRAPH Asia 2016 Posters</i> – palombaro controllato in PD con webcam e pompa a siringa.
+  [2] J. Güémez, C. Fiolhais, M. Fiolhais, “The Cartesian diver and the fold catastrophe”, <i>Am. J. Phys.</i> 70 (2002).
+  [3] C. Bonivento, L. Gentili, A. Paoli, <i>Sistemi di automazione industriale</i>, McGraw-Hill, 2011.
+</footer>
+
+</body>
+</html>

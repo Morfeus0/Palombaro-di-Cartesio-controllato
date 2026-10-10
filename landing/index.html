@@ -1,0 +1,746 @@
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="color-scheme" content="light dark">
+<meta name="theme-color" media="(prefers-color-scheme: light)" content="#f3f7f9">
+<meta name="theme-color" media="(prefers-color-scheme: dark)" content="#09141d">
+<title>Palombaro di Cartesio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;1,400&family=Source+Serif+4:ital,opsz,wght@0,8..60,500;0,8..60,700;1,8..60,400;1,8..60,500&display=swap">
+<style>
+  /* Layout: laboratorio a due colonne. A sinistra il banco (fisso mentre si scorre),
+     a destra la console con il "dietro le quinte"; sotto la fisica e il progetto. */
+  :root {
+    --bg: #f3f7f9;
+    --surface: #ffffff;
+    --surface-2: #e9f1f5;
+    --ink: #0f2233;
+    --muted: #4f6474;
+    --line: #cbd9e1;
+    --water: #1f86ad;
+    --water-soft: #d7ebf3;
+    --water-deep: #155f7c;
+    --alert: #c23f2a;
+    --alert-soft: #fae6e1;
+    --ok: #2b7a4e;
+    --copper: #9a5b2a;
+    --focus: #1f86ad;
+    --font-display: "Source Serif 4", "Iowan Old Style", Georgia, serif;
+    --font-body: "IBM Plex Sans", "Helvetica Neue", Arial, sans-serif;
+    --font-mono: "IBM Plex Mono", ui-monospace, Menlo, monospace;
+    --radius: 6px;
+    --ease: cubic-bezier(.2, .7, .2, 1);
+    --gutter: 20px;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg: #09141d; --surface: #0f1f2b; --surface-2: #132a39; --ink: #e3edf3; --muted: #93a8b7;
+      --line: #24394a; --water: #4cb3db; --water-soft: #113246; --water-deep: #86d0ec;
+      --alert: #ff7d64; --alert-soft: #3a1d17; --ok: #5cc48c; --copper: #d08a4f;
+      --focus: #86d0ec; color-scheme: dark;
+    }
+  }
+  :root[data-theme="dark"] {
+    --bg: #09141d; --surface: #0f1f2b; --surface-2: #132a39; --ink: #e3edf3; --muted: #93a8b7;
+    --line: #24394a; --water: #4cb3db; --water-soft: #113246; --water-deep: #86d0ec;
+    --alert: #ff7d64; --alert-soft: #3a1d17; --ok: #5cc48c; --copper: #d08a4f;
+    --focus: #86d0ec; color-scheme: dark;
+  }
+
+  * { box-sizing: border-box; }
+  [hidden] { display: none !important; }
+  html { -webkit-tap-highlight-color: transparent; -webkit-text-size-adjust: 100%; text-size-adjust: 100%; }
+  body {
+    margin: 0; background: var(--bg); color: var(--ink);
+    font-family: var(--font-body); font-size: 16px; line-height: 1.55;
+    padding-left: max(var(--gutter), env(safe-area-inset-left, 0px));
+    padding-right: max(var(--gutter), env(safe-area-inset-right, 0px));
+  }
+  /* touch: niente ritardo da doppio tap e niente selezione del testo tenendo premuto un comando */
+  a, button, label, input[type="range"] { touch-action: manipulation; }
+  button { -webkit-user-select: none; user-select: none; }
+  .wrap { max-width: 1280px; margin-inline: auto; }
+  h1, h2, h3 { font-family: var(--font-display); font-weight: 700; line-height: 1.1; text-wrap: balance; margin: 0; }
+  h2 { font-size: clamp(1.9rem, 1.4rem + 1.8vw, 2.8rem); letter-spacing: -.01em; }
+  h3 { font-size: 1.2rem; font-weight: 500; }
+  p { margin: 0; }
+  a { color: var(--water-deep); }
+  .eyebrow { font-family: var(--font-mono); font-size: .75rem; letter-spacing: .12em; text-transform: uppercase; color: var(--muted); }
+  .lede { font-size: 1.08rem; color: var(--muted); max-width: 62ch; }
+  .mono { font-family: var(--font-mono); }
+  :focus-visible { outline: 2px solid var(--focus); outline-offset: 3px; border-radius: 3px; }
+
+  /* barra superiore e introduzione */
+  .topbar { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 12px;
+            padding-block: 18px; border-bottom: 1px solid var(--line); }
+  .brand { font-family: var(--font-display); font-weight: 700; font-size: 1.05rem; }
+  .brand span { color: var(--water); font-style: italic; font-weight: 400; }
+  .topbar nav { display: flex; flex-wrap: wrap; gap: 4px 18px; font-size: .92rem; }
+  .topbar nav a { color: var(--muted); text-decoration: none; }
+  @media (hover: hover) and (pointer: fine) {
+    .topbar nav a:hover { color: var(--ink); text-decoration: underline; text-underline-offset: 4px; }
+  }
+
+  .intro { display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr); gap: 16px 48px; align-items: end; padding-block: 40px 28px; }
+  .intro .eyebrow { grid-column: 1 / -1; }
+  .intro h1 { font-size: clamp(2.4rem, 1.5rem + 3.4vw, 4rem); letter-spacing: -.02em; }
+  .intro h1 em { color: var(--water); font-weight: 400; }
+  .intro-text { display: grid; gap: 12px; }
+  .hint { font-size: .92rem; color: var(--muted); }
+  .hint b { color: var(--ink); font-weight: 600; }
+
+  /* laboratorio */
+  .lab { display: grid; grid-template-columns: minmax(300px, 420px) minmax(0, 1fr); gap: 28px; align-items: start; padding-bottom: 72px; }
+  .lab-stage { position: sticky; top: calc(env(safe-area-inset-top, 0px) + 12px); display: grid; gap: 12px; z-index: 2; }
+  .lab-console { display: grid; gap: 20px; min-width: 0; }
+
+  .bench { position: relative; margin: 0; border: 1px solid var(--line); border-radius: var(--radius); background-color: var(--surface-2);
+           background-image: linear-gradient(var(--line) 1px, transparent 1px), linear-gradient(90deg, var(--line) 1px, transparent 1px);
+           background-size: 24px 24px; background-position: -1px -1px; padding: 8px; }
+  .bench-label { position: absolute; top: 9px; left: 12px; font-family: var(--font-mono); font-size: .68rem; letter-spacing: .1em; text-transform: uppercase; color: var(--muted); }
+  .bench figcaption { padding: 4px 4px 0; font-size: .8rem; color: var(--muted); }
+  #bottle { width: 100%; height: auto; max-height: min(62vh, 560px); display: block; touch-action: none; cursor: crosshair; }
+  #bottle:focus-visible { outline-offset: -2px; }
+
+  /* elementi della bottiglia */
+  .glass { fill: var(--surface); stroke: var(--ink); stroke-width: 1.6; }
+  .glass-outline { fill: none; stroke: var(--ink); stroke-width: 1.6; }
+  .water-fill { fill: url(#g-water); }
+  .stop-top { stop-color: var(--water-soft); }
+  .stop-bottom { stop-color: var(--water); stop-opacity: .35; }
+  .surface-line { stroke: var(--water); stroke-width: 1; stroke-dasharray: 4 3; }
+  .cap { fill: var(--ink); }
+  .chip { fill: var(--water-deep); }
+  .tube { fill: none; stroke: var(--water); stroke-width: 2.4; stroke-linejoin: round; }
+  .tube-dot { fill: var(--water); }
+  .barrel { fill: var(--surface); stroke: var(--ink); stroke-width: 1.2; }
+  .syringe-air { fill: var(--water-soft); }
+  .plunger { fill: var(--ink); }
+  .servo { fill: var(--ink); }
+  .servo-horn { stroke: var(--muted); stroke-width: 4; stroke-linecap: round; }
+  .servo-pin { fill: var(--surface); }
+  .tick { stroke: var(--muted); stroke-width: 1; }
+  .tick-label, .svg-label { font-family: var(--font-mono); font-size: 9.5px; fill: var(--muted); }
+  .readout { font-family: var(--font-mono); font-size: 11px; fill: var(--ink); font-weight: 500; }
+  .diver-cap { fill: var(--alert); }
+  .diver-glass { fill: none; stroke: var(--ink); stroke-width: 1.4; }
+  .diver-air { fill: var(--surface); }
+  .diver-water { fill: var(--water); opacity: .45; }
+  .diver-weight { fill: var(--copper); }
+  .target-line { stroke: var(--ink); stroke-width: 1.2; stroke-dasharray: 6 4; }
+  .target-band { fill: var(--ok); opacity: 0; transition: opacity .3s var(--ease); }
+  .target-band.is-on { opacity: .22; }
+  .tag-bg { fill: var(--ink); }
+  .tag-text { font-family: var(--font-mono); font-size: 10px; fill: var(--surface); font-weight: 500; }
+  .track { fill: none; stroke: var(--water); stroke-width: 1; stroke-dasharray: 3 2; }
+  .track-label { font-family: var(--font-mono); font-size: 8px; fill: var(--water-deep); }
+  .cam-body { fill: var(--ink); }
+  .cam-lens { fill: var(--muted); }
+  .fov { stroke: var(--water); stroke-width: .8; stroke-dasharray: 3 3; opacity: .6; }
+
+  .readouts { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px 14px; margin: 0;
+              background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); padding: 12px 14px; }
+  .readouts div { display: grid; gap: 1px; min-width: 0; }
+  .readouts dt { font-size: .68rem; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); }
+  .readouts dd { margin: 0; font-family: var(--font-mono); font-size: 1rem; font-variant-numeric: tabular-nums; white-space: nowrap; }
+
+  /* pannelli e controlli */
+  .panel { display: grid; gap: 16px; border: 1px solid var(--line); background: var(--surface); border-radius: var(--radius); padding: 20px; min-width: 0; }
+  .panel h3 { font-family: var(--font-body); font-size: 1rem; font-weight: 600; }
+  .panel p { color: var(--muted); font-size: .95rem; }
+  .segmented { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 4px; padding: 4px; border-radius: 12px; background: var(--surface-2); border: 1px solid var(--line); }
+  .segmented button { font: inherit; font-size: .92rem; border: 0; border-radius: 9px; padding: 8px 10px; min-height: 44px;
+                      background: transparent; color: var(--muted); cursor: pointer; transition: background .2s var(--ease), color .2s var(--ease); }
+  @media (hover: hover) and (pointer: fine) {
+    .segmented button:hover { color: var(--ink); }
+  }
+  .segmented button[aria-pressed="true"] { background: var(--ink); color: var(--surface); }
+  .ctrl-desc { min-height: 3em; }
+  .btn-row { display: flex; flex-wrap: wrap; gap: 8px; }
+  .btn { font: inherit; font-size: .92rem; font-weight: 500; min-height: 44px; padding: 9px 14px; border-radius: var(--radius); cursor: pointer;
+         border: 1px solid var(--line); background: var(--surface); color: var(--ink);
+         transition: border-color .2s var(--ease), background .2s var(--ease), transform .12s var(--ease); }
+  @media (hover: hover) and (pointer: fine) {
+    .btn:hover { border-color: var(--ink); }
+    .btn.primary:hover { background: var(--ink); border-color: var(--ink); }
+    .btn.danger:hover { background: var(--alert-soft); }
+  }
+  .btn:active { transform: translateY(1px); }
+  .btn.primary { background: var(--water-deep); border-color: var(--water-deep); color: var(--surface); }
+  .btn.danger { color: var(--alert); border-color: color-mix(in srgb, var(--alert) 45%, var(--line)); }
+  .btn.danger.is-resume { color: var(--ok); border-color: var(--ok); }
+  .chip-btn[aria-pressed="true"] { background: var(--water-soft); border-color: var(--water); }
+  .sub-panel { display: grid; gap: 12px; padding-top: 16px; border-top: 1px solid var(--line); }
+  .sub-label { font-size: .78rem; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); }
+
+  .range-field { display: grid; gap: 6px; }
+  .range-field label { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 4px 12px; font-size: .92rem; font-weight: 500; }
+  .range-field output { font-family: var(--font-mono); font-variant-numeric: tabular-nums; color: var(--water-deep); font-weight: 500; }
+  input[type="range"] { width: 100%; accent-color: var(--water); min-height: 32px; cursor: pointer; margin: 0; }
+  .syringe-range { min-height: 44px; }
+  .scale { display: flex; justify-content: space-between; font-size: .78rem; color: var(--muted); }
+
+  .game-meter { height: 10px; border-radius: 999px; background: var(--surface-2); overflow: hidden; border: 1px solid var(--line); }
+  .game-meter span { display: block; height: 100%; background: var(--ok); transform-origin: left; transform: scaleX(0); }
+  .game-stats { display: flex; flex-wrap: wrap; gap: 6px 20px; font-size: .9rem; color: var(--muted); }
+  .game-stats b { font-family: var(--font-mono); color: var(--ink); font-weight: 500; }
+  .panel .game-msg { font-weight: 500; color: var(--ink); min-height: 1.6em; }
+
+  /* narrazione e termini PID */
+  .narrator { gap: 14px; }
+  .panel .narr-head { font-family: var(--font-display); font-size: 1.35rem; line-height: 1.25; font-weight: 500; min-height: 2.5em; color: var(--ink); }
+  .narr-detail { min-height: 1.6em; }
+  .terms { display: grid; gap: 10px; }
+  .terms.is-idle .term { opacity: .45; }
+  .term { display: grid; grid-template-columns: 11rem minmax(0, 1fr) 5.6rem; gap: 12px; align-items: center; transition: opacity .3s var(--ease); }
+  .term-name { font-weight: 600; font-size: .95rem; line-height: 1.25; }
+  .term-name small { font-weight: 400; color: var(--muted); font-size: .8rem; margin-left: 4px; }
+  .bar { position: relative; height: 14px; background: var(--surface-2); border-radius: 3px; }
+  .bar::after { content: ""; position: absolute; left: 50%; top: -3px; bottom: -3px; width: 1px; background: var(--muted); }
+  .bar-fill { position: absolute; top: 0; bottom: 0; left: 50%; width: 0; background: var(--water); border-radius: 2px; }
+  .bar-fill.is-pull { background: var(--alert); }
+  .term-val { font-family: var(--font-mono); font-size: .88rem; text-align: right; font-variant-numeric: tabular-nums; }
+  .term-legend { display: flex; flex-wrap: wrap; gap: 6px 16px; font-size: .8rem; color: var(--muted); }
+  .term-legend span::before { content: ""; display: inline-block; width: 10px; height: 10px; border-radius: 2px; margin-right: 6px; vertical-align: -1px; background: var(--water); }
+  .term-legend span.pull::before { background: var(--alert); }
+  .term-legend span.plain::before { display: none; }
+
+  /* grafici */
+  .charts { gap: 14px; }
+  .chart { display: grid; gap: 6px; min-width: 0; }
+  .chart-head { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 4px 16px; font-size: .88rem; }
+  .chart-head b { font-weight: 600; }
+  .legend { display: flex; flex-wrap: wrap; gap: 4px 14px; color: var(--muted); }
+  .legend .key::before { content: ""; display: inline-block; width: 18px; height: 0; border-top: 2px solid var(--c); margin-right: 6px; vertical-align: middle; }
+  .legend .key.dash::before { border-top-style: dashed; }
+  .chart canvas { width: 100%; height: 120px; display: block; background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); }
+
+  /* schema a blocchi */
+  .scroll-x { overflow-x: auto; }
+  .diagram { min-width: 640px; width: 100%; height: auto; display: block; }
+  .bd-box { fill: var(--surface); stroke: var(--ink); stroke-width: 1.3; }
+  .bd-plant { fill: var(--alert-soft); stroke: var(--alert); stroke-width: 1.6; }
+  .bd-sensor { fill: var(--water-soft); stroke: var(--water); }
+  .bd-super { fill: var(--ink); }
+  .bd-super-text { fill: var(--surface); font-family: var(--font-body); font-size: 13px; font-weight: 600; }
+  .bd-title { font-family: var(--font-body); font-size: 14px; font-weight: 600; fill: var(--ink); }
+  .bd-sub { font-family: var(--font-body); font-size: 11.5px; fill: var(--muted); }
+  .bd-val { font-family: var(--font-mono); font-size: 12.5px; fill: var(--water-deep); font-weight: 500;
+            paint-order: stroke; stroke: var(--surface); stroke-width: 5px; stroke-linejoin: round; }
+  .bd-sensor-val { font-family: var(--font-mono); font-size: 12.5px; fill: var(--water-deep); font-weight: 500; }
+  .bd-sym { font-family: var(--font-mono); font-size: 11px; fill: var(--muted); }
+  .arrow-ink { fill: var(--ink); } .arrow-water { fill: var(--water); } .arrow-muted { fill: var(--muted); }
+  .wire { fill: none; stroke: var(--ink); stroke-width: 1.4; }
+  .wire-fb { fill: none; stroke: var(--water); stroke-width: 1.4; stroke-dasharray: 6 4; animation: flow 1.2s linear infinite; }
+  #bd-outer, #bd-inner, #bd-fb-inner, #bd-fb-outer { transition: opacity .3s var(--ease); }
+  .is-off { opacity: .28; }
+  .is-off .wire-fb { animation: none; }
+  @keyframes flow { to { stroke-dashoffset: -20; } }
+
+  .console-pair { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 20px; align-items: start; }
+  .toggles { display: flex; flex-wrap: wrap; gap: 10px 24px; font-size: .92rem; }
+  .toggles label { display: inline-flex; align-items: center; gap: 8px; min-height: 32px; cursor: pointer; }
+  .toggles input { width: 18px; height: 18px; accent-color: var(--water); }
+  .panel .exp-note { color: var(--ink); min-height: 3.2em; border-left: 3px solid var(--water); padding-left: 12px; }
+  .fsm { min-width: 480px; width: 100%; height: auto; display: block; }
+  .st rect { fill: var(--surface); stroke: var(--line); stroke-width: 1.4; transition: fill .3s var(--ease), stroke .3s var(--ease); }
+  .st text { font-family: var(--font-mono); font-size: 11px; fill: var(--muted); font-weight: 500; }
+  .st.is-active rect { fill: var(--ink); stroke: var(--ink); }
+  .st.is-active text { fill: var(--surface); }
+  #st-SAFE.is-active rect { fill: var(--alert); stroke: var(--alert); }
+  .fsm-arrow { fill: none; stroke: var(--muted); stroke-width: 1.2; }
+  .fsm-label { font-family: var(--font-body); font-size: 10px; fill: var(--muted); }
+  .fsm-note { min-height: 3em; }
+
+  /* sezioni sotto il laboratorio */
+  section { padding-block: 72px; border-top: 1px solid var(--line); }
+  .section-head { display: grid; gap: 14px; margin-bottom: 36px; }
+  .laws { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 28px; counter-reset: law; }
+  .laws li { display: grid; gap: 8px; align-content: start; padding-top: 16px; border-top: 2px solid var(--ink); counter-increment: law; min-width: 0; }
+  .laws li::before { content: "Passo " counter(law); font-family: var(--font-mono); font-size: .75rem; letter-spacing: .1em; text-transform: uppercase; color: var(--water-deep); }
+  .laws h3 { font-size: 1.5rem; }
+  .laws .formula { font-family: var(--font-mono); font-size: .92rem; color: var(--water-deep); }
+  .laws p { color: var(--muted); }
+  .instability { margin-top: 44px; display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 32px; align-items: center;
+                 background: var(--alert-soft); border-radius: var(--radius); padding: 28px; }
+  .instability h3 { font-size: 1.6rem; }
+  .instability p { margin-top: 10px; }
+  .loop { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; font-size: .92rem; }
+  .loop span { background: var(--surface); border: 1px solid var(--line); border-radius: 999px; padding: 6px 12px; }
+  .loop i { color: var(--alert); font-style: normal; font-weight: 600; }
+  .tf { font-family: var(--font-mono); font-size: .95rem; margin-top: 14px; display: inline-block; background: var(--surface); padding: 8px 12px; border-radius: var(--radius); }
+  .tf b { color: var(--alert); font-weight: 600; }
+
+  .project-grid { display: grid; grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); gap: 40px 48px; }
+  .block-title { margin-bottom: 10px; }
+  .timeline { list-style: none; margin: 0; padding: 0; display: grid; }
+  .timeline li { display: grid; grid-template-columns: 2.6rem 7rem minmax(0, 1fr); gap: 12px; padding-block: 12px; border-bottom: 1px solid var(--line); align-items: baseline; }
+  .timeline .ph { font-family: var(--font-mono); font-weight: 500; color: var(--water-deep); }
+  .timeline .when { font-family: var(--font-mono); font-size: .85rem; color: var(--muted); font-variant-numeric: tabular-nums; }
+  .timeline .ms { display: block; font-size: .85rem; color: var(--alert); margin-top: 2px; }
+  .timeline li.final .ms { color: var(--ok); font-weight: 600; }
+  table.costs { width: 100%; border-collapse: collapse; font-size: .95rem; }
+  .costs td { padding: 8px 0; border-bottom: 1px solid var(--line); }
+  .costs td:last-child { text-align: right; font-family: var(--font-mono); font-variant-numeric: tabular-nums; padding-left: 12px; }
+  .costs tr.total td { border-bottom: 0; border-top: 2px solid var(--ink); font-weight: 600; font-size: 1.05rem; }
+  .side-stack { display: grid; gap: 36px; align-content: start; }
+  .levels { display: grid; gap: 12px; }
+  .level { display: grid; grid-template-columns: 5.2rem minmax(0, 1fr); gap: 12px; align-items: baseline; }
+  .level .tag { font-family: var(--font-mono); font-size: .75rem; letter-spacing: .08em; text-align: center; padding: 3px 0; border-radius: 3px; color: var(--surface); }
+  .tag.base { background: var(--ok); } .tag.target { background: var(--water-deep); } .tag.extra { background: var(--ink); }
+  .topics { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 18px 28px; }
+  .topics div { display: grid; gap: 4px; }
+  .topics b { font-weight: 600; }
+  .topics span { color: var(--muted); font-size: .93rem; }
+  .spaced { margin-top: 40px; }
+  .note { font-size: .88rem; color: var(--muted); max-width: 75ch; }
+
+  footer { border-top: 1px solid var(--line); padding-block: 32px 48px; display: grid; gap: 10px; font-size: .88rem; color: var(--muted); }
+  footer b { color: var(--ink); }
+
+  @media (max-width: 1080px) {
+    .console-pair { grid-template-columns: minmax(0, 1fr); }
+    .term { grid-template-columns: minmax(0, 1fr) 5rem; gap: 4px 12px; }
+    .term-name { grid-column: 1 / -1; }
+  }
+  @media (max-width: 860px) {
+    .intro, .project-grid, .instability { grid-template-columns: minmax(0, 1fr); }
+    .laws { grid-template-columns: minmax(0, 1fr); }
+    .lab { grid-template-columns: minmax(0, 1fr); gap: 20px; }
+    /* banco fisso in alto: bottiglia a sinistra (più spazio possibile al dito), tre letture a destra */
+    .lab-stage { top: env(safe-area-inset-top, 0px); background: var(--bg); padding-block: 8px;
+                 margin-inline: calc(-1 * var(--gutter)); padding-inline: var(--gutter);
+                 grid-template-columns: minmax(0, 1fr) auto; align-items: center; border-bottom: 1px solid var(--line); }
+    .bench { padding: 4px; justify-self: center; }
+    #bottle { max-height: 34vh; max-height: 34svh; }
+    .bench figcaption, .bench-label, .readouts .ro-extra { display: none; }
+    .readouts { grid-template-columns: minmax(0, 1fr); padding: 10px 12px; }
+    .readouts dd { font-size: .92rem; }
+    .scroll-x { overscroll-behavior-x: contain; }
+  }
+  /* telefono in orizzontale: poca altezza, le letture vanno in riga per non far crescere il banco fisso */
+  @media (max-width: 860px) and (orientation: landscape) {
+    .readouts { grid-template-columns: repeat(3, auto); gap: 4px 20px; }
+  }
+  @media (max-width: 560px) {
+    :root { --gutter: 16px; }
+    .segmented { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .topics { grid-template-columns: minmax(0, 1fr); }
+    .timeline li { grid-template-columns: 2.4rem minmax(0, 1fr); row-gap: 4px; }
+    .timeline li > :nth-child(n+2) { grid-column: 2; }
+    .instability, .panel { padding: 16px; }
+    section { padding-block: 52px; }
+    /* link del menu: area di tocco da 44 px senza spostare l'impaginazione */
+    .topbar nav a { padding-block: 10px; margin-block: -10px; }
+    /* gli schemi larghi scorrono fino al bordo del pannello invece di fermarsi al padding */
+    .panel .scroll-x { margin-inline: -16px; padding-inline: 16px; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .wire-fb { animation: none; }
+    * { transition: none !important; }
+  }
+</style>
+
+<div class="wrap">
+  <header class="topbar">
+    <div class="brand">Palombaro <span>di Cartesio</span></div>
+    <nav aria-label="Sezioni della pagina">
+      <a href="#laboratorio">Laboratorio</a>
+      <a href="#fisica">Come funziona</a>
+      <a href="#progetto">Il progetto</a>
+    </nav>
+  </header>
+
+  <main>
+    <div class="intro">
+      <p class="eyebrow">Progetto di Automazione · Sapienza – DIAG · A.A. 2026/27</p>
+      <h1>Il Palombaro di Cartesio <em>controllato</em></h1>
+      <div class="intro-text">
+        <p class="lede">Un contagocce con una bolla d'aria, chiuso in una bottiglia d'acqua. Da solo non resta mai a mezz'acqua: o affonda o torna a galla. Un controllore lo tiene alla quota che scegli, cambiando soltanto la pressione dell'aria con una siringa.</p>
+        <p class="hint"><b>Clicca o trascina</b> nella bottiglia per scegliere la quota: a destra vedi in tempo reale cosa decide il controllore.</p>
+      </div>
+    </div>
+
+    <div class="lab" id="laboratorio">
+      <aside class="lab-stage" aria-label="Banco simulato">
+        <figure class="bench">
+          <span class="bench-label">Banco simulato</span>
+          <svg id="bottle" viewBox="0 0 380 520" role="slider" tabindex="0" aria-orientation="vertical"
+               aria-label="Quota del bersaglio in centimetri" aria-valuemin="3" aria-valuemax="24" aria-valuenow="12">
+            <defs>
+              <linearGradient id="g-water" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0" class="stop-top"/><stop offset="1" class="stop-bottom"/>
+              </linearGradient>
+              <clipPath id="clip-bottle"><path d="M238 56 V80 Q196 92 196 124 V486 Q196 500 210 500 H290 Q304 500 304 486 V124 Q304 92 262 80 V56 Z"/></clipPath>
+            </defs>
+            <!-- tubi e bottiglia d'aria aggiuntiva -->
+            <path class="tube" d="M158 74 H172 V26 H250 V44"/>
+            <path class="tube" d="M172 74 V120 H121 V160"/>
+            <circle class="tube-dot" cx="172" cy="74" r="3"/>
+            <rect class="cap" x="115" y="160" width="12" height="8"/>
+            <path class="glass" d="M117 168 V174 Q98 180 98 196 V276 Q98 284 106 284 H136 Q144 284 144 276 V196 Q144 180 125 174 V168 Z"/>
+            <text class="svg-label" x="121" y="300" text-anchor="middle">aria extra</text>
+            <text class="svg-label" x="121" y="312" text-anchor="middle">~300 ml</text>
+            <!-- siringa e servo -->
+            <rect class="barrel" x="70" y="64" width="80" height="20" rx="2"/>
+            <rect class="barrel" x="150" y="71" width="8" height="6"/>
+            <rect id="syringe-air" class="syringe-air" x="113" y="66" width="34" height="16"/>
+            <g id="barrel-ticks"></g>
+            <g id="plunger" transform="translate(32 0)">
+              <rect class="plunger" x="75" y="65" width="5" height="18"/>
+              <rect class="plunger" x="22" y="72" width="54" height="4"/>
+              <rect class="plunger" x="18" y="64" width="5" height="20"/>
+            </g>
+            <rect class="servo" x="6" y="96" width="38" height="24" rx="2"/>
+            <line id="servo-horn" class="servo-horn" x1="30" y1="108" x2="48" y2="108"/>
+            <circle class="servo-pin" cx="30" cy="108" r="3"/>
+            <text class="svg-label" x="110" y="100" text-anchor="middle">siringa 10 ml</text>
+            <text class="svg-label" x="25" y="134" text-anchor="middle">servo</text>
+            <!-- bottiglia -->
+            <rect class="cap" x="232" y="44" width="36" height="12" rx="2"/>
+            <path class="glass" d="M238 56 V80 Q196 92 196 124 V486 Q196 500 210 500 H290 Q304 500 304 486 V124 Q304 92 262 80 V56 Z"/>
+            <g clip-path="url(#clip-bottle)">
+              <rect class="water-fill" x="190" y="150" width="120" height="360"/>
+              <rect id="target-band" class="target-band" x="196" y="150" width="108" height="24"/>
+            </g>
+            <path class="glass-outline" d="M238 56 V80 Q196 92 196 124 V486 Q196 500 210 500 H290 Q304 500 304 486 V124 Q304 92 262 80 V56 Z"/>
+            <line class="surface-line" x1="197" y1="150" x2="303" y2="150"/>
+            <rect class="chip" x="244" y="60" width="12" height="7"/>
+            <text id="bottle-p" class="readout" x="274" y="38">p +1,50 kPa</text>
+            <text class="svg-label" x="274" y="50">BMP280</text>
+            <g id="ruler"></g>
+            <text class="svg-label" x="178" y="138" text-anchor="end">cm</text>
+            <!-- telecamera -->
+            <line class="fov" x1="334" y1="104" x2="305" y2="150"/>
+            <line class="fov" x1="334" y1="104" x2="305" y2="490"/>
+            <rect class="cam-body" x="324" y="58" width="24" height="44" rx="5"/>
+            <circle class="cam-lens" cx="331" cy="65" r="3"/>
+            <text class="svg-label" x="336" y="124" text-anchor="middle">iPhone</text>
+            <text class="svg-label" x="336" y="136" text-anchor="middle">30 fps</text>
+            <!-- bersaglio, stima della telecamera, palombaro -->
+            <line id="target-line" class="target-line" x1="197" x2="303" y1="160" y2="160"/>
+            <g id="track-box" transform="translate(250 170)">
+              <rect class="track" x="-15" y="-12" width="30" height="58"/>
+              <text class="track-label" x="-18" y="40" text-anchor="end">stima</text>
+            </g>
+            <g id="diver" transform="translate(250 170)">
+              <rect class="diver-cap" x="-6" y="-8" width="12" height="9" rx="4"/>
+              <rect id="diver-bubble" class="diver-air" x="-7" y="2" width="14" height="20" rx="2"/>
+              <rect id="diver-water" class="diver-water" x="-7" y="22" width="14" height="12"/>
+              <rect class="diver-glass" x="-9" y="0" width="18" height="34" rx="4"/>
+              <path class="diver-glass" d="M-9 32 L-5 39 H5 L9 32"/>
+              <rect class="diver-weight" x="-5" y="38" width="10" height="4.5" rx="1"/>
+            </g>
+            <g id="target-tag" transform="translate(306 160)">
+              <path class="tag-bg" d="M0 0 L8 -8 H56 V8 H8 Z"/>
+              <text id="target-tag-text" class="tag-text" x="32" y="3.5" text-anchor="middle">12,0 cm</text>
+            </g>
+          </svg>
+          <figcaption>Tratteggio: dove la telecamera crede che sia il palombaro. Bolla disegnata 12 volte più compressa del vero.</figcaption>
+        </figure>
+        <dl class="readouts">
+          <div><dt>Quota</dt><dd id="ro-depth">14,0 cm</dd></div>
+          <div><dt>Bersaglio</dt><dd id="ro-target">12,0 cm</dd></div>
+          <div><dt>Stato</dt><dd id="ro-state">Calibrazione</dd></div>
+          <div class="ro-extra"><dt>Errore</dt><dd id="ro-error">20,0 mm</dd></div>
+          <div class="ro-extra"><dt>Pressione</dt><dd id="ro-pressure">+1,50 kPa</dd></div>
+          <div class="ro-extra"><dt>Siringa</dt><dd id="ro-syringe">5,00 ml</dd></div>
+        </dl>
+      </aside>
+
+      <div class="lab-console">
+        <div class="panel">
+          <p class="eyebrow">Chi controlla il palombaro</p>
+          <div class="segmented" role="group" aria-label="Chi controlla il palombaro">
+            <button type="button" data-ctrl="manual" aria-pressed="false">Tu</button>
+            <button type="button" data-ctrl="onoff" aria-pressed="false">On-Off</button>
+            <button type="button" data-ctrl="pid" aria-pressed="false">PID</button>
+            <button type="button" data-ctrl="cascade" aria-pressed="true">Cascata</button>
+          </div>
+          <p class="ctrl-desc" id="ctrl-desc"></p>
+
+          <div class="sub-panel" id="panel-auto">
+            <div class="btn-row" role="group" aria-label="Andamento del bersaglio">
+              <button type="button" class="btn chip-btn" data-profile="fisso" aria-pressed="true">Quota fissa</button>
+              <button type="button" class="btn chip-btn" data-profile="gradini" aria-pressed="false">Gradini di 5 cm</button>
+              <button type="button" class="btn chip-btn" data-profile="onda" aria-pressed="false">Onda lenta</button>
+            </div>
+            <div class="btn-row">
+              <button type="button" class="btn" id="btn-poke">Dai un colpetto</button>
+              <button type="button" class="btn" id="btn-squeeze">Schiaccia la bottiglia</button>
+              <button type="button" class="btn danger" id="btn-safe">Arresto di emergenza</button>
+            </div>
+          </div>
+
+          <div class="sub-panel" id="panel-manual" hidden>
+            <p>Spingi la siringa per farlo scendere, tirala per farlo risalire. Tienilo nella fascia verde (±1 cm) per 10 secondi di fila.</p>
+            <div class="range-field">
+              <label for="manual-syringe">Siringa spinta <output id="manual-value" for="manual-syringe">5,00 ml</output></label>
+              <input type="range" id="manual-syringe" class="syringe-range" min="0" max="10" step="0.05" value="5">
+              <div class="scale"><span>tirata: sale</span><span>spinta: scende</span></div>
+            </div>
+            <div class="game-meter" aria-hidden="true"><span id="game-bar"></span></div>
+            <div class="game-stats">
+              <span>In fascia: <b id="game-time">0,0 s</b> / 10 s</span>
+              <span>Il tuo record: <b id="game-best">—</b></span>
+            </div>
+            <p class="game-msg" id="game-msg" aria-live="polite">Fuori dalla fascia: correggi con la siringa.</p>
+            <div><button type="button" class="btn primary" id="btn-handover">Lascia fare al controllore</button></div>
+          </div>
+        </div>
+
+        <div class="panel narrator">
+          <p class="eyebrow">In parole semplici</p>
+          <p class="narr-head" id="narr-head"></p>
+          <p class="narr-detail" id="narr-detail"></p>
+          <div class="terms" id="terms">
+            <div class="term"><span class="term-name">Presente <small>P · quanto è lontano</small></span><div class="bar"><span class="bar-fill" id="bar-p"></span></div><span class="term-val" id="val-p">—</span></div>
+            <div class="term"><span class="term-name">Passato <small>I · errore accumulato</small></span><div class="bar"><span class="bar-fill" id="bar-i"></span></div><span class="term-val" id="val-i">—</span></div>
+            <div class="term"><span class="term-name">Futuro <small>D · dove sta andando</small></span><div class="bar"><span class="bar-fill" id="bar-d"></span></div><span class="term-val" id="val-d">—</span></div>
+            <div class="term-legend"><span>più pressione (spinge giù)</span><span class="pull">meno pressione (lascia salire)</span><span class="plain">base dal modello: <b class="mono" id="val-ff">—</b></span></div>
+          </div>
+        </div>
+
+        <div class="panel charts" id="charts">
+          <div class="chart">
+            <div class="chart-head"><b>Quota (cm, verso il basso)</b><span class="legend"><span class="key" style="--c:var(--water)">palombaro</span><span class="key dash" style="--c:var(--ink)">bersaglio</span><span>errore RMS 10 s: <b class="mono" id="ro-rms">—</b></span></span></div>
+            <canvas id="chart-z" role="img" aria-label="Grafico della quota del palombaro e del bersaglio negli ultimi 30 secondi"></canvas>
+          </div>
+          <div class="chart">
+            <div class="chart-head"><b>Pressione in testa (kPa)</b><span class="legend"><span class="key" style="--c:var(--water-deep)">misurata</span><span class="key dash" style="--c:var(--alert)">richiesta dal controllore</span></span></div>
+            <canvas id="chart-p" role="img" aria-label="Grafico della pressione misurata e richiesta negli ultimi 30 secondi"></canvas>
+          </div>
+          <div class="chart">
+            <div class="chart-head"><b>Siringa (ml spinti)</b><span class="legend"><span class="key" style="--c:var(--ink)">posizione dello stantuffo</span></span></div>
+            <canvas id="chart-s" role="img" aria-label="Grafico della posizione della siringa negli ultimi 30 secondi"></canvas>
+          </div>
+        </div>
+
+        <div class="panel">
+          <p class="eyebrow">Schema a blocchi · valori dal vivo</p>
+          <div class="scroll-x">
+            <svg class="diagram" viewBox="0 0 920 236" role="img" aria-label="Schema a blocchi del controllo in cascata con i valori attuali">
+              <defs>
+                <marker id="m-ink" viewBox="0 0 6 6" refX="5.5" refY="3" markerWidth="6" markerHeight="6" orient="auto"><path class="arrow-ink" d="M0 0 L6 3 L0 6 Z"/></marker>
+                <marker id="m-water" viewBox="0 0 6 6" refX="5.5" refY="3" markerWidth="6" markerHeight="6" orient="auto"><path class="arrow-water" d="M0 0 L6 3 L0 6 Z"/></marker>
+              </defs>
+              <rect class="bd-super" x="12" y="8" width="230" height="28" rx="3"/>
+              <text class="bd-super-text" x="127" y="27" text-anchor="middle">Supervisore · macchina a stati</text>
+              <path class="wire" d="M34 36 V110 H53" stroke-dasharray="3 3" marker-end="url(#m-ink)"/>
+              <text class="bd-sym" x="44" y="58">z ref</text>
+              <text class="bd-val" id="bd-zref" x="44" y="76">12,0 cm</text>
+              <circle cx="64" cy="110" r="10" class="bd-box"/><text class="bd-title" x="64" y="115" text-anchor="middle">Σ</text>
+              <text class="bd-sym" x="48" y="137">−</text>
+              <path class="wire" d="M74 110 H138" marker-end="url(#m-ink)"/>
+              <text class="bd-val" id="bd-err" x="106" y="100" text-anchor="middle">+0,00 cm</text>
+              <g id="bd-outer">
+                <rect class="bd-box" x="140" y="84" width="118" height="52" rx="3"/>
+                <text class="bd-title" id="bd-outer-title" x="199" y="107" text-anchor="middle">PID digitale</text>
+                <text class="bd-sub" x="199" y="124" text-anchor="middle">quota → pressione</text>
+              </g>
+              <path class="wire" d="M258 110 H329" marker-end="url(#m-ink)"/>
+              <text class="bd-val" id="bd-pref" x="294" y="100" text-anchor="middle">1,50 kPa</text>
+              <circle cx="340" cy="110" r="10" class="bd-box"/><text class="bd-title" x="340" y="115" text-anchor="middle">Σ</text>
+              <text class="bd-sym" x="324" y="137">−</text>
+              <path class="wire" d="M350 110 H370" marker-end="url(#m-ink)"/>
+              <g id="bd-inner">
+                <rect class="bd-box" x="372" y="84" width="118" height="52" rx="3"/>
+                <text class="bd-title" id="bd-inner-title" x="431" y="107" text-anchor="middle">PI pressione</text>
+                <text class="bd-sub" x="431" y="124" text-anchor="middle">pressione → siringa</text>
+              </g>
+              <path class="wire" d="M490 110 H564" marker-end="url(#m-ink)"/>
+              <text class="bd-val" id="bd-u" x="528" y="100" text-anchor="middle">5,00 ml</text>
+              <rect class="bd-box" x="566" y="84" width="108" height="52" rx="3"/>
+              <text class="bd-title" x="620" y="107" text-anchor="middle">Attuatore</text>
+              <text class="bd-sub" x="620" y="124" text-anchor="middle">servo + siringa</text>
+              <path class="wire" d="M674 110 H746" marker-end="url(#m-ink)"/>
+              <text class="bd-val" id="bd-p" x="711" y="100" text-anchor="middle">1,50 kPa</text>
+              <rect class="bd-plant" x="748" y="84" width="98" height="52" rx="3"/>
+              <text class="bd-title" x="797" y="107" text-anchor="middle">Palombaro</text>
+              <text class="bd-sub" x="797" y="124" text-anchor="middle">instabile</text>
+              <path class="wire" d="M846 110 H912" marker-end="url(#m-ink)"/>
+              <text class="bd-val" id="bd-z" x="874" y="100" text-anchor="middle">14,0 cm</text>
+              <g id="bd-fb-inner">
+                <path class="wire-fb" d="M711 110 V170 H340 V122" marker-end="url(#m-water)"/>
+                <rect class="bd-sensor" x="450" y="158" width="200" height="24" rx="3"/>
+                <text class="bd-sub" x="462" y="174">BMP280 · 100 Hz</text>
+                <text class="bd-sensor-val" id="bd-pmeas" x="640" y="174" text-anchor="end">1,50 kPa</text>
+              </g>
+              <g id="bd-fb-outer">
+                <path class="wire-fb" d="M896 110 V214 H64 V122" marker-end="url(#m-water)"/>
+                <rect class="bd-sensor" x="400" y="202" width="300" height="24" rx="3"/>
+                <text class="bd-sub" x="412" y="218">telecamera + filtro α-β · 30 Hz</text>
+                <text class="bd-sensor-val" id="bd-zmeas" x="690" y="218" text-anchor="end">14,00 cm</text>
+              </g>
+            </svg>
+          </div>
+        </div>
+
+        <div class="console-pair">
+          <div class="panel">
+            <h3>Esperimenti guidati</h3>
+            <div class="btn-row">
+              <button type="button" class="btn" data-exp="instabile">Mostra l'instabilità</button>
+              <button type="button" class="btn" data-exp="gradino">Gradino di 5 cm</button>
+              <button type="button" class="btn" data-exp="onoff">Prova l'On-Off</button>
+              <button type="button" class="btn" data-exp="perdita">Perdita d'aria</button>
+              <button type="button" class="btn" data-exp="schiaccia">Schiaccia la bottiglia</button>
+            </div>
+            <p class="exp-note" id="exp-note" aria-live="polite">Scegli un esperimento e guarda la bottiglia e i grafici insieme.</p>
+            <p class="eyebrow">Macchina a stati del supervisore</p>
+            <div class="scroll-x">
+              <svg class="fsm" viewBox="0 0 600 150" role="img" aria-label="Macchina a stati: manuale, calibrazione, mantenimento, inseguimento, sicurezza">
+                <defs><marker id="m-fsm" viewBox="0 0 6 6" refX="5.5" refY="3" markerWidth="6" markerHeight="6" orient="auto"><path class="arrow-muted" d="M0 0 L6 3 L0 6 Z"/></marker></defs>
+                <path class="fsm-arrow" d="M120 38 H148" marker-end="url(#m-fsm)"/>
+                <text class="fsm-label" x="134" y="30" text-anchor="middle">auto</text>
+                <path class="fsm-arrow" d="M280 38 H318" marker-end="url(#m-fsm)"/>
+                <text class="fsm-label" x="299" y="30" text-anchor="middle">1,2 s</text>
+                <path class="fsm-arrow" d="M360 56 V88" marker-end="url(#m-fsm)"/>
+                <path class="fsm-arrow" d="M384 90 V58" marker-end="url(#m-fsm)"/>
+                <text class="fsm-label" x="392" y="77">profilo</text>
+                <path class="fsm-arrow" d="M420 38 Q466 40 486 62" marker-end="url(#m-fsm)"/>
+                <path class="fsm-arrow" d="M420 108 Q466 106 486 88" marker-end="url(#m-fsm)"/>
+                <text class="fsm-label" x="466" y="30">allarme</text>
+                <path class="fsm-arrow" d="M540 91 V138 H215 V58" marker-end="url(#m-fsm)"/>
+                <text class="fsm-label" x="378" y="133" text-anchor="middle">riprendi</text>
+                <g class="st" id="st-MANUALE"><rect x="10" y="20" width="110" height="36" rx="4"/><text x="65" y="42" text-anchor="middle">MANUALE</text></g>
+                <g class="st" id="st-CALIBRAZIONE"><rect x="150" y="20" width="130" height="36" rx="4"/><text x="215" y="42" text-anchor="middle">CALIBRAZIONE</text></g>
+                <g class="st" id="st-HOLD"><rect x="320" y="20" width="100" height="36" rx="4"/><text x="370" y="42" text-anchor="middle">HOLD</text></g>
+                <g class="st" id="st-TRACKING"><rect x="320" y="90" width="100" height="36" rx="4"/><text x="370" y="112" text-anchor="middle">TRACKING</text></g>
+                <g class="st" id="st-SAFE"><rect x="488" y="55" width="100" height="36" rx="4"/><text x="538" y="77" text-anchor="middle">SAFE</text></g>
+              </svg>
+            </div>
+            <p class="fsm-note" id="fsm-note"></p>
+          </div>
+
+          <div class="panel">
+            <h3>Taratura del PID</h3>
+            <p>Abbassa «Futuro» (D) e il palombaro inizia a oscillare. Senza «Presente» (P) non riesce nemmeno a stare fermo.</p>
+            <div class="range-field">
+              <label for="kp"><span>Presente · K<sub>p</sub></span> <output id="kp-out" for="kp"></output></label>
+              <input type="range" id="kp" min="0" max="1200" step="10" value="470">
+            </div>
+            <div class="range-field">
+              <label for="ki"><span>Passato · K<sub>i</sub></span> <output id="ki-out" for="ki"></output></label>
+              <input type="range" id="ki" min="0" max="400" step="5" value="100">
+            </div>
+            <div class="range-field">
+              <label for="kd"><span>Futuro · K<sub>d</sub></span> <output id="kd-out" for="kd"></output></label>
+              <input type="range" id="kd" min="0" max="800" step="10" value="290">
+            </div>
+            <div><button type="button" class="btn" id="btn-gains-reset">Ripristina i guadagni di progetto</button></div>
+            <div class="range-field">
+              <label for="leak">Perdita d'aria dal tappo <output id="leak-out" for="leak">minima</output></label>
+              <input type="range" id="leak" min="0" max="4" step="1" value="1">
+            </div>
+            <div class="toggles">
+              <label><input type="checkbox" id="noise" checked> Rumore dei sensori</label>
+              <label><input type="checkbox" id="quant" checked> Servo a passi (0,05 ml)</label>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <section id="fisica" aria-labelledby="fisica-title">
+      <div class="section-head">
+        <p class="eyebrow">Come funziona</p>
+        <h2 id="fisica-title">Tre leggi della fisica e un'instabilità</h2>
+        <p class="lede">Il palombaro non ha motori né eliche. Si muove solo perché la pressione dell'aria cambia il volume della sua bolla.</p>
+      </div>
+      <ol class="laws">
+        <li>
+          <h3>Pascal</h3>
+          <span class="formula">Δp in testa = Δp ovunque</span>
+          <p>Quando il servo spinge la siringa, la pressione dell'aria in cima alla bottiglia aumenta e si trasmette a tutta l'acqua, fino al palombaro.</p>
+        </li>
+        <li>
+          <h3>Boyle</h3>
+          <span class="formula">p · V = costante</span>
+          <p>La bolla dentro il contagocce viene schiacciata e si rimpicciolisce. Nel banco vero si vede: entra un filo d'acqua dal basso.</p>
+        </li>
+        <li>
+          <h3>Archimede</h3>
+          <span class="formula">spinta = ρ · g · V spostato</span>
+          <p>Bolla più piccola, meno acqua spostata, meno spinta: il palombaro scende. Tirando la siringa succede tutto al contrario e risale.</p>
+        </li>
+      </ol>
+      <div class="instability">
+        <div>
+          <h3>Perché da solo non sta fermo</h3>
+          <p>Ogni 10 cm d'acqua aggiungono circa 1 kPa di pressione. Se il palombaro scende di poco, la bolla si comprime ancora e scende di più; se sale, la bolla si espande e sale di più. Il punto di equilibrio esiste, ma è <b>instabile</b>.</p>
+          <span class="tf">G(s) = b / (m·s² + c·s <b>− k</b>) · polo a <b>+<span id="pole-value">0,34</span> rad/s</b></span>
+        </div>
+        <div class="loop" role="img" aria-label="Il circolo vizioso: scende un po', più pressione dall'acqua, bolla più piccola, meno spinta, scende ancora di più">
+          <span>scende un po'</span><i>→</i><span>più pressione dall'acqua</span><i>→</i><span>bolla più piccola</span><i>→</i><span>meno spinta</span><i>→</i><span>scende ancora di più</span>
+        </div>
+      </div>
+    </section>
+
+    <section id="progetto" aria-labelledby="progetto-title">
+      <div class="section-head">
+        <p class="eyebrow">Il progetto</p>
+        <h2 id="progetto-title">Dal foglio A4 al banco vero</h2>
+        <p class="lede">Proposta per l'esonero del corso di Automazione: costruire il banco, identificarne il modello e confrontare On-Off, PID e controllo in cascata sui dati reali.</p>
+      </div>
+      <div class="project-grid">
+        <div>
+          <h3 class="block-title">Piano di lavoro</h3>
+          <ol class="timeline">
+            <li><span class="ph">F0</span><span class="when">8–11 ott</span><span>Approvazione e ordine dei componenti</span></li>
+            <li><span class="ph">F1</span><span class="when">12–25 ott</span><span>Costruzione e test di tenuta <span class="ms">M1 · il palombaro si muove con la siringa</span></span></li>
+            <li><span class="ph">F2</span><span class="when">26 ott–8 nov</span><span>Sensori, visione con OpenCV, registrazione dati <span class="ms">M2 · quota e pressione ad almeno 20 Hz</span></span></li>
+            <li><span class="ph">F3</span><span class="when">9–15 nov</span><span>Modello, identificazione, simulazione Simulink <span class="ms">M3 · G(s) validata sui dati</span></span></li>
+            <li><span class="ph">F4</span><span class="when">16–22 nov</span><span>On-Off, PI sulla pressione, P → PD <span class="ms">M4 · quota stabile</span></span></li>
+            <li><span class="ph">F5</span><span class="when">23 nov–6 dic</span><span>Cascata, PID digitale, macchina a stati, real-time <span class="ms">M5 · ±5 mm e inseguimento</span></span></li>
+            <li class="final"><span class="ph">F6</span><span class="when">7–13 dic</span><span>Validazione, video, relazione <span class="ms">M6 · consegna interna 13 dicembre</span></span></li>
+          </ol>
+          <h3 class="block-title spaced">Cosa dimostra del corso</h3>
+          <div class="topics">
+            <div><b>PID digitali e tuning</b><span>Discretizzazione, anti-windup, filtro sul derivativo.</span></div>
+            <div><b>Controllori avanzati</b><span>Cascata pressione/quota e feedforward dal modello.</span></div>
+            <div><b>PLC e SFC</b><span>Supervisione con calibrazione, mantenimento, inseguimento e stato sicuro.</span></div>
+            <div><b>Reti e real-time</b><span>Anello chiuso su iPhone, Mac ed ESP32: latenza misurata, task periodici.</span></div>
+            <div><b>Automi e reti di Petri</b><span>Supervisore modellato e verificato senza blocchi.</span></div>
+            <div><b>Corsi propedeutici</b><span>Linearizzazione, Routh, luogo delle radici, Bode, Simulink.</span></div>
+          </div>
+        </div>
+        <div class="side-stack">
+          <div>
+            <h3 class="block-title">Componenti</h3>
+            <table class="costs">
+              <tr><td>ESP32 DevKit</td><td>8 €</td></tr>
+              <tr><td>Servo MG996R</td><td>8 €</td></tr>
+              <tr><td>Sensore di pressione BMP280</td><td>4 €</td></tr>
+              <tr><td>Alimentatore 5 V 3 A</td><td>9 €</td></tr>
+              <tr><td>Breadboard e cavi</td><td>7 €</td></tr>
+              <tr><td>Siringhe, tubi, raccordo a T, contagocce</td><td>10 €</td></tr>
+              <tr><td>Epossidica, colla a caldo, legno</td><td>24 €</td></tr>
+              <tr class="total"><td>Totale stimato</td><td>≈ 70 €</td></tr>
+            </table>
+            <p class="note">La telecamera è un iPhone 15 Pro usato come webcam del Mac.</p>
+          </div>
+          <div>
+            <h3 class="block-title">Tre livelli di risultato</h3>
+            <div class="levels">
+              <div class="level"><span class="tag base">BASE</span><span>On-Off, PID su un anello e macchina a stati. Garantito entro F4.</span></div>
+              <div class="level"><span class="tag target">TARGET</span><span>Cascata, PID digitale completo, filtro, analisi real-time.</span></div>
+              <div class="level"><span class="tag extra">EXTRA</span><span>Retroazione dallo stato con osservatore, predittore di Smith.</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <p class="note spaced">I parametri della simulazione (massa, volumi, attriti, rumore e ritardo dei sensori) sono stime di progetto. Nella fase 3 verranno sostituiti con i valori identificati sul banco reale.</p>
+    </section>
+  </main>
+
+  <footer>
+    <p><b>Gabriele Caruso</b> · Corso di Automazione, Prof. Alessandro Giuseppi · Sapienza Università di Roma – DIAG · A.A. 2026/27</p>
+    <p>Riferimenti: A. Koike, Y. Ochiai et al., «Syringe-worked Mermaid», SIGGRAPH Asia 2016 Posters · J. Güémez, C. Fiolhais, M. Fiolhais, «The Cartesian diver and the fold catastrophe», Am. J. Phys. 70 (2002).</p>
+  </footer>
+</div>
+
+<script src="sim.js" charset="utf-8"></script>
+<script src="charts.js" charset="utf-8"></script>
+<script src="views.js" charset="utf-8"></script>
+<script src="app.js" charset="utf-8"></script>
