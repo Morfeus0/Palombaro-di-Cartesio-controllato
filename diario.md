@@ -3,7 +3,7 @@
 > Una voce per ogni sessione di lavoro (attività T1 del piano operativo).
 > Modello: data · sottofase · ore → Fatto · Problemi · Decisioni (e perché) · Foto/file · Prossimo passo.
 
-## 2026-10-10 · sottofase 1.1 · ore: da compilare
+## 2026-10-10 · sottofase 1.1 · 1 h (conclusa alle 13:30)
 
 **Fatto:**
 - Creata la struttura del progetto e inizializzato git (primo commit `chore: struttura iniziale del progetto Palombaro di Cartesio`).
