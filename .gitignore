@@ -1,0 +1,28 @@
+# macOS
+.DS_Store
+
+# Materiale del corso (PDF pesanti, libri: non vanno su un repository remoto)
+Materiale teorico/
+
+# Python
+.venv/
+__pycache__/
+*.pyc
+
+# PlatformIO
+.pio/
+
+# Video (pesanti: si copiano nel cloud a parte; i CSV in dati/ restano versionati)
+media/*.mp4
+media/*.mov
+
+# MATLAB / Simulink
+*.asv
+slprj/
+
+# LaTeX (file intermedi)
+relazione/*.aux
+relazione/*.log
+relazione/*.out
+relazione/*.toc
+relazione/*.synctex.gz
