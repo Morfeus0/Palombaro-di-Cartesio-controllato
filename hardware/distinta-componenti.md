@@ -1,7 +1,7 @@
 # Distinta componenti: Palombaro di Cartesio
 
-> Sottofase **0.2** del piano operativo. Stato al **9 ottobre 2026**: carrello Amazon **definitivo e verificato** (da ordinare) · lista negozio **completa**.
-> Prezzi e date di consegna letti nel carrello Amazon il 9 ottobre: vanno ricontrollati al checkout.
+> Sottofasi **0.2** e **0.4** del piano operativo. Stato al **10 ottobre 2026**: carrello Amazon **ordinato venerdì 9 ottobre alle 20:00** · lista negozio **completa, ancora da comprare** (istruzioni pezzo per pezzo in [lista-spesa-negozi.md](lista-spesa-negozi.md)).
+> Prezzi e date di consegna letti nel carrello Amazon il 9 ottobre: importo reale e date vanno confermati dalla mail d'ordine.
 > Livelli: **E** = indispensabile · **C** = consigliato (riduce i rischi) · **F** = facoltativo.
 
 ---
@@ -18,7 +18,7 @@ Un solo canale (Amazon.it): **niente AliExpress**, per evitare i dazi.
 | A4 | **Sensore BMP280 3,3 V, 8 pezzi** (GERUI) | 1 conf. | E | 10,91 € | gio 15 ott | Misura la pressione nella bottiglia: retroazione dell'anello interno, test di tenuta (1.6), identificazione del modello. Ne servono 2, il resto sono ricambi |
 | A5 | **Alimentatore TKDY 5 V 3 A con punte intercambiabili** ([B0B121C8JX](https://www.amazon.it/dp/B0B121C8JX)) | 1 | E | 15,92 € | **ven 16 ott** (Prime) | Alimenta il servo a parte, con le masse in comune: i picchi di corrente non fanno riavviare l'ESP32 (rischio R7). Include l'adattatore con presa femmina e morsetti verdi: sostituisce il vecchio A5 |
 | A6 | **Asticelle a Z in acciaio inox, QUARKZMAN 1,5 × 300 mm, 10 pezzi** | 1 conf. | C | 13,99 € | gio 15 ott | Collegamento rigido tra braccetto del servo e stantuffo, con meno gioco possibile (1.7). Ne usi 1–2 |
-| A7 | **Bilancino CAMRY 500 g / 0,01 g** ([B0BZS18B18](https://www.amazon.it/dp/B0BZS18B18)) | 1 | C | 8,99 € | mar 13 ott | Pesare i palombari e tararli vicino al galleggiamento neutro (1.2); massa e volume sono parametri di G(s) (3.2) |
+| A7 | **Bilancino CAMRY 500 g / 0,01 g** ([B0BZS18B18](https://www.amazon.it/dp/B0BZS18B18)) | 1 | C | 8,99 € | **mar 13 ott** (confermata da Amazon) | Pesare i palombari e tararli vicino al galleggiamento neutro (1.2); massa e volume sono parametri di G(s) (3.2) |
 | A8 | **Kit saldatore Beizkna 80 W LCD, 180–520 °C** | 1 kit | E | 23,98 € | lun 12 ott | Saldare i 4 fili al BMP280 (1.3). Include stagno, supporto, 5 punte e pompetta dissaldante |
 
 **Totale carrello: 119,76 €** (saldatore incluso). Più la spesa in negozio (sezione B).
@@ -46,7 +46,7 @@ Un solo canale (Amazon.it): **niente AliExpress**, per evitare i dazi.
 | B3 | Filo di rame rigido (zavorra) | ferramenta | — |
 | B4 | Colla epossidica bicomponente | ferramenta | per sigillare il tappo (1.3); 24 h di indurimento |
 | B5 | Stick di colla a caldo di ricambio | ferramenta | la pistola c'è già |
-| B6 | Tavoletta di legno, viti, fascette | ferramenta | base servo–siringa (1.7) e fascette sul tubo (1.4) |
+| B6 | Tavoletta di legno ≈ 30 × 15 cm (spessore 12–18 mm), **viti per legno autofilettanti 3,5 × 20 mm** (≈ 20 pezzi), **fascette di nylon** (2,5 × 100 mm, ≈ 100 pezzi, più una decina da 3,6 × 200 mm) | ferramenta | base servo–siringa (1.7) e fascette sul tubo (1.4). Le viti per il servo sono già nella sua confezione |
 | ~~B7~~ | ~~Filo d'acciaio 1–1,5 mm~~ | — | **cancellato**: si usano le QUARKZMAN (A6) |
 | B8 | Cavo a 4 fili, 50–80 cm | ferramenta / elettronica | dal BMP280 alla breadboard. Opzionale: guaina termorestringente o nastro isolante sui fili saldati |
 | B9 | Vaschetta di contenimento | casalinghi | — |
@@ -55,6 +55,8 @@ Un solo canale (Amazon.it): **niente AliExpress**, per evitare i dazi.
 | B12 | **Condensatore elettrolitico 1000 µF, ≥ 10 V** (2 pezzi; il 16 V va benissimo) | negozio di elettronica | **Indispensabile:** stabilizza il 5 V del servo ed evita che l'ESP32 si riavvii. ≈ 0,50 €, a fori passanti (non SMD). La striscia chiara sul corpo è il polo **negativo** (va al GND). Serve entro **dom 18 ott** (1.5). Se non lo trovi: kit GTIWUNG 30 pezzi 1000 µF 16 V su Amazon, 9,99 € |
 | B13 | **Tubo per aria da acquario 4/6 mm** (**4 mm interno**), circa 2 m, + **2 raccordi a T** per tubo da 4 mm | negozio di acquari | ≈ 4 €. Porta una siringa da 10 ml e prova subito che il tubo si infili sul cono. Serve entro **sab 17 ott** (1.4). I raccordi vanno fissati con le fascette |
 | B14 | **Multimetro con prova di continuità** (se non ne hai già uno) | elettronica / ferramenta (o Amazon) | ≈ 10–15 €. Serve per la continuità dei 4 fili del BMP280 (1.3) e per verificare che l'alimentatore dia 5 V con la polarità giusta (1.5). Entro **gio 15 ott** |
+| B15 | **Carta vetrata** grana 120–180 (1 foglio) | ferramenta | ruvidare il tappo prima della colla epossidica, che si attacca male alla plastica liscia (1.3) |
+| B16 | **Tronchesino** piccolo | ferramenta | tagliare il filo di rame della zavorra (1.2), i fili del sensore (1.3) e le fascette (1.4) |
 
 **Spesa indicativa in negozio:** ≈ 20–25 € (B1–B6, B8–B13), più il multimetro se non ce l'hai.
 
@@ -79,16 +81,17 @@ Un solo canale (Amazon.it): **niente AliExpress**, per evitare i dazi.
 - [x] (9 ott) **Saldatore: si compra** (23,98 €), niente prestito.
 - [x] (9 ott) **Budget:** accettata la spesa attuale, grazie ai risparmi fatti sul carrello (adattatore, tubo, filo e kit breadboard più economici). Carrello Amazon 119,76 € + negozio ≈ 20–25 € (+ multimetro se serve), cioè ≈ 140–145 €.
 - [x] (9 ott) **Carrello Amazon confermato** (8 articoli, 119,76 €).
+- [x] (9 ott, 20:00) **Ordine Amazon inviato.** Il bilancino (A7) arriva martedì 13 ottobre, in tempo per pesare i palombari nella 1.2.
 
-## Carrello da ordinare ora
+## Carrello Amazon: ordinato venerdì 9 ottobre alle 20:00
 
-- [ ] A1 · ELEGOO ESP-32 USB-C ×2
-- [ ] A2 · GTIWUNG breadboard + jumper
-- [ ] A3 · Servo HAXIHA ×2
-- [ ] A4 · BMP280 ×8
-- [ ] A5 · Alimentatore TKDY 5 V 3 A
-- [ ] A6 · QUARKZMAN 1,5×300 mm
-- [ ] A7 · Bilancino CAMRY
-- [ ] A8 · Saldatore Beizkna 80 W
+- [x] A1 · ELEGOO ESP-32 USB-C ×2
+- [x] A2 · GTIWUNG breadboard + jumper
+- [x] A3 · Servo HAXIHA ×2
+- [x] A4 · BMP280 ×8
+- [x] A5 · Alimentatore TKDY 5 V 3 A
+- [x] A6 · QUARKZMAN 1,5×300 mm
+- [x] A7 · Bilancino CAMRY (consegna **martedì 13 ottobre**)
+- [x] A8 · Saldatore Beizkna 80 W
 
-**Dopo l'ordine:** annotare qui spesa reale, ordine e data di consegna (sottofase 0.4).
+**Ancora da annotare (sottofase 0.4):** la spesa reale e le date di consegna di tutti gli articoli, dalla mail di conferma di Amazon. Poi gli acquisti nei negozi (vedi [lista-spesa-negozi.md](lista-spesa-negozi.md)).
