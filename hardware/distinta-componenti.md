@@ -46,7 +46,7 @@ Un solo canale (Amazon.it): **niente AliExpress**, per evitare i dazi.
 | B3 | Filo di rame rigido (zavorra) | ferramenta | — |
 | B4 | Colla epossidica bicomponente | ferramenta | per sigillare il tappo (1.3); 24 h di indurimento |
 | B5 | Stick di colla a caldo di ricambio | ferramenta | la pistola c'è già |
-| B6 | Tavoletta di legno ≈ 30 × 15 cm (spessore 12–18 mm), **viti per legno autofilettanti 3,5 × 20 mm** (≈ 20 pezzi), **fascette di nylon** (2,5 × 100 mm, ≈ 100 pezzi, più una decina da 3,6 × 200 mm) | ferramenta | base servo–siringa (1.7) e fascette sul tubo (1.4). Le viti per il servo sono già nella sua confezione |
+| B6 | Tavoletta di legno ≈ 30 × 15 cm (spessore 12–18 mm), **viti per legno autofilettanti 3,5 × 20 mm** (≈ 20 pezzi). Fascette di nylon: **già in casa**, non servono | ferramenta | base servo–siringa (1.7). Le fascette (già in casa) servono sul tubo (1.4). Le viti per il servo sono già nella sua confezione |
 | ~~B7~~ | ~~Filo d'acciaio 1–1,5 mm~~ | — | **cancellato**: si usano le QUARKZMAN (A6) |
 | B8 | Cavo a 4 fili, 50–80 cm | ferramenta / elettronica | dal BMP280 alla breadboard. Opzionale: guaina termorestringente o nastro isolante sui fili saldati |
 | B9 | Vaschetta di contenimento | casalinghi | — |
@@ -56,8 +56,6 @@ Un solo canale (Amazon.it): **niente AliExpress**, per evitare i dazi.
 | B13 | **Tubo per aria da acquario 4/6 mm** (**4 mm interno**), circa 2 m, + **2 raccordi a T** per tubo da 4 mm | negozio di acquari | ≈ 4 €. Porta una siringa da 10 ml e prova subito che il tubo si infili sul cono. Serve entro **sab 17 ott** (1.4). I raccordi vanno fissati con le fascette |
 | B14 | **Multimetro con prova di continuità** (se non ne hai già uno) | elettronica / ferramenta (o Amazon) | ≈ 10–15 €. Serve per la continuità dei 4 fili del BMP280 (1.3) e per verificare che l'alimentatore dia 5 V con la polarità giusta (1.5). Entro **gio 15 ott** |
 | B15 | **Carta vetrata** grana 120–180 (1 foglio) | ferramenta | ruvidare il tappo prima della colla epossidica, che si attacca male alla plastica liscia (1.3) |
-| B16 | **Tronchesino** piccolo | ferramenta | tagliare il filo di rame della zavorra (1.2), i fili del sensore (1.3) e le fascette (1.4) |
-
 **Spesa indicativa in negozio:** ≈ 20–25 € (B1–B6, B8–B13), più il multimetro se non ce l'hai.
 
 ---

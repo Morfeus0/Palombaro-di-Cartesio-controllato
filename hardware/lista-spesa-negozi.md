@@ -21,6 +21,8 @@ Controlla e spunta. Quello che manca si compra in ferramenta (vedi **F11**).
 - [ ] Forbici e taglierino
 - [ ] Pistola per colla a caldo (c'è già, secondo la distinta): **leggi il diametro dei bastoncini** stampato sulla pistola (7 mm o 11 mm) per il pezzo **F4**
 - [ ] Righello (servirà dopo, nella 2.1)
+- [x] Fascette di nylon: le hai già, **non comprarle**
+- [x] Tronchesino o pinza tagliafili piccola: ce l'hai già, **non comprarlo**
 
 ## Giro consigliato (per scadenze)
 
@@ -28,7 +30,7 @@ Controlla e spunta. Quello che manca si compra in ferramenta (vedi **F11**).
 |---|---|---|---|---|
 | 1 | **Farmacia** | siringhe, contagocce | **lun 12 ott** | 1.2 (martedì 13) e 1.4 |
 | 2 | **Supermercato / casalinghi** | bottiglie, vaschetta | **lun 12 ott** | 1.2 (prove in acqua) |
-| 3 | **Ferramenta / brico** | rame, nastro rosso, epossidica, colla a caldo, legno, viti, fascette, cavo, punte, tronchesino | **lun 12 ott** (rame e nastro servono per la 1.2; l'epossidica per la 1.3 di giovedì 15) | 1.2, 1.3, 1.7 |
+| 3 | **Ferramenta / brico** | rame, nastro rosso, epossidica, colla a caldo, legno, viti, cavo, carta vetrata, punte (solo se hai il trapano) | **lun 12 ott** (rame e nastro servono per la 1.2; l'epossidica per la 1.3 di giovedì 15) | 1.2, 1.3, 1.7 |
 | 4 | **Negozio di acquari** (con la siringa in tasca) | tubo + raccordi a T | **ven 16 ott** | 1.4 (sabato 17) |
 | 5 | **Elettronica** | condensatori (+ multimetro) | multimetro **gio 15**, condensatori **sab 17** | 1.3 e 1.5 |
 
@@ -125,10 +127,8 @@ Una sola visita, con la frase di apertura della sezione "Come usare questa lista
   > "Mi servono delle viti **autofilettanti per legno**, testa tonda o bombata, **3,5 per 20 millimetri**, una ventina."
 - **Nota:** le viti per fissare il **servo** sono già nella sua confezione (insieme alle squadrette). Queste servono per il resto della base.
 
-### F9 · Fascette di nylon (B6) — **1 confezione mista**
-- **A cosa serve:** bloccano il tubo sui raccordi e fermano la siringa sulla base.
-- **Cosa dire:**
-  > "Mi servono delle fascette di nylon, una confezione da **100 pezzi da 2,5 per 100 millimetri**, e **una decina più grandi**, 3,6 per 200."
+### F9 · Fascette di nylon (B6) — **già in casa, non comprarle**
+- Servono per bloccare il tubo sui raccordi e per fermare la siringa sulla base. Prima di montare, controlla che ne abbia di piccole (larghezza circa 2,5 mm) per il tubo da 6 mm.
 
 ### F10 · Cavo a 4 fili (B8) — **1 metro**
 - **A cosa serve:** collega il sensore (dentro la bottiglia) alla breadboard, fuori dalla vaschetta.
@@ -139,8 +139,8 @@ Una sola visita, con la frase di apertura della sezione "Come usare questa lista
 - **Opzionale:** guaina termorestringente piccola (2–4 mm), per isolare le saldature:
   > "Un assortimento di guaina termorestringente, diametri piccoli."
 
-### F11 · Punte da trapano, carta vetrata, tronchesino (non erano in distinta)
-- **A cosa servono:** forare il tappo (1.3), ruvidarlo prima della colla e tagliare fili e fascette.
+### F11 · Punte da trapano e carta vetrata (non erano in distinta)
+- **A cosa servono:** forare il tappo (1.3) e ruvidarlo prima della colla.
 - **Se hai già un trapano**, dì:
   > "Mi servono **tre punte da trapano, da 3, da 5 e da 6 millimetri**, per forare plastica sottile, cioè un tappo di bottiglia. Meglio quelle per metallo (HSS), o una punta a gradino, se ce l'avete."
 - **Se NON hai un trapano, non serve comprarlo.** Nel piano si fora solo nella 1.3, e sono circa **3 fori in tappi di plastica morbida** (tubo e cavo nel tappo grande, tubo nel tappo piccolo). Tre strade, dalla più semplice:
@@ -153,8 +153,6 @@ Una sola visita, con la frase di apertura della sezione "Come usare questa lista
      Costo indicativo 5–10 € (non verificato).
 - **Dimensione dei fori:** il tubo di silicone è morbido, quindi il foro deve essere **appena più stretto** del tubo (circa 5–5,5 mm per il tubo da 6 mm) perché si infili con un po' di forza. Meglio partire stretti e allargare provando con il tubo vero, sempre prima su un **tappo di ricambio**.
 - **Carta vetrata:** un foglio a **grana 120–180**.
-- **Tronchesino:**
-  > "Un tronchesino piccolo, per tagliare filo di rame sottile e fascette."
 - **Nota:** diametri e tipo di punta sono una proposta, li confermiamo nella 1.3 con il tappo di prova.
 
 ---
@@ -200,5 +198,5 @@ Una sola visita, con la frase di apertura della sezione "Come usare questa lista
 
 - [ ] Spunta qui i pezzi comprati e **annota la spesa reale** (vale anche per la distinta, sottofase 0.4).
 - [ ] Scrivi nel diario di cosa hai trovato e di cosa ti hanno consigliato i commessi.
-- [x] Pezzi nuovi emersi qui **aggiunti alla distinta**: carta vetrata (B15), tronchesino (B16), viti e fascette (B6). **Trapano e punte** restano fuori dalla distinta finché non controlli in casa cosa hai.
-- [ ] **Stima mia, non verificata:** con tutti i pezzi, tronchesino e multimetro, la spesa in negozio potrebbe stare tra i 35 e i 50 €, più dei 20–25 € indicati nella distinta. Sono prezzi che dipendono dal negozio: il totale vero lo vedi allo scontrino.
+- [x] Pezzi nuovi emersi qui **aggiunti alla distinta**: carta vetrata (B15) e viti (B6). Fascette e tronchesino li hai già in casa, quindi non si comprano. **Trapano e punte** restano fuori dalla distinta finché non controlli in casa cosa hai.
+- [ ] **Stima mia, non verificata:** con tutti i pezzi e il multimetro, la spesa in negozio potrebbe stare tra i 35 e i 50 €, più dei 20–25 € indicati nella distinta. Quella cifra era calcolata prima dei tagli (meno siringhe e contagocce, niente fascette né tronchesino), quindi ora dovrebbe essere più bassa. Sono prezzi che dipendono dal negozio: il totale vero lo vedi allo scontrino.
