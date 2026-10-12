@@ -48,15 +48,18 @@ Un solo canale (Amazon.it): **niente AliExpress**, per evitare i dazi.
 | B5 | Stick di colla a caldo di ricambio | ferramenta | la pistola c'è già |
 | B6 | Tavoletta di legno ≈ 30 × 15 cm (spessore 12–18 mm), **viti per legno autofilettanti 3,5 × 20 mm** (≈ 20 pezzi). Fascette di nylon: **già in casa**, non servono | ferramenta | base servo–siringa (1.7). Le fascette (già in casa) servono sul tubo (1.4). Le viti per il servo sono già nella sua confezione |
 | ~~B7~~ | ~~Filo d'acciaio 1–1,5 mm~~ | — | **cancellato**: si usano le QUARKZMAN (A6) |
-| B8 | Cavo a 4 fili, 50–80 cm | ferramenta / elettronica | dal BMP280 alla breadboard. Opzionale: guaina termorestringente o nastro isolante sui fili saldati |
+| B8 | Cavo a 4 fili, 50–80 cm | ferramenta / elettronica | **non trovato in ferramenta il 12 ott**: si riprova in elettronica entro **gio 15 ott** (1.3). Alternativa gratis: i 4 fili colorati di un vecchio cavo USB. Dal BMP280 alla breadboard. Opzionale: guaina termorestringente o nastro isolante sui fili saldati |
 | B9 | Vaschetta di contenimento | casalinghi | — |
 | B10 | Nastro isolante rosso o smalto rosso (marcatore) | ferramenta | marcatore visibile alla telecamera (1.2) |
-| B11 | 2 bottiglie PET lisce (1,5–2 L e 0,5 L) | casa | — |
+| B11 | 2 bottiglie PET lisce (1,5–2 L e 0,5 L) | casa | **già in casa** (12 ott): Levissima da 1,5 L (principale) e da 0,5 L (aria extra). Per le prove di foratura serve un tappo di un'altra bottiglia |
 | B12 | **Condensatore elettrolitico 1000 µF, ≥ 10 V** (2 pezzi; il 16 V va benissimo) | negozio di elettronica | **Indispensabile:** stabilizza il 5 V del servo ed evita che l'ESP32 si riavvii. ≈ 0,50 €, a fori passanti (non SMD). La striscia chiara sul corpo è il polo **negativo** (va al GND). Serve entro **dom 18 ott** (1.5). Se non lo trovi: kit GTIWUNG 30 pezzi 1000 µF 16 V su Amazon, 9,99 € |
 | B13 | **Tubo per aria da acquario 4/6 mm** (**4 mm interno**), circa 2 m, + **2 raccordi a T** per tubo da 4 mm | negozio di acquari | ≈ 4 €. Porta una siringa da 10 ml e prova subito che il tubo si infili sul cono. Serve entro **sab 17 ott** (1.4). I raccordi vanno fissati con le fascette |
 | B14 | **Multimetro con prova di continuità** (se non ne hai già uno) | elettronica / ferramenta (o Amazon) | ≈ 10–15 €. Serve per la continuità dei 4 fili del BMP280 (1.3) e per verificare che l'alimentatore dia 5 V con la polarità giusta (1.5). Entro **gio 15 ott** |
 | B15 | **Carta vetrata** grana 120–180 (1 foglio) | ferramenta | ruvidare il tappo prima della colla epossidica, che si attacca male alla plastica liscia (1.3) |
+
 **Spesa indicativa in negozio:** ≈ 20–25 € (B1–B6, B8–B13), più il multimetro se non ce l'hai.
+
+**Stato al 12 ottobre:** comprati in farmacia e ferramenta B1–B6 e B10 (con le fascette già in casa); le bottiglie (B11) sono già in casa. **Mancano:** B8 (cavo a 4 fili, non trovato), B9 (vaschetta), B12 (condensatori), B13 (tubo e raccordi), B14 (multimetro). La carta vetrata (B15) è da confermare. Spesa reale ancora da annotare.
 
 ---
 

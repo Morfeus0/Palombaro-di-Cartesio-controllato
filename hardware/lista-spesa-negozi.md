@@ -4,6 +4,13 @@
 > Per ogni pezzo: a cosa serve, **cosa dire al commesso** (le frasi tra virgolette si possono leggere pari pari), cosa controllare prima di pagare, cosa fare se non c'è.
 > Stato: `[ ]` da comprare · `[x]` comprato.
 
+## Stato degli acquisti (aggiornato lunedì 12 ottobre)
+
+- **Comprato** (farmacia e ferramenta, 12 ott): siringhe (F1), contagocce (F2), filo di rame (F3), colla a caldo (F4), nastro rosso (F5), epossidica (F6), legno (F7) e viti (F8).
+- **Già in casa:** bottiglie (Levissima da 1,5 L e da 0,5 L, vedi S1), fascette di nylon, tronchesino.
+- **Ancora da trovare:** cavo a 4 fili (F10: non c'era in ferramenta, si riprova domani), vaschetta (S2), tubo e raccordi a T (A1, A2), condensatori (E1) e multimetro (E2).
+- **Da confermare:** carta vetrata e come hai risolto la questione dei fori (F11).
+
 ## Come usare questa lista
 
 - **Spiega sempre a cosa serve.** In ferramenta i commessi aiutano molto di più se capiscono il progetto. Una frase che funziona ovunque:
@@ -26,15 +33,15 @@ Controlla e spunta. Quello che manca si compra in ferramenta (vedi **F11**).
 
 ## Giro consigliato (per scadenze)
 
-| # | Dove | Pezzi | Entro | Serve per |
+| # | Dove | Pezzi | Stato / entro | Serve per |
 |---|---|---|---|---|
-| 1 | **Farmacia** | siringhe, contagocce | **lun 12 ott** | 1.2 (martedì 13) e 1.4 |
-| 2 | **Supermercato / casalinghi** | bottiglie, vaschetta | **lun 12 ott** | 1.2 (prove in acqua) |
-| 3 | **Ferramenta / brico** | rame, nastro rosso, epossidica, colla a caldo, legno, viti, cavo, carta vetrata, punte (solo se hai il trapano) | **lun 12 ott** (rame e nastro servono per la 1.2; l'epossidica per la 1.3 di giovedì 15) | 1.2, 1.3, 1.7 |
-| 4 | **Negozio di acquari** (con la siringa in tasca) | tubo + raccordi a T | **ven 16 ott** | 1.4 (sabato 17) |
-| 5 | **Elettronica** | condensatori (+ multimetro) | multimetro **gio 15**, condensatori **sab 17** | 1.3 e 1.5 |
+| 1 | **Farmacia** | siringhe, contagocce | **fatto lun 12 ott** | 1.2 (martedì 13) e 1.4 |
+| 2 | **Supermercato / casalinghi** | solo la vaschetta (le bottiglie sono già in casa) | **entro mar 13 ott** | 1.2 (prove in acqua) |
+| 3 | **Ferramenta / brico** | era tutto, tranne il cavo a 4 fili | **fatto lun 12 ott, tranne il cavo** | 1.2, 1.3, 1.7 |
+| 4 | **Negozio di acquari** (con la siringa in tasca) | tubo + raccordi a T | **entro mer 14 ott** (consigliato: serve per provare il tubo sul foro del tappo, nella 1.3 di giovedì) | 1.3 e 1.4 |
+| 5 | **Elettronica** | cavo a 4 fili (se non lo trovi altrove), multimetro, condensatori | **entro mer 14 ott** (il cavo serve giovedì 15 mattina per saldare il sensore); condensatori entro **sab 17** | 1.3 e 1.5 |
 
-Le domeniche molti negozi sono chiusi: **oggi pomeriggio o lunedì pomeriggio** (dopo l'incontro) sono i momenti migliori per i giri 1–3.
+Le domeniche molti negozi sono chiusi. **Domani (martedì 13) e mercoledì 14** restano i giri 2, 4 e 5: il cavo a 4 fili è la voce più urgente, perché il sensore arriva giovedì 15 e va saldato subito (1.3).
 
 ---
 
@@ -66,14 +73,13 @@ Le domeniche molti negozi sono chiusi: **oggi pomeriggio o lunedì pomeriggio** 
 
 ## 2 · SUPERMERCATO / CASALINGHI
 
-### S1 · Bottiglie di plastica (B11)
-- **Quantità:** **2 grandi** (1,5 o 2 L) e **2 piccole** (0,5 L), **acqua naturale** (non gassata).
-- **Perché due per tipo, dello stesso modello:** così hai i **tappi di ricambio** per provare a forare (1.3) senza rovinare quello giusto. La bottiglia piccola è quella dell'"aria extra".
-- **Come scegliere (nessuna frase da dire, ci pensi tu):**
-  - trasparente, **incolore**;
-  - la più **cilindrica e liscia possibile**: senza scanalature o rilievi sulla parete, che deformerebbero l'immagine per la telecamera;
-  - evita quelle delle bibite gassate (fondo a petali, pareti irregolari);
-  - etichetta di carta o facile da staccare.
+### S1 · Bottiglie di plastica (B11): già in casa, non comprarle
+- **Hai:** una **Levissima da 1,5 L** (la bottiglia principale) e una **da 0,5 L** (quella dell'"aria extra").
+- **Controlla prima di usarle** (non conosco la forma esatta di queste bottiglie, quindi guardale tu):
+  - la parete deve essere **liscia, senza scanalature o rilievi** nella zona in cui passa il palombaro: i rilievi deformano l'immagine per la telecamera. Guardala controluce;
+  - **togli l'etichetta** (se c'è) e lava via la colla;
+  - il **tappo** è integro e chiude bene.
+- **Hai un solo tappo per bottiglia.** Per le prove di foratura (1.3) non usare quelli veri: usa il tappo di **un'altra bottiglia**, meglio un'altra Levissima, per avere la stessa filettatura e la stessa plastica. Fora quelli veri solo alla fine, quando conosci le misure. Se ne rovini uno, un'altra bottiglia uguale costa pochissimo.
 
 ### S2 · Vaschetta di contenimento (B9)
 - **A cosa serve:** raccoglie l'acqua se qualcosa si rovescia. È una misura di sicurezza del piano (rischio R8).
@@ -131,8 +137,11 @@ Una sola visita, con la frase di apertura della sezione "Come usare questa lista
 ### F9 · Fascette di nylon (B6) — **già in casa, non comprarle**
 - Servono per bloccare il tubo sui raccordi e per fermare la siringa sulla base. Prima di montare, controlla che ne abbia di piccole (larghezza circa 2,5 mm) per il tubo da 6 mm.
 
-### F10 · Cavo a 4 fili (B8) — **1 metro**
+### F10 · Cavo a 4 fili (B8) — **1 metro** · NON TROVATO il 12 ott
 - **A cosa serve:** collega il sensore (dentro la bottiglia) alla breadboard, fuori dalla vaschetta.
+- **Stato:** non c'era in ferramenta. Serve entro **giovedì 15 mattina**, quando arriva il sensore e si saldano i fili (1.3).
+- **Dove riprovare:** il negozio di **elettronica** (vendono cavo multipolare a metro, e ci devi andare comunque per i condensatori: vai mercoledì 14), oppure un grande negozio di bricolage. Chiedilo con uno di questi nomi: "cavo antifurto a 4 conduttori", "cavo citofonico" o "cavo multipolare 4 × 0,22".
+- **Soluzione gratis, da provare stasera:** un **vecchio cavo USB** (di mouse, tastiera, stampante o un cavo dati). Dentro ci sono 4 fili colorati (di solito rosso, nero, verde e bianco) più uno schermo. Taglia il cavo, spella la guaina esterna e usa i 4 fili colorati. **Attenzione:** i cavi USB di sola ricarica hanno spesso solo 2 fili, quindi controlla di averne 4. Ti servono circa 50–80 cm.
 - **Cosa dire:**
   > "Mi serve un metro di **cavo flessibile a quattro conduttori colorati**, sezione piccola, **0,22 mm²**, senza schermo. Tipo cavo per antifurto o per citofono."
 - **Controlla:** i **4 fili hanno 4 colori diversi** (così non li confondi: uno per l'alimentazione 3,3 V, uno per la massa e due per il segnale).
