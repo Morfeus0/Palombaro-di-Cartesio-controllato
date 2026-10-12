@@ -114,6 +114,7 @@ Una sola visita, con la frase di apertura della sezione "Come usare questa lista
 - **Controlla:** sulla confezione c'è scritto *epossidica*, *2 componenti*, *5 min* o *rapida*; deve avere i **puntali miscelatori**.
 - **Domanda importante da fare:**
   > "Tiene anche sul polietilene o polipropilene, cioè la plastica dei tappi?"
+
   La risposta di solito è **no**, ed è un problema noto: nessuna epossidica comune si attacca bene a quelle plastiche. Non è grave: la tenuta la dà il riempimento attorno a tubo e fili, e il tappo si ruvida prima con carta vetrata. Se la 1.6 mostra perdite, il piano B del rischio R2 prevede un tappo nuovo con passanti e nastro in teflon.
 
 ### F7 · Tavoletta di legno (B6) — **1 pezzo, circa 30 × 15 cm**
@@ -147,9 +148,11 @@ Una sola visita, con la frase di apertura della sezione "Come usare questa lista
   1. **Chiedi in prestito un trapano** per 5 minuti (famiglia, amici, vicini).
   2. **Fallo fare in ferramenta:** porta con te i **tappi di ricambio** e chiedi:
      > "Mi potete forare questi tappi con una punta da 5 millimetri? Serve per un piccolo esperimento."
+
      Meglio fori un po' stretti, che poi allarghi a mano.
   3. **Senza elettrico:** foro pilota con la **punta di scorta del saldatore** caldo (circa 250–300 °C, con la stanza ben ventilata; la punta si sporca di plastica, quindi si usa una di scorta e non per saldare), poi allarga con un **alesatore conico a mano**:
      > "Mi serve un alesatore conico a mano, per allargare fori in plastica fino a circa 10 millimetri."
+
      Costo indicativo 5–10 € (non verificato).
 - **Dimensione dei fori:** il tubo di silicone è morbido, quindi il foro deve essere **appena più stretto** del tubo (circa 5–5,5 mm per il tubo da 6 mm) perché si infili con un po' di forza. Meglio partire stretti e allargare provando con il tubo vero, sempre prima su un **tappo di ricambio**.
 - **Carta vetrata:** un foglio a **grana 120–180**.
