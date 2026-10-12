@@ -142,9 +142,15 @@ Una sola visita, con la frase di apertura della sezione "Come usare questa lista
 - **A cosa servono:** forare il tappo (1.3), ruvidarlo prima della colla e tagliare fili e fascette.
 - **Se hai già un trapano**, dì:
   > "Mi servono **tre punte da trapano, da 3, da 5 e da 6 millimetri**, per forare plastica sottile, cioè un tappo di bottiglia. Meglio quelle per metallo (HSS), o una punta a gradino, se ce l'avete."
-- **Se NON hai un trapano**, dì:
-  > "Devo fare dei fori da 5 e 6 millimetri nel tappo di una bottiglia di plastica, ma non ho un trapano. Che cosa mi consiglia di economico?"
-  Probabilmente ti proporranno un avvitatore a batteria economico. Prima di comprarlo **chiedi in giro se qualcuno te ne presta uno**: serve solo per qualche foro.
+- **Se NON hai un trapano, non serve comprarlo.** Nel piano si fora solo nella 1.3, e sono circa **3 fori in tappi di plastica morbida** (tubo e cavo nel tappo grande, tubo nel tappo piccolo). Tre strade, dalla più semplice:
+  1. **Chiedi in prestito un trapano** per 5 minuti (famiglia, amici, vicini).
+  2. **Fallo fare in ferramenta:** porta con te i **tappi di ricambio** e chiedi:
+     > "Mi potete forare questi tappi con una punta da 5 millimetri? Serve per un piccolo esperimento."
+     Meglio fori un po' stretti, che poi allarghi a mano.
+  3. **Senza elettrico:** foro pilota con la **punta di scorta del saldatore** caldo (circa 250–300 °C, con la stanza ben ventilata; la punta si sporca di plastica, quindi si usa una di scorta e non per saldare), poi allarga con un **alesatore conico a mano**:
+     > "Mi serve un alesatore conico a mano, per allargare fori in plastica fino a circa 10 millimetri."
+     Costo indicativo 5–10 € (non verificato).
+- **Dimensione dei fori:** il tubo di silicone è morbido, quindi il foro deve essere **appena più stretto** del tubo (circa 5–5,5 mm per il tubo da 6 mm) perché si infili con un po' di forza. Meglio partire stretti e allargare provando con il tubo vero, sempre prima su un **tappo di ricambio**.
 - **Carta vetrata:** un foglio a **grana 120–180**.
 - **Tronchesino:**
   > "Un tronchesino piccolo, per tagliare filo di rame sottile e fascette."
