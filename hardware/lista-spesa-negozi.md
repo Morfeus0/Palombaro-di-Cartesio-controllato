@@ -8,7 +8,7 @@
 
 - **Comprato** (farmacia e ferramenta, 12 ott): siringhe (F1), contagocce (F2), filo di rame (F3), colla a caldo (F4), nastro rosso (F5), epossidica (F6), legno (F7) e viti (F8).
 - **Già in casa:** bottiglie (Levissima da 1,5 L e da 0,5 L, vedi S1), vaschetta (S2), fascette di nylon, tronchesino. Il bilancino (A7) è arrivato in anticipo, il 12 ottobre.
-- **Ancora da trovare:** cavo a 4 fili (F10: non c'era in ferramenta, si riprova domani), tubo e raccordi a T (A1, A2), condensatori (E1) e multimetro (E2).
+- **Ancora da trovare:** cavo a 4 fili (F10: non c'era in ferramenta e il 4 × 0,22 è difficile da trovare; **va bene un cavo Ethernet**, vedi F10), tubo e raccordi a T (A1, A2), condensatori (E1) e multimetro (E2).
 - **Da confermare:** carta vetrata e come hai risolto la questione dei fori (F11).
 
 ## Come usare questa lista
@@ -142,7 +142,13 @@ Una sola visita, con la frase di apertura della sezione "Come usare questa lista
 - **A cosa serve:** collega il sensore (dentro la bottiglia) alla breadboard, fuori dalla vaschetta.
 - **Stato:** non c'era in ferramenta. Serve entro **giovedì 15 mattina**, quando arriva il sensore e si saldano i fili (1.3).
 - **Dove riprovare:** il negozio di **elettronica** (vendono cavo multipolare a metro, e ci devi andare comunque per i condensatori: vai mercoledì 14), oppure un grande negozio di bricolage. Chiedilo con uno di questi nomi: "cavo antifurto a 4 conduttori", "cavo citofonico" o "cavo multipolare 4 × 0,22".
-- **Soluzione gratis, da provare stasera:** un **vecchio cavo USB** (di mouse, tastiera, stampante o un cavo dati). Dentro ci sono 4 fili colorati (di solito rosso, nero, verde e bianco) più uno schermo. Taglia il cavo, spella la guaina esterna e usa i 4 fili colorati. **Attenzione:** i cavi USB di sola ricarica hanno spesso solo 2 fili, quindi controlla di averne 4. Ti servono circa 50–80 cm.
+- **Cavo di rete Ethernet: va bene, ed è la soluzione migliore se ce l'hai.** Un cavo Cat5e o Cat6 contiene 8 fili colorati (4 coppie) da 24 AWG, cioè circa 0,2 mm²: è praticamente il 4 × 0,22 mm² che cercavi. Per un segnale I²C a 3,3 V su 50–80 cm non ci sono problemi elettrici (se la lettura desse errori, nella 1.5 abbassiamo la velocità del bus). Come usarlo:
+  - taglia circa **80 cm**, spella la guaina esterna con cura, senza incidere i fili sotto;
+  - usa **4 fili di colore pieno e ben distinguibili**, ad esempio arancione, verde, blu e marrone. Evita quelli bianco-striati, che si confondono. **Annota nel diario** quale colore va su 3,3 V, massa, SDA e SCL;
+  - **fili rigidi o a trefoli?** Il cavo "da posa" (quello dei muri) ha fili rigidi che entrano direttamente nella breadboard. I normali cavi con le spine (quelli del router) hanno fili a trefoli, più morbidi: stagna le punte con il saldatore;
+  - evita i cavi economici **CCA** (alluminio ricoperto di rame), che si saldano male: se raschiando un po' un filo appare un colore argentato invece del rame, è CCA. Se lo stagno non prende, cambia cavo.
+- **Altra soluzione gratis: un vecchio cavo USB** (di mouse, tastiera, stampante o un cavo dati). Dentro ci sono 4 fili colorati (di solito rosso, nero, verde e bianco) più uno schermo, ma i fili sono più sottili e fragili di quelli Ethernet. **Attenzione:** i cavi USB di sola ricarica hanno spesso solo 2 fili, quindi controlla di averne 4. Ti servono circa 50–80 cm.
+- **Attenzione alla tenuta (vale per qualunque cavo multipolare):** l'aria può passare **tra i fili dentro la guaina**, quindi non far attraversare il tappo al cavo con la guaina. Togli la guaina nel tratto che passa dal tappo e fai passare i **4 fili singoli**: l'epossidica li circonda e li sigilla. Se i fili sono a trefoli, **stagna il tratto che attraversa il tappo**: lo stagno riempie gli spazi tra i trefoli, e l'aria non passa. Per 4 fili singoli dovrebbe bastare un foro da circa 3,5–4 mm (da confermare con il tappo di prova nella 1.3). La tenuta si verifica nella 1.6.
 - **Cosa dire:**
   > "Mi serve un metro di **cavo flessibile a quattro conduttori colorati**, sezione piccola, **0,22 mm²**, senza schermo. Tipo cavo per antifurto o per citofono."
 - **Controlla:** i **4 fili hanno 4 colori diversi** (così non li confondi: uno per l'alimentazione 3,3 V, uno per la massa e due per il segnale).

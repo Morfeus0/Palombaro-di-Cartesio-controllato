@@ -48,7 +48,7 @@ Un solo canale (Amazon.it): **niente AliExpress**, per evitare i dazi.
 | B5 | Stick di colla a caldo di ricambio | ferramenta | la pistola c'è già |
 | B6 | Tavoletta di legno ≈ 30 × 15 cm (spessore 12–18 mm), **viti per legno autofilettanti 3,5 × 20 mm** (≈ 20 pezzi). Fascette di nylon: **già in casa**, non servono | ferramenta | base servo–siringa (1.7). Le fascette (già in casa) servono sul tubo (1.4). Le viti per il servo sono già nella sua confezione |
 | ~~B7~~ | ~~Filo d'acciaio 1–1,5 mm~~ | — | **cancellato**: si usano le QUARKZMAN (A6) |
-| B8 | Cavo a 4 fili, 50–80 cm | ferramenta / elettronica | **non trovato in ferramenta il 12 ott**: si riprova in elettronica entro **gio 15 ott** (1.3). Alternativa gratis: i 4 fili colorati di un vecchio cavo USB. Dal BMP280 alla breadboard. Opzionale: guaina termorestringente o nastro isolante sui fili saldati |
+| B8 | Cavo a 4 fili, 50–80 cm | ferramenta / elettronica | **non trovato in ferramenta il 12 ott**: si riprova in elettronica entro **gio 15 ott** (1.3). Il 4 × 0,22 è difficile da trovare: **va bene un cavo Ethernet** (4 dei suoi fili da 24 AWG ≈ 0,2 mm², di colore pieno), oppure i 4 fili di un vecchio cavo USB. Dal BMP280 alla breadboard. Opzionale: guaina termorestringente o nastro isolante sui fili saldati |
 | B9 | Vaschetta di contenimento | casalinghi | **disponibile** (12 ott) |
 | B10 | Nastro isolante rosso o smalto rosso (marcatore) | ferramenta | marcatore visibile alla telecamera (1.2) |
 | B11 | 2 bottiglie PET lisce (1,5–2 L e 0,5 L) | casa | **già in casa** (12 ott): Levissima da 1,5 L (principale) e da 0,5 L (aria extra). Per le prove di foratura serve un tappo di un'altra bottiglia |
