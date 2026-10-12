@@ -7,8 +7,8 @@
 ## Stato degli acquisti (aggiornato lunedì 12 ottobre)
 
 - **Comprato** (farmacia e ferramenta, 12 ott): siringhe (F1), contagocce (F2), filo di rame (F3), colla a caldo (F4), nastro rosso (F5), epossidica (F6), legno (F7) e viti (F8).
-- **Già in casa:** bottiglie (Levissima da 1,5 L e da 0,5 L, vedi S1), fascette di nylon, tronchesino.
-- **Ancora da trovare:** cavo a 4 fili (F10: non c'era in ferramenta, si riprova domani), vaschetta (S2), tubo e raccordi a T (A1, A2), condensatori (E1) e multimetro (E2).
+- **Già in casa:** bottiglie (Levissima da 1,5 L e da 0,5 L, vedi S1), vaschetta (S2), fascette di nylon, tronchesino. Il bilancino (A7) è arrivato in anticipo, il 12 ottobre.
+- **Ancora da trovare:** cavo a 4 fili (F10: non c'era in ferramenta, si riprova domani), tubo e raccordi a T (A1, A2), condensatori (E1) e multimetro (E2).
 - **Da confermare:** carta vetrata e come hai risolto la questione dei fori (F11).
 
 ## Come usare questa lista
@@ -36,7 +36,7 @@ Controlla e spunta. Quello che manca si compra in ferramenta (vedi **F11**).
 | # | Dove | Pezzi | Stato / entro | Serve per |
 |---|---|---|---|---|
 | 1 | **Farmacia** | siringhe, contagocce | **fatto lun 12 ott** | 1.2 (martedì 13) e 1.4 |
-| 2 | **Supermercato / casalinghi** | solo la vaschetta (le bottiglie sono già in casa) | **entro mar 13 ott** | 1.2 (prove in acqua) |
+| 2 | **Supermercato / casalinghi** | niente: vaschetta e bottiglie sono già disponibili | **non serve** | — |
 | 3 | **Ferramenta / brico** | era tutto, tranne il cavo a 4 fili | **fatto lun 12 ott, tranne il cavo** | 1.2, 1.3, 1.7 |
 | 4 | **Negozio di acquari** (con la siringa in tasca) | tubo + raccordi a T | **entro mer 14 ott** (consigliato: serve per provare il tubo sul foro del tappo, nella 1.3 di giovedì) | 1.3 e 1.4 |
 | 5 | **Elettronica** | cavo a 4 fili (se non lo trovi altrove), multimetro, condensatori | **entro mer 14 ott** (il cavo serve giovedì 15 mattina per saldare il sensore); condensatori entro **sab 17** | 1.3 e 1.5 |
@@ -82,6 +82,7 @@ Le domeniche molti negozi sono chiusi. **Domani (martedì 13) e mercoledì 14** 
 - **Hai un solo tappo per bottiglia.** Per le prove di foratura (1.3) non usare quelli veri: usa il tappo di **un'altra bottiglia**, meglio un'altra Levissima, per avere la stessa filettatura e la stessa plastica. Fora quelli veri solo alla fine, quando conosci le misure. Se ne rovini uno, un'altra bottiglia uguale costa pochissimo.
 
 ### S2 · Vaschetta di contenimento (B9)
+- **Stato:** già disponibile (12 ott), non comprarla.
 - **A cosa serve:** raccoglie l'acqua se qualcosa si rovescia. È una misura di sicurezza del piano (rischio R8).
 - **Cosa dire (reparto casalinghi):**
   > "Cerco una vaschetta di plastica rettangolare, bassa e larga, almeno 40 per 30 centimetri, con i bordi alti 8–10 centimetri, **senza buchi**. Serve per tenere dell'acqua se si versa."

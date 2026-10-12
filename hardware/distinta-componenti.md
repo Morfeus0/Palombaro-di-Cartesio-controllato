@@ -18,7 +18,7 @@ Un solo canale (Amazon.it): **niente AliExpress**, per evitare i dazi.
 | A4 | **Sensore BMP280 3,3 V, 8 pezzi** (GERUI) | 1 conf. | E | 10,91 € | gio 15 ott | Misura la pressione nella bottiglia: retroazione dell'anello interno, test di tenuta (1.6), identificazione del modello. Ne servono 2, il resto sono ricambi |
 | A5 | **Alimentatore TKDY 5 V 3 A con punte intercambiabili** ([B0B121C8JX](https://www.amazon.it/dp/B0B121C8JX)) | 1 | E | 15,92 € | **ven 16 ott** (Prime) | Alimenta il servo a parte, con le masse in comune: i picchi di corrente non fanno riavviare l'ESP32 (rischio R7). Include l'adattatore con presa femmina e morsetti verdi: sostituisce il vecchio A5 |
 | A6 | **Asticelle a Z in acciaio inox, QUARKZMAN 1,5 × 300 mm, 10 pezzi** | 1 conf. | C | 13,99 € | gio 15 ott | Collegamento rigido tra braccetto del servo e stantuffo, con meno gioco possibile (1.7). Ne usi 1–2 |
-| A7 | **Bilancino CAMRY 500 g / 0,01 g** ([B0BZS18B18](https://www.amazon.it/dp/B0BZS18B18)) | 1 | C | 8,99 € | **mar 13 ott** (confermata da Amazon) | Pesare i palombari e tararli vicino al galleggiamento neutro (1.2); massa e volume sono parametri di G(s) (3.2) |
+| A7 | **Bilancino CAMRY 500 g / 0,01 g** ([B0BZS18B18](https://www.amazon.it/dp/B0BZS18B18)) | 1 | C | 8,99 € | **arrivato** (12 ott) | Pesare i palombari e tararli vicino al galleggiamento neutro (1.2); massa e volume sono parametri di G(s) (3.2) |
 | A8 | **Kit saldatore Beizkna 80 W LCD, 180–520 °C** | 1 kit | E | 23,98 € | lun 12 ott | Saldare i 4 fili al BMP280 (1.3). Include stagno, supporto, 5 punte e pompetta dissaldante |
 
 **Totale carrello: 119,76 €** (saldatore incluso). Più la spesa in negozio (sezione B).
@@ -49,7 +49,7 @@ Un solo canale (Amazon.it): **niente AliExpress**, per evitare i dazi.
 | B6 | Tavoletta di legno ≈ 30 × 15 cm (spessore 12–18 mm), **viti per legno autofilettanti 3,5 × 20 mm** (≈ 20 pezzi). Fascette di nylon: **già in casa**, non servono | ferramenta | base servo–siringa (1.7). Le fascette (già in casa) servono sul tubo (1.4). Le viti per il servo sono già nella sua confezione |
 | ~~B7~~ | ~~Filo d'acciaio 1–1,5 mm~~ | — | **cancellato**: si usano le QUARKZMAN (A6) |
 | B8 | Cavo a 4 fili, 50–80 cm | ferramenta / elettronica | **non trovato in ferramenta il 12 ott**: si riprova in elettronica entro **gio 15 ott** (1.3). Alternativa gratis: i 4 fili colorati di un vecchio cavo USB. Dal BMP280 alla breadboard. Opzionale: guaina termorestringente o nastro isolante sui fili saldati |
-| B9 | Vaschetta di contenimento | casalinghi | — |
+| B9 | Vaschetta di contenimento | casalinghi | **disponibile** (12 ott) |
 | B10 | Nastro isolante rosso o smalto rosso (marcatore) | ferramenta | marcatore visibile alla telecamera (1.2) |
 | B11 | 2 bottiglie PET lisce (1,5–2 L e 0,5 L) | casa | **già in casa** (12 ott): Levissima da 1,5 L (principale) e da 0,5 L (aria extra). Per le prove di foratura serve un tappo di un'altra bottiglia |
 | B12 | **Condensatore elettrolitico 1000 µF, ≥ 10 V** (2 pezzi; il 16 V va benissimo) | negozio di elettronica | **Indispensabile:** stabilizza il 5 V del servo ed evita che l'ESP32 si riavvii. ≈ 0,50 €, a fori passanti (non SMD). La striscia chiara sul corpo è il polo **negativo** (va al GND). Serve entro **dom 18 ott** (1.5). Se non lo trovi: kit GTIWUNG 30 pezzi 1000 µF 16 V su Amazon, 9,99 € |
@@ -59,7 +59,7 @@ Un solo canale (Amazon.it): **niente AliExpress**, per evitare i dazi.
 
 **Spesa indicativa in negozio:** ≈ 20–25 € (B1–B6, B8–B13), più il multimetro se non ce l'hai.
 
-**Stato al 12 ottobre:** comprati in farmacia e ferramenta B1–B6 e B10 (con le fascette già in casa); le bottiglie (B11) sono già in casa. **Mancano:** B8 (cavo a 4 fili, non trovato), B9 (vaschetta), B12 (condensatori), B13 (tubo e raccordi), B14 (multimetro). La carta vetrata (B15) è da confermare. Spesa reale ancora da annotare.
+**Stato al 12 ottobre:** comprati in farmacia e ferramenta B1–B6 e B10 (con le fascette già in casa); le bottiglie (B11) e la vaschetta (B9) sono già disponibili, e il bilancino (A7) è arrivato in anticipo. **Mancano:** B8 (cavo a 4 fili, non trovato), B12 (condensatori), B13 (tubo e raccordi), B14 (multimetro). La carta vetrata (B15) è da confermare. Spesa reale ancora da annotare.
 
 ---
 
@@ -92,7 +92,7 @@ Un solo canale (Amazon.it): **niente AliExpress**, per evitare i dazi.
 - [x] A4 · BMP280 ×8
 - [x] A5 · Alimentatore TKDY 5 V 3 A
 - [x] A6 · QUARKZMAN 1,5×300 mm
-- [x] A7 · Bilancino CAMRY (consegna **martedì 13 ottobre**)
+- [x] A7 · Bilancino CAMRY (**arrivato il 12 ottobre**, in anticipo)
 - [x] A8 · Saldatore Beizkna 80 W
 
 **Ancora da annotare (sottofase 0.4):** la spesa reale e le date di consegna di tutti gli articoli, dalla mail di conferma di Amazon. Poi gli acquisti nei negozi (vedi [lista-spesa-negozi.md](lista-spesa-negozi.md)).
