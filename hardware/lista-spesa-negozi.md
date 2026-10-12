@@ -38,10 +38,10 @@ Le domeniche molti negozi sono chiusi: **oggi pomeriggio o lunedì pomeriggio** 
 
 ## 1 · FARMACIA
 
-### F1 · Siringhe da 10 ml (B1) — quantità: **4**
-- **A cosa serve:** una è quella vera (spinta dal servo, cambia il volume d'aria), le altre sono scorta e prove.
+### F1 · Siringhe da 10 ml (B1) — quantità: **2**
+- **A cosa serve:** una è quella vera (spinta dal servo, cambia il volume d'aria), l'altra è di scorta. Costano pochissimo e sono difficili da rompere: **se ne servono altre torni in farmacia**.
 - **Cosa dire:**
-  > "Buongiorno, mi servono quattro siringhe da 10 millilitri, **senza ago**, con la punta **Luer semplice, quella liscia, non a vite**. Meglio se a tre pezzi, con la guarnizione di gomma sullo stantuffo. Le uso per un esperimento di fisica."
+  > "Buongiorno, mi servono due siringhe da 10 millilitri, **senza ago**, con la punta **Luer semplice, quella liscia, non a vite**. Meglio se a tre pezzi, con la guarnizione di gomma sullo stantuffo. Le uso per un esperimento di fisica."
 - **Controlla prima di pagare:**
   - la punta (il "cono") è **liscia**, senza ghiera filettata attorno;
   - il cono è **al centro** della siringa, non spostato di lato;
@@ -49,10 +49,11 @@ Le domeniche molti negozi sono chiusi: **oggi pomeriggio o lunedì pomeriggio** 
 - **Se hanno solo Luer-lock** (quella con la ghiera a vite): vanno bene lo stesso per iniziare, ma sono meno comode per infilarci il tubo. Prendine una e **verifica con il tubo** nel giro 4 prima di comprarne altre.
 - **Perché a tre pezzi:** la guarnizione di gomma tiene meglio l'aria. Quelle tutte di plastica perdono di più.
 
-### F2 · Contagocce di vetro (B2) — quantità: **5**
-- **A cosa serve:** sono il corpo dei palombari (3 da costruire + 2 di scorta, perché il vetro si rompe).
+### F2 · Contagocce di vetro (B2) — quantità: **3**
+- **A cosa serve:** sono il corpo dei palombari: 1 principale e 2 di riserva, perché il vetro si rompe e perché ogni contagocce si comporta in modo un po' diverso. Se vuoi spendere ancora meno, **2 bastano per cominciare**: se uno si rompe o non va bene, torni in farmacia.
+- **Cosa chiedere prima di pagare:** il **prezzo di un contagocce**. È la voce più cara della farmacia, quindi se è alto prendi 2.
 - **Cosa dire:**
-  > "Mi servono cinque contagocce di vetro con la tettarella di gomma, di quelli piccoli, con il tubicino dritto e trasparente."
+  > "Mi servono tre contagocce di vetro con la tettarella di gomma, di quelli piccoli, con il tubicino dritto e trasparente."
 - **Controlla:**
   - tubicino **trasparente e dritto**, lungo circa **6–10 cm**;
   - diametro del tubicino **sotto 1 cm**: devono passare dal collo della bottiglia;

@@ -41,8 +41,8 @@ Un solo canale (Amazon.it): **niente AliExpress**, per evitare i dazi.
 
 | # | Componente | Dove | Note |
 |---|---|---|---|
-| B1 | Siringhe 10 ml con attacco Luer (3–4 pezzi) | farmacia | — |
-| B2 | Contagocce di vetro o pipette (4–5 pezzi) | farmacia | per costruire i palombari (1.2) |
+| B1 | Siringhe 10 ml con attacco Luer (**2 pezzi**) | farmacia | una vera e una di scorta; se servono altre si torna in farmacia |
+| B2 | Contagocce di vetro o pipette (**3 pezzi**, 2 per cominciare) | farmacia | per costruire i palombari (1.2): 1 principale e 2 di riserva |
 | B3 | Filo di rame rigido (zavorra) | ferramenta | — |
 | B4 | Colla epossidica bicomponente | ferramenta | per sigillare il tappo (1.3); 24 h di indurimento |
 | B5 | Stick di colla a caldo di ricambio | ferramenta | la pistola c'è già |
