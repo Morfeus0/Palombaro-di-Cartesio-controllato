@@ -28,6 +28,23 @@ Se dopo le misure si toglie o si aggiunge rame, si pesa il pezzetto (`Δm`) e si
 - Temperatura dell'acqua (o della stanza): ___ °C
 - Acqua lasciata riposare dalla sera prima? sì / no
 
+## Controllo del bilancino
+
+Masse ufficiali delle monete in euro: 2 € = 8,50 g · 1 € = 7,50 g · 50 c = 7,80 g · 20 c = 5,74 g · 10 c = 4,10 g · 5 c = 3,92 g · 2 c = 3,06 g · 1 c = 2,30 g.
+Le monete consumate pesano qualche centesimo in meno.
+
+| Prova | Moneta | Atteso [g] | Letture [g] |
+|---|---|---|---|
+| Ripetibilità, prima serie | 2 c | 3,06 | 3,05 / 3,06 / 3,06 |
+| Ripetibilità, prima serie | 1 € | 7,50 | 7,54 / 7,45 / 7,46 (la prima è anomala: bilancino appena acceso) |
+| Ripetibilità, seconda serie (5 pesate al centro) | 1 € | 7,50 | 7,47 / 7,45 / 7,46 / 7,45 / 7,45 (media 7,46) |
+| Posizione (centro / bordo) | 1 € | 7,50 | 7,46 / 7,45 |
+| Somma (2 monete insieme) | 1 € + 2 c | 10,52 (dalle pesate singole) | 10,53–10,54 |
+| Ritorno a zero dopo ogni pesata | — | 0,00 | sì |
+
+**Esito (15 ott):** bilancino affidabile. Incertezza di una singola pesata: **±0,02 g**.
+Dopo l'accensione bisogna aspettare 2–3 minuti prima della prima pesata.
+
 ## Misure
 
 | | P1 (principale) | R1 (riserva) | R2 (riserva) |

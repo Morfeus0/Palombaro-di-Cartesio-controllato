@@ -8,6 +8,7 @@
 
 - **Comprato** (farmacia e ferramenta, 12 ott): siringhe (F1), contagocce (F2), filo di rame (F3), colla a caldo (F4), nastro rosso (F5), epossidica (F6), legno (F7) e viti (F8).
 - **Già in casa:** bottiglie (Levissima da 1,5 L e da 0,5 L, vedi S1), vaschetta (S2), fascette di nylon, tronchesino. Il bilancino (A7) è arrivato in anticipo, il 12 ottobre.
+- **Da ricomprare (15 ott):** pipette di plastica da 3 ml (F2-bis), perché i contagocce di vetro comprati non passano dal collo della bottiglia.
 - **Ancora da trovare:** cavo a 4 fili (F10: non c'era in ferramenta e il 4 × 0,22 è difficile da trovare; **va bene un cavo Ethernet**, vedi F10), tubo e raccordi a T (A1, A2), condensatori (E1) e multimetro (E2).
 - **Da confermare:** carta vetrata e come hai risolto la questione dei fori (F11).
 
@@ -68,6 +69,18 @@ Le domeniche molti negozi sono chiusi. **Domani (martedì 13) e mercoledì 14** 
   - diametro del tubicino **sotto 1 cm**: devono passare dal collo della bottiglia;
   - tettarella integra, senza crepe.
 - **Se non hanno il vetro:** vanno bene le **pipette di plastica trasparente da 3 ml** (quelle monouso da laboratorio). Sono più leggere: nella 1.2 servirà più zavorra.
+- **Esito (15 ott): non utilizzabili.** I due contagocce comprati sono lunghi 12,5 cm con la tettarella di 22 e 28 mm: la tettarella non passa dal collo (foro di circa 21 mm, uguale per quasi tutte le bottiglie d'acqua) e sono troppo lunghi per la corsa del palombaro (circa 25 cm d'acqua). Nella lista mancava il controllo sul **diametro della tettarella**. Si passa a F2-bis.
+
+### F2-bis · Pipette Pasteur di plastica da 3 ml — quantità: **una confezione** (5–10 pezzi o più)
+- **A cosa serve:** il corpo dei palombari, al posto dei contagocce di vetro. La tettarella è stretta, quindi passa dal collo, e il gambo si accorcia con le forbici: il palombaro viene lungo 5–6 cm.
+- **Dove:** farmacia o parafarmacia, negozi di articoli per laboratorio, erboristerie e negozi di cosmetica fai-da-te. Se non le trovi, su Amazon ("pipette Pasteur plastica 3 ml") arrivano in 1–2 giorni.
+- **Cosa dire:**
+  > "Avete delle pipette Pasteur di plastica, monouso, da 3 millilitri? Quelle trasparenti, tutte di un pezzo, con la tettarella. Mi bastano anche poche."
+- **Controlla prima di pagare:**
+  - plastica **trasparente**, non colorata, tutta in un pezzo;
+  - tettarella con **diametro massimo di 15 mm**: se puoi, porta una bottiglia vuota gemella e prova a infilarne una nel collo;
+  - capacità di circa 3 ml e lunghezza totale di circa 15 cm (il gambo si accorcia dopo).
+- **Alternativa:** piccole pipette contagocce per flaconi da 10–15 ml, purché la tettarella passi dal collo e il tubetto sia trasparente.
 
 ---
 
