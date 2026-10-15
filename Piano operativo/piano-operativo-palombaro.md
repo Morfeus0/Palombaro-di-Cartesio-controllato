@@ -202,13 +202,13 @@ Sono le sottofasi che, se ritardano, fanno slittare la consegna. Le altre hanno 
 - **Quando:** gio 15 → dom 18 ott · **Scadenza:** dom 18 ott · **Impegno:** ~3 h (più 24 h di indurimento dell'epossidica) · **Prerequisiti:** BMP280 arrivato, 1.1
 - **Obiettivo:** un tappo a tenuta che porti dentro la bottiglia il tubo dell'aria e i 4 fili del BMP280.
 - **Attività:**
-  - [ ] Saldare i fili al BMP280, lunghi abbastanza da raggiungere la breadboard fuori dalla vaschetta.
-  - [ ] Forare il tappo per il tubo e per il passaggio dei fili (prima una prova su un tappo di ricambio).
+  - [~] Saldare i fili al BMP280, lunghi abbastanza da raggiungere la breadboard fuori dalla vaschetta. *(15 ott: saldati, ma il sensore non risponde; vedi diario)*
+  - [x] Forare il tappo per il tubo e per il passaggio dei fili (prima una prova su un tappo di ricambio).
   - [ ] Posizionare il sensore nella camera d'aria, al riparo dagli schizzi.
   - [ ] Sigillare con epossidica e lasciare indurire 24 h.
   - [ ] Controllare la continuità dei 4 fili.
 - **Output:** tappo pronto, foto del montaggio.
-- **Fatto quando:** l'epossidica è indurita, i fili sono integri e il sensore non tocca l'acqua con la bottiglia capovolta.
+- **Fatto quando:** l'epossidica è indurita, i fili sono integri e il sensore non tocca l'acqua con la bottiglia inclinata a 45°.
 - **Attenzione:** il BMP280 non deve bagnarsi.
 
 ### 1.4 · Circuito pneumatico
