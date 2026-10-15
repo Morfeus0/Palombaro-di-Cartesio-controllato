@@ -9,7 +9,9 @@
 - **Comprato** (farmacia e ferramenta, 12 ott): siringhe (F1), contagocce (F2), filo di rame (F3), colla a caldo (F4), nastro rosso (F5), epossidica (F6), legno (F7) e viti (F8).
 - **Già in casa:** bottiglie (Levissima da 1,5 L e da 0,5 L, vedi S1), vaschetta (S2), fascette di nylon, tronchesino. Il bilancino (A7) è arrivato in anticipo, il 12 ottobre.
 - **Ordinate su Amazon (15 ott), arrivo ven 16 ott:** pipette di plastica da 3 ml, 20 pezzi (F2-bis, [B0DM97C93M](https://www.amazon.it/dp/B0DM97C93M)), perché i contagocce di vetro comprati non passano dal collo della bottiglia.
-- **Ancora da trovare:** cavo a 4 fili (F10: non c'era in ferramenta e il 4 × 0,22 è difficile da trovare; **va bene un cavo Ethernet**, vedi F10), tubo e raccordi a T (A1, A2), condensatori (E1) e multimetro (E2).
+- **Comprati (entro il 15 ott):** cavo da allarme 4 × 0,22 mm², 4 m (F10, in elettronica) e tubo da acquario 4/6 mm (A1).
+- **Non comprati:** raccordi a T (A2). Forse non servono: nella 1.4 si valuta di collegare le due bottiglie in serie, con 2 fori nel tappo piccolo.
+- **Ancora da trovare:** condensatori (E1) e multimetro (E2), se non sono già stati presi.
 - **Da confermare:** carta vetrata e come hai risolto la questione dei fori (F11).
 
 ## Come usare questa lista
@@ -151,7 +153,7 @@ Una sola visita, con la frase di apertura della sezione "Come usare questa lista
 ### F9 · Fascette di nylon (B6) — **già in casa, non comprarle**
 - Servono per bloccare il tubo sui raccordi e per fermare la siringa sulla base. Prima di montare, controlla che ne abbia di piccole (larghezza circa 2,5 mm) per il tubo da 6 mm.
 
-### F10 · Cavo a 4 fili (B8) — **1 metro** · NON TROVATO il 12 ott
+### F10 · Cavo a 4 fili (B8) — **1 metro** · COMPRATO (cavo da allarme 4 × 0,22, 4 m)
 - **A cosa serve:** collega il sensore (dentro la bottiglia) alla breadboard, fuori dalla vaschetta.
 - **Stato:** non c'era in ferramenta. Serve entro **giovedì 15 mattina**, quando arriva il sensore e si saldano i fili (1.3).
 - **Dove riprovare:** il negozio di **elettronica** (vendono cavo multipolare a metro, e ci devi andare comunque per i condensatori: vai mercoledì 14), oppure un grande negozio di bricolage. Chiedilo con uno di questi nomi: "cavo antifurto a 4 conduttori", "cavo citofonico" o "cavo multipolare 4 × 0,22".
