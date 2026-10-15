@@ -8,7 +8,7 @@
 
 - **Comprato** (farmacia e ferramenta, 12 ott): siringhe (F1), contagocce (F2), filo di rame (F3), colla a caldo (F4), nastro rosso (F5), epossidica (F6), legno (F7) e viti (F8).
 - **Già in casa:** bottiglie (Levissima da 1,5 L e da 0,5 L, vedi S1), vaschetta (S2), fascette di nylon, tronchesino. Il bilancino (A7) è arrivato in anticipo, il 12 ottobre.
-- **Da ricomprare (15 ott):** pipette di plastica da 3 ml (F2-bis), perché i contagocce di vetro comprati non passano dal collo della bottiglia.
+- **Ordinate su Amazon (15 ott), arrivo ven 16 ott:** pipette di plastica da 3 ml, 20 pezzi (F2-bis, [B0DM97C93M](https://www.amazon.it/dp/B0DM97C93M)), perché i contagocce di vetro comprati non passano dal collo della bottiglia.
 - **Ancora da trovare:** cavo a 4 fili (F10: non c'era in ferramenta e il 4 × 0,22 è difficile da trovare; **va bene un cavo Ethernet**, vedi F10), tubo e raccordi a T (A1, A2), condensatori (E1) e multimetro (E2).
 - **Da confermare:** carta vetrata e come hai risolto la questione dei fori (F11).
 

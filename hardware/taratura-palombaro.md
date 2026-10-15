@@ -18,6 +18,9 @@
 | Spinta in eccesso `E` | `(V_materiali + V_bolla) − m_secco`, in grammi: deve essere **positiva e piccola** (centesimi di grammo) |
 | Pressione neutra in superficie | circa `101,3 kPa × E / V_bolla` |
 
+**Filo di rame:** diametro 0,8 mm (rotolo da 12 m), circa **0,45 g ogni 10 cm**, cioè 0,045 g al centimetro.
+2 mm di filo valgono 0,01 g, la risoluzione del bilancino.
+
 Se dopo le misure si toglie o si aggiunge rame, si pesa il pezzetto (`Δm`) e si corregge:
 `m_secco ± Δm` e `V_materiali ± Δm / 8,96`.
 
