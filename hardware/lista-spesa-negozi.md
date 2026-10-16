@@ -8,7 +8,7 @@
 
 - **Comprato** (farmacia e ferramenta, 12 ott): siringhe (F1), contagocce (F2), filo di rame (F3), colla a caldo (F4), nastro rosso (F5), epossidica (F6), legno (F7) e viti (F8).
 - **Già in casa:** bottiglie (Levissima da 1,5 L e da 0,5 L, vedi S1), vaschetta (S2), fascette di nylon, tronchesino. Il bilancino (A7) è arrivato in anticipo, il 12 ottobre.
-- **Arrivate (16 ott):** pipette di plastica da 3 ml, 20 pezzi (F2-bis, [B0DM97C93M](https://www.amazon.it/dp/B0DM97C93M)), perché i contagocce di vetro comprati non passano dal collo della bottiglia.
+- **In ritardo, arrivo lunedì 19 ott:** pipette di plastica da 3 ml, 20 pezzi (F2-bis, [B0DM97C93M](https://www.amazon.it/dp/B0DM97C93M)), perché i contagocce di vetro comprati non passano dal collo della bottiglia.
 - **Comprati (entro il 15 ott):** cavo da allarme 4 × 0,22 mm², 4 m (F10, in elettronica) e tubo da acquario 4/6 mm (A1).
 - **Non comprati:** raccordi a T (A2). Forse non servono: nella 1.4 si valuta di collegare le due bottiglie in serie, con 2 fori nel tappo piccolo.
 - **Già disponibili (16 ott):** condensatori (E1) e multimetro (E2).

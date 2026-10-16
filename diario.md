@@ -149,17 +149,59 @@ Calendario realistico: **ven 16** chiusura della diagnosi, sensore funzionante, 
 
 **Prossimo passo:** rileggere il sensore di riferimento con il CSB collegato al VCC (la prova rimasta in sospeso). Se risponde, ponticello CSB → VCC sul sensore del tappo e nuova prova.
 
-## 2026-10-16 · sottofase 1.3 (diagnosi del sensore) · in corso, orari da compilare
+## 2026-10-16 · sottofase 1.3 (sensore funzionante e colata di epossidica) · 5 h 10
 
-**Materiale:**
-- **Multimetro** (B14/E2) e **condensatori da 1000 µF** (B12/E1) già disponibili: non vanno comprati.
-- **Arrivate le pipette** Pasteur di plastica da 3 ml (20 pezzi) per i palombari della 1.2.
+**Orario:** 13:54–15:25 e 17:50–21:30, cioè **1 h 30 + 3 h 40 = 5 h 10**. Orari ricostruiti dai messaggi della sessione e dalle foto; tra le 15:25 e le 17:50 è stata contata una pausa.
 
-**Fatto finora:**
-- Riletta la prova rimasta in sospeso ieri sera (sensore di riferimento sulla seconda breadboard, CSB collegato al VCC): nessuna risposta, ma con una linea dati bassa, cioè un collegamento interrotto. **Correzione rispetto a ieri:** la scheda del BMP280 ha i pull-up da 10 kΩ su **entrambe** le linee dati, quindi una linea bassa vuol dire davvero filo interrotto. Le prove sul CSB di ieri sera non erano valide.
-- Scritto un firmware di prova A/B (`firmware/src/main.cpp`): spegne e riaccende il sensore alternando CSB alto e CSB scollegato, e prima legge lo stato delle linee dati.
-- La seconda breadboard è nuova e molto dura: i pin entrano solo forzando e possono finire di fianco alla molletta, senza contatto. L'ESP32 è stato rimontato sulla prima breadboard, nella zona mai usata (colonne 29 e seguenti).
-- Sensore di riferimento infilato accanto all'ESP32, allineamento verificato in foto (`IMG_1718`, `IMG_1719`): le linee dati risultano comunque basse in entrambi i modi, quindi il sensore non è alimentato. Senza una misura diretta non si distingue tra contatto della breadboard e sensore danneggiato ieri.
-- Il Mac per qualche minuto non vedeva l'ESP32: risolto cambiando porta USB.
+**Divisione del tempo:**
 
-**Decisione in corso:** smettere di provare il sensore di riferimento e usare il **multimetro** per tutte le verifiche di contatto. Sul tappo: tagliare i fili e risaldarli su un BMP280 nuovo con ponticello CSB → VCC, così da coprire sia l'ipotesi del chip guasto sia quella del CSB scollegato.
+| Orario | Durata | Attività |
+|---|---|---|
+| 13:54–15:25 | 1 h 30 | diagnosi con il sensore di riferimento: prova A/B del CSB, ESP32 spostato (breadboard nuova troppo dura), porta USB del Mac da cambiare. Conclusione: senza strumento di misura il banco non è affidabile |
+| 17:50–18:30 | 40 min | multimetro: continuità dei 4 fili del tappo (integri, nessun corto), ponticello CSB → VCC sul sensore del tappo, isolamento con il nastro |
+| 18:30–19:15 | 45 min | il sensore del tappo, alimentato a 3,28 V e con il CSB collegato, non risponde: **chip guasto**. Misurato il pull-up del CSB su un sensore nuovo (8,71 kΩ: il ponticello non serve), fili tagliati e risaldati sul sensore nuovo, prova riuscita |
+| 19:15–20:50 | 1 h 35 | prove di funzionamento (soffio, dito, strette della bottiglia), posizionamento del sensore e del tubo, fissaggio, supporto per la colata |
+| 20:50–21:30 | 40 min | prima e seconda colata di epossidica |
+
+**Fatto:**
+- **Multimetro e condensatori da 1000 µF** già disponibili: non vanno comprati.
+- **Diagnosi chiusa con misure dirette:** sul sensore del tappo fili integri (continuità), nessun corto, 3,28 V tra VCC e GND, linee dati alte, CSB collegato al VCC, eppure nessuna risposta sul bus. Il chip si era danneggiato il 15 ottobre, quasi certamente per il calore delle rifusioni ripetute vicino al chip.
+- **Sensore nuovo sul tappo:** fili tagliati a 2–3 mm dalla scheda guasta, rispellati, stagnati e saldati su un BMP280 nuovo. Il ponticello CSB → VCC non serve: la scheda ha già il pull-up sul CSB (8,71 kΩ misurati tra CSB e VCC).
+- **Prove riuscite** (firmware `firmware/src/main.cpp`, commit `e50f261`): indirizzo 0x76, chip ID 0x58, p = 101,11 kPa, T = 27,3 °C (sensore caldo dopo le saldature), rumore ±2–3 Pa. Il soffio dà da −28 a +20 Pa, il dito vicino porta la temperatura da 27,8 a 30,5 °C.
+- **Prima misura della pressione in bottiglia** (tappo avvitato su una bottiglia gemella, prima della colla): stringendo si arriva a **+2,5 kPa**, ma in meno di mezzo secondo la pressione torna a zero, e al rilascio scende fino a −1,2 kPa. È la perdita dai fori ancora aperti: la costante di tempo è sotto il mezzo secondo, e la 1.6 la vuole sopra i 30 minuti.
+- **Montaggio interno:** tubo a circa 15 mm dalla faccia interna; scheda verticale con i pin verso il tappo e il chip rivolto lontano dal tubo; scheda **legata al tubo** con una fascetta del pane, passando per un foro di montaggio, con il chip libero. Prova nel collo di una bottiglia gemella superata.
+- **Colata di epossidica** (5 minuti di lavorazione, maneggiabile dopo 20 minuti, indurimento completo in 2–3 ore a 20 °C): prima colata sulla faccia interna (strato sottile sui 5 fori), seconda sulla faccia esterna. Supporto: barattolo di vetro con cartoncino forato.
+
+**Problemi (e cosa si è capito):**
+1. **La breadboard nuova** è così dura che i pin entrano solo forzando, e possono finire di fianco alla molletta, senza contatto: ha falsato le prove della sera del 15 sulla seconda breadboard.
+2. **Correzione rispetto al 15:** la scheda del BMP280 ha i pull-up da 10 kΩ su **entrambe** le linee dati, quindi una linea bassa vuol dire davvero filo interrotto. Le prove sul CSB della sera del 15 non erano valide.
+3. Per qualche minuto il Mac non vedeva l'ESP32: risolto cambiando porta USB.
+4. **La colla a caldo non attacca al tubo in silicone** (materiale antiaderente): la scheda è fissata in modo meccanico con una fascetta.
+5. Il tubo arrotolato nel barattolo faceva leva e piegava il pezzo interno: il tubo esterno va lasciato libero, non arrotolato stretto.
+6. **L'epossidica non aderisce a PE e PP** (lo dicono le istruzioni): la tenuta si basa sul riempimento dei fori e sull'unione tra lo strato interno e quello esterno attraverso i fori. La verifica sarà il test di tenuta della 1.6.
+7. Sulla faccia esterna i colletti attorno ai fili sono venuti bassi, uno strato sottile e non 1 cm. Se la 1.6 mostrerà perdite, si aggiunge una terza dose.
+8. Il tubo esterno è rimasto piegato vicino al tappo durante l'indurimento: da controllare che non sia strozzato.
+9. **Le pipette sono in ritardo:** arrivano **lunedì 19** e non oggi. Alle 15:25 nel diario avevo scritto per errore che erano arrivate.
+
+**Decisioni (e perché):**
+- Per ogni verifica di contatto si usa il **multimetro**: le prove indirette (pull-down, diodi di protezione) avevano ipotesi nascoste e hanno fatto perdere ore.
+- Sostituire il sensore invece di continuare la diagnosi: un sensore costa poco più di un euro, la diagnosi stava costando ore.
+- Niente ponticello CSB → VCC: è stato **misurato** che la scheda ha già il pull-up, ed è una saldatura in meno vicino al chip.
+- Sensore verticale, con il chip rivolto lontano dal tubo e non verso il soffitto del tappo, dove si forma la condensa.
+- Il sensore di riferimento delle prove del 15 resta da parte, con l'etichetta "da verificare"; quello vecchio del tappo, "guasto".
+
+**Foto** (nella cartella Download del Mac):
+- `IMG_1718`, `IMG_1719` (15:19): sensore di riferimento accanto all'ESP32, dall'alto e di lato.
+- `IMG_1721`, `IMG_1722` (18:20): ponticello CSB → VCC sul vecchio sensore del tappo.
+- `IMG_1730`–`IMG_1734` (19:38–19:42): posizionamento del sensore nuovo e del tubo dentro il tappo.
+- `IMG_1736`–`IMG_1738` (20:22): supporto per la colata (barattolo con cartoncino forato).
+- `IMG_1739`–`IMG_1741` (20:59): prima colata, faccia interna.
+- `IMG_1743`–`IMG_1746` (21:31): seconda colata, faccia esterna.
+
+**Stato a fine giornata:**
+- 1.3: sensore funzionante e sigillato. **Mancano** la verifica dopo l'indurimento (prova con l'ESP32, prova di inclinazione a 45°, controllo del tubo esterno) e il taglio dei trefoli della calza che sporgono dalla guaina vicino al tappo.
+- 1.2: ferma fino a lunedì 19 (pipette).
+
+**Ore della 1.3 finora:** 7 h 45 (15 ott) + 5 h 10 (16 ott) = **circa 12 h 55**, contro le 3 h del piano. Di queste, circa 4 h 30 non si ripeteranno: imparare a saldare (3 h) e la diagnosi del primo sensore (1 h 30).
+
+**Prossimo passo:** ricalibrare il piano del fine settimana (vedi la proposta in chat) e chiudere la 1.3 sabato mattina.
