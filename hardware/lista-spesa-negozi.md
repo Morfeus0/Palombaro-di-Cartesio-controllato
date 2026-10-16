@@ -8,10 +8,10 @@
 
 - **Comprato** (farmacia e ferramenta, 12 ott): siringhe (F1), contagocce (F2), filo di rame (F3), colla a caldo (F4), nastro rosso (F5), epossidica (F6), legno (F7) e viti (F8).
 - **Già in casa:** bottiglie (Levissima da 1,5 L e da 0,5 L, vedi S1), vaschetta (S2), fascette di nylon, tronchesino. Il bilancino (A7) è arrivato in anticipo, il 12 ottobre.
-- **Ordinate su Amazon (15 ott), arrivo ven 16 ott:** pipette di plastica da 3 ml, 20 pezzi (F2-bis, [B0DM97C93M](https://www.amazon.it/dp/B0DM97C93M)), perché i contagocce di vetro comprati non passano dal collo della bottiglia.
+- **Arrivate (16 ott):** pipette di plastica da 3 ml, 20 pezzi (F2-bis, [B0DM97C93M](https://www.amazon.it/dp/B0DM97C93M)), perché i contagocce di vetro comprati non passano dal collo della bottiglia.
 - **Comprati (entro il 15 ott):** cavo da allarme 4 × 0,22 mm², 4 m (F10, in elettronica) e tubo da acquario 4/6 mm (A1).
 - **Non comprati:** raccordi a T (A2). Forse non servono: nella 1.4 si valuta di collegare le due bottiglie in serie, con 2 fori nel tappo piccolo.
-- **Ancora da trovare:** condensatori (E1) e multimetro (E2), se non sono già stati presi.
+- **Già disponibili (16 ott):** condensatori (E1) e multimetro (E2).
 - **Da confermare:** carta vetrata e come hai risolto la questione dei fori (F11).
 
 ## Come usare questa lista
@@ -212,7 +212,7 @@ Una sola visita, con la frase di apertura della sezione "Come usare questa lista
 
 ## 5 · NEGOZIO DI ELETTRONICA
 
-### E1 · Condensatori elettrolitici da 1000 µF (B12) — **2 pezzi**
+### E1 · Condensatori elettrolitici da 1000 µF (B12) — **2 pezzi** · DISPONIBILI (16 ott)
 - **A cosa serve:** stabilizza il 5 V del servo. Senza, l'ESP32 si riavvia quando il servo parte (rischio R7).
 - **Cosa dire:**
   > "Mi servono **due condensatori elettrolitici da 1000 microfarad, 16 volt**, a piedini passanti, non SMD. Va bene anche 25 volt."
@@ -220,7 +220,7 @@ Una sola visita, con la frase di apertura della sezione "Come usare questa lista
 - **Attenzione alla polarità:** la **striscia chiara** sul corpo indica il **polo negativo** (va a massa). Il piedino **più lungo** è il positivo.
 - **Scadenza:** entro **sab 17 ott**. Se non lo trovi, su Amazon c'è un kit da 30 pezzi a 9,99 € (vedi la distinta).
 
-### E2 · Multimetro (B14) — **1 pezzo**, solo se non ne hai già uno
+### E2 · Multimetro (B14) — **1 pezzo**, solo se non ne hai già uno · DISPONIBILE (16 ott)
 - **A cosa serve:** controllare la continuità dei 4 fili del sensore (1.3) e verificare che l'alimentatore dia 5 V con la polarità giusta (1.5).
 - **Cosa dire:**
   > "Mi serve un **multimetro digitale economico**, con la **prova di continuità con il cicalino** e la misura di **tensione continua fino a 20 volt**."

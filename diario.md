@@ -148,3 +148,18 @@
 Calendario realistico: **ven 16** chiusura della diagnosi, sensore funzionante, colata di epossidica e inizio della 1.2 (circa 4–5 h). **Sab 17** taratura fine dei palombari (2–3 h). **Dom 18** verifica del tappo dopo le 24 h. La 1.2 slitta da ven 16 a sab 17; la 1.3 resta entro dom 18 solo se la colata si fa venerdì. La milestone M1 (dom 25) per ora regge, con un margine ridotto.
 
 **Prossimo passo:** rileggere il sensore di riferimento con il CSB collegato al VCC (la prova rimasta in sospeso). Se risponde, ponticello CSB → VCC sul sensore del tappo e nuova prova.
+
+## 2026-10-16 · sottofase 1.3 (diagnosi del sensore) · in corso, orari da compilare
+
+**Materiale:**
+- **Multimetro** (B14/E2) e **condensatori da 1000 µF** (B12/E1) già disponibili: non vanno comprati.
+- **Arrivate le pipette** Pasteur di plastica da 3 ml (20 pezzi) per i palombari della 1.2.
+
+**Fatto finora:**
+- Riletta la prova rimasta in sospeso ieri sera (sensore di riferimento sulla seconda breadboard, CSB collegato al VCC): nessuna risposta, ma con una linea dati bassa, cioè un collegamento interrotto. **Correzione rispetto a ieri:** la scheda del BMP280 ha i pull-up da 10 kΩ su **entrambe** le linee dati, quindi una linea bassa vuol dire davvero filo interrotto. Le prove sul CSB di ieri sera non erano valide.
+- Scritto un firmware di prova A/B (`firmware/src/main.cpp`): spegne e riaccende il sensore alternando CSB alto e CSB scollegato, e prima legge lo stato delle linee dati.
+- La seconda breadboard è nuova e molto dura: i pin entrano solo forzando e possono finire di fianco alla molletta, senza contatto. L'ESP32 è stato rimontato sulla prima breadboard, nella zona mai usata (colonne 29 e seguenti).
+- Sensore di riferimento infilato accanto all'ESP32, allineamento verificato in foto (`IMG_1718`, `IMG_1719`): le linee dati risultano comunque basse in entrambi i modi, quindi il sensore non è alimentato. Senza una misura diretta non si distingue tra contatto della breadboard e sensore danneggiato ieri.
+- Il Mac per qualche minuto non vedeva l'ESP32: risolto cambiando porta USB.
+
+**Decisione in corso:** smettere di provare il sensore di riferimento e usare il **multimetro** per tutte le verifiche di contatto. Sul tappo: tagliare i fili e risaldarli su un BMP280 nuovo con ponticello CSB → VCC, così da coprire sia l'ipotesi del chip guasto sia quella del CSB scollegato.
