@@ -1,55 +1,25 @@
 #include <Arduino.h>
 #include <Wire.h>
-#include <driver/gpio.h>
+#include <Adafruit_BMP280.h>
 
-// Prova A/B del CSB (sottofase 1.3, diagnosi del 16 ott).
-// Il BMP280 di riferimento è infilato nella riga a, colonne 3-8, accanto ai pin dell'ESP32,
-// ed è alimentato dai pin stessi: VCC D5, GND TX2 (17), SCL RX2 (16), SDA D4, CSB D2, SDO D15.
-// A ogni giro il sensore viene spento e riacceso alternando:
-//   A: CSB a 3,3 V e SDO a 0 V (come quando ha funzionato il 15 ott);
-//   B: CSB e SDO scollegati (come sul sensore del tappo).
-// Il firmware di lettura e diagnosi del 15 ott è nel commit 7c0b77c.
+// Prova di banco del BMP280 sul tappo (sottofase 1.3): verifica fili e saldature
+// prima della colata di epossidica, e di nuovo dopo. Nella 2.5 lascia il posto al firmware vero.
+//
+// Collegamenti: rosso -> 3V3, bianco -> GND, verde -> GPIO 21 (SDA), giallo -> GPIO 22 (SCL).
+// Sul sensore il CSB è collegato al VCC con un ponticello (I2C fisso), l'SDO è libero.
 
 namespace {
 
-constexpr int PIN_VCC = 5;
-constexpr int PIN_GND = 17;
-constexpr int PIN_SCL = 16;
-constexpr int PIN_SDA = 4;
-constexpr int PIN_CSB = 2;
-constexpr int PIN_SDO = 15;
-constexpr uint32_t I2C_HZ = 100000;
-constexpr uint32_t PAUSA_MS = 1500;
-constexpr uint32_t SPENTO_MS = 200;
-constexpr uint32_t AVVIO_MS = 50;
+constexpr int PIN_SDA = 21;
+constexpr int PIN_SCL = 22;
+constexpr uint8_t REG_CHIP_ID = 0xD0;
+constexpr uint8_t CHIP_ID_BMP280 = 0x58;
+constexpr uint8_t CHIP_ID_BME280 = 0x60;
+constexpr uint32_t PERIODO_STAMPA_MS = 200;
+constexpr uint32_t PAUSA_RIPROVA_MS = 2000;
 
-// Uscita a corrente minima (~5 mA): basta al sensore (<1 mA) e limita la corrente in caso di errori.
-void uscitaDebole(int pin, int livello) {
-  pinMode(pin, OUTPUT);
-  gpio_set_drive_capability(static_cast<gpio_num_t>(pin), GPIO_DRIVE_CAP_0);
-  digitalWrite(pin, livello);
-}
-
-// Il sensore si spegne portando la sua massa a 3,3 V; tutte le altre linee restano libere,
-// così nessun pin a 0 V lo alimenta di traverso attraverso i diodi di protezione.
-void spegniSensore() {
-  Wire.end();
-  for (int pin : {PIN_SDA, PIN_SCL, PIN_CSB, PIN_SDO}) pinMode(pin, INPUT);
-  digitalWrite(PIN_GND, HIGH);
-  delay(SPENTO_MS);
-}
-
-// Il BMP280 sceglie I2C o SPI all'accensione guardando il CSB: per questo lo si imposta prima.
-void accendiSensore(bool csbPilotato) {
-  if (csbPilotato) {
-    uscitaDebole(PIN_CSB, HIGH);
-    uscitaDebole(PIN_SDO, LOW);
-  }
-  digitalWrite(PIN_GND, LOW);
-  delay(AVVIO_MS);
-  Wire.begin(PIN_SDA, PIN_SCL);
-  Wire.setClock(I2C_HZ);
-}
+Adafruit_BMP280 bmp;
+float pressioneIniziale = NAN;
 
 // Il BMP280 risponde a 0x76 (SDO a massa) o a 0x77 (SDO a VCC): 0 se non risponde nessuno.
 uint8_t cercaSensore() {
@@ -60,7 +30,16 @@ uint8_t cercaSensore() {
   return 0;
 }
 
-// Con il pull-down interno (~45 kΩ) una linea dati legge alta solo se il pin del sensore fa contatto
+// Il registro 0xD0 dice quale chip c'è davvero: 0x58 BMP280, 0x60 BME280.
+uint8_t leggiChipId(uint8_t indirizzo) {
+  Wire.beginTransmission(indirizzo);
+  Wire.write(REG_CHIP_ID);
+  if (Wire.endTransmission(false) != 0) return 0;
+  if (Wire.requestFrom(static_cast<int>(indirizzo), 1) != 1) return 0;
+  return Wire.read();
+}
+
+// Con il pull-down interno (~45 kΩ) una linea dati legge alta solo se il filo arriva al sensore
 // e il sensore è alimentato: la tirano su le resistenze da 10 kΩ della sua scheda.
 bool lineaAlta(int pin) {
   pinMode(pin, INPUT_PULLDOWN);
@@ -70,37 +49,71 @@ bool lineaAlta(int pin) {
   return alta;
 }
 
-void provaModo(bool csbPilotato) {
-  spegniSensore();
-  accendiSensore(csbPilotato);
+void stampaDiagnostica() {
   Wire.end();
   const bool sdaAlta = lineaAlta(PIN_SDA);
   const bool sclAlta = lineaAlta(PIN_SCL);
   Wire.begin(PIN_SDA, PIN_SCL);
-  Wire.setClock(I2C_HZ);
-  const uint8_t indirizzo = cercaSensore();
-  Serial.print(csbPilotato ? "A (CSB alto, SDO basso)  " : "B (CSB e SDO scollegati) ");
-  Serial.printf(" SDA %s  SCL %s  ->  ", sdaAlta ? "alta " : "BASSA", sclAlta ? "alta " : "BASSA");
-  if (indirizzo != 0) {
-    Serial.printf("risponde a 0x%02X\n", indirizzo);
+  Serial.printf("Nessun sensore.  verde/SDA: %s  giallo/SCL: %s\n", sdaAlta ? "alta" : "BASSA",
+                sclAlta ? "alta" : "BASSA");
+  if (!sdaAlta || !sclAlta) {
+    Serial.println("  linea bassa: sensore non alimentato o filo che non fa contatto (misura col multimetro)");
   } else {
-    Serial.println("NESSUNA RISPOSTA");
+    Serial.println("  linee alte ma nessuna risposta: sensore alimentato, chip che non risponde");
   }
+}
+
+// Dice se una lettura è fisicamente credibile per il nostro banco: una lettura assurda
+// vuol dire contatto intermittente, saldatura fredda o sensore guasto.
+bool letturaPlausibile(float pressionePa, float temperaturaC) {
+  // TODO: scegliere i limiti di pressione (in Pa) e temperatura (in °C) e restituire false fuori da essi.
+  (void)pressionePa;
+  (void)temperaturaC;
+  return true;
+}
+
+[[noreturn]] void fermaConErrore(const char* messaggio) {
+  Serial.println(messaggio);
+  while (true) delay(1000);
 }
 
 }  // namespace
 
 void setup() {
   Serial.begin(115200);
-  uscitaDebole(PIN_VCC, HIGH);
-  uscitaDebole(PIN_GND, HIGH);
-  delay(500);
-  Serial.println("Prova A/B del CSB");
+  delay(1000);
+  Wire.begin(PIN_SDA, PIN_SCL);
+
+  uint8_t indirizzo = cercaSensore();
+  while (indirizzo == 0) {
+    stampaDiagnostica();
+    delay(PAUSA_RIPROVA_MS);
+    indirizzo = cercaSensore();
+  }
+  const uint8_t chipId = leggiChipId(indirizzo);
+  Serial.printf("Sensore a 0x%02X, chip ID 0x%02X", indirizzo, chipId);
+  if (chipId == CHIP_ID_BMP280) {
+    Serial.println(" (BMP280)");
+  } else if (chipId == CHIP_ID_BME280) {
+    Serial.println(" (BME280: pressione e temperatura funzionano uguale)");
+  } else {
+    fermaConErrore("\nERRORE: chip ID sconosciuto. Possibile sensore guasto o contatto incerto.");
+  }
+
+  if (!bmp.begin(indirizzo, chipId)) fermaConErrore("ERRORE: inizializzazione del sensore fallita.");
+  // Filtro interno spento: per la prova vogliamo vedere subito il soffio o la stretta della bottiglia.
+  bmp.setSampling(Adafruit_BMP280::MODE_NORMAL, Adafruit_BMP280::SAMPLING_X2,
+                  Adafruit_BMP280::SAMPLING_X16, Adafruit_BMP280::FILTER_OFF,
+                  Adafruit_BMP280::STANDBY_MS_63);
+  delay(100);
+  pressioneIniziale = bmp.readPressure();
 }
 
 void loop() {
-  provaModo(true);
-  delay(PAUSA_MS);
-  provaModo(false);
-  delay(PAUSA_MS);
+  const float pressionePa = bmp.readPressure();
+  const float temperaturaC = bmp.readTemperature();
+  Serial.printf("p = %.2f kPa  dp = %+5.0f Pa  T = %.2f C  %s\n", pressionePa / 1000.0f,
+                pressionePa - pressioneIniziale, temperaturaC,
+                letturaPlausibile(pressionePa, temperaturaC) ? "ok" : "SOSPETTA");
+  delay(PERIODO_STAMPA_MS);
 }
