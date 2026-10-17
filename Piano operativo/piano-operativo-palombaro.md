@@ -187,7 +187,7 @@ Sono le sottofasi che, se ritardano, fanno slittare la consegna. Le altre hanno 
 - **Fatto quando:** OpenCV mostra il video dell'iPhone, PlatformIO compila, MATLAB apre Simulink.
 
 ### 1.2 · Costruire e tarare il palombaro
-- **Quando:** mar 13 → ven 16 ott · **Scadenza:** ven 16 ott · **Impegno:** ~3 h · **Prerequisiti:** contagocce, filo di rame, bottiglia (dalla farmacia, non serve aspettare Amazon)
+- **Quando:** mar 13 → mar 20 ott (lun 19 parte 1, mar 20 taratura fine: le pipette arrivano lun 19) · **Scadenza:** mar 20 ott · **Impegno:** ~3 h · **Prerequisiti:** contagocce, filo di rame, bottiglia (dalla farmacia, non serve aspettare Amazon)
 - **Obiettivo:** avere 3 palombari in galleggiamento neutro "per un pelo", con un marcatore rosso visibile alla telecamera.
 - **Attività:**
   - [ ] Costruire 3 palombari: 1 principale e 2 di riserva.
@@ -199,30 +199,32 @@ Sono le sottofasi che, se ritardano, fanno slittare la consegna. Le altre hanno 
 - **Attenzione:** più è vicino al galleggiamento neutro a pressione ambiente, più margine avrà la siringa (vedi il calcolo nel foglio A4).
 
 ### 1.3 · Tappo con il sensore di pressione
-- **Quando:** gio 15 → dom 18 ott · **Scadenza:** dom 18 ott · **Impegno:** ~3 h (più 24 h di indurimento dell'epossidica) · **Prerequisiti:** BMP280 arrivato, 1.1
+- **Quando:** gio 15 → sab 17 ott · **Scadenza:** sab 17 ott · **Impegno:** ~3 h (più 24 h di indurimento dell'epossidica) · **Prerequisiti:** BMP280 arrivato, 1.1
 - **Obiettivo:** un tappo a tenuta che porti dentro la bottiglia il tubo dell'aria e i 4 fili del BMP280.
 - **Attività:**
   - [x] Saldare i fili al BMP280, lunghi abbastanza da raggiungere la breadboard fuori dalla vaschetta. *(16 ott: sensore nuovo, il primo si era guastato)*
   - [x] Forare il tappo per il tubo e per il passaggio dei fili (prima una prova su un tappo di ricambio).
   - [x] Posizionare il sensore nella camera d'aria, al riparo dagli schizzi.
-  - [~] Sigillare con epossidica e lasciare indurire 24 h. *(16 ott: due colate fatte; indurimento completo in 2–3 h secondo le istruzioni)*
+  - [x] Sigillare con epossidica e lasciare indurire 24 h. *(16 ott: due colate; 17 ott: indurita, prima prova di pressione con τ ≥ 10 min circa)*
   - [x] Controllare la continuità dei 4 fili. *(16 ott, con il multimetro)*
+  - [x] Saldare i pin a pettine sulle punte lato breadboard *(anticipato dalla 1.5; 17 ott, isolati con colla a caldo)*.
 - **Output:** tappo pronto, foto del montaggio.
 - **Fatto quando:** l'epossidica è indurita, i fili sono integri e il sensore non tocca l'acqua con la bottiglia inclinata a 45°.
 - **Attenzione:** il BMP280 non deve bagnarsi.
+- ✅ **Chiusa il 17 ottobre:** colla indurita, 4 fili verificati con il multimetro, sensore che risponde all'ESP32, circa 3 cm di margine dall'acqua a circa 50°.
 
 ### 1.4 · Circuito pneumatico
-- **Quando:** sab 17 → lun 19 ott · **Scadenza:** lun 19 ott · **Impegno:** ~2 h · **Prerequisiti:** 1.3, siringhe, tubi, raccordo a T
+- **Quando:** sab 17 → lun 19 ott (sab 17 senza palombaro, lun 19 con il palombaro) · **Scadenza:** lun 19 ott · **Impegno:** ~2 h · **Prerequisiti:** 1.3, siringhe, tubi, raccordo a T (o bottiglie in serie)
 - **Obiettivo:** collegare siringa, raccordo a T, bottiglia d'aria extra e tappo con il sensore.
 - **Attività:**
-  - [ ] Preparare la bottiglia d'aria extra con il suo tappo forato e sigillato.
+  - [~] Preparare la bottiglia d'aria extra con il suo tappo forato e sigillato. *(17 ott: tappo con 2 fori, tubi A e B, due colate; bottiglie in serie al posto del raccordo a T)*
   - [ ] Collegare i tubi e stringerli con le fascette.
   - [ ] Annotare tutti i volumi: camera d'aria della bottiglia, bottiglia extra, tubi.
 - **Output:** circuito montato, volumi annotati nel diario (serviranno al modello).
 - **Fatto quando:** spingendo la siringa a mano il palombaro scende, e tirandola risale.
 
 ### 1.5 · Banco elettronico minimo
-- **Quando:** dom 18 → mar 20 ott · **Scadenza:** mar 20 ott · **Impegno:** ~3 h · **Prerequisiti:** ESP32, servo, alimentatore, 1.1
+- **Quando:** dom 18 ott · **Scadenza:** dom 18 ott · **Impegno:** ~3 h · **Prerequisiti:** ESP32, servo, alimentatore, 1.1
 - **Obiettivo:** leggere la pressione e muovere il servo, ciascuno con un programma di prova.
 - **Attività:**
   - [ ] Collegare ESP32 e BMP280 via I²C.
@@ -235,7 +237,7 @@ Sono le sottofasi che, se ritardano, fanno slittare la consegna. Le altre hanno 
 - **Attenzione:** se l'ESP32 si riavvia quando il servo si muove, l'alimentazione è insufficiente (rischio R7).
 
 ### 1.6 · Test di tenuta
-- **Quando:** mar 20 → mer 21 ott · **Scadenza:** mer 21 ott · **Impegno:** ~1,5 h · **Prerequisiti:** 1.4, 1.5
+- **Quando:** dom 18 ott (margine: ven 23 per una nuova colata) · **Scadenza:** dom 18 ott · **Impegno:** ~1,5 h · **Prerequisiti:** 1.4, 1.5
 - **Obiettivo:** misurare quanto velocemente la bottiglia perde aria.
 - **Attività:**
   - [ ] Portare la bottiglia a circa +2 kPa.
@@ -247,7 +249,7 @@ Sono le sottofasi che, se ritardano, fanno slittare la consegna. Le altre hanno 
 - **Attenzione:** se dopo 2 tentativi τ è ancora sotto i 30 minuti, piano B del rischio R2.
 
 ### 1.7 · Meccanica siringa–servo
-- **Quando:** lun 19 → gio 22 ott · **Scadenza:** gio 22 ott · **Impegno:** ~3 h · **Prerequisiti:** 1.5
+- **Quando:** sab 17 → gio 22 ott (sab 17 montaggio sulla tavoletta, mer 21 – gio 22 meccanica) · **Scadenza:** gio 22 ott · **Impegno:** ~3 h · **Prerequisiti:** 1.5 (solo per le prove con il servo acceso)
 - **Obiettivo:** il servo spinge e tira lo stantuffo in modo rigido e ripetibile.
 - **Attività:**
   - [ ] Montare servo e siringa su una tavoletta di legno.

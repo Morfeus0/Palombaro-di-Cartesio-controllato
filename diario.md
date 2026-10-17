@@ -205,3 +205,74 @@ Calendario realistico: **ven 16** chiusura della diagnosi, sensore funzionante, 
 **Ore della 1.3 finora:** 7 h 45 (15 ott) + 5 h 10 (16 ott) = **circa 12 h 55**, contro le 3 h del piano. Di queste, circa 4 h 30 non si ripeteranno: imparare a saldare (3 h) e la diagnosi del primo sensore (1 h 30).
 
 **Prossimo passo:** ricalibrare il piano del fine settimana (vedi la proposta in chat) e chiudere la 1.3 sabato mattina.
+
+## 2026-10-17 · sottofasi 1.3 (chiusa) e 1.4 (tappo della bottiglia da 0,5 L) · 3 h 55
+
+**Orario:** 16:15–20:10, senza pause: **3 h 55**. Divisione ricostruita dagli orari delle foto e dal registro della seriale.
+
+**Calendario confermato** (le date di piano e bollettino sono aggiornate): sab 17 chiusura della 1.3 e 1.4 senza palombaro · dom 18 1.5 e 1.6 · lun 19 pipette, 1.2 parte 1 e chiusura della 1.4 · mar 20 1.2 parte 2 · mer 21 – gio 22 1.7 (decisione sul piano B giovedì) · ven 23 margine · sab 24 – dom 25 1.8 e M1. Rispetto alla proposta della sera del 16 ci sono due ritocchi: i pin a pettine sul cavo del sensore si saldano oggi, perché servono già per la prova con l'ESP32; la chiusura della 1.3 è stimata 1 h invece di 30 minuti.
+
+**Divisione del tempo:**
+
+| Orario | Durata | Attività |
+|---|---|---|
+| 16:15–16:30 | 15 min | 1.3: controllo della colla (prova dell'unghia), ispezione del tappo, prova del soffio nel tubo |
+| 16:30–16:55 | 25 min | 1.3: trefoli tagliati, continuità del filo bianco con il multimetro, primo pin a pettine (rosso) |
+| 16:55–17:10 | 15 min | 1.3: altri tre pin a pettine |
+| 17:10–17:55 | 45 min | 1.3: pulizia del flussante, continuità e corti dei 4 fili, colla a caldo sui giunti (rifatta sul giallo) |
+| 17:55–18:15 | 20 min | 1.3: prova con l'ESP32; il pin rosso si sfila alle 18:02, ricerca del guasto, ancoraggio del cavo |
+| 18:15–18:30 | 15 min | 1.3: prova di pressione con la siringa, inclinazione a 45° |
+| 18:30–18:55 | 25 min | 1.4: due fori nel tappo della 0,5 L |
+| 18:55–19:30 | 35 min | 1.4: sbavature, carteggiatura, tubi A e B, supporto, prima colata (19:30) |
+| 19:30–20:10 | 40 min | 1.4: attesa, seconda colata (19:55), prova del soffio |
+
+**Stima contro tempo reale:** chiusura della 1.3 stimata 1 h, reale **2 h 15** (fattore 2,25). 1.4 finora 1 h 40, contro 2 h del piano per l'intera sottofase.
+
+**Fatto (1.3, chiusa):**
+- **Colla indurita** dentro e fuori (prova dell'unghia sulla goccia avanzata e sul tappo). Ingrandendo le foto: forellino del BMP280 pulito, scheda verticale e legata, nessuna crepa né bolla, tubo esterno curvo ma con sezione rotonda. Con il soffio l'aria passa bene.
+- **Trefoli:** tagliati per errore i trefoli scoperti del filo bianco vicino al sensore (erano fuori dalla saldatura); continuità del bianco verificata con il multimetro (suona), nessun corto verso giallo e rosso. Poi tagliati i trefoli della calza all'estremità della guaina.
+- **Pin a pettine** saldati sulle 4 punte lato breadboard, usando la prima breadboard come morsa: saldatura parallela sul lato corto del pin, 350 °C. Tutte e quattro lucide e ben bagnate. Sul pin rosso il flussante bruciato aveva annerito il lato lungo: pulito. **Continuità dei 4 fili** dal pad del sensore al pin e **nessun corto** tra le 6 coppie (multimetro). Giunti isolati con un manicotto di colla a caldo lungo circa 1 cm.
+- **Collegamento sull'ESP32:** rosso colonna 30 (3V3), bianco 31 (GND), verde 40 (D21), giallo 43 (D22), tutti in riga a, l'unica libera.
+- **Prova con l'ESP32:** 0x76, chip ID 0x58, p = 100,93 kPa, rumore di pochi pascal. Firmware invariato (`firmware/src/main.cpp`); corretto solo il commento sul CSB.
+- **Prova di pressione** (registro in `dati/2026-10-17/2026-10-17_prova-siringa-tappo_01.log`): 10 ml spinti con la siringa nella bottiglia vuota da 1,5 L danno **+670 Pa**, che scendono a +580 Pa e si stabilizzano. Boyle prevede circa +670 Pa. Dopo 30 s resta l'85 %; il calo è quasi tutto nei primi 10 s e poi la curva si appiattisce, come per il raffreddamento dell'aria compressa, non per una perdita. Negli ultimi 10 s cala di circa 1 Pa/s: **τ ≥ 10 minuti** circa, contro meno di 0,5 s del 16 senza colla. Il τ vero (≥ 30 min richiesti) lo dirà la 1.6.
+- **Inclinazione:** bottiglia da 1,5 L piena fino alla spalla, inclinata di circa 50–55°: la superficie dell'acqua resta circa **3 cm sotto il collo**, quindi lontana dal sensore.
+
+**Fatto (1.4, in corso):**
+- Tappo gemello della bottiglia da 0,5 L: 2 fori a 10 mm di distanza (pilota con la punta "per la plastica" a 280 °C, poi allargati con la forbice), tubo stretto nel foro. Sbavature tolte, zona centrale carteggiata dentro e fuori, anello di tenuta e filettatura lasciati puliti.
+- Tubi: **A** = pezzo nuovo da 50 cm (verso la siringa); **B** = l'estremità libera dei 65 cm che escono dal tappo con il sensore. Le due bottiglie restano unite per sempre da B. Monconi interni di circa 1 cm, dritti.
+- Colate di epossidica: faccia interna alle 19:30, faccia esterna alle 19:55, applicata dopo 2–3 minuti di attesa perché si addensasse: i colletti questa volta sono rimasti attorno ai tubi. Prova del soffio dopo la seconda colata: entrambi i monconi liberi.
+- Tubo rimasto: circa 3 m.
+
+**Problemi (e cosa si è capito):**
+1. **Il pin rosso si è sfilato dalla breadboard** alle 18:02:18, mentre il tappo veniva avvitato sulla bottiglia: il cavo ruotato ha tirato il pin. Il registro lo mostra bene: da quell'istante 2382 letture identiche (85,51 kPa, 25,30 °C) ed errori di timeout I²C (`Error 263`), con il programma che scriveva comunque "ok", perché `letturaPlausibile()` è ancora da scrivere. La prova con la siringa delle 18:02 è andata persa e rifatta alle 18:16.
+2. **"Lo stantuffo non torna indietro" non dice niente sulla tenuta:** +0,7 kPa su uno stantuffo da circa 1,65 cm² spingono con circa 0,1 N, mentre la guarnizione ha bisogno di qualche newton per scorrere. Era una mia indicazione sbagliata. La tenuta si giudica solo dalla pressione misurata.
+3. Il blocchetto di plastica del pin rosso si è fuso e sfilato (troppo calore vicino alla plastica): rimesso e bloccato dalla colla a caldo. Sugli altri tre pin il saldatore è stato appoggiato dal lato dell'isolante, con tocchi da 3 secondi al massimo.
+4. La colla a caldo del giallo era stata stesa su tutto il filo, per un'indicazione poco chiara: tolta e rifatta solo sul giunto, perché un filo rigido spinge sul pin.
+5. Il sensore segnava circa 30 °C a inizio prova (tappo al sole o in mano), poi è sceso verso 26 °C.
+
+**Decisioni (e perché):**
+- **Il cavo del sensore va ancorato al tavolo con il nastro** a circa 10 cm dalla breadboard, con i fili laschi fino ai pin: la trazione e la torsione si fermano sul nastro. **Il tappo si avvita tenendolo fermo e girando la bottiglia.**
+- Prima la misura con il multimetro, poi la colla a caldo: con la colla sopra, rifare una saldatura è molto più scomodo.
+- Una lettura I²C riuscita (indirizzo e chip ID giusti, pressione che varia) vale come prova dei 4 contatti: è una prova diretta di funzionamento, non una prova indiretta.
+- Bottiglie in serie confermate: siringa → A → 0,5 L → B → 1,5 L.
+
+**Foto** (nella cartella Download del Mac):
+- `IMG_1777`–`IMG_1781` (16:20): tappo con il sensore a colla indurita, facce interna ed esterna, tubo piegato.
+- `IMG_1782` (16:27): faccia interna dopo il taglio dei trefoli del filo bianco.
+- `IMG_1784`–`IMG_1786` (16:52): primo pin a pettine (rosso).
+- `IMG_1787`–`IMG_1792` (17:08): i quattro pin saldati.
+- `IMG_1795`–`IMG_1798` (17:42–17:50): colla a caldo sui giunti.
+- `IMG_1799` (18:24): prova di inclinazione.
+- `IMG_1801`–`IMG_1804` (18:51): fori nel tappo della 0,5 L.
+- `IMG_1805`–`IMG_1807` (19:00): tubi montati dritti.
+- `IMG_1809`–`IMG_1812` (20:02): dopo le due colate.
+
+**Stato a fine giornata:**
+- **1.3 chiusa:** colla indurita, 4 fili integri, sensore asciutto a 45°.
+- 1.4: tappo della 0,5 L sigillato, in indurimento (completo verso le 22–23). Mancano la misura dei volumi (con bottiglie gemelle, per non bagnare quelle del banco), la prova della siringa sul circuito completo e, lunedì, il palombaro.
+- 1.7 non cominciata: slitta a domani, durante la 1.5, o a mercoledì come da calendario.
+- `letturaPlausibile()` ancora da scrivere: il guasto delle 18:02 ne è l'esempio perfetto (valori bloccati, salto di 15 kPa e di 3 °C in un decimo di secondo).
+
+**Ore della 1.3 in totale:** 7 h 45 (15 ott) + 5 h 10 (16 ott) + 2 h 15 (17 ott) = **circa 15 h 10**, contro le 3 h del piano.
+
+**Prossimo passo:** domenica 18, prova della siringa sul circuito con le due bottiglie (tappo indurito), misura dei volumi, poi 1.5 (servo con alimentatore separato e condensatore) e 1.6 (tenuta a +2 kPa per 10 minuti).

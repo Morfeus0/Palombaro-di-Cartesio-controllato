@@ -6,7 +6,7 @@
 // prima della colata di epossidica, e di nuovo dopo. Nella 2.5 lascia il posto al firmware vero.
 //
 // Collegamenti: rosso -> 3V3, bianco -> GND, verde -> GPIO 21 (SDA), giallo -> GPIO 22 (SCL).
-// Sul sensore il CSB è collegato al VCC con un ponticello (I2C fisso), l'SDO è libero.
+// Sul sensore il CSB è tenuto alto dal pull-up della scheda (8,71 kΩ misurati: I2C fisso), l'SDO è libero.
 
 namespace {
 
