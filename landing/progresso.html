@@ -1,0 +1,166 @@
+<!doctype html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="color-scheme" content="light dark">
+<meta name="theme-color" media="(prefers-color-scheme: light)" content="#f3f7f9">
+<meta name="theme-color" media="(prefers-color-scheme: dark)" content="#09141d">
+<meta name="description" content="Bollettino di avanzamento del progetto Palombaro di Cartesio: traguardi, calendario e andamento, aggiornati ogni sera.">
+<title>Avanzamento · Palombaro di Cartesio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;1,400&family=Source+Serif+4:ital,opsz,wght@0,8..60,500;0,8..60,700;1,8..60,400;1,8..60,500&display=swap">
+<link rel="stylesheet" href="progresso.css">
+</head>
+<body>
+<!-- icone di stato: ogni colore di stato viaggia sempre con una forma e un'etichetta -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="i-ok" viewBox="0 0 16 16"><circle cx="8" cy="8" r="7" fill="currentColor"/><path d="M4.6 8.3 7 10.6l4.4-4.9" fill="none" stroke="var(--surface)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="i-warn" viewBox="0 0 16 16"><path d="M8 1.5 15 14H1Z" fill="currentColor" stroke="currentColor" stroke-linejoin="round"/><path d="M8 6v3.6M8 11.6v.1" stroke="var(--surface)" stroke-width="1.8" stroke-linecap="round"/></symbol>
+  <symbol id="i-late" viewBox="0 0 16 16"><path d="M5 1h6l4 4v6l-4 4H5l-4-4V5Z" fill="currentColor"/><path d="M8 4.5v4.2M8 11.2v.1" stroke="var(--surface)" stroke-width="1.8" stroke-linecap="round"/></symbol>
+  <symbol id="i-run" viewBox="0 0 16 16"><circle cx="8" cy="8" r="6.2" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M8 1.8a6.2 6.2 0 0 1 0 12.4Z" fill="currentColor"/></symbol>
+  <symbol id="i-wait" viewBox="0 0 16 16"><circle cx="8" cy="8" r="6.2" fill="none" stroke="currentColor" stroke-width="1.6" stroke-dasharray="2.4 2"/></symbol>
+  <symbol id="i-skip" viewBox="0 0 16 16"><circle cx="8" cy="8" r="6.2" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M4.5 8h7" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></symbol>
+</svg>
+
+<div class="wrap">
+  <header class="topbar">
+    <a class="brand" href="index.html">Palombaro <span>di Cartesio</span></a>
+    <nav aria-label="Sezioni del sito">
+      <a href="index.html#laboratorio">Laboratorio</a>
+      <a href="index.html#fisica">Come funziona</a>
+      <a href="index.html#progetto">Il progetto</a>
+      <a href="progresso.html" aria-current="page">Avanzamento</a>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero" aria-labelledby="hero-title">
+      <div class="hero-text">
+        <p class="eyebrow" id="stamp">Bollettino di avanzamento</p>
+        <h1 id="hero-title">Come sta andando il <em>progetto</em></h1>
+        <p class="lede" id="sintesi"></p>
+        <p class="verdict" id="verdict"></p>
+      </div>
+      <figure class="bench gauge">
+        <span class="bench-label">Livello del progetto</span>
+        <svg id="gauge" viewBox="156 36 248 476" role="img" aria-labelledby="gauge-desc">
+          <desc id="gauge-desc">Bottiglia riempita fino alla percentuale completata; il tratteggio indica la percentuale prevista a oggi.</desc>
+        </svg>
+        <figcaption>Il livello dell'acqua è il lavoro fatto; il tratteggio è dove il piano voleva che fossi oggi.</figcaption>
+      </figure>
+    </section>
+
+    <dl class="kpis" id="kpis" aria-label="Indicatori principali"></dl>
+
+    <section id="milestone" aria-labelledby="milestone-title">
+      <div class="section-head">
+        <p class="eyebrow">Le tappe</p>
+        <h2 id="milestone-title">Sette traguardi verso la consegna</h2>
+        <p class="lede">Ogni traguardo chiude una fase di lavoro. La barra piena è quanto è fatto, il segno tratteggiato è quanto doveva esserlo oggi. Apri una tappa per vedere le singole attività.</p>
+      </div>
+      <ol class="milestones" id="milestones"></ol>
+    </section>
+
+    <section id="calendario" aria-labelledby="calendario-title">
+      <div class="section-head">
+        <p class="eyebrow">Il calendario</p>
+        <h2 id="calendario-title">Dove dovrei essere, dove sono</h2>
+        <p class="lede">Ogni riga è una fase nel suo periodo previsto, riempita per la parte completata. La linea verticale è oggi.</p>
+      </div>
+      <div class="gantt" id="gantt"></div>
+      <ul class="legend-row" aria-label="Legenda del calendario">
+        <li><span class="key-box planned"></span>periodo previsto</li>
+        <li><span class="key-box done"></span>parte completata</li>
+        <li><span class="key-diamond"></span>traguardo</li>
+        <li><span class="key-margin"></span>margine fino al 31 dicembre</li>
+      </ul>
+    </section>
+
+    <section id="andamento" aria-labelledby="andamento-title">
+      <div class="section-head">
+        <p class="eyebrow">L'andamento</p>
+        <h2 id="andamento-title">Lavoro fatto contro lavoro previsto</h2>
+        <p class="lede">La curva tratteggiata è il piano: sale più in fretta nelle settimane con più lavoro. I punti sono il lavoro completato, sera dopo sera.</p>
+      </div>
+      <figure class="panel trend">
+        <div class="chart-head">
+          <b>Avanzamento complessivo (%)</b>
+          <span class="legend"><span class="key" style="--c:var(--water)">fatto</span><span class="key dash" style="--c:var(--ink)">previsto</span></span>
+        </div>
+        <div class="trend-plot" id="trend" tabindex="0" role="img" aria-label="Grafico dell'avanzamento fatto e previsto fino alla consegna. Usa le frecce per scorrere i giorni."></div>
+        <details class="data-table">
+          <summary>Vedi i dati in tabella</summary>
+          <div class="scroll-x"><table id="trend-table"></table></div>
+        </details>
+      </figure>
+    </section>
+
+    <section id="previsione" aria-labelledby="previsione-title">
+      <div class="section-head">
+        <p class="eyebrow">Il prospetto di fine progetto</p>
+        <h2 id="previsione-title">Quando finirò, al ritmo di oggi</h2>
+        <p class="lede">Per ogni attività confronto le ore che il piano prevedeva per la parte fatta con quelle che ci ho messo davvero. Il rapporto dice quanto vado più lento o più veloce del piano; applicato al lavoro che resta, con <span id="fc-perday">2 ore</span> di lavoro al giorno in media, dà la data di fine.</p>
+      </div>
+      <div class="fc-grid">
+        <div class="fc-head" id="fc-head"></div>
+        <figure class="panel fc-chart">
+          <div class="chart-head"><b>Data di fine in tre scenari</b><span class="legend"><span class="key dash" style="--c:var(--ink)">consegna interna</span><span class="key" style="--c:var(--alert)">scadenza del professore</span></span></div>
+          <div class="finish" id="finish"></div>
+        </figure>
+      </div>
+      <h3 class="block-title fc-table-title">Ore stimate e ore effettive</h3>
+      <div class="scroll-x"><table class="hours" id="hours"></table></div>
+      <p class="note" id="fc-note"></p>
+    </section>
+
+    <section id="diario" aria-labelledby="diario-title">
+      <div class="section-head">
+        <p class="eyebrow">Dal diario di laboratorio</p>
+        <h2 id="diario-title">Cosa è successo, cosa viene dopo</h2>
+      </div>
+      <div class="diary-grid">
+        <div>
+          <h3 class="block-title">Ultimi aggiornamenti</h3>
+          <ol class="log" id="log"></ol>
+        </div>
+        <div class="side-stack">
+          <div>
+            <h3 class="block-title">Prossimi passi</h3>
+            <ol class="next" id="next"></ol>
+          </div>
+          <div>
+            <h3 class="block-title">Punti di attenzione</h3>
+            <ul class="risks" id="risks"></ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="metodo" class="method" aria-labelledby="metodo-title">
+      <h2 id="metodo-title" class="block-title">Come sono calcolate le percentuali</h2>
+      <div class="method-grid">
+        <p>Il piano divide il progetto in <span id="m-count">45</span> attività, ognuna con le sue ore di lavoro previste: in tutto circa <span id="m-hours">108</span>. Ogni attività pesa per le sue ore, quindi scrivere la relazione (8 ore) conta più di montare la postazione di ripresa (un'ora e mezza).</p>
+        <p>Ogni sera confronto il diario di laboratorio con il criterio di completamento di ciascuna attività e stimo la percentuale fatta. Il «previsto a oggi» invece non è una stima: viene dal calendario del piano.</p>
+        <p>Lo scostamento risponde a una domanda: in che giorno il piano prevedeva di arrivare al punto in cui sono oggi? Entro un giorno di differenza il progetto è in linea; oltre i tre giorni scatta un piano B.</p>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <p><b>Gabriele Caruso</b> · Corso di Automazione, Prof. Alessandro Giuseppi · Sapienza Università di Roma – DIAG · A.A. 2026/27</p>
+    <p>Le percentuali sono stime aggiornate ogni sera a partire dal diario di laboratorio. <a href="index.html">Torna alla simulazione interattiva</a>.</p>
+  </footer>
+</div>
+
+<div class="tip" id="tip" role="status" hidden></div>
+
+<script src="progresso-dati.js" charset="utf-8"></script>
+<script src="progresso-calc.js" charset="utf-8"></script>
+<script src="progresso-ui.js" charset="utf-8"></script>
+<script src="progresso-trend.js" charset="utf-8"></script>
+<script src="progresso-forecast.js" charset="utf-8"></script>
+<script src="progresso.js" charset="utf-8"></script>
+</body>
+</html>
