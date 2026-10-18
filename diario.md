@@ -276,3 +276,56 @@ Calendario realistico: **ven 16** chiusura della diagnosi, sensore funzionante, 
 **Ore della 1.3 in totale:** 7 h 45 (15 ott) + 5 h 10 (16 ott) + 2 h 15 (17 ott) = **circa 15 h 10**, contro le 3 h del piano.
 
 **Prossimo passo:** domenica 18, prova della siringa sul circuito con le due bottiglie (tappo indurito), misura dei volumi, poi 1.5 (servo con alimentatore separato e condensatore) e 1.6 (tenuta a +2 kPa per 10 minuti).
+
+## 2026-10-18 · sottofasi 1.4, 1.6 (chiusa), 1.5 (chiusa), 1.7 (misure) · prima parte, 1 h 45
+
+**Orario:** 15:20–17:05, cioè **1 h 45**. Sessione in pausa per circa due ore (crediti esauriti); la giornata prevede 5 ore in tutto. Divisione dagli orari annotati e dai registri della seriale.
+
+| Orario | Durata | Attività |
+|---|---|---|
+| 15:20–15:25 | 5 min | 1.4: volumi d'aria con bottiglie gemelle |
+| 15:25–15:33 | 8 min | 1.4: montaggio del circuito (due bottiglie, elettronica, USB) |
+| 15:33–15:42 | 9 min | 1.4: prova della siringa (15:38) |
+| 15:42–16:01 | 19 min | 1.6: prova di tenuta (fascetta chiusa alle 15:44, tagliata alle 16:01) |
+| 16:01–16:32 | 31 min | 1.5: controllo dell'alimentatore, cablaggio del servo e del condensatore, controlli con il multimetro |
+| 16:32–16:36 | 4 min | 1.5: prova del servo (programma `prova_banco.cpp`) |
+| 16:36–17:05 | 29 min | 1.7: misure di siringa, squadrette, servo, tavoletta, asticelle |
+
+**Fatto (1.4):**
+- **Volumi:** acqua nella bottiglia principale fino all'inizio della spalla (segnata con nastro rosso). Camera d'aria **200 ml**, bottiglia piccola **550 ml**, tubi circa 15 ml (A 50 cm, B 65 cm, diametro interno 4 mm): in tutto circa **765 ml**.
+- **Circuito montato:** siringa → tubo A → bottiglia da 0,5 L → tubo B → bottiglia da 1,5 L con il sensore. La bottiglia da 0,5 L è fissata con lo scotch: vuota è troppo leggera e cade.
+- **Prova della siringa (15:38):** 10 ml danno **+1,02 kPa** a regime (picco iniziale +1,14 kPa). Boyle con 765 ml prevede +1,32 kPa: il volume "efficace" è di circa **990 ml**, perché pareti delle bottiglie e tubo in silicone cedono sotto pressione (e forse lo stantuffo non spinge tutti i 10 ml). **Guadagno misurato: circa 0,10 kPa per ml di siringa.**
+
+**Fatto (1.6, chiusa):** due cariche di siringa (la seconda tenendo piegato il tubo A), tubo A chiuso con una fascetta su una piega alle 15:44:00. Pressione ambiente 101,19 kPa.
+
+| Ora | Sovrapressione | Rispetto all'inizio |
+|---|---|---|
+| 15:44:00 | +1,78 kPa | 100 % |
+| 15:46:30 | +1,63 kPa | 92 % (assestamento di pareti e tubo, poi la curva si ferma) |
+| 15:54:00 (10 min) | +1,66 kPa | **93 %** (il piano chiede ≥ 70 %) |
+| 16:01:20 (17 min) | +1,71 kPa | 96 % |
+
+Alle 16:01:23, tagliata la fascetta, la pressione è tornata a 101,21 kPa, cioè allo zero di partenza. **τ di molte ore**, ben oltre i 30 minuti richiesti. Registro: `dati/2026-10-18/2026-10-18_seriale.log` (manca un minuto, 15:49:30–15:50:30: la registrazione si è fermata da sola ed è stata riavviata).
+
+**Fatto (1.5, chiusa):**
+- Alimentatore TKDY: tensione ai morsetti verificata con il multimetro, polarità giusta.
+- Condensatore da 1000 µF **25 V** nei morsetti verdi (gamba lunga accorciata e gambe aperte a V; striscia nel −), insieme ai jumper. Servo: rosso al morsetto +, marrone alla striscia blu "−" della breadboard, giallo a **D18** (colonna 38, riga a). Masse comuni sulla striscia blu "−": morsetto −, GND dell'ESP32 (jumper da colonna 31, riga a) e filo bianco del sensore (spostato lì). Schema in `hardware/collegamenti.md`.
+- Controlli di continuità prima di accendere: tutti giusti (morsetto − con GND e con il bianco; nessun corto + e −; nessun collegamento tra il 5 V e il 3V3).
+- Programma `firmware/src/prova_banco.cpp` (ambiente `banco` in `platformio.ini`: `pio run -e banco -t upload`): BMP280 a 50 Hz (oversampling ×4, standby 0,5 ms), servo comandato dalla seriale, motivo dell'ultimo riavvio stampato all'avvio.
+- **Prova (16:33–16:35):** escursione lenta 0°→180°→0° e scatti 0°/180°/90°, due volte. **Nessun riavvio, nessun brownout**; **50 letture al secondo** stabili per 138 s; rumore della pressione circa ±10 Pa, uguale a servo fermo e in movimento. Registro: `dati/2026-10-18/2026-10-18_prova-servo.log`.
+
+**Fatto (1.7, misure, da ricontrollare nella prossima sessione):** vedi `hardware/calibrazione-servo.md`.
+
+**Problemi (e cosa si è capito):**
+1. La registrazione in background si è fermata da sola dopo circa 18 minuti (motivo non chiaro): da ora va lanciata staccata dalla sessione (`nohup ... &`).
+2. Due misure della siringa non tornano tra loro (gomma 67 mm contro asta 46 mm per 10 ml; diametro esterno "6,5 cm" impossibile): da rifare.
+3. **Problema di progetto emerso dalle misure:** con il braccio più lungo delle squadrette (16,75 mm) la corsa massima dello stantuffo è circa 33 mm, cioè 5–7 ml, sotto gli 8 ml del piano. E con il guadagno misurato (0,10 kPa/ml) anche 10 ml danno solo circa 1 kPa, mentre tenere il palombaro su tutta la colonna d'acqua (circa 25 cm) richiede circa ρ·g·0,25 m ≈ 2,5 kPa. Va deciso come recuperare (dettagli e opzioni in `hardware/calibrazione-servo.md`).
+
+**Decisioni (e perché):**
+- Condensatore da 25 V invece di 10 V: più margine sui picchi del motore.
+- Masse comuni sulla striscia blu "−" della breadboard: la corrente del servo non passa dall'ESP32, il collegamento di massa porta solo il riferimento del segnale.
+- I programmi di prova stanno in `firmware/src/`, uno per ambiente PlatformIO (`esp32dev` = prova del tappo, `banco` = 1.5), invece che in `firmware/test/` (cartella che PlatformIO riserva ai test automatici).
+
+**Foto** (cartella Download): `IMG_1836` squadrette; `IMG_1837`–`IMG_1840` asticelle a Z; `IMG_1841`, `IMG_1842` banco elettronico dall'alto.
+
+**Stato alla pausa (17:05):** 1.5 e 1.6 chiuse, in anticipo sul calendario. 1.4 manca solo del palombaro (lunedì). 1.7 avviata: misure fatte, geometria da decidere. Sull'ESP32 è caricato `prova_banco.cpp`. Il circuito pneumatico è montato e il servo, alimentato a parte, è fermo a 90°.

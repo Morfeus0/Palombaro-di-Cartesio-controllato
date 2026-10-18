@@ -217,9 +217,9 @@ Sono le sottofasi che, se ritardano, fanno slittare la consegna. Le altre hanno 
 - **Quando:** sab 17 → lun 19 ott (sab 17 senza palombaro, lun 19 con il palombaro) · **Scadenza:** lun 19 ott · **Impegno:** ~2 h · **Prerequisiti:** 1.3, siringhe, tubi, raccordo a T (o bottiglie in serie)
 - **Obiettivo:** collegare siringa, raccordo a T, bottiglia d'aria extra e tappo con il sensore.
 - **Attività:**
-  - [~] Preparare la bottiglia d'aria extra con il suo tappo forato e sigillato. *(17 ott: tappo con 2 fori, tubi A e B, due colate; bottiglie in serie al posto del raccordo a T)*
-  - [ ] Collegare i tubi e stringerli con le fascette.
-  - [ ] Annotare tutti i volumi: camera d'aria della bottiglia, bottiglia extra, tubi.
+  - [x] Preparare la bottiglia d'aria extra con il suo tappo forato e sigillato. *(17 ott: tappo con 2 fori, tubi A e B, due colate; bottiglie in serie al posto del raccordo a T)*
+  - [x] Collegare i tubi e stringerli con le fascette. *(18 ott: tubi incollati nei tappi, fascette non necessarie)*
+  - [x] Annotare tutti i volumi: camera d'aria della bottiglia, bottiglia extra, tubi. *(18 ott: 200 + 550 + 15 ml; guadagno misurato 0,10 kPa/ml)*
 - **Output:** circuito montato, volumi annotati nel diario (serviranno al modello).
 - **Fatto quando:** spingendo la siringa a mano il palombaro scende, e tirandola risale.
 
@@ -227,26 +227,28 @@ Sono le sottofasi che, se ritardano, fanno slittare la consegna. Le altre hanno 
 - **Quando:** dom 18 ott · **Scadenza:** dom 18 ott · **Impegno:** ~3 h · **Prerequisiti:** ESP32, servo, alimentatore, 1.1
 - **Obiettivo:** leggere la pressione e muovere il servo, ciascuno con un programma di prova.
 - **Attività:**
-  - [ ] Collegare ESP32 e BMP280 via I²C.
-  - [ ] Collegare il servo con alimentazione 5 V separata, condensatore e massa in comune.
-  - [ ] Programma di prova 1: stampa la pressione sulla seriale.
-  - [ ] Programma di prova 2: il servo esegue un'escursione completa avanti e indietro.
-  - [ ] Annotare la frequenza di lettura massima del BMP280 e il suo rumore a riposo.
+  - [x] Collegare ESP32 e BMP280 via I²C.
+  - [x] Collegare il servo con alimentazione 5 V separata, condensatore e massa in comune.
+  - [x] Programma di prova 1: stampa la pressione sulla seriale.
+  - [x] Programma di prova 2: il servo esegue un'escursione completa avanti e indietro. *(un solo programma, `firmware/src/prova_banco.cpp`)*
+  - [x] Annotare la frequenza di lettura massima del BMP280 e il suo rumore a riposo. *(50 Hz stabili, ±10 Pa)*
 - **Output:** `hardware/collegamenti.md` (schema e foto), programmi di prova in `firmware/test/`.
 - **Fatto quando:** la pressione si legge ad almeno 50 Hz in modo stabile, e il servo si muove senza far riavviare l'ESP32.
 - **Attenzione:** se l'ESP32 si riavvia quando il servo si muove, l'alimentazione è insufficiente (rischio R7).
+- ✅ **Chiusa il 18 ottobre:** 50 letture al secondo, servo senza riavvii né brownout; schema in `hardware/collegamenti.md`.
 
 ### 1.6 · Test di tenuta
 - **Quando:** dom 18 ott (margine: ven 23 per una nuova colata) · **Scadenza:** dom 18 ott · **Impegno:** ~1,5 h · **Prerequisiti:** 1.4, 1.5
 - **Obiettivo:** misurare quanto velocemente la bottiglia perde aria.
 - **Attività:**
-  - [ ] Portare la bottiglia a circa +2 kPa.
-  - [ ] Registrare la pressione per 10 minuti.
-  - [ ] Stimare la costante di tempo τ della perdita.
-  - [ ] Se necessario, risigillare e ripetere.
+  - [x] Portare la bottiglia a circa +2 kPa. *(+1,78 kPa con due cariche di siringa)*
+  - [x] Registrare la pressione per 10 minuti. *(17 minuti)*
+  - [x] Stimare la costante di tempo τ della perdita. *(dopo 10 min resta il 93 %: τ di molte ore)*
+  - [-] Se necessario, risigillare e ripetere. *(non necessario)*
 - **Output:** grafico di decadimento e valore di τ annotato (sarà un parametro del modello).
 - **Fatto quando:** **τ ≥ 30 minuti**, cioè dopo 10 minuti resta almeno il 70 % della sovrapressione.
 - **Attenzione:** se dopo 2 tentativi τ è ancora sotto i 30 minuti, piano B del rischio R2.
+- ✅ **Chiusa il 18 ottobre** al primo tentativo (registro in `dati/2026-10-18/`).
 
 ### 1.7 · Meccanica siringa–servo
 - **Quando:** sab 17 → gio 22 ott (sab 17 montaggio sulla tavoletta, mer 21 – gio 22 meccanica) · **Scadenza:** gio 22 ott · **Impegno:** ~3 h · **Prerequisiti:** 1.5 (solo per le prove con il servo acceso)
@@ -254,7 +256,7 @@ Sono le sottofasi che, se ritardano, fanno slittare la consegna. Le altre hanno 
 - **Attività:**
   - [ ] Montare servo e siringa su una tavoletta di legno.
   - [ ] Realizzare il collegamento braccetto–stantuffo, il più possibile senza gioco.
-  - [ ] Misurare la corsa utile.
+  - [ ] Misurare la corsa utile. *(18 ott: misure preliminari e problema di corsa e pressione in `hardware/calibrazione-servo.md`)*
   - [ ] Costruire la tabella di calibrazione dal comando del servo ai ml spostati.
   - [ ] Stimare la zona morta e il gioco meccanico.
 - **Output:** banco montato, `hardware/calibrazione-servo.md`.
