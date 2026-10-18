@@ -40,11 +40,63 @@ Con 6,7 mm/ml (se vale la misura della gomma) 33,5 mm sono **5,0 ml**; con 4,6 m
 
 Prima di scegliere: rifare le misure ⚠️ e ricontrollare il calcolo del foglio A4 (proposta) sulla pressione necessaria.
 
+## Analisi del 18 ottobre, sera (proposta, da confermare con le misure)
+
+**1. Le pareti cedono: circa 210 ml "in più", quasi tutti nella bottiglia da 1,5 L.** Le due prove con la siringa danno lo stesso risultato. Il volume efficace si ricava da Boyle come V_eff = p₀·10 ml / Δp + 10 ml:
+
+| Prova | Volume d'aria vero | Δp a regime | V_eff | In più |
+|---|---|---|---|---|
+| 17 ott, 1,5 L vuota + tubo B | circa 1550 ml | 0,58 kPa | 1755 ml | **circa 205 ml** |
+| 18 ott, circuito completo | 765 ml | 1,02 kPa | 1000 ml | **circa 235 ml** |
+
+La parte che cede è quindi soprattutto la 1,5 L (circa 2 ml di rigonfiamento per kPa). Togliere aria dalla 0,5 L aiuta, ma meno di quanto stimato prima ("3–4 volte"): il guadagno passa da 0,10 a circa **0,21–0,24 kPa/ml**, non oltre. La discesa lenta dopo ogni spinta (dal picco al valore di regime, −10…−13 %) è lo stesso cedimento, che arriva con un ritardo: servirà nel modello dell'anello di pressione (fase 3).
+
+**2. Quanta pressione serve davvero.** Il palombaro sta in equilibrio dove p_aria + ρ·g·z è costante, quindi spostare l'equilibrio di Δz richiede ρ·g·Δz = **0,98 kPa ogni 10 cm**. Con l'acqua fino alla spalla (circa 22 cm) e un palombaro lungo circa 3,5 cm, la fascia utile è di circa 15 cm, cioè 1,5 kPa, più circa 0,5 kPa di margine per il controllo e la taratura: **minimo 2,0 kPa, comodo 2,5 kPa**. Il foglio A4 era coerente (simulazione `landing/sim.js`: 310 ml d'aria in tutto, 10 ml danno circa 3,3 kPa), ma non contava né la bottiglia extra da 550 ml né le pareti che cedono.
+
+**3. Conseguenza:** il braccio più lungo da solo non basta (anche 10 ml pieni danno solo circa 1 kPa). Servono **meno aria e tutta la corsa**:
+
+| Configurazione | Guadagno | 9 ml (siringa da 10) | 18 ml (siringa da 20) |
+|---|---|---|---|
+| Oggi (0,5 L vuota) | 0,10 kPa/ml | 0,9 kPa | 1,9 kPa |
+| 0,5 L con 500 ml d'acqua (restano circa 50 ml d'aria) | circa 0,21 kPa/ml | **1,9 kPa** (al limite) | **3,8 kPa** (comodo) |
+
+**4. Geometria proposta:** due squadrette a doppio braccio sovrapposte (quella del servo di scorta fa da prolunga), foro di lavoro a **r = 35,25 mm**. Biella (asticella) di circa **110 mm** tra i due perni: carico critico a punta circa 41 N, angolo massimo dell'asticella circa 19°.
+
+| Rotazione del braccio | Corsa | ml (10 ml, circa 6,2 mm/ml) | ml (20 ml, circa 3,3 mm/ml) |
+|---|---|---|---|
+| ±45° | 50 mm | 8,0 | 15 |
+| ±56° | 58 mm | 9,4 | 18 |
+| ±60° | 61 mm | 9,8 | 18,5 |
+
+Al centro della corsa: 0,62 mm per grado. Con la zona morta del servo (circa 0,5°) è circa 0,05 ml (10 ml) o 0,1 ml (20 ml), cioè **10–20 Pa per passo**, come stimato nella proposta (circa 17 Pa).
+
+**5. Prova del guadagno con la 0,5 L quasi piena (18 ott, 21:50–21:57).** Nella 0,5 L ci sono 500 ml d'acqua, quindi restano circa 50 ml d'aria. Circuito chiuso con la siringa a mano a 10 ml, poi spinta a passi di 2 ml e ritorno, 30 s per passo. Registro: `dati/2026-10-18/2026-10-18_seriale-sera.log`.
+
+| Siringa | Andata (kPa, a regime) | Ritorno (kPa) |
+|---|---|---|
+| 10 ml (chiusura) | 101,558 | 101,578 |
+| 8 ml | 101,951 | 101,953 |
+| 6 ml | 102,355 | 102,353 |
+| 4 ml | 102,784 | 102,720 |
+| 2 ml | 103,171 | 103,155 |
+| 0 ml | 103,580 | — |
+
+- **10 ml danno +2,02 kPa: guadagno 0,20 kPa/ml** (0,197 all'inizio, 0,205 alla fine: è la curva di Boyle). Era previsto circa 0,21.
+- Volume efficace 103,58 · 10 / 2,02 ≈ **512 ml**, contro circa 276 ml d'aria vera: le pareti valgono ancora circa **235 ml**, quindi il cedimento è confermato e viene quasi tutto dalla 1,5 L.
+- Il calo lento dopo ogni passo ora è piccolo (al massimo −25 Pa).
+- Andata e ritorno coincidono entro circa 60 Pa: è l'errore nel portare la gomma sulle tacche a mano (circa 0,3 ml). Alla fine resta +20 Pa, compatibile con l'aria scaldata di 0,1 °C: **nessuna perdita**.
+- **Con la siringa da 20 ml** (decisa la sera del 18, da comprare lunedì 19): 18 ml di corsa danno circa **3,6 kPa**, contro i 2,0–2,5 necessari. Il margine si potrà spendere rimettendo un po' d'aria nella 0,5 L, per avere meno pascal per passo del servo. Ad esempio, per arrivare a circa 3 kPa con 18 ml si tolgono circa 90 g d'acqua.
+
+**6. Prolunga incollata (18 ott, 21:15–21:40; foto `IMG_1843`–`IMG_1845`).** Due squadrette a doppio braccio incollate con l'epossidica, con 3 perni di filo di rame nei fori che combaciano. Dalle foto i due mozzi sono a circa 24 mm, cioè il foro più esterno di una squadretta sta sul primo foro dell'altra (4 fori combaciano, 3 hanno il perno). I fori del braccio libero sono quindi a circa **32, 35, 38 e 41 mm** dal mozzo che va sul servo; si lavora con quello a 35 mm (o 32: con la siringa da 20 ml bastano tutti e due). **Da verificare con il righello** prima del montaggio.
+- I perni sporgono di circa 6 mm da un lato solo: quel lato va **verso l'esterno**. Sul servo si monta quindi la squadretta che ha il mozzo scanalato dal lato in cui i perni sono a filo. Dopo l'indurimento, i perni si accorciano a circa 2 mm con il tronchesino, tenendo ferma l'unione.
+- Mozzo scanalato e fori del braccio libero sono rimasti puliti.
+
 ## Da fare nella 1.7 (dal piano)
 
-- [ ] Scelta della geometria (sopra) e montaggio di servo e siringa sulla tavoletta.
+- [x] Scelta della geometria (sopra): siringa da 20 ml, meno aria, foro a circa 35 mm. Prolunga incollata il 18 ottobre.
+- [ ] Siringhe da 20 ml (lun 19), loro misure, montaggio di servo e siringa sulla tavoletta (mer 21). Posizioni proposte: alberino a 25 mm dal bordo sinistro con il corpo del servo verso la siringa, asse della siringa a 100 mm dal bordo lungo, perno sullo stantuffo a circa 104 mm dall'alberino a metà corsa.
 - [ ] Collegamento braccetto–stantuffo il più possibile senza gioco (asticella a Z).
 - [ ] Misura della corsa utile.
 - [ ] Tabella di calibrazione: comando del servo → ml spostati.
 - [ ] Stima della zona morta e del gioco meccanico.
-- **Fatto quando:** corsa utile ≥ 8 ml, ripetibile entro ±0,1 ml su 5 andate e ritorni. **Giovedì 22 ottobre si decide sul piano B** (passo-passo + barra filettata) se la ripetibilità non basta (rischio R3).
+- **Fatto quando:** escursione di pressione ≥ 2,5 kPa, ripetibile entro ±25 Pa su 5 andate e ritorni (cambiato il 18 ottobre, prima era ≥ 8 ml entro ±0,1 ml). **Giovedì 22 ottobre si decide sul piano B** (passo-passo + barra filettata) se la ripetibilità non basta (rischio R3).

@@ -329,3 +329,51 @@ Alle 16:01:23, tagliata la fascetta, la pressione è tornata a 101,21 kPa, cioè
 **Foto** (cartella Download): `IMG_1836` squadrette; `IMG_1837`–`IMG_1840` asticelle a Z; `IMG_1841`, `IMG_1842` banco elettronico dall'alto.
 
 **Stato alla pausa (17:05):** 1.5 e 1.6 chiuse, in anticipo sul calendario. 1.4 manca solo del palombaro (lunedì). 1.7 avviata: misure fatte, geometria da decidere. Sull'ESP32 è caricato `prova_banco.cpp`. Il circuito pneumatico è montato e il servo, alimentato a parte, è fermo a 90°.
+
+## 2026-10-18 · sottofasi 1.4 e 1.7 · seconda parte, 42 min
+
+**Orario:** 21:15–21:57, **42 min** (foto alle 22:01). **Totale della giornata: 1 h 45 + 42 min = 2 h 27**, contro le 5 ore previste. La sera si è chiusa prima del previsto: il montaggio sulla tavoletta aspetta la siringa nuova, di cui non si conoscono ancora marca e misure.
+
+| Orario | Durata | Attività |
+|---|---|---|
+| 21:15–21:40 | 25 min | 1.7: prolunga del braccio (due squadrette incollate con l'epossidica e 3 perni di rame) |
+| 21:40–21:50 | 10 min | 1.4: 500 ml d'acqua nella bottiglia da 0,5 L, ESP32 collegato (21:45), controllo della registrazione |
+| 21:50–21:57 | 7 min | 1.4 e 1.7: prova del guadagno con la siringa a mano |
+
+**Analisi prima di lavorare (conti in `hardware/calibrazione-servo.md`):**
+- **Le pareti cedono:** le prove del 17 e del 18 danno lo stesso risultato. Il circuito si comporta come se avesse circa **210–235 ml d'aria in più**, quasi tutti per il rigonfiamento della bottiglia da 1,5 L (circa 2 ml per kPa). Togliere aria dalla 0,5 L raddoppia il guadagno, ma non lo moltiplica per 3–4 come era stato stimato.
+- **Quanta pressione serve:** spostare l'equilibrio del palombaro di 10 cm richiede 0,98 kPa. La fascia utile della bottiglia è di circa 15 cm (acqua circa 22 cm, palombaro circa 3,5 cm), quindi servono **almeno 2,0 kPa, comodi 2,5**. I 25 cm di stamattina erano troppi.
+- La proposta (`landing/sim.js`: 310 ml d'aria in tutto, circa 3,3 kPa con 10 ml) era coerente, ma non contava né la bottiglia extra da 550 ml né le pareti che cedono.
+- **Conseguenza:** il braccio lungo da solo non basta. Servono meno aria e tutta la corsa, e con una siringa da 20 ml avanza margine.
+
+**Fatto (1.7):**
+- **Prolunga del braccio:** due squadrette a doppio braccio (una del servo di scorta) sovrapposte, con le facce di contatto carteggiate, epossidica e 3 perni di filo di rame nei fori che combaciano. Dalle foto i mozzi sono a circa 24 mm, quindi i fori del braccio libero sono a circa 32, 35, 38 e 41 mm dal mozzo che va sul servo: si lavora con quello a circa 35 mm. Le due squadrette sono in linea e incollate piatte. Il mozzo scanalato e i fori liberi sono rimasti puliti.
+- I perni sporgono di circa 6 mm da un lato solo: quel lato va verso l'esterno, e sul servo si monta la squadretta con il mozzo scanalato dal lato dei perni a filo. Dopo l'indurimento si accorciano a circa 2 mm.
+
+**Fatto (1.4): meno aria e prova del guadagno.**
+- 500 ml d'acqua nella bottiglia da 0,5 L: restano circa 50 ml d'aria. La bottiglia sta in piedi sul tavolo, più in basso del tappo della 1,5 L, e ora non cade più.
+- **Prova (21:50–21:57):** circuito chiuso con la siringa a mano a 10 ml, poi spinta a passi di 2 ml e ritorno, 30 s per passo.
+- **Risultato: 10 ml danno +2,02 kPa, cioè 0,20 kPa/ml** (il doppio di stamattina; previsto circa 0,21). Volume efficace circa 512 ml contro circa 276 ml d'aria vera: le pareti valgono ancora circa 235 ml.
+- **Nessuna perdita:** andata e ritorno coincidono entro circa 60 Pa (precisione delle tacche a mano, circa 0,3 ml). Alla fine resta +20 Pa, compatibile con l'aria scaldata di 0,1 °C.
+- Registro: `dati/2026-10-18/2026-10-18_seriale-sera.log`, 50 letture al secondo, dalle 21:45 alle 22:00.
+
+**Decisioni (e perché):**
+- **Siringa da 20 ml** (2 pezzi in farmacia lunedì 19): con la stessa corsa (circa 58 mm) sposta circa 18 ml, cioè **circa 3,6 kPa**. Il margine si potrà spendere rimettendo un po' d'aria nella 0,5 L, per avere meno pascal per passo del servo (è il «volume d'aria regolabile» della proposta). Con la 10 ml si arrivava a circa 1,9 kPa, al limite.
+- La siringa da 10 ml resta come siringa a mano: per le prove di lunedì con il palombaro, e di scorta.
+- **Il «Fatto quando» della 1.7 diventa in pressione:** escursione ≥ 2,5 kPa, ripetibile entro ±25 Pa. Aggiornati anche i vincoli del piano e il rischio R3.
+- **Il montaggio di servo e siringa sulla tavoletta è rinviato a mercoledì 21**, con la siringa in mano e misurata. Le posizioni sono già pronte in `hardware/calibrazione-servo.md`.
+- Saltate le misure della siringa da 10 ml: con la 20 ml non servono più.
+
+**Foto** (cartella Download): `IMG_1843`–`IMG_1845` (22:01), prolunga incollata vista di lato e dalle due facce.
+
+**Stato a fine giornata:**
+- 1.5 e 1.6 chiuse. 1.4 manca solo del palombaro (lunedì), con una siringa a mano che ora sposta il doppio della pressione.
+- 1.7: geometria decisa, prolunga in indurimento, siringa da comprare.
+- `letturaPlausibile()` ancora da scrivere.
+
+**Ore:** 1.7 finora 29 + 25 = **54 min**. 1.4 circa **2 h 19** (2 h 02 + 17 min).
+
+**Prossimo passo:** lunedì 19, dopo la lezione:
+- farmacia: due siringhe da 20 ml «senza ago, cono Luer semplice, a tre pezzi»;
+- con le pipette: 1.2 parte 1 e chiusura della 1.4 con il palombaro;
+- mercoledì 21: misure della 20 ml, montaggio sulla tavoletta e asticella. Prima va verificato quali attrezzi ci sono per piegare e tagliare il filo inox: pinza, seghetto o lima.

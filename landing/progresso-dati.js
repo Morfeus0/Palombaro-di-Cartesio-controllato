@@ -12,12 +12,12 @@
    Le date sono AAAA-MM-GG; `ore` è l'impegno stimato nel piano operativo e fa da peso. */
 window.PalombaroProgresso = Object.freeze({
   aggiornato: '2026-10-18',
-  provvisorio: true, // true finché le stime non sono confrontate con il diario della sera
+  provvisorio: false, // true finché le stime non sono confrontate con il diario della sera
   consegna: '2026-12-13',
   scadenzaProf: '2026-12-31',
   oreAlGiorno: 2, // media dichiarata, tutti i giorni: base del prospetto di fine progetto
 
-  sintesi: 'Giornata in anticipo sul calendario: la bottiglia tiene la pressione per ore (la prova chiedeva 30 minuti), e il motore che muoverà la siringa funziona con la sua alimentazione separata, senza disturbare la scheda né il sensore. Il circuito dell\'aria è montato e misurato: manca solo il palombaro, con le pipette che arrivano domani. Le misure per la meccanica del motore hanno però mostrato un problema di progetto: il braccio del motore è troppo corto e l\'aria nel circuito è troppa, quindi la siringa cambia la pressione meno di quanto serve per spostare il palombaro su tutta l\'altezza della bottiglia. Si sceglie la soluzione nella prossima sessione. Buone notizie sulle ore: oggi elettronica e prova di tenuta hanno richiesto meno del previsto, e la previsione di fine (togliendo le ore che non si ripeteranno) è tornata a metà dicembre, prima della scadenza del professore.',
+  sintesi: 'Giornata in anticipo sul calendario: la bottiglia tiene la pressione per ore (la prova chiedeva 30 minuti), e il motore che muoverà la siringa funziona con la sua alimentazione separata, senza disturbare la scheda né il sensore. Le misure hanno mostrato un problema di progetto: la siringa cambiava la pressione meno della metà di quanto serve, perché nel circuito c\'era troppa aria e la bottiglia grande si gonfia un po\' sotto pressione. In serata la soluzione è stata scelta e provata: con l\'acqua nella bottiglia piccola l\'effetto della siringa è raddoppiato, senza perdite, e con una siringa da 20 ml (da comprare lunedì) e il braccio del motore allungato si avrà margine. Il montaggio sulla tavoletta aspetta la siringa nuova. Le ore di oggi sono state meno del previsto (circa due e mezza su cinque), ma le sottofasi chiuse restano in anticipo. Togliendo le ore che non si ripeteranno, la fine prevista è giovedì 17 dicembre: qualche giorno dopo la consegna interna, ma prima della scadenza del professore.',
 
   fasi: [
     {
@@ -40,10 +40,10 @@ window.PalombaroProgresso = Object.freeze({
         { id: '1.1', nome: 'Ambiente di lavoro e programmi', da: '2026-10-12', a: '2026-10-14', ore: 2.5, fatto: 100, oreEffettive: 1, nota: 'Chiusa il 10 ottobre in un\'ora: iPhone come telecamera a circa 30 fps.' },
         { id: '1.2', nome: 'Costruire e tarare il palombaro', da: '2026-10-13', a: '2026-10-20', ore: 3, fatto: 15, oreEffettive: 0.75, nota: 'Bilancino verificato; i contagocce non passavano dal collo della bottiglia. Le pipette sono in ritardo: arrivano lunedì 19.' },
         { id: '1.3', nome: 'Tappo con il sensore di pressione', da: '2026-10-15', a: '2026-10-17', ore: 3, fatto: 100, oreEffettive: 15.15, oreUnaTantum: 4.5, nota: 'Chiusa il 17 ottobre: colla indurita, fili controllati con il multimetro, sensore asciutto anche con la bottiglia inclinata a 50°.' },
-        { id: '1.4', nome: 'Circuito dell\'aria', da: '2026-10-17', a: '2026-10-19', ore: 2, fatto: 70, oreEffettive: 2.03, nota: 'Montato e misurato: 10 ml di siringa alzano la pressione di 1 kPa. Manca la prova con il palombaro, lunedì.' },
+        { id: '1.4', nome: 'Circuito dell\'aria', da: '2026-10-17', a: '2026-10-19', ore: 2, fatto: 75, oreEffettive: 2.32, nota: 'Con l\'acqua nella bottiglia piccola 10 ml di siringa alzano la pressione di 2 kPa, il doppio di prima, e il circuito non perde. Manca la prova con il palombaro, lunedì.' },
         { id: '1.5', nome: 'Elettronica minima', da: '2026-10-18', a: '2026-10-18', ore: 3, fatto: 100, oreEffettive: 0.58, nota: 'Chiusa il 18 ottobre: pressione letta 50 volte al secondo, il motore si muove senza far riavviare la scheda.' },
         { id: '1.6', nome: 'Prova di tenuta della bottiglia', da: '2026-10-18', a: '2026-10-18', ore: 1.5, fatto: 100, oreEffettive: 0.32, nota: 'Chiusa il 18 ottobre al primo tentativo: dopo 10 minuti resta il 93 % della pressione (ne bastava il 70 %).' },
-        { id: '1.7', nome: 'Meccanica motore e siringa', da: '2026-10-17', a: '2026-10-22', ore: 3, fatto: 5, oreEffettive: 0.48, nota: 'Misure fatte: il braccio del motore è troppo corto per la corsa richiesta. Da scegliere tra un braccio più lungo e meno aria nel circuito.' },
+        { id: '1.7', nome: 'Meccanica motore e siringa', da: '2026-10-17', a: '2026-10-22', ore: 3, fatto: 20, oreEffettive: 0.9, nota: 'Soluzione scelta: meno aria, braccio del motore allungato (già incollato) e siringa da 20 ml, da comprare lunedì. Il montaggio sulla tavoletta è mercoledì, con la siringa in mano.' },
         { id: '1.8', nome: 'Prova d\'insieme e video', da: '2026-10-24', a: '2026-10-25', ore: 2, fatto: 0 },
       ],
     },
@@ -135,6 +135,9 @@ window.PalombaroProgresso = Object.freeze({
       'Prova di tenuta superata al primo colpo: dopo 10 minuti la bottiglia conserva il 93 % della pressione, e dopo 17 minuti è ancora lì.',
       'Collegato il motore con la sua alimentazione e un condensatore: si muove da un estremo all\'altro senza far riavviare la scheda, che intanto legge la pressione 50 volte al secondo.',
       'Le misure di siringa e braccetti mostrano che la corsa del motore non basta: va scelta una soluzione prima del montaggio.',
+      'In serata (42 minuti), rifatti i conti: la bottiglia grande si gonfia un po\' sotto pressione e "assorbe" parte dell\'aria spinta. Per muovere il palombaro su tutta l\'altezza servono 2–2,5 kPa.',
+      'Riempita d\'acqua la bottiglia piccola: ora 10 ml di siringa danno 2 kPa, il doppio di prima, e il circuito non perde.',
+      'Incollati due braccetti del motore uno sull\'altro per allungare il braccio. Decisa una siringa da 20 ml, che con la stessa corsa sposta il doppio dell\'aria: si compra lunedì, e il montaggio sulla tavoletta si fa mercoledì con le sue misure.',
     ] },
     { data: '2026-10-17', testo: [
       'Quasi quattro ore di lavoro: il tappo con il sensore è finito e verificato. La colla ha fatto presa e il sensore, collegato alla scheda, misura bene.',
@@ -167,16 +170,18 @@ window.PalombaroProgresso = Object.freeze({
   ],
 
   prossimi: [
-    'Domenica 18, seconda parte: rifare due misure della siringa e scegliere come aumentare l\'effetto della siringa (braccio più lungo o meno aria), poi montare motore e siringa sulla tavoletta.',
-    'Lunedì 19: arrivano le pipette, si costruiscono i palombari e si chiude il circuito dell\'aria.',
+    'Lunedì 19: arrivano le pipette, si costruiscono i palombari e si chiude il circuito dell\'aria con la prova del palombaro. In farmacia, due siringhe da 20 ml.',
     'Martedì 20: taratura fine dei palombari.',
+    'Mercoledì 21: misure della siringa nuova, montaggio di motore e siringa sulla tavoletta, asticella di collegamento.',
   ],
 
   rischi: [
     { titolo: 'Più ore del previsto per ogni attività', livello: 'alto',
-      nota: 'Il tappo con il sensore ha richiesto circa 15 ore contro le 3 previste. Oggi elettronica e prova di tenuta hanno invece richiesto meno delle ore stimate: il ritmo comincia a migliorare, ma il ritardo accumulato resta.' },
-    { titolo: 'La siringa cambia la pressione meno del necessario', livello: 'alto',
-      nota: 'Con il braccio del motore più lungo e con tutta l\'aria del circuito, la siringa sposta circa 0,5–0,7 kPa, mentre per muovere il palombaro su tutta la bottiglia ne servono circa 2,5. Soluzioni: braccio più lungo, meno aria nel circuito, o tutte e due.' },
+      nota: 'Il tappo con il sensore ha richiesto circa 15 ore contro le 3 previste. Il 18 elettronica e prova di tenuta hanno invece richiesto meno delle ore stimate: il ritmo comincia a migliorare, ma il ritardo accumulato resta.' },
+    { titolo: 'La siringa cambia la pressione meno del necessario', livello: 'basso',
+      nota: 'Risolto sulla carta e in parte provato: con meno aria 10 ml danno già 2 kPa (misurato), e con la siringa da 20 ml e il braccio allungato si arriva a circa 3,6 kPa contro i 2–2,5 necessari. Resta da verificare sul banco montato, mercoledì.' },
+    { titolo: 'Meccanica del motore imprecisa', livello: 'medio',
+      nota: 'Il collegamento tra braccio e siringa deve avere pochissimo gioco: giovedì 22 si decide se basta o se serve il piano B (motore passo-passo con vite). Prima va verificato di avere gli attrezzi per piegare e tagliare l\'asticella d\'acciaio.' },
     { titolo: 'Palombaro difficile da tarare', livello: 'medio',
       nota: 'Le pipette arrivano lunedì 19: costruzione e taratura dei palombari lunedì e martedì.' },
   ],

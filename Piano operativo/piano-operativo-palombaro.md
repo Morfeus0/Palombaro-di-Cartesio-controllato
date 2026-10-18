@@ -30,7 +30,7 @@ Valgono per **tutte** le sottofasi.
 | Budget | ≈ 70 € previsti, tetto massimo 90 € (piano B compresi) |
 | Criteri di successo (dal foglio A4) | errore RMS di quota < 5 mm su 3 setpoint; gradino di 5 cm con assestamento < 10 s e sovraelongazione < 20 %; disturbo recuperato in < 10 s; fail-safe verso SAFE |
 | Livelli di risultato | **Base** (On-Off + PID su un anello + macchina a stati) garantito entro F4 · **Target** (cascata, PID digitale completo, filtro, SFC, analisi real-time) entro F5 · **Extra** solo se si è in anticipo |
-| Hardware fissato | ESP32 DevKit, servo MG996R, BMP280, siringa 10 ml, bottiglia PET 1,5–2 L, volume d'aria extra ~300 ml, iPhone 15 Pro come telecamera |
+| Hardware fissato | ESP32 DevKit, servo MG996R, BMP280, siringa **20 ml** (decisa il 18 ott al posto della 10 ml), bottiglia PET 1,5 L, bottiglia extra da 0,5 L con 500 ml d'acqua (circa 50 ml d'aria: il volume si regola con l'acqua), iPhone 15 Pro come telecamera |
 | Frequenze di progetto | anello interno (pressione) 100 Hz · anello esterno (quota) 30 Hz, la frequenza della telecamera |
 | Lingua | documentazione, codice commentato e relazione in italiano |
 | Sicurezza | elettronica mai sopra l'acqua né sotto la bottiglia; il banco sta in una vaschetta di contenimento; servo alimentato a parte (5 V), con masse in comune; nessun test elettrico con la bottiglia aperta sopra la breadboard |
@@ -219,7 +219,7 @@ Sono le sottofasi che, se ritardano, fanno slittare la consegna. Le altre hanno 
 - **Attività:**
   - [x] Preparare la bottiglia d'aria extra con il suo tappo forato e sigillato. *(17 ott: tappo con 2 fori, tubi A e B, due colate; bottiglie in serie al posto del raccordo a T)*
   - [x] Collegare i tubi e stringerli con le fascette. *(18 ott: tubi incollati nei tappi, fascette non necessarie)*
-  - [x] Annotare tutti i volumi: camera d'aria della bottiglia, bottiglia extra, tubi. *(18 ott: 200 + 550 + 15 ml; guadagno misurato 0,10 kPa/ml)*
+  - [x] Annotare tutti i volumi: camera d'aria della bottiglia, bottiglia extra, tubi. *(18 ott: 200 + 550 + 15 ml; guadagno misurato 0,10 kPa/ml. Sera: 500 ml d'acqua nella 0,5 L, guadagno 0,20 kPa/ml, nessuna perdita)*
 - **Output:** circuito montato, volumi annotati nel diario (serviranno al modello).
 - **Fatto quando:** spingendo la siringa a mano il palombaro scende, e tirandola risale.
 
@@ -254,13 +254,16 @@ Sono le sottofasi che, se ritardano, fanno slittare la consegna. Le altre hanno 
 - **Quando:** sab 17 → gio 22 ott (sab 17 montaggio sulla tavoletta, mer 21 – gio 22 meccanica) · **Scadenza:** gio 22 ott · **Impegno:** ~3 h · **Prerequisiti:** 1.5 (solo per le prove con il servo acceso)
 - **Obiettivo:** il servo spinge e tira lo stantuffo in modo rigido e ripetibile.
 - **Attività:**
-  - [ ] Montare servo e siringa su una tavoletta di legno.
+  - [x] Scegliere la geometria. *(18 ott: siringa da 20 ml, meno aria nella 0,5 L, due squadrette sovrapposte con il foro di lavoro a circa 35 mm; conti in `hardware/calibrazione-servo.md`)*
+  - [x] Prolunga del braccio. *(18 ott: squadrette incollate con l'epossidica e 3 perni di rame)*
+  - [ ] Comprare 2 siringhe da 20 ml (lun 19) e misurarle.
+  - [ ] Montare servo e siringa su una tavoletta di legno. *(rinviato a quando c'è la siringa da 20 ml, mer 21)*
   - [ ] Realizzare il collegamento braccetto–stantuffo, il più possibile senza gioco.
   - [ ] Misurare la corsa utile. *(18 ott: misure preliminari e problema di corsa e pressione in `hardware/calibrazione-servo.md`)*
   - [ ] Costruire la tabella di calibrazione dal comando del servo ai ml spostati.
   - [ ] Stimare la zona morta e il gioco meccanico.
 - **Output:** banco montato, `hardware/calibrazione-servo.md`.
-- **Fatto quando:** corsa utile ≥ 8 ml, ripetibile entro ±0,1 ml su 5 andate e ritorni.
+- **Fatto quando:** escursione di pressione ≥ 2,5 kPa (circa 12–13 ml con la siringa da 20 ml), ripetibile entro ±25 Pa (circa ±0,12 ml) su 5 andate e ritorni. *(Fino al 18 ottobre era: corsa utile ≥ 8 ml entro ±0,1 ml. Cambiato perché con la siringa da 20 ml conta la pressione, non i ml.)*
 - **Attenzione:** **giovedì 22 ottobre si decide sul piano B** (passo-passo + barra filettata) se la ripetibilità non basta (rischio R3).
 
 ### 1.8 · Prova integrata e milestone M1
@@ -639,7 +642,7 @@ Sono le sottofasi che, se ritardano, fanno slittare la consegna. Le altre hanno 
 |---|---|---|---|
 | R1 | I componenti arrivano in ritardo | non arrivati entro **ven 16 ott** | acquisto in un negozio di elettronica a Roma; intanto si anticipano le sottofasi senza hardware (3.1, 2.4, 1.1) |
 | R2 | Il tappo perde aria | τ < 30 min dopo 2 tentativi (1.6) | tappo nuovo con passanti per tubo, nastro teflon; in ultima istanza ci si affida alla compensazione dell'anello interno |
-| R3 | Servo impreciso o con troppo gioco | ripetibilità > ±0,1 ml entro **gio 22 ott** (1.7) | passo-passo + barra filettata (circa 15 €, +2 giorni); oppure più volume d'aria per avere più risoluzione |
+| R3 | Servo impreciso o con troppo gioco | ripetibilità peggiore di ±25 Pa (circa ±0,12 ml con la siringa da 20 ml) entro **gio 22 ott** (1.7) | passo-passo + barra filettata (circa 15 €, +2 giorni); oppure più volume d'aria per avere più risoluzione |
 | R4 | Riconoscimento instabile (riflessi, luce) | perdite del palombaro entro **ven 30 ott** (2.2) | cambiare sfondo e luce, marcatore più grande o di altro colore |
 | R5 | Continuity Camera lenta o si disconnette | latenza > 150 ms o disconnessioni (2.3) | webcam USB (+20 €) |
 | R6 | Palombaro difficile da tarare | dopo 2 sessioni (1.2) | bilancino 0,01 g, palombari di riserva, zavorra a passi più piccoli |
