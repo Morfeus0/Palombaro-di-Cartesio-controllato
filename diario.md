@@ -377,3 +377,87 @@ Alle 16:01:23, tagliata la fascetta, la pressione è tornata a 101,21 kPa, cioè
 - farmacia: due siringhe da 20 ml «senza ago, cono Luer semplice, a tre pezzi»;
 - con le pipette: 1.2 parte 1 e chiusura della 1.4 con il palombaro;
 - mercoledì 21: misure della 20 ml, montaggio sulla tavoletta e asticella. Prima va verificato quali attrezzi ci sono per piegare e tagliare il filo inox: pinza, seghetto o lima.
+
+## 2026-10-19 · sottofasi 1.2 (palombari), 1.4 (prove con la siringa), 1.6 (tenuta rifatta), 1.7 (siringa da 20 ml) · circa 5 h
+
+**Orario:** circa **16:25–21:30**. L'inizio non è stato annotato: è stimato dal primo messaggio della sessione. In tutto circa **5 h 05**. In mattinata, lezione in aula magna (8:30–11:00, non contata). Divisione ricostruita dal registro della seriale (`dati/2026-10-19/2026-10-19_seriale.log.gz`, compresso perché sono 30 MB di testo) e dagli orari annotati; dopo le 20:25 il registro non ha più la pressione (vedi problema 6).
+
+| Orario | Durata | Attività |
+|---|---|---|
+| ~16:25–17:20 | 55 min | 1.2 e 1.7: preparazione, misure di pipetta e siringa da 20 ml, costruzione e pesate di P1, prova nella bottiglia gemella |
+| 17:20–17:25 | 5 min | 1.4: prima prova con P1 nella bottiglia con il sensore (circuito chiuso alle 17:21:49): P1 non scende |
+| 17:25–17:55 | 30 min | 1.4 e 1.6: ricerca della perdita, tappo stretto, prova di tenuta (17:41–17:52) |
+| 17:55–17:57 | 2 min | 1.4: prova ripetuta, P1 fermo anche a +4,0 kPa |
+| 17:58–19:30 | 1 h 32 | 1.2: tentativi di taratura di P1 (gocce, bollicine, ugello, tagli di rame) |
+| 19:30–19:33 | 3 min | 1.2: misura con la «pompa»: P1 fermo anche a +12–14 kPa |
+| 19:33–20:15 | 42 min | 1.2: secondo palombaro R1 (senza ugello, 50 cm di rame) e prove con la siringa |
+| 20:15–20:25 | 10 min | 1.2: R1 affondato, recuperato aspirando con la siringa (fino a circa −4 kPa) |
+| 20:25–21:30 | 1 h 05 | 1.2: altri tentativi con P1, con il sensore ormai guasto (non ce ne siamo accorti) |
+
+**Fatto (1.7, siringa da 20 ml):** comprate due siringhe **PIC Solution** da 20 ml.
+- Distanza tra le tacche 0 e 20: **70 mm**, cioè **3,5 mm/ml** (area 2,86 cm², diametro interno circa 19,1 mm). Il controllo con la gomma torna: 15 mm a 0 ml, 85 mm a 20 ml.
+- Diametro esterno circa 20 mm, alette 38 mm, disco di spinta 28 mm. L'asta è a croce, con nervature che sporgono 7 mm.
+- Il tubo A entra sul cono come sulla 10 ml.
+- **Nel circuito, 20 ml spinti danno +4,0 kPa** (17:55–17:57): 0,20 kPa/ml, come previsto.
+- Mancano la lunghezza del cilindro (dalle alette alla punta del cono) e lo spessore delle alette.
+
+**Fatto (1.2, palombari):**
+- **Pipetta intera:** 15 cm. Tettarella 4 cm per 1,3 cm; gambo 11 cm, largo 8 mm vicino alla tettarella e 3 mm in punta. Tacche fino a 3 ml (lo 0 a 3,8 cm dalla punta, il 3 a 0,9 cm dalla tettarella). Era previsto fin dal 15 ottobre di accorciarla, ma non era stato detto chiaramente all'acquisto.
+- **P1:**
+  - gambo tagliato 2 cm sotto la tettarella (palombaro lungo circa 6 cm, foro di circa 6–7 mm);
+  - 55 cm di rame (**2,35 g**) e nastro rosso in cima; **m_secco = 3,05 g**;
+  - in seguito, **ugello**: 15 mm di punta di un'altra pipetta incollati nel foro con la colla a caldo.
+- **R1:** come P1 ma senza ugello, con **50 cm** di rame.
+- **Pesate con l'acqua dentro (non affidabili):**
+  - m_pieno 5,34–5,40 g;
+  - m_tarato 5,14 g (sporge 2–3 mm, serve una stretta fortissima), 5,91 g (affonda), **5,44 g** (nella gemella scende con una stretta e risale dal fondo);
+  - V_materiali: 2,00 g con il primo metodo e −5,12 g con il secondo, entrambi non validi.
+  - m_tarato (5,44) è più di m_pieno (5,37): impossibile. Durante le pesate esce acqua dal foro largo.
+- **Bottiglia gemella:** P1 a 5,44 g scende con una stretta della mano e risale dal fondo. È il «Fatto quando» della 1.2 com'è scritto oggi, ma una stretta della mano vale 10–20 kPa: non dice niente sul funzionamento con la siringa.
+
+**Fatto (1.4 e 1.6, circuito):**
+- **Prima prova (17:21–17:25):** la pressione sale solo a +2,06 kPa e poi si svuota da sola, con **τ ≈ 1 minuto**. Era una **perdita dal tappo della bottiglia principale**, svitato per mettere dentro P1 e non riavvitato abbastanza.
+- Stretto il tappo: **prova di tenuta 17:41–17:52, dopo 10 minuti resta il 94 %**, τ di circa 4–5 ore. Il «Fatto quando» della 1.6 è confermato.
+- Imparata la **pompa**: il tubo piegato a mano fa da valvola, e la siringa si può ricaricare. Raggiunti +14 kPa, e −4 kPa tirando invece di spingere.
+- **Il «Fatto quando» della 1.4 non è ancora raggiunto:** nessun palombaro è sceso con la siringa entro +4 kPa. P1 non scende neanche a +12–14 kPa. R1 scende a circa +8–10 kPa; con 2 cm di rame in più affonda anche a pressione zero.
+
+**Problemi (e cosa si è capito):**
+1. **Dopo aver svitato una bottiglia va rifatta la prova di tenuta.** Procedura per chiudere: tubo A sfilato, bottiglia tenuta dal fondo (mai dal corpo), tappo appoggiato dritto e prima girato all'indietro fino allo scatto del filetto, ultimo quarto di giro deciso. Poi prova rapida: siringa da 20 a 12 ml, e tra 10 s e 40 s il calo deve essere sotto 0,05 kPa.
+2. **Stringere la bottiglia con il tubo collegato la mette in pressione:** punte di **+18, +24, +25 e +27 kPa**, oltre la scala del BMP280 (110 kPa).
+3. **La mano scalda il tappo**: 1 °C vale circa 0,34 kPa in una bottiglia chiusa e sembra una perdita. Anche il sapone sul tappo, asciugando, lo raffredda. Le prove di tenuta si fanno a mani ferme.
+4. **Tarare il palombaro con le gocce non funziona.** La fascia utile vale circa 0,02–0,03 g d'acqua, meno di una goccia (circa 0,05 g), e le pesate da bagnato oscillano di qualche centesimo. Dal foro largo esce acqua a ogni spostamento, e anche prendere P1 per la tettarella la schiaccia. In più, le mie indicazioni (bollicine «grandi come una lenticchia», «1,5–2 mm fuori», «una bollicina in meno») erano troppo grossolane o ambigue.
+5. **Ipotesi principale, da verificare domani: la tensione superficiale.** Quando la punta sporge dall'acqua, il menisco attorno alla tettarella asciutta tiene il palombaro con una forza fino a circa 0,072 N/m × 41 mm ≈ **3 mN (circa 0,3 g)**. La siringa a +4 kPa toglie solo circa 0,08 g di spinta (a +12 kPa circa 0,24 g). Spiega tutto:
+   - con la mano (10–20 kPa) scende, con la siringa no;
+   - tutto sott'acqua affonda, appena sporge non lo smuove niente;
+   - muovendo la siringa in fretta si vedono solo «micromovimenti».
+
+   Prova: un colpetto sulla bottiglia sotto pressione. Rimedio: **una goccia di detersivo per i piatti** nell'acqua, che fa bagnare la plastica.
+6. **Guasto del sensore (scoperto rileggendo il registro a fine giornata):**
+   - **20:20:42**: l'ESP32 si riavvia per **brownout**, senza servo in movimento.
+   - **20:25:07**: errori di timeout I²C (`Error 263`, poi `Error -1`), poi valori senza senso (p circa 2,5 kPa, T circa 180 °C).
+   - **20:42:42**: al riavvio, «BMP280 non trovato a 0x76».
+   - Nei 4 minuti prima, la temperatura del sensore è salita da 25,3 a 26,7 °C.
+   - **Ipotesi:**
+     - acqua sul sensore, perché la bottiglia è stata stretta molte volte con l'acqua fino al collo, e richiusa (una corrente di dispersione spiegherebbe sia il brownout sia il calore);
+     - oppure un pin sfilato dalla breadboard per il cavo attorcigliato dalle molte aperture del tappo, come il 17 ottobre.
+   - In entrambi i casi `letturaPlausibile()`, ancora da scrivere, avrebbe dato l'allarme subito.
+
+**Decisioni (e perché):**
+- **Siringa da 20 ml confermata:** +4,0 kPa con tutta la corsa.
+- **Proposta per il «Fatto quando» della 1.2, in kPa:** nella bottiglia con il sensore, il palombaro scende con una sovrapressione **tra +2 e +7 kPa** e risale dal fondo a pressione zero, 5 volte. Sotto i 2 kPa non risale dal fondo; sopra i 7 kPa il sensore va fuori scala. Il circuito si può chiudere già in pressione (con la pompa), e il servo lavora attorno a quel punto: nella fase 4 diventa lo stato CALIBRAZIONE.
+- **Registratore della seriale nel progetto** (`pc/registra_seriale.py`): lo scratchpad della sessione si svuota.
+- **D'ora in poi:** i palombari si tengono per il rame o per il gambo, mai per la tettarella; si tarano direttamente nella bottiglia dove verranno usati; la correzione fine si fa con il rame (2 mm = 0,009 g).
+
+**Stato a fine giornata:**
+- **Il sensore della bottiglia principale non risponde: da controllare prima di ogni altra cosa.**
+- 1.2: P1 (con ugello) e R1 costruiti, non ancora utilizzabili con la siringa. R2 da fare.
+- 1.4: circuito verificato (+4,0 kPa, tenuta ok), ma il palombaro non scende ancora con la siringa.
+- 1.7: siringa da 20 ml misurata.
+- `letturaPlausibile()` ancora da scrivere.
+
+**Ore:** 1.2 circa 4 h 17; 1.4 circa 35 min; 1.7 circa 10 min.
+
+**Prossimo passo (martedì 20):**
+1. **Sensore:** USB staccato; si guarda il tappo dentro per cercare gocce d'acqua (se è bagnato, si lascia asciugare con il tappo aperto, senza alimentarlo). Poi con il multimetro: continuità dei 4 fili, nessun corto tra 3V3 e GND, pin ben dentro la breadboard. Solo dopo, prova con l'ESP32.
+2. Se il sensore funziona: colpetto e goccia di detersivo, poi taratura di P1 o R1 con il rame, e chiusura della 1.4.
+3. Se è guasto: piano per un nuovo tappo con un BMP280 di scorta (ne restano 6).

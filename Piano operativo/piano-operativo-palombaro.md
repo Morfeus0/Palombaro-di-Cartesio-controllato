@@ -190,12 +190,14 @@ Sono le sottofasi che, se ritardano, fanno slittare la consegna. Le altre hanno 
 - **Quando:** mar 13 → mar 20 ott (lun 19 parte 1, mar 20 taratura fine: le pipette arrivano lun 19) · **Scadenza:** mar 20 ott · **Impegno:** ~3 h · **Prerequisiti:** contagocce, filo di rame, bottiglia (dalla farmacia, non serve aspettare Amazon)
 - **Obiettivo:** avere 3 palombari in galleggiamento neutro "per un pelo", con un marcatore rosso visibile alla telecamera.
 - **Attività:**
-  - [ ] Costruire 3 palombari: 1 principale e 2 di riserva.
+  - [ ] Costruire 3 palombari: 1 principale e 2 di riserva. *(19 ott: P1 con ugello e R1 senza ugello costruiti; R2 da fare)*
   - [ ] Primo tentativo in un bicchiere, poi taratura fine nella bottiglia chiusa.
   - [ ] Misurare e annotare per ognuno massa, volume esterno e volume della bolla.
   - [ ] Applicare il marcatore rosso in cima.
 - **Output:** 3 palombari tarati, scheda `hardware/taratura-palombaro.md`.
 - **Fatto quando:** nella bottiglia chiusa, una leggera pressione con la mano fa scendere il palombaro e, togliendola, risale, in modo ripetibile per 5 volte.
+  - **Proposta del 19 ottobre (da confermare):** nella bottiglia con il sensore il palombaro scende con una sovrapressione **tra +2 e +7 kPa** e risale dal fondo a pressione zero, 5 volte. La stretta della mano vale 10–20 kPa, quindi non verifica il funzionamento con la siringa. Il circuito si può chiudere già in pressione (la «pompa» con il tubo piegato), e il servo lavora attorno a quel punto.
+  - **Lezioni del 19 ottobre** (diario): la taratura con le gocce non converge; si tara nella bottiglia d'uso, con il rame per la correzione fine (2 mm = 0,009 g); vicino alla superficie la tensione superficiale trattiene il palombaro fino a circa 0,3 g (rimedio da provare: una goccia di detersivo).
 - **Attenzione:** più è vicino al galleggiamento neutro a pressione ambiente, più margine avrà la siringa (vedi il calcolo nel foglio A4).
 
 ### 1.3 · Tappo con il sensore di pressione
@@ -222,6 +224,7 @@ Sono le sottofasi che, se ritardano, fanno slittare la consegna. Le altre hanno 
   - [x] Annotare tutti i volumi: camera d'aria della bottiglia, bottiglia extra, tubi. *(18 ott: 200 + 550 + 15 ml; guadagno misurato 0,10 kPa/ml. Sera: 500 ml d'acqua nella 0,5 L, guadagno 0,20 kPa/ml, nessuna perdita)*
 - **Output:** circuito montato, volumi annotati nel diario (serviranno al modello).
 - **Fatto quando:** spingendo la siringa a mano il palombaro scende, e tirandola risale.
+- *(19 ott: con la siringa da 20 ml il circuito arriva a +4,0 kPa e tiene, ma nessun palombaro è ancora sceso con la siringa. Dalle 20:25 il sensore non risponde più: da controllare per primo.)*
 
 ### 1.5 · Banco elettronico minimo
 - **Quando:** dom 18 ott · **Scadenza:** dom 18 ott · **Impegno:** ~3 h · **Prerequisiti:** ESP32, servo, alimentatore, 1.1
@@ -256,7 +259,7 @@ Sono le sottofasi che, se ritardano, fanno slittare la consegna. Le altre hanno 
 - **Attività:**
   - [x] Scegliere la geometria. *(18 ott: siringa da 20 ml, meno aria nella 0,5 L, due squadrette sovrapposte con il foro di lavoro a circa 35 mm; conti in `hardware/calibrazione-servo.md`)*
   - [x] Prolunga del braccio. *(18 ott: squadrette incollate con l'epossidica e 3 perni di rame)*
-  - [ ] Comprare 2 siringhe da 20 ml (lun 19) e misurarle.
+  - [x] Comprare 2 siringhe da 20 ml (lun 19) e misurarle. *(PIC Solution, 3,5 mm/ml, +4,0 kPa con 20 ml; mancano lunghezza del cilindro e spessore delle alette)*
   - [ ] Montare servo e siringa su una tavoletta di legno. *(rinviato a quando c'è la siringa da 20 ml, mer 21)*
   - [ ] Realizzare il collegamento braccetto–stantuffo, il più possibile senza gioco.
   - [ ] Misurare la corsa utile. *(18 ott: misure preliminari e problema di corsa e pressione in `hardware/calibrazione-servo.md`)*
@@ -645,9 +648,9 @@ Sono le sottofasi che, se ritardano, fanno slittare la consegna. Le altre hanno 
 | R3 | Servo impreciso o con troppo gioco | ripetibilità peggiore di ±25 Pa (circa ±0,12 ml con la siringa da 20 ml) entro **gio 22 ott** (1.7) | passo-passo + barra filettata (circa 15 €, +2 giorni); oppure più volume d'aria per avere più risoluzione |
 | R4 | Riconoscimento instabile (riflessi, luce) | perdite del palombaro entro **ven 30 ott** (2.2) | cambiare sfondo e luce, marcatore più grande o di altro colore |
 | R5 | Continuity Camera lenta o si disconnette | latenza > 150 ms o disconnessioni (2.3) | webcam USB (+20 €) |
-| R6 | Palombaro difficile da tarare | dopo 2 sessioni (1.2) | bilancino 0,01 g, palombari di riserva, zavorra a passi più piccoli |
+| R6 | Palombaro difficile da tarare | dopo 2 sessioni (1.2) | bilancino 0,01 g, palombari di riserva, zavorra a passi più piccoli. *(19 ott: in corso. Taratura nella bottiglia d'uso con il rame, detersivo contro la tensione superficiale, circuito chiuso già in pressione)* |
 | R7 | L'ESP32 si riavvia quando si muove il servo | durante la 1.5 | alimentazione separata più potente, condensatore più grande, cavi più corti |
-| R8 | L'acqua raggiunge l'elettronica | sempre | vaschetta di contenimento, elettronica sopraelevata e lontana; asciugare e controllare prima di alimentare |
+| R8 | L'acqua raggiunge l'elettronica | sempre | vaschetta di contenimento, elettronica sopraelevata e lontana; asciugare e controllare prima di alimentare. *(19 ott, 20:25: il BMP280 del tappo smette di rispondere dopo un brownout; acqua sul sensore o pin sfilato, da verificare)* |
 | R9 | Ritardo generale | una fase slitta > 3 giorni (T5) | usare il margine della fase successiva; poi "Ordine dei tagli" |
 
 ### Ordine dei tagli (se il tempo non basta)

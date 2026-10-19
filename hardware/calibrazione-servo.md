@@ -91,6 +91,21 @@ Al centro della corsa: 0,62 mm per grado. Con la zona morta del servo (circa 0,5
 - I perni sporgono di circa 6 mm da un lato solo: quel lato va **verso l'esterno**. Sul servo si monta quindi la squadretta che ha il mozzo scanalato dal lato in cui i perni sono a filo. Dopo l'indurimento, i perni si accorciano a circa 2 mm con il tronchesino, tenendo ferma l'unione.
 - Mozzo scanalato e fori del braccio libero sono rimasti puliti.
 
+**7. Siringa da 20 ml (19 ott).** Due siringhe **PIC Solution** da 20 ml.
+
+| Grandezza | Valore |
+|---|---|
+| Tacche 0 → 20 ml | **70 mm**, cioè **3,5 mm/ml** (area 2,86 cm², diametro interno circa 19,1 mm) |
+| Bordo anteriore della gomma | a 15 mm (0 ml) e a 85 mm (20 ml) dal riferimento: torna con le tacche |
+| Diametro esterno | circa 20 mm |
+| Alette | larghe 38 mm; spessore **da misurare** |
+| Disco di spinta | 28 mm |
+| Asta | a croce, nervature che sporgono 7 mm dall'asse |
+| Cilindro (dalle alette alla punta del cono) | **da misurare** |
+| Nel circuito (0,5 L con 500 ml d'acqua) | 20 ml spinti danno **+4,0 kPa** (17:55–17:57), cioè 0,20 kPa/ml |
+
+Con il foro a 35,25 mm: ±56° fanno 58 mm, cioè **circa 16,7 ml e circa 3,3 kPa**. Al centro della corsa 0,62 mm per grado, cioè 0,18 ml e circa 35 Pa per grado.
+
 ## Da fare nella 1.7 (dal piano)
 
 - [x] Scelta della geometria (sopra): siringa da 20 ml, meno aria, foro a circa 35 mm. Prolunga incollata il 18 ottobre.

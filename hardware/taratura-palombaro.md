@@ -26,10 +26,10 @@ Se dopo le misure si toglie o si aggiunge rame, si pesa il pezzetto (`Δm`) e si
 
 ## Condizioni della prova
 
-- Data: 
+- Data: 19 ottobre 2026 (P1 e R1)
 - Altezza dell'acqua nella bottiglia `H` (dal fondo alla superficie): ___ cm
-- Temperatura dell'acqua (o della stanza): ___ °C
-- Acqua lasciata riposare dalla sera prima? sì / no
+- Temperatura dell'acqua (o della stanza): ___ °C (sensore nel tappo: 24–27 °C)
+- Acqua lasciata riposare dalla sera prima? bottiglia principale sì (dal 18); caraffa e gemella con acqua minerale appena aperta
 
 ## Controllo del bilancino
 
@@ -52,14 +52,14 @@ Dopo l'accensione bisogna aspettare 2–3 minuti prima della prima pesata.
 
 | | P1 (principale) | R1 (riserva) | R2 (riserva) |
 |---|---|---|---|
-| Segno di riconoscimento | | | |
-| Rame: diametro e massa avvolta | | | |
-| `m_secco` [g] | | | |
-| `m_pieno` [g] | | | |
+| Segno di riconoscimento | ugello (punta di pipetta incollata) | senza ugello | — |
+| Rame: diametro e massa avvolta | 0,8 mm, 55 cm, **2,35 g** (poi alcuni tagli da 2 mm) | 0,8 mm, 50 cm (circa 2,25 g) | |
+| `m_secco` [g] | **3,05** (prima dell'ugello) | | |
+| `m_pieno` [g] | 5,34–5,40 ⚠️ (esce acqua dal foro largo) | | |
 | `V_interno` [ml] | | | |
-| `V_materiali` lettura 1 / 2 / 3 [ml] | | | |
+| `V_materiali` lettura 1 / 2 / 3 [ml] | 2,00 e −5,12 ⚠️ non validi (aria dentro, acqua persa) | | |
 | `V_materiali` media [ml] | | | |
-| `m_tarato` [g] | | | |
+| `m_tarato` [g] | 5,14 / 5,91 / 5,44 ⚠️ (vedi note) | | |
 | `V_acqua` [ml] | | | |
 | `V_bolla` [ml] | | | |
 | `E` [g] | | | |
@@ -74,3 +74,10 @@ Dopo l'accensione bisogna aspettare 2–3 minuti prima della prima pesata.
 | P1 risale **dal fondo** lasciando | | | | | |
 
 ## Note
+
+**19 ottobre: la taratura non è riuscita.** Le lezioni sono nel diario. In breve:
+- **Pipetta:** 15 cm. Tettarella 4 × 1,3 cm; gambo 11 cm, largo da 8 a 3 mm. Si taglia 2 cm sotto la tettarella: palombaro di circa 6 cm, foro di 6–7 mm.
+- **Il foro largo fa uscire acqua** a ogni spostamento: le pesate con l'acqua dentro non valgono (`m_tarato` 5,44 > `m_pieno` 5,37). Per `V_materiali` il palombaro deve essere pieno d'acqua **senza bolle**, così affonda e resta appeso al filo; dai materiali ci si aspetta circa 1,0 ml.
+- **Fascia utile stretta:** P_neutra ≈ 101,5 kPa × E / V_bolla. Con circa 2 ml di bolla, la fascia +2…+3 kPa è larga circa 0,02 g, cioè meno di una goccia. Correzione fine solo con il rame (2 mm = 0,009 g).
+- **Tensione superficiale (ipotesi):** con la punta fuori dall'acqua il menisco trattiene il palombaro fino a circa 3 mN (0,3 g), più della spinta tolta dalla siringa (circa 0,02 g per kPa). Da provare: colpetto sulla bottiglia sotto pressione e una goccia di detersivo.
+- **Nella gemella**, P1 a 5,44 g scende con una stretta della mano (10–20 kPa) e risale dal fondo; **con la siringa non scende** (P1 fermo a +12–14 kPa). R1 (50 cm di rame) scende a circa +8–10 kPa; con 2 cm di rame in più affonda anche a zero.

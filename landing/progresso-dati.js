@@ -11,13 +11,13 @@
    5. Aggiornare `sintesi`, `diario` (in cima la voce nuova), `prossimi` e `rischi`.
    Le date sono AAAA-MM-GG; `ore` è l'impegno stimato nel piano operativo e fa da peso. */
 window.PalombaroProgresso = Object.freeze({
-  aggiornato: '2026-10-18',
+  aggiornato: '2026-10-19',
   provvisorio: false, // true finché le stime non sono confrontate con il diario della sera
   consegna: '2026-12-13',
   scadenzaProf: '2026-12-31',
   oreAlGiorno: 2, // media dichiarata, tutti i giorni: base del prospetto di fine progetto
 
-  sintesi: 'Giornata in anticipo sul calendario: la bottiglia tiene la pressione per ore (la prova chiedeva 30 minuti), e il motore che muoverà la siringa funziona con la sua alimentazione separata, senza disturbare la scheda né il sensore. Le misure hanno mostrato un problema di progetto: la siringa cambiava la pressione meno della metà di quanto serve, perché nel circuito c\'era troppa aria e la bottiglia grande si gonfia un po\' sotto pressione. In serata la soluzione è stata scelta e provata: con l\'acqua nella bottiglia piccola l\'effetto della siringa è raddoppiato, senza perdite, e con una siringa da 20 ml (da comprare lunedì) e il braccio del motore allungato si avrà margine. Il montaggio sulla tavoletta aspetta la siringa nuova. Le ore di oggi sono state meno del previsto (circa due e mezza su cinque), ma le sottofasi chiuse restano in anticipo. Togliendo le ore che non si ripeteranno, la fine prevista è giovedì 17 dicembre: qualche giorno dopo la consegna interna, ma prima della scadenza del professore.',
+  sintesi: 'Giornata lunga (circa cinque ore) e difficile. Le siringhe da 20 ml funzionano: spinte fino in fondo alzano la pressione di 4 kPa, come previsto, e dopo aver ritrovato e chiuso una perdita il circuito tiene di nuovo per ore. I palombari invece non si lasciano ancora tarare: nella bottiglia di prova scendono stringendola con la mano, ma con la siringa no. La causa più probabile è la tensione superficiale, che tiene il palombaro attaccato al pelo dell\'acqua con una forza più grande di quella che la siringa riesce a togliere; domani si prova con una goccia di detersivo. In serata il sensore di pressione ha smesso di rispondere: va controllato prima di tutto il resto. La sottofase del palombaro resta indietro di uno o due giorni. Le ore di oggi pesano sulla previsione: al ritmo misurato finora la fine arriva ai primi di gennaio (1 gennaio togliendo le ore che non si ripeteranno), cioè oltre la scadenza del professore. Va recuperato nelle prossime settimane, o tagliando qualcosa dal livello Target.',
 
   fasi: [
     {
@@ -38,12 +38,12 @@ window.PalombaroProgresso = Object.freeze({
         descrizione: 'Bottiglia, siringa, motore ed elettronica montati e funzionanti insieme.' },
       sottofasi: [
         { id: '1.1', nome: 'Ambiente di lavoro e programmi', da: '2026-10-12', a: '2026-10-14', ore: 2.5, fatto: 100, oreEffettive: 1, nota: 'Chiusa il 10 ottobre in un\'ora: iPhone come telecamera a circa 30 fps.' },
-        { id: '1.2', nome: 'Costruire e tarare il palombaro', da: '2026-10-13', a: '2026-10-20', ore: 3, fatto: 15, oreEffettive: 0.75, nota: 'Bilancino verificato; i contagocce non passavano dal collo della bottiglia. Le pipette sono in ritardo: arrivano lunedì 19.' },
+        { id: '1.2', nome: 'Costruire e tarare il palombaro', da: '2026-10-13', a: '2026-10-20', ore: 3, fatto: 30, oreEffettive: 5.03, nota: 'Due palombari costruiti con le pipette accorciate. Nella bottiglia scendono stringendola con la mano, ma la siringa non basta: probabilmente la tensione superficiale li trattiene in superficie. Domani la prova con il detersivo.' },
         { id: '1.3', nome: 'Tappo con il sensore di pressione', da: '2026-10-15', a: '2026-10-17', ore: 3, fatto: 100, oreEffettive: 15.15, oreUnaTantum: 4.5, nota: 'Chiusa il 17 ottobre: colla indurita, fili controllati con il multimetro, sensore asciutto anche con la bottiglia inclinata a 50°.' },
-        { id: '1.4', nome: 'Circuito dell\'aria', da: '2026-10-17', a: '2026-10-19', ore: 2, fatto: 75, oreEffettive: 2.32, nota: 'Con l\'acqua nella bottiglia piccola 10 ml di siringa alzano la pressione di 2 kPa, il doppio di prima, e il circuito non perde. Manca la prova con il palombaro, lunedì.' },
+        { id: '1.4', nome: 'Circuito dell\'aria', da: '2026-10-17', a: '2026-10-19', ore: 2, fatto: 75, oreEffettive: 2.9, nota: 'Con la siringa da 20 ml la pressione sale di 4 kPa e, stretto bene il tappo, il circuito tiene. Manca che il palombaro scenda con la siringa; il sensore è da ricontrollare.' },
         { id: '1.5', nome: 'Elettronica minima', da: '2026-10-18', a: '2026-10-18', ore: 3, fatto: 100, oreEffettive: 0.58, nota: 'Chiusa il 18 ottobre: pressione letta 50 volte al secondo, il motore si muove senza far riavviare la scheda.' },
         { id: '1.6', nome: 'Prova di tenuta della bottiglia', da: '2026-10-18', a: '2026-10-18', ore: 1.5, fatto: 100, oreEffettive: 0.32, nota: 'Chiusa il 18 ottobre al primo tentativo: dopo 10 minuti resta il 93 % della pressione (ne bastava il 70 %).' },
-        { id: '1.7', nome: 'Meccanica motore e siringa', da: '2026-10-17', a: '2026-10-22', ore: 3, fatto: 20, oreEffettive: 0.9, nota: 'Soluzione scelta: meno aria, braccio del motore allungato (già incollato) e siringa da 20 ml, da comprare lunedì. Il montaggio sulla tavoletta è mercoledì, con la siringa in mano.' },
+        { id: '1.7', nome: 'Meccanica motore e siringa', da: '2026-10-17', a: '2026-10-22', ore: 3, fatto: 25, oreEffettive: 1.07, nota: 'Siringhe da 20 ml comprate e misurate: con il braccio allungato daranno circa 3,3 kPa. Il montaggio sulla tavoletta è mercoledì.' },
         { id: '1.8', nome: 'Prova d\'insieme e video', da: '2026-10-24', a: '2026-10-25', ore: 2, fatto: 0 },
       ],
     },
@@ -127,9 +127,16 @@ window.PalombaroProgresso = Object.freeze({
     { data: '2026-10-15', fatto: 8.8 },
     { data: '2026-10-16', fatto: 9.9 },
     { data: '2026-10-17', fatto: 11.3 },
+    { data: '2026-10-18', fatto: 16.2 },
   ],
 
   diario: [
+    { data: '2026-10-19', testo: [
+      'Circa cinque ore di lavoro. Arrivate le pipette: si accorciano a 6 cm, tenendo la tettarella e un pezzo di gambo per il filo di rame. Comprate e misurate due siringhe da 20 ml.',
+      'Con la siringa nuova la pressione sale di 4 kPa, come previsto. Una perdita dal tappo, dopo averlo aperto per mettere dentro il palombaro, è stata trovata e chiusa: la bottiglia tiene di nuovo per ore.',
+      'I palombari scendono stringendo la bottiglia con la mano, ma non con la siringa. Dopo molti tentativi l\'ipotesi è che la tensione superficiale li tenga attaccati al pelo dell\'acqua: si prova domani con una goccia di detersivo.',
+      'Alle 20:25 il sensore di pressione ha smesso di rispondere: domani si controlla se è bagnato o se si è sfilato un collegamento.',
+    ] },
     { data: '2026-10-18', testo: [
       'Prima parte della giornata (un\'ora e tre quarti): misurati i volumi d\'aria e montato il circuito con le due bottiglie e la siringa.',
       'Prova di tenuta superata al primo colpo: dopo 10 minuti la bottiglia conserva il 93 % della pressione, e dopo 17 minuti è ancora lì.',
@@ -170,19 +177,21 @@ window.PalombaroProgresso = Object.freeze({
   ],
 
   prossimi: [
-    'Lunedì 19: arrivano le pipette, si costruiscono i palombari e si chiude il circuito dell\'aria con la prova del palombaro. In farmacia, due siringhe da 20 ml.',
-    'Martedì 20: taratura fine dei palombari.',
-    'Mercoledì 21: misure della siringa nuova, montaggio di motore e siringa sulla tavoletta, asticella di collegamento.',
+    'Martedì 20: controllo del sensore (acqua o collegamento), poi prova con il detersivo, taratura del palombaro e chiusura del circuito dell\'aria.',
+    'Mercoledì 21: montaggio di motore e siringa da 20 ml sulla tavoletta e asticella di collegamento.',
+    'Giovedì 22: calibrazione del motore e decisione sul piano B.',
   ],
 
   rischi: [
     { titolo: 'Più ore del previsto per ogni attività', livello: 'alto',
-      nota: 'Il tappo con il sensore ha richiesto circa 15 ore contro le 3 previste. Il 18 elettronica e prova di tenuta hanno invece richiesto meno delle ore stimate: il ritmo comincia a migliorare, ma il ritardo accumulato resta.' },
+      nota: 'Il tappo con il sensore ha richiesto circa 15 ore contro le 3 previste. Il 18 elettronica e prova di tenuta hanno richiesto meno delle ore stimate, ma il 19 il palombaro ne ha prese circa 5 contro le 3 previste per tutta la sottofase, e non è finito: la fine prevista è passata ai primi di gennaio.' },
     { titolo: 'La siringa cambia la pressione meno del necessario', livello: 'basso',
-      nota: 'Risolto sulla carta e in parte provato: con meno aria 10 ml danno già 2 kPa (misurato), e con la siringa da 20 ml e il braccio allungato si arriva a circa 3,6 kPa contro i 2–2,5 necessari. Resta da verificare sul banco montato, mercoledì.' },
+      nota: 'Le siringhe da 20 ml danno 4 kPa (misurato il 19), contro i 2–3 necessari. Resta da verificare con il motore montato, mercoledì.' },
     { titolo: 'Meccanica del motore imprecisa', livello: 'medio',
       nota: 'Il collegamento tra braccio e siringa deve avere pochissimo gioco: giovedì 22 si decide se basta o se serve il piano B (motore passo-passo con vite). Prima va verificato di avere gli attrezzi per piegare e tagliare l\'asticella d\'acciaio.' },
-    { titolo: 'Palombaro difficile da tarare', livello: 'medio',
-      nota: 'Le pipette arrivano lunedì 19: costruzione e taratura dei palombari lunedì e martedì.' },
+    { titolo: 'Palombaro difficile da tarare', livello: 'alto',
+      nota: 'Il 19 nessun palombaro è sceso con la siringa, dopo ore di prove. Rimedi da provare: detersivo contro la tensione superficiale, correzione fine con il rame, circuito chiuso già in pressione.' },
+    { titolo: 'Sensore di pressione guasto', livello: 'alto',
+      nota: 'Il 19 alle 20:25 il sensore nel tappo ha smesso di rispondere. Se è solo un collegamento si sistema in pochi minuti; se è bagnato o rotto serve un tappo nuovo con un sensore di scorta, circa un giorno di lavoro.' },
   ],
 });
