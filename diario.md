@@ -448,8 +448,10 @@ Alle 16:01:23, tagliata la fascetta, la pressione è tornata a 101,21 kPa, cioè
 - **Registratore della seriale nel progetto** (`pc/registra_seriale.py`): lo scratchpad della sessione si svuota.
 - **D'ora in poi:** i palombari si tengono per il rame o per il gambo, mai per la tettarella; si tarano direttamente nella bottiglia dove verranno usati; la correzione fine si fa con il rame (2 mm = 0,009 g).
 
+**Controllo serale (21:20–21:40), dopo un odore di bruciato:** tutte le alimentazioni staccate (USB, alimentatore del servo, pistola e saldatore non collegati); nessun pezzo caldo, annerito o fuso; fonte dell'odore non trovata, probabilmente non il banco. Tappo asciutto. Con l'ESP32 di nuovo collegato (21:31:12) il **BMP280 risponde subito**: 101,59 kPa, 23,5 °C, 50 letture al secondo, nessun errore né brownout; temperatura ferma per 45 s (nessuna corrente di dispersione); prova del soffio alle 21:31:56 superata (p ±50 Pa, T +2,9 °C e poi di nuovo giù). Registro: `dati/2026-10-19/2026-10-19_controllo-sera.log`. **Falso allarme**: il guasto delle 20:25 era quasi certamente un contatto instabile (pin o cavo mossi durante le tante aperture del tappo).
+
 **Stato a fine giornata:**
-- **Il sensore della bottiglia principale non risponde: da controllare prima di ogni altra cosa.**
+- Sensore funzionante (vedi controllo serale); il guasto delle 20:25 resta da spiegare: domani controllare i pin a fondo e il cavo ancorato.
 - 1.2: P1 (con ugello) e R1 costruiti, non ancora utilizzabili con la siringa. R2 da fare.
 - 1.4: circuito verificato (+4,0 kPa, tenuta ok), ma il palombaro non scende ancora con la siringa.
 - 1.7: siringa da 20 ml misurata.
@@ -458,6 +460,5 @@ Alle 16:01:23, tagliata la fascetta, la pressione è tornata a 101,21 kPa, cioè
 **Ore:** 1.2 circa 4 h 17; 1.4 circa 35 min; 1.7 circa 10 min.
 
 **Prossimo passo (martedì 20):**
-1. **Sensore:** USB staccato; si guarda il tappo dentro per cercare gocce d'acqua (se è bagnato, si lascia asciugare con il tappo aperto, senza alimentarlo). Poi con il multimetro: continuità dei 4 fili, nessun corto tra 3V3 e GND, pin ben dentro la breadboard. Solo dopo, prova con l'ESP32.
-2. Se il sensore funziona: colpetto e goccia di detersivo, poi taratura di P1 o R1 con il rame, e chiusura della 1.4.
-3. Se è guasto: piano per un nuovo tappo con un BMP280 di scorta (ne restano 6).
+1. Pin del sensore spinti a fondo e cavo ancorato; registrazione con il controllo degli errori.
+2. Colpetto e goccia di detersivo, poi taratura di P1 o R1 con il rame, e chiusura della 1.4.
