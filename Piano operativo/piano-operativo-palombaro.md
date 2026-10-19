@@ -197,7 +197,7 @@ Sono le sottofasi che, se ritardano, fanno slittare la consegna. Le altre hanno 
 - **Output:** 3 palombari tarati, scheda `hardware/taratura-palombaro.md`.
 - **Fatto quando:** nella bottiglia chiusa, una leggera pressione con la mano fa scendere il palombaro e, togliendola, risale, in modo ripetibile per 5 volte.
   - **Proposta del 19 ottobre (da confermare):** nella bottiglia con il sensore il palombaro scende con una sovrapressione **tra +2 e +7 kPa** e risale dal fondo a pressione zero, 5 volte. La stretta della mano vale 10–20 kPa, quindi non verifica il funzionamento con la siringa. Il circuito si può chiudere già in pressione (la «pompa» con il tubo piegato), e il servo lavora attorno a quel punto.
-  - **Lezioni del 19 ottobre** (diario): la taratura con le gocce non converge; si tara nella bottiglia d'uso, con il rame per la correzione fine (2 mm = 0,009 g); vicino alla superficie la tensione superficiale trattiene il palombaro fino a circa 0,3 g (rimedio da provare: una goccia di detersivo).
+  - **Lezioni del 19 ottobre** (diario): la taratura con le gocce non converge; si tara nella bottiglia d'uso, con il rame per la correzione fine (2 mm = 0,009 g); vicino alla superficie la tensione superficiale trattiene il palombaro fino a circa 0,3 g. **Rimedio confermato la sera del 19:** marcatore senza pieghe e una soluzione di detersivo (una goccia in un cucchiaino d'acqua) sul pelo dell'acqua e sulla punta del palombaro.
 - **Attenzione:** più è vicino al galleggiamento neutro a pressione ambiente, più margine avrà la siringa (vedi il calcolo nel foglio A4).
 
 ### 1.3 · Tappo con il sensore di pressione
@@ -224,7 +224,7 @@ Sono le sottofasi che, se ritardano, fanno slittare la consegna. Le altre hanno 
   - [x] Annotare tutti i volumi: camera d'aria della bottiglia, bottiglia extra, tubi. *(18 ott: 200 + 550 + 15 ml; guadagno misurato 0,10 kPa/ml. Sera: 500 ml d'acqua nella 0,5 L, guadagno 0,20 kPa/ml, nessuna perdita)*
 - **Output:** circuito montato, volumi annotati nel diario (serviranno al modello).
 - **Fatto quando:** spingendo la siringa a mano il palombaro scende, e tirandola risale.
-- *(19 ott: con la siringa da 20 ml il circuito arriva a +4,0 kPa e tiene, ma nessun palombaro è ancora sceso con la siringa. Dalle 20:25 il sensore non risponde più: da controllare per primo.)*
+- ✅ **Chiusa il 19 ottobre** (21:51–21:56): con una sola corsa della siringa da 20 ml, P1 scende spingendo e risale tirando, più volte, tra 0 e circa +3,6 kPa. Servivano il marcatore senza pieghe e una soluzione di detersivo sul pelo dell'acqua e sulla punta del palombaro, contro la tensione superficiale.
 
 ### 1.5 · Banco elettronico minimo
 - **Quando:** dom 18 ott · **Scadenza:** dom 18 ott · **Impegno:** ~3 h · **Prerequisiti:** ESP32, servo, alimentatore, 1.1

@@ -378,7 +378,7 @@ Alle 16:01:23, tagliata la fascetta, la pressione è tornata a 101,21 kPa, cioè
 - con le pipette: 1.2 parte 1 e chiusura della 1.4 con il palombaro;
 - mercoledì 21: misure della 20 ml, montaggio sulla tavoletta e asticella. Prima va verificato quali attrezzi ci sono per piegare e tagliare il filo inox: pinza, seghetto o lima.
 
-## 2026-10-19 · sottofasi 1.2 (palombari), 1.4 (prove con la siringa), 1.6 (tenuta rifatta), 1.7 (siringa da 20 ml) · circa 5 h
+## 2026-10-19 · sottofasi 1.2 (palombari), 1.4 (chiusa), 1.6 (tenuta rifatta), 1.7 (siringa da 20 ml) · circa 5 h 35
 
 **Orario:** circa **16:25–21:30**. L'inizio non è stato annotato: è stimato dal primo messaggio della sessione. In tutto circa **5 h 05**. In mattinata, lezione in aula magna (8:30–11:00, non contata). Divisione ricostruita dal registro della seriale (`dati/2026-10-19/2026-10-19_seriale.log.gz`, compresso perché sono 30 MB di testo) e dagli orari annotati; dopo le 20:25 il registro non ha più la pressione (vedi problema 6).
 
@@ -450,15 +450,24 @@ Alle 16:01:23, tagliata la fascetta, la pressione è tornata a 101,21 kPa, cioè
 
 **Controllo serale (21:20–21:40), dopo un odore di bruciato:** tutte le alimentazioni staccate (USB, alimentatore del servo, pistola e saldatore non collegati); nessun pezzo caldo, annerito o fuso; fonte dell'odore non trovata, probabilmente non il banco. Tappo asciutto. Con l'ESP32 di nuovo collegato (21:31:12) il **BMP280 risponde subito**: 101,59 kPa, 23,5 °C, 50 letture al secondo, nessun errore né brownout; temperatura ferma per 45 s (nessuna corrente di dispersione); prova del soffio alle 21:31:56 superata (p ±50 Pa, T +2,9 °C e poi di nuovo giù). Registro: `dati/2026-10-19/2026-10-19_controllo-sera.log`. **Falso allarme**: il guasto delle 20:25 era quasi certamente un contatto instabile (pin o cavo mossi durante le tante aperture del tappo).
 
+**Prova finale con il detersivo (21:42–21:57): P1 funziona con la siringa ✅**
+- **Marcatore rifatto** senza pieghe, ben aderente: le pieghe del nastro trattenevano aria. Già così P1 scende a circa +5,7–6,0 kPa (prima non scendeva neanche a +12–14), ma sul fondo non risale finché la pressione non torna vicino a zero: l'isteresi del menisco.
+- **Detersivo:** una goccia pura va a fondo senza sciogliersi (è più densa dell'acqua). Funziona invece la **soluzione** (una goccia in un cucchiaino d'acqua), messa **sul pelo dell'acqua** e **strofinata sulla punta di P1**.
+- **Risultato (21:51–21:56):** con **una sola corsa della siringa (da 20 a 0 ml), senza la pompa**, P1 scende spingendo e risale tirando, più volte di fila. La pressione resta tra 0 e circa +3,6 kPa. Nessun errore del sensore. **Il «Fatto quando» della 1.4 è raggiunto.**
+- Ipotesi della tensione superficiale **confermata**: si vedeva a occhio l'acqua che «tirava su» P1 un attimo prima che si staccasse.
+- Registro: `dati/2026-10-19/2026-10-19_prova-detersivo.log`. Le soglie esatte di discesa e risalita sono da misurare domani con calma.
+
 **Stato a fine giornata:**
-- Sensore funzionante (vedi controllo serale); il guasto delle 20:25 resta da spiegare: domani controllare i pin a fondo e il cavo ancorato.
+- **1.4 chiusa.** P1 tarato, con la pressione neutra nella fascia giusta (circa +2…+3,5 kPa). Sensore funzionante (vedi controllo serale); il guasto delle 20:25 resta da spiegare: domani controllare i pin a fondo e il cavo ancorato.
 - 1.2: P1 (con ugello) e R1 costruiti, non ancora utilizzabili con la siringa. R2 da fare.
 - 1.4: circuito verificato (+4,0 kPa, tenuta ok), ma il palombaro non scende ancora con la siringa.
 - 1.7: siringa da 20 ml misurata.
 - `letturaPlausibile()` ancora da scrivere.
 
-**Ore:** 1.2 circa 4 h 17; 1.4 circa 35 min; 1.7 circa 10 min.
+**Ore:** 1.2 circa 4 h 17 + 15 min (detersivo e prova finale); 1.4 circa 35 min + 15 min; 1.7 circa 10 min. Controllo serale del sensore circa 20 min. **Totale della giornata: circa 5 h 35** (16:25–21:57, con il controllo).
 
 **Prossimo passo (martedì 20):**
 1. Pin del sensore spinti a fondo e cavo ancorato; registrazione con il controllo degli errori.
-2. Colpetto e goccia di detersivo, poi taratura di P1 o R1 con il rame, e chiusura della 1.4.
+2. P1: misurare con calma le soglie (pressione di discesa dalla superficie e di risalita dal fondo, 5 volte), cioè il «Fatto quando» in kPa della 1.2.
+3. R1 tarato nella stessa bottiglia (detersivo sulla punta, rame per la correzione fine).
+4. Mercoledì 21: 1.7, montaggio di servo e siringa da 20 ml.

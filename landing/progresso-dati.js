@@ -17,7 +17,7 @@ window.PalombaroProgresso = Object.freeze({
   scadenzaProf: '2026-12-31',
   oreAlGiorno: 2, // media dichiarata, tutti i giorni: base del prospetto di fine progetto
 
-  sintesi: 'Giornata lunga (circa cinque ore) e difficile. Le siringhe da 20 ml funzionano: spinte fino in fondo alzano la pressione di 4 kPa, come previsto, e dopo aver ritrovato e chiuso una perdita il circuito tiene di nuovo per ore. I palombari invece non si lasciano ancora tarare: nella bottiglia di prova scendono stringendola con la mano, ma con la siringa no. La causa più probabile è la tensione superficiale, che tiene il palombaro attaccato al pelo dell\'acqua con una forza più grande di quella che la siringa riesce a togliere; domani si prova con una goccia di detersivo. In serata il sensore di pressione ha smesso di rispondere per un contatto instabile; ricontrollato alle 21:30, funziona di nuovo. La sottofase del palombaro resta indietro di uno o due giorni. Le ore di oggi pesano sulla previsione: al ritmo misurato finora la fine arriva ai primi di gennaio (1 gennaio togliendo le ore che non si ripeteranno), cioè oltre la scadenza del professore. Va recuperato nelle prossime settimane, o tagliando qualcosa dal livello Target.',
+  sintesi: 'Giornata lunga (più di cinque ore) e difficile, ma finita con il traguardo: alle 21:51 il palombaro scende spingendo la siringa e risale tirandola, più volte di fila. Il circuito dell\'aria è chiuso. Per arrivarci sono serviti tre passi: siringhe da 20 ml (4 kPa con una corsa), una perdita del tappo trovata e chiusa, e soprattutto aver capito che la tensione superficiale teneva il palombaro attaccato al pelo dell\'acqua. L\'hanno battuta un marcatore senza pieghe e una goccia di detersivo sciolta in acqua. In serata c\'è stato anche un falso allarme sul sensore: un contatto mosso, che ora funziona. Le ore spese sul palombaro sono state molte di più del previsto e pesano sulla previsione di fine: togliendo le ore che non si ripeteranno arriva al 26 dicembre, dopo la consegna interna ma prima della scadenza del professore. Vanno recuperate nelle prossime settimane.',
 
   fasi: [
     {
@@ -38,9 +38,9 @@ window.PalombaroProgresso = Object.freeze({
         descrizione: 'Bottiglia, siringa, motore ed elettronica montati e funzionanti insieme.' },
       sottofasi: [
         { id: '1.1', nome: 'Ambiente di lavoro e programmi', da: '2026-10-12', a: '2026-10-14', ore: 2.5, fatto: 100, oreEffettive: 1, nota: 'Chiusa il 10 ottobre in un\'ora: iPhone come telecamera a circa 30 fps.' },
-        { id: '1.2', nome: 'Costruire e tarare il palombaro', da: '2026-10-13', a: '2026-10-20', ore: 3, fatto: 30, oreEffettive: 5.03, nota: 'Due palombari costruiti con le pipette accorciate. Nella bottiglia scendono stringendola con la mano, ma la siringa non basta: probabilmente la tensione superficiale li trattiene in superficie. Domani la prova con il detersivo.' },
+        { id: '1.2', nome: 'Costruire e tarare il palombaro', da: '2026-10-13', a: '2026-10-20', ore: 3, fatto: 55, oreEffettive: 5.28, nota: 'Il palombaro principale funziona: con il detersivo contro la tensione superficiale scende e risale con la siringa. Restano da misurare le soglie esatte e da tarare il palombaro di riserva.' },
         { id: '1.3', nome: 'Tappo con il sensore di pressione', da: '2026-10-15', a: '2026-10-17', ore: 3, fatto: 100, oreEffettive: 15.15, oreUnaTantum: 4.5, nota: 'Chiusa il 17 ottobre: colla indurita, fili controllati con il multimetro, sensore asciutto anche con la bottiglia inclinata a 50°.' },
-        { id: '1.4', nome: 'Circuito dell\'aria', da: '2026-10-17', a: '2026-10-19', ore: 2, fatto: 75, oreEffettive: 2.9, nota: 'Con la siringa da 20 ml la pressione sale di 4 kPa e, stretto bene il tappo, il circuito tiene. Manca che il palombaro scenda con la siringa.' },
+        { id: '1.4', nome: 'Circuito dell\'aria', da: '2026-10-17', a: '2026-10-19', ore: 2, fatto: 100, oreEffettive: 3.15, nota: 'Chiusa il 19 ottobre: spingendo la siringa da 20 ml il palombaro scende, tirandola risale.' },
         { id: '1.5', nome: 'Elettronica minima', da: '2026-10-18', a: '2026-10-18', ore: 3, fatto: 100, oreEffettive: 0.58, nota: 'Chiusa il 18 ottobre: pressione letta 50 volte al secondo, il motore si muove senza far riavviare la scheda.' },
         { id: '1.6', nome: 'Prova di tenuta della bottiglia', da: '2026-10-18', a: '2026-10-18', ore: 1.5, fatto: 100, oreEffettive: 0.32, nota: 'Chiusa il 18 ottobre al primo tentativo: dopo 10 minuti resta il 93 % della pressione (ne bastava il 70 %).' },
         { id: '1.7', nome: 'Meccanica motore e siringa', da: '2026-10-17', a: '2026-10-22', ore: 3, fatto: 25, oreEffettive: 1.07, nota: 'Siringhe da 20 ml comprate e misurate: con il braccio allungato daranno circa 3,3 kPa. Il montaggio sulla tavoletta è mercoledì.' },
@@ -136,6 +136,7 @@ window.PalombaroProgresso = Object.freeze({
       'Con la siringa nuova la pressione sale di 4 kPa, come previsto. Una perdita dal tappo, dopo averlo aperto per mettere dentro il palombaro, è stata trovata e chiusa: la bottiglia tiene di nuovo per ore.',
       'I palombari scendono stringendo la bottiglia con la mano, ma non con la siringa. Dopo molti tentativi l\'ipotesi è che la tensione superficiale li tenga attaccati al pelo dell\'acqua: si prova domani con una goccia di detersivo.',
       'Alle 20:25 il sensore di pressione ha smesso di rispondere. Ricontrollato in serata, funziona: era quasi certamente un collegamento mosso durante le prove.',
+      'Alle 21:51 la svolta: con il marcatore rifatto senza pieghe e un po\' di detersivo sciolto in acqua, il palombaro scende spingendo la siringa e risale tirandola. Circuito dell\'aria chiuso!',
     ] },
     { data: '2026-10-18', testo: [
       'Prima parte della giornata (un\'ora e tre quarti): misurati i volumi d\'aria e montato il circuito con le due bottiglie e la siringa.',
@@ -177,20 +178,20 @@ window.PalombaroProgresso = Object.freeze({
   ],
 
   prossimi: [
-    'Martedì 20: prova con il detersivo, taratura del palombaro e chiusura del circuito dell\'aria.',
+    'Martedì 20: misura precisa delle pressioni a cui il palombaro scende e risale, e taratura del palombaro di riserva.',
     'Mercoledì 21: montaggio di motore e siringa da 20 ml sulla tavoletta e asticella di collegamento.',
     'Giovedì 22: calibrazione del motore e decisione sul piano B.',
   ],
 
   rischi: [
     { titolo: 'Più ore del previsto per ogni attività', livello: 'alto',
-      nota: 'Il tappo con il sensore ha richiesto circa 15 ore contro le 3 previste. Il 18 elettronica e prova di tenuta hanno richiesto meno delle ore stimate, ma il 19 il palombaro ne ha prese circa 5 contro le 3 previste per tutta la sottofase, e non è finito: la fine prevista è passata ai primi di gennaio.' },
+      nota: 'Il tappo con il sensore ha richiesto circa 15 ore contro le 3 previste. Il 18 elettronica e prova di tenuta hanno richiesto meno delle ore stimate, ma il 19 il palombaro ne ha prese più di 5 contro le 3 previste per tutta la sottofase: togliendo le ore una tantum, la fine prevista è il 26 dicembre, oltre la consegna interna.' },
     { titolo: 'La siringa cambia la pressione meno del necessario', livello: 'basso',
       nota: 'Le siringhe da 20 ml danno 4 kPa (misurato il 19), contro i 2–3 necessari. Resta da verificare con il motore montato, mercoledì.' },
     { titolo: 'Meccanica del motore imprecisa', livello: 'medio',
       nota: 'Il collegamento tra braccio e siringa deve avere pochissimo gioco: giovedì 22 si decide se basta o se serve il piano B (motore passo-passo con vite). Prima va verificato di avere gli attrezzi per piegare e tagliare l\'asticella d\'acciaio.' },
-    { titolo: 'Palombaro difficile da tarare', livello: 'alto',
-      nota: 'Il 19 nessun palombaro è sceso con la siringa, dopo ore di prove. Rimedi da provare: detersivo contro la tensione superficiale, correzione fine con il rame, circuito chiuso già in pressione.' },
+    { titolo: 'Palombaro difficile da tarare', livello: 'basso',
+      nota: 'Risolto la sera del 19: la causa era la tensione superficiale, battuta con un marcatore senza pieghe e un po\' di detersivo. Resta da tarare il palombaro di riserva con lo stesso metodo.' },
     { titolo: 'Collegamento del sensore instabile', livello: 'medio',
       nota: 'Il 19 alle 20:25 il sensore ha smesso di rispondere, poi in serata ha ripreso a funzionare: un contatto mosso aprendo e chiudendo il tappo. Rimedi: cavo ancorato, pin controllati, e un controllo automatico delle letture nel programma della scheda.' },
   ],
