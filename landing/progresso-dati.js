@@ -17,7 +17,7 @@ window.PalombaroProgresso = Object.freeze({
   scadenzaProf: '2026-12-31',
   oreAlGiorno: 2, // media dichiarata, tutti i giorni: base del prospetto di fine progetto
 
-  sintesi: 'Giornata lunga (più di cinque ore) e difficile, ma finita con il traguardo: alle 21:51 il palombaro scende spingendo la siringa e risale tirandola, più volte di fila. Il circuito dell\'aria è chiuso. Per arrivarci sono serviti tre passi: siringhe da 20 ml (4 kPa con una corsa), una perdita del tappo trovata e chiusa, e soprattutto aver capito che la tensione superficiale teneva il palombaro attaccato al pelo dell\'acqua. L\'hanno battuta un marcatore senza pieghe e una goccia di detersivo sciolta in acqua. In serata c\'è stato anche un falso allarme sul sensore: un contatto mosso, che ora funziona. Le ore spese sul palombaro sono state molte di più del previsto e pesano sulla previsione di fine: togliendo le ore che non si ripeteranno arriva al 26 dicembre, dopo la consegna interna ma prima della scadenza del professore. Vanno recuperate nelle prossime settimane.',
+  sintesi: 'Giornata lunga (più di cinque ore) e difficile, ma finita con il traguardo: alle 21:51 il palombaro scende spingendo la siringa e risale tirandola, più volte di fila. Il circuito dell\'aria è chiuso, e con l\'arrivo delle pipette è raggiunto anche il primo traguardo (M0: tutto il materiale disponibile). Per arrivarci sono serviti tre passi: siringhe da 20 ml (4 kPa con una corsa), una perdita del tappo trovata e chiusa, e soprattutto aver capito che la tensione superficiale teneva il palombaro attaccato al pelo dell\'acqua. L\'hanno battuta un marcatore senza pieghe e una goccia di detersivo sciolta in acqua. In serata c\'è stato anche un falso allarme sul sensore: un contatto mosso, che ora funziona. Le ore spese sul palombaro sono state molte di più del previsto e pesano sulla previsione di fine: togliendo le ore che non si ripeteranno arriva al 26 dicembre, dopo la consegna interna ma prima della scadenza del professore. Vanno recuperate nelle prossime settimane.',
 
   fasi: [
     {
@@ -28,7 +28,7 @@ window.PalombaroProgresso = Object.freeze({
         { id: '0.1', nome: 'Preparare la presentazione al professore', da: '2026-10-08', a: '2026-10-11', ore: 1.5, fatto: 100, nota: 'Proposta e sito inviati per email l\'8 ottobre.' },
         { id: '0.2', nome: 'Preparare la lista dei componenti', da: '2026-10-08', a: '2026-10-11', ore: 1.5, fatto: 100 },
         { id: '0.3', nome: 'Approvazione del professore', da: '2026-10-12', a: '2026-10-12', ore: 1, fatto: 100, nota: 'Approvato per email l\'8 ottobre, senza modifiche.' },
-        { id: '0.4', nome: 'Ordinare e comprare i componenti', da: '2026-10-12', a: '2026-10-13', ore: 1, fatto: 95, nota: 'Tutto disponibile tranne le pipette, in ritardo: arrivano lunedì 19.' },
+        { id: '0.4', nome: 'Ordinare e comprare i componenti', da: '2026-10-12', a: '2026-10-13', ore: 1, fatto: 100, nota: 'Chiusa il 19 ottobre con l\'arrivo delle pipette; il 19 comprate anche le siringhe da 20 ml.' },
         { id: '0.5', nome: 'Rivedere il piano', da: '2026-10-12', a: '2026-10-13', ore: 1, fatto: 0, saltata: true, nota: 'Non serviva: nessuna modifica richiesta.' },
       ],
     },
@@ -132,7 +132,7 @@ window.PalombaroProgresso = Object.freeze({
 
   diario: [
     { data: '2026-10-19', testo: [
-      'Circa cinque ore di lavoro. Arrivate le pipette: si accorciano a 6 cm, tenendo la tettarella e un pezzo di gambo per il filo di rame. Comprate e misurate due siringhe da 20 ml.',
+      'Circa cinque ore di lavoro. Arrivate le pipette, l\'ultimo materiale che mancava: primo traguardo (M0) raggiunto. Si accorciano a 6 cm, tenendo la tettarella e un pezzo di gambo per il filo di rame. Comprate e misurate due siringhe da 20 ml.',
       'Con la siringa nuova la pressione sale di 4 kPa, come previsto. Una perdita dal tappo, dopo averlo aperto per mettere dentro il palombaro, è stata trovata e chiusa: la bottiglia tiene di nuovo per ore.',
       'I palombari scendono stringendo la bottiglia con la mano, ma non con la siringa. Dopo molti tentativi l\'ipotesi è che la tensione superficiale li tenga attaccati al pelo dell\'acqua: si prova domani con una goccia di detersivo.',
       'Alle 20:25 il sensore di pressione ha smesso di rispondere. Ricontrollato in serata, funziona: era quasi certamente un collegamento mosso durante le prove.',

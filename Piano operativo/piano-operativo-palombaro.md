@@ -162,6 +162,7 @@ Sono le sottofasi che, se ritardano, fanno slittare la consegna. Le altre hanno 
   - [ ] Annotare la data di consegna prevista.
 - **Output:** ordini confermati, spesa registrata in `hardware/distinta-componenti.md`.
 - **Fatto quando:** tutto ordinato o comprato, con consegna prevista **entro mer 14 ott**.
+- ✅ **Chiusa il 19 ottobre** con l'arrivo delle pipette (in ritardo rispetto al 14). **M0 raggiunta.**
 
 ### 0.5 · Revisione del piano (solo se il prof chiede modifiche)
 - **Quando:** lun 12 → mar 13 ott · **Impegno:** ~1 h · **Prerequisiti:** 0.3

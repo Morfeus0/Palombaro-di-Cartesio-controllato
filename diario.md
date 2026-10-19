@@ -402,6 +402,7 @@ Alle 16:01:23, tagliata la fascetta, la pressione è tornata a 101,21 kPa, cioè
 - Mancano la lunghezza del cilindro (dalle alette alla punta del cono) e lo spessore delle alette.
 
 **Fatto (1.2, palombari):**
+- **Pipette arrivate: la 0.4 è chiusa e con lei la milestone M0** (tutto il materiale disponibile).
 - **Pipetta intera:** 15 cm. Tettarella 4 cm per 1,3 cm; gambo 11 cm, largo 8 mm vicino alla tettarella e 3 mm in punta. Tacche fino a 3 ml (lo 0 a 3,8 cm dalla punta, il 3 a 0,9 cm dalla tettarella). Era previsto fin dal 15 ottobre di accorciarla, ma non era stato detto chiaramente all'acquisto.
 - **P1:**
   - gambo tagliato 2 cm sotto la tettarella (palombaro lungo circa 6 cm, foro di circa 6–7 mm);
