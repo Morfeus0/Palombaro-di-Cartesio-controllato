@@ -199,6 +199,7 @@ Sono le sottofasi che, se ritardano, fanno slittare la consegna. Le altre hanno 
 - **Fatto quando:** nella bottiglia chiusa, una leggera pressione con la mano fa scendere il palombaro e, togliendola, risale, in modo ripetibile per 5 volte.
   - **Proposta del 19 ottobre (da confermare):** nella bottiglia con il sensore il palombaro scende con una sovrapressione **tra +2 e +7 kPa** e risale dal fondo a pressione zero, 5 volte. La stretta della mano vale 10–20 kPa, quindi non verifica il funzionamento con la siringa. Il circuito si può chiudere già in pressione (la «pompa» con il tubo piegato), e il servo lavora attorno a quel punto.
   - **Lezioni del 19 ottobre** (diario): la taratura con le gocce non converge; si tara nella bottiglia d'uso, con il rame per la correzione fine (2 mm = 0,009 g); vicino alla superficie la tensione superficiale trattiene il palombaro fino a circa 0,3 g. **Rimedio confermato la sera del 19:** marcatore senza pieghe e una soluzione di detersivo (una goccia in un cucchiaino d'acqua) sul pelo dell'acqua e sulla punta del palombaro.
+  - **Lezioni del 21 ottobre:** dopo due giorni a galla la punta si asciuga e il menisco torna: con tutta la corsa P1 non scende, ma si stacca di colpo con un colpetto o con una spinta rapida, e poi va a fondo. La pressione della stanza era scesa di 0,9 kPa (100,65 contro 101,55). Le soglie vanno misurate **con il palombaro già sott'acqua**, e durante il controllo non deve mai riemergere.
 - **Attenzione:** più è vicino al galleggiamento neutro a pressione ambiente, più margine avrà la siringa (vedi il calcolo nel foglio A4).
 
 ### 1.3 · Tappo con il sensore di pressione
@@ -260,9 +261,9 @@ Sono le sottofasi che, se ritardano, fanno slittare la consegna. Le altre hanno 
 - **Attività:**
   - [x] Scegliere la geometria. *(18 ott: siringa da 20 ml, meno aria nella 0,5 L, due squadrette sovrapposte con il foro di lavoro a circa 35 mm; conti in `hardware/calibrazione-servo.md`)*
   - [x] Prolunga del braccio. *(18 ott: squadrette incollate con l'epossidica e 3 perni di rame)*
-  - [x] Comprare 2 siringhe da 20 ml (lun 19) e misurarle. *(PIC Solution, 3,5 mm/ml, +4,0 kPa con 20 ml; mancano lunghezza del cilindro e spessore delle alette)*
-  - [ ] Montare servo e siringa su una tavoletta di legno. *(rinviato a quando c'è la siringa da 20 ml, mer 21)*
-  - [ ] Realizzare il collegamento braccetto–stantuffo, il più possibile senza gioco.
+  - [x] Comprare 2 siringhe da 20 ml (lun 19) e misurarle. *(PIC Solution, 3,5 mm/ml, +4,0 kPa con 20 ml; 21 ott: cilindro 103 mm, alette 38 × 12 mm, spessore 1–2 mm)*
+  - [ ] Montare servo e siringa su una tavoletta di legno. *(21 ott: misure fatte, prolunga finita (perni accorciati, braccio libero tagliato), linee tracciate e servo posizionato a secco; manca il fissaggio. Geometria in `hardware/calibrazione-servo.md`, sezione 8)*
+  - [ ] Realizzare il collegamento braccetto–stantuffo, il più possibile senza gioco. *(21 ott: l'asticella non si taglia con gli attrezzi di casa; serve un tronchese per acciaio o un seghetto, oppure la rottura per fatica. Firmware con i limiti di corsa pronto)*
   - [ ] Misurare la corsa utile. *(18 ott: misure preliminari e problema di corsa e pressione in `hardware/calibrazione-servo.md`)*
   - [ ] Costruire la tabella di calibrazione dal comando del servo ai ml spostati.
   - [ ] Stimare la zona morta e il gioco meccanico.
@@ -646,12 +647,12 @@ Sono le sottofasi che, se ritardano, fanno slittare la consegna. Le altre hanno 
 |---|---|---|---|
 | R1 | I componenti arrivano in ritardo | non arrivati entro **ven 16 ott** | acquisto in un negozio di elettronica a Roma; intanto si anticipano le sottofasi senza hardware (3.1, 2.4, 1.1) |
 | R2 | Il tappo perde aria | τ < 30 min dopo 2 tentativi (1.6) | tappo nuovo con passanti per tubo, nastro teflon; in ultima istanza ci si affida alla compensazione dell'anello interno |
-| R3 | Servo impreciso o con troppo gioco | ripetibilità peggiore di ±25 Pa (circa ±0,12 ml con la siringa da 20 ml) entro **gio 22 ott** (1.7) | passo-passo + barra filettata (circa 15 €, +2 giorni); oppure più volume d'aria per avere più risoluzione |
+| R3 | Servo impreciso o con troppo gioco | ripetibilità peggiore di ±25 Pa (circa ±0,12 ml con la siringa da 20 ml) entro **gio 22 ott** (1.7) *(21 ott: proposta di spostare la decisione a ven 23: il montaggio non è finito)* | passo-passo + barra filettata (circa 15 €, +2 giorni); oppure più volume d'aria per avere più risoluzione |
 | R4 | Riconoscimento instabile (riflessi, luce) | perdite del palombaro entro **ven 30 ott** (2.2) | cambiare sfondo e luce, marcatore più grande o di altro colore |
 | R5 | Continuity Camera lenta o si disconnette | latenza > 150 ms o disconnessioni (2.3) | webcam USB (+20 €) |
-| R6 | Palombaro difficile da tarare | dopo 2 sessioni (1.2) | bilancino 0,01 g, palombari di riserva, zavorra a passi più piccoli. *(19 ott: in corso. Taratura nella bottiglia d'uso con il rame, detersivo contro la tensione superficiale, circuito chiuso già in pressione)* |
+| R6 | Palombaro difficile da tarare | dopo 2 sessioni (1.2) | bilancino 0,01 g, palombari di riserva, zavorra a passi più piccoli. *(19 ott: in corso. Taratura nella bottiglia d'uso con il rame, detersivo contro la tensione superficiale, circuito chiuso già in pressione. 21 ott: dopo due giorni a galla P1 non scende più con tutta la corsa, ma si stacca di colpo con un colpetto o una spinta rapida della siringa: il menisco è tornato (punta asciutta) e la pressione esterna è calata di 0,9 kPa. Il palombaro non deve mai riemergere durante il controllo; lo zero si ritrova a ogni sessione)* |
 | R7 | L'ESP32 si riavvia quando si muove il servo | durante la 1.5 | alimentazione separata più potente, condensatore più grande, cavi più corti |
-| R8 | L'acqua raggiunge l'elettronica | sempre | vaschetta di contenimento, elettronica sopraelevata e lontana; asciugare e controllare prima di alimentare. *(19 ott, 20:25: il BMP280 del tappo smette di rispondere dopo un brownout; acqua sul sensore o pin sfilato, da verificare)* |
+| R8 | L'acqua raggiunge l'elettronica | sempre | vaschetta di contenimento, elettronica sopraelevata e lontana; asciugare e controllare prima di alimentare. *(19 ott, 20:25: il BMP280 del tappo smette di rispondere dopo un brownout; acqua sul sensore o pin sfilato, da verificare. **21 ott: confermato.** Schedina del sensore umida (condensa nell'aria satura della bottiglia, forse residui di detersivo), più il jumper GND della breadboard allentato: il chip risponde all'accensione e sparisce appena misura. Asciugata con il phon, funziona. Rimedi: smalto trasparente su schedina e saldature, lasciando libero il forellino del chip; mai stringere la bottiglia con l'acqua al collo; detersivo lontano dal tappo; tappo aperto quando il banco resta fermo per giorni; il firmware segnala ogni secondo se il sensore risponde)* |
 | R9 | Ritardo generale | una fase slitta > 3 giorni (T5) | usare il margine della fase successiva; poi "Ordine dei tagli" |
 
 ### Ordine dei tagli (se il tempo non basta)

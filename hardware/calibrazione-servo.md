@@ -98,18 +98,44 @@ Al centro della corsa: 0,62 mm per grado. Con la zona morta del servo (circa 0,5
 | Tacche 0 → 20 ml | **70 mm**, cioè **3,5 mm/ml** (area 2,86 cm², diametro interno circa 19,1 mm) |
 | Bordo anteriore della gomma | a 15 mm (0 ml) e a 85 mm (20 ml) dal riferimento: torna con le tacche |
 | Diametro esterno | circa 20 mm |
-| Alette | larghe 38 mm; spessore **da misurare** |
+| Alette | 38 × **12 mm**, spessore circa 1–2 mm (21 ott) |
 | Disco di spinta | 28 mm |
-| Asta | a croce, nervature che sporgono 7 mm dall'asse |
-| Cilindro (dalle alette alla punta del cono) | **da misurare** |
+| Asta | a croce, nervature che sporgono 7 mm dall'asse, spesse circa 1 mm |
+| Cilindro (dalla faccia posteriore delle alette alla punta del cono) | **103 mm** (21 ott) |
 | Nel circuito (0,5 L con 500 ml d'acqua) | 20 ml spinti danno **+4,0 kPa** (17:55–17:57), cioè 0,20 kPa/ml |
 
 Con il foro a 35,25 mm: ±56° fanno 58 mm, cioè **circa 16,7 ml e circa 3,3 kPa**. Al centro della corsa 0,62 mm per grado, cioè 0,18 ml e circa 35 Pa per grado.
 
+**8. Misure e geometria del montaggio (21 ottobre).** Misure: prolunga e servo con il righello, la siringa era già misurata (sezione 7).
+
+| Grandezza | Valore |
+|---|---|
+| Fori del braccio libero della prolunga, dal centro del mozzo che va sul servo | **32, 35, 38, 41 mm** (come stimato dalle foto): si usa quello a **35 mm** |
+| Asticella da 1,5 mm nel foro a 35 mm | entra senza forzare e non balla |
+| Servo sdraiato su un fianco largo: centro dell'alberino | **9 mm** sopra la tavoletta |
+| Nervatura dell'asta dello stantuffo | circa 1 mm |
+
+- **Prolunga finita:** perni di rame accorciati a circa 2 mm; braccio libero della squadretta che va sul servo tagliato a circa 6,5 mm dal mozzo (con l'alberino a 9 mm, quel braccio da 18,5 mm avrebbe urtato la tavoletta con il braccio lungo verticale).
+- **Montaggio scelto:** servo sdraiato su un fianco largo all'estremità sinistra, alberino a 25 mm dal bordo sinistro che punta verso il bordo lontano, corpo verso destra; braccio lungo verticale al centro della corsa, che ruota di ±60° in un piano verticale parallelo alla siringa. Siringa con l'asse a 100 mm dal bordo vicino, su due distanziali da circa 11 mm (asse a circa 21 mm), **alette verticali**: con le alette orizzontali la flangia sporgerebbe solo 6 mm dall'asse, meno del raggio del cilindro, e non ci sarebbe niente da bloccare. L'aletta in basso scende fino a circa 2 mm dalla tavoletta e fa da fermo: davanti il distanziale, dietro una vite che sporge al massimo 5 mm (il disco di spinta scende fino a circa 7 mm).
+- **Collegamento allo stantuffo:** asticella di 110 mm tra i perni, Z nel foro a 35 mm, L (gamba di 7 mm) in un foro da 1,5 mm nella nervatura verticale superiore dell'asta, 4 mm sopra l'asse e 3 mm davanti al disco; il foro si fa con lo spezzone d'asticella scaldato, così viene della misura del filo. Il disco di spinta va intaccato dall'alto (circa 4 × 12 mm) per far passare l'asticella.
+- **Manovellismo** (r = 35 mm, asticella 110 mm, perno sullo stantuffo circa 15 mm sopra l'alberino):
+
+| | Valore |
+|---|---|
+| Corsa a ±60° | 60,6 mm = **17,3 ml ≈ 3,5 kPa** |
+| Dal braccio verticale | +32 mm verso la siringa, −28 mm verso il servo |
+| Stantuffo con il braccio verticale | **circa 11 ml** (corsa da 1,3 a 18,7 ml) |
+| mm per grado | 0,61 al centro, circa 0,3 agli estremi: la tabella comando → kPa non sarà lineare |
+| Angolo massimo dell'asticella | circa 12° |
+
+- **Firmware del banco** (`firmware/src/prova_banco.cpp`): servo limitato a `ANGOLO_CENTRO ± 60` (30–150 finché c0 non è misurato), sempre un grado ogni 15 ms anche con i comandi singoli, `s` = 150 → 30 → 90.
+- **Stato a fine giornata:** linee a matita tracciate (asse della siringa a 100 mm, alberino a 25 mm); servo posizionato a secco, non ancora fissato. L'asticella non si è potuta tagliare: con le forbici non si scalfisce e la lima non c'è.
+
 ## Da fare nella 1.7 (dal piano)
 
 - [x] Scelta della geometria (sopra): siringa da 20 ml, meno aria, foro a circa 35 mm. Prolunga incollata il 18 ottobre.
-- [ ] Siringhe da 20 ml (lun 19), loro misure, montaggio di servo e siringa sulla tavoletta (mer 21). Posizioni proposte: alberino a 25 mm dal bordo sinistro con il corpo del servo verso la siringa, asse della siringa a 100 mm dal bordo lungo, perno sullo stantuffo a circa 104 mm dall'alberino a metà corsa.
+- [x] Siringhe da 20 ml (lun 19) e loro misure (19 e 21 ott).
+- [ ] Montaggio di servo e siringa sulla tavoletta: misure, prolunga e posizioni fatte il 21 (sezione 8), fissaggio da fare. Posizioni proposte: alberino a 25 mm dal bordo sinistro con il corpo del servo verso la siringa, asse della siringa a 100 mm dal bordo lungo, perno sullo stantuffo a circa 108 mm dall'alberino con il braccio verticale (21 ott).
 - [ ] Collegamento braccetto–stantuffo il più possibile senza gioco (asticella a Z).
 - [ ] Misura della corsa utile.
 - [ ] Tabella di calibrazione: comando del servo → ml spostati.

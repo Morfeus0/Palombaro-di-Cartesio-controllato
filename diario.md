@@ -472,3 +472,71 @@ Alle 16:01:23, tagliata la fascetta, la pressione è tornata a 101,21 kPa, cioè
 2. P1: misurare con calma le soglie (pressione di discesa dalla superficie e di risalita dal fondo, 5 volte), cioè il «Fatto quando» in kPa della 1.2.
 3. R1 tarato nella stessa bottiglia (detersivo sulla punta, rame per la correzione fine).
 4. Mercoledì 21: 1.7, montaggio di servo e siringa da 20 ml.
+
+## 2026-10-20 · giornata di riposo
+
+Nessuna attività sul progetto (altri impegni e materie).
+
+## 2026-10-21 · guasto del sensore (umidità), diagnosi di P1, 1.7 (misure e prolunga) · circa 2 h 55
+
+**Orario:** circa **17:00–19:55**, su 3 ore disponibili. L'inizio è stimato dal primo messaggio della sessione; il resto viene dal registro della seriale (`dati/2026-10-21/2026-10-21_seriale.log.gz`) e dalle foto.
+
+| Orario | Durata | Attività |
+|---|---|---|
+| ~17:00–17:15 | 15 min | 1.7: lettura del piano del giorno |
+| 17:15–17:34 | 19 min | 1.2: osservazione di P1 (a galla), siringa sfilata alle 17:10 circa, controlli del multimetro su 5 V e 3V3, ESP32 collegato |
+| 17:34–17:46 | 12 min | sensore: «non trovato», diagnosi delle linee I²C, pin bianco reinserito (risponde dalle 17:40:56 alle 17:41:34) |
+| 17:46–17:52 | 6 min | 1.2: prova di P1 con la siringa (senza dati di pressione: sensore già perso) |
+| 17:52–18:59 | 1 h 07 | sensore: jumper GND, saldatura del pin bianco rifatta, tappo aperto e schedina umida, continuità e misure in ohm, asciugatura |
+| 18:59–19:55 | 56 min | 1.7: misure del Blocco 2, prolunga (perni e braccio libero), tentativo di taglio dell'asticella, linee sulla tavoletta e servo posizionato a secco |
+
+**Fatto (1.2, P1 dopo due giorni):**
+- Il circuito era rimasto chiuso dal 19 sera con la siringa collegata. Togliendo la siringa (17:10) P1 non si è mosso: dentro c'era già la pressione della stanza, come atteso con una perdita di τ ≈ 4–5 ore.
+- Pressione della stanza **100,65 kPa**, contro circa **101,55** del 19 sera: **0,9 kPa in meno**.
+- Siringa a 20 ml, tubo rinfilato alle 17:46, spinta 2 ml alla volta fino a 0: **P1 non scende**. Scende con un **colpetto** sulla bottiglia o con una **spinta rapida** della siringa, staccandosi sempre **di colpo**: a quella pressione è già più pesante dell'acqua, ma il **menisco** lo trattiene. La punta, rimasta fuori dall'acqua due giorni, si è asciugata.
+
+**Fatto (sensore, R8):**
+- All'avvio «BMP280 non trovato a 0x76». Programma di diagnosi nuovo (`firmware/src/diagnosi_i2c.cpp`, ambiente `diagnosi`): **SDA e SCL alte** grazie ai pull-up del modulo, quindi rosso, verde e giallo integri; **nessun dispositivo** sul bus.
+- Firmware del banco: se il sensore manca **non si blocca più**, riprova ogni secondo e controlla ogni secondo il registro d'identità del chip (`# BMP280 assente/perso/ritrovato`). Così la perdita del sensore si vede subito nel registro e non produce più valori falsi senza avviso.
+- Multimetro: pin bianco → GND dell'ESP32 **non suonava**. Il **jumper GND** (colonna 31 → striscia blu) era allentato: reinserito, suona.
+- Il chip però rispondeva all'accensione e spariva entro un secondo, con valori assurdi (156 kPa, 182 °C). Rifatta la saldatura del pin bianco (trefoli sotto non stagnati, rame scoperto a S, niente manicotto): nessun cambiamento.
+- **Tappo aperto: la schedina era umida.** Continuità dei 4 fili fino alla schedina e nessun corto. Misure in ohm prima e dopo il phon tiepido: VCC–GND da 45,5 a 122,9 kΩ; CSB–VCC 8,68 e 9,16 kΩ (il pull-up della scheda, come il 16).
+- **Alle 18:59:51 il sensore funziona:** 50 letture al secondo per un'ora, p = 100,67–100,77 kPa (rumore ±7 Pa), temperatura scesa da 33 a 25 °C dopo il phon, nessuna perdita.
+
+**Fatto (1.7):**
+- Misure: fori della prolunga a **32, 35, 38, 41 mm** dal mozzo (si usa il 35); l'asticella entra nel foro **senza gioco**; servo sdraiato su un fianco largo con l'alberino a **9 mm** dalla tavoletta; alette della siringa 38 × **12 mm**, spessore 1–2 mm; nervatura dello stantuffo circa 1 mm; cilindro 103 mm.
+- **Prolunga finita:** perni di rame accorciati a circa 2 mm, braccio libero della squadretta che va sul servo tagliato a circa 6,5 mm dal mozzo (avrebbe urtato la tavoletta).
+- Geometria del montaggio decisa con le misure (servo sdraiato, siringa su distanziali da 11 mm con le alette verticali, stantuffo a circa 11 ml con il braccio verticale): `hardware/calibrazione-servo.md`, sezione 8.
+- Firmware del banco: servo limitato a ±60° dal centro (30–150 finché c0 non è misurato), un grado ogni 15 ms anche con i comandi singoli.
+- Linee a matita sulla tavoletta (asse della siringa a 100 mm dal bordo vicino, alberino a 25 mm dal bordo sinistro) e servo posizionato a secco.
+
+**Problemi (e cosa si è capito):**
+1. **Umidità sul sensore.** Nella bottiglia l'aria è satura: quando la stanza si raffredda la condensa si forma sulle superfici più fredde, e il 19 la bottiglia era stata stretta molte volte con l'acqua al collo e il detersivo era entrato dal collo. Con la schedina umida il chip risponde da fermo e si blocca appena misura. È la spiegazione più probabile anche del guasto del 19 alle 20:25 (rischio R8).
+2. **Due guasti sovrapposti** (jumper GND allentato e schedina umida): ognuno da solo bastava a fermare il sensore, e per questo i primi rimedi sembravano non funzionare.
+3. **Il menisco torna** quando la punta del palombaro si asciuga. Con 0,9 kPa di meno dal meteo la corsa della siringa non basta più a strapparlo. La superficie è "appiccicosa" (un'isteresi): durante il controllo il palombaro non deve mai riemergere.
+4. **La continuità pin bianco–GND al primo giro non era stata misurata**, e per qualche minuto la diagnosi ha cercato il guasto nel cavo. Misurata davvero, ha trovato subito il jumper allentato. Lezione: ogni controllo della lista si misura, anche quando sembra ovvio.
+5. **L'asticella d'acciaio non si taglia** con gli attrezzi di casa (forbici inutili, niente lima).
+6. Le indicazioni per le misure M4 e M5 e per il Blocco 4 erano poco chiare. Riscritte con riferimenti concreti (bordo vicino, bordo sinistro) e disegni.
+
+**Decisioni (e perché):**
+- **Il firmware non si ferma più senza sensore** e verifica ogni secondo che il chip risponda: il controllo di plausibilità dei valori resta `letturaPlausibile()`, ma un sensore "muto" ora si vede subito.
+- **Smalto trasparente** su schedina e saldature (chip coperto con il nastro durante la verniciatura): è la difesa contro la condensa. Regole nuove: mai stringere la bottiglia con l'acqua al collo, detersivo lontano dal tappo, tappo aperto quando il banco resta fermo per giorni.
+- **Soglie di P1 da misurare con il palombaro già sott'acqua**, non dalla superficie (altrimenti si misura il menisco).
+- **Alette della siringa verticali:** con la flangia da 12 mm, in orizzontale non sporgerebbero dal cilindro e non si potrebbero bloccare.
+- **Proposta:** spostare la calibrazione e la decisione sul piano B (R3) a venerdì 23; giovedì 22 serve per il sensore e per finire il montaggio.
+
+**Foto** (cartella Download): `IMG_1902`–`IMG_1904` (18:06) pin bianco prima della nuova saldatura; `IMG_1906`–`IMG_1908` (18:32) sensore nel tappo aperto.
+
+**Stato a fine giornata:**
+- Sensore funzionante; tappo fuori dalla bottiglia per la notte.
+- 1.7: prolunga e misure fatte, servo posizionato ma non fissato; asticella, stantuffo e siringa da fare.
+- 1.2: soglie di P1 e taratura di R1 ancora da fare.
+- `letturaPlausibile()` ancora da scrivere.
+
+**Ore:** 1.2 circa 25 min; sensore (1.3) circa 1 h 19; 1.7 circa 1 h 11. **Totale circa 2 h 55.**
+
+**Prossimo passo (giovedì 22):**
+1. Comprare lo smalto trasparente e un tronchese per acciaio (o un seghetto da ferro).
+2. Smalto sul sensore (chip coperto), un'ora d'asciugatura, prova di funzionamento; tappo sulla bottiglia con la procedura e la prova rapida di tenuta; punta di P1 ribagnata con la soluzione.
+3. 1.7: fissaggio del servo e c0 (Blocco 4, passi 3–6), asticella (L a 110 mm), foro nella nervatura e tacca nel disco, siringa sui distanziali, prove a vuoto.
+4. Venerdì 23: calibrazione comando → kPa e decisione sul piano B (R3); soglie di P1 sott'acqua.
