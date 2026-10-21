@@ -523,7 +523,7 @@ Nessuna attività sul progetto (altri impegni e materie).
 - **Smalto trasparente** su schedina e saldature (chip coperto con il nastro durante la verniciatura): è la difesa contro la condensa. Regole nuove: mai stringere la bottiglia con l'acqua al collo, detersivo lontano dal tappo, tappo aperto quando il banco resta fermo per giorni.
 - **Soglie di P1 da misurare con il palombaro già sott'acqua**, non dalla superficie (altrimenti si misura il menisco).
 - **Alette della siringa verticali:** con la flangia da 12 mm, in orizzontale non sporgerebbero dal cilindro e non si potrebbero bloccare.
-- **Proposta:** spostare la calibrazione e la decisione sul piano B (R3) a venerdì 23; giovedì 22 serve per il sensore e per finire il montaggio.
+- **Calendario invariato:** si prosegue con il piano originale, senza tagli né spostamenti; giovedì 22 restano la calibrazione e la decisione sul piano B (R3). Eventuali tagli li decide solo Gabriele.
 
 **Foto** (cartella Download): `IMG_1902`–`IMG_1904` (18:06) pin bianco prima della nuova saldatura; `IMG_1906`–`IMG_1908` (18:32) sensore nel tappo aperto.
 
@@ -539,4 +539,4 @@ Nessuna attività sul progetto (altri impegni e materie).
 1. Comprare lo smalto trasparente e un tronchese per acciaio (o un seghetto da ferro).
 2. Smalto sul sensore (chip coperto), un'ora d'asciugatura, prova di funzionamento; tappo sulla bottiglia con la procedura e la prova rapida di tenuta; punta di P1 ribagnata con la soluzione.
 3. 1.7: fissaggio del servo e c0 (Blocco 4, passi 3–6), asticella (L a 110 mm), foro nella nervatura e tacca nel disco, siringa sui distanziali, prove a vuoto.
-4. Venerdì 23: calibrazione comando → kPa e decisione sul piano B (R3); soglie di P1 sott'acqua.
+4. Come da calendario: calibrazione comando → kPa e decisione sul piano B (R3). Venerdì 23 resta il giorno di margine.

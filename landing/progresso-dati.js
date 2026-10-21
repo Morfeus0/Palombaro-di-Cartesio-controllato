@@ -17,7 +17,7 @@ window.PalombaroProgresso = Object.freeze({
   scadenzaProf: '2026-12-31',
   oreAlGiorno: 2, // media dichiarata, tutti i giorni: base del prospetto di fine progetto
 
-  sintesi: 'Giornata di quasi tre ore, in gran parte spesa su un guasto: il sensore di pressione nel tappo non rispondeva. Le cause erano due insieme: un filo di massa allentato sulla basetta e la schedina del sensore bagnata dalla condensa che si forma nella bottiglia. Asciugata con il phon, funziona di nuovo; domani una mano di smalto trasparente la proteggerà. Il palombaro, dopo due giorni fermo a galla, non scendeva più con la siringa: la punta si era asciugata e il pelo dell\'acqua lo tratteneva di nuovo, mentre la pressione dell\'aria esterna era calata. Con un colpetto scende: è una lezione utile per il controllo, che non dovrà mai farlo riemergere. Sulla meccanica: misure fatte, braccio del motore finito, posizione del motore segnata sulla tavoletta. L\'asticella d\'acciaio non si taglia con gli attrezzi di casa: domani si compra un tronchese. Il montaggio slitta di un giorno. Il conto delle ore peggiora: siamo circa tre giorni indietro rispetto al piano, al limite della regola che fa scattare i tagli, e togliendo le ore una tantum la fine prevista passa dal 26 dicembre al 4 gennaio, oltre la scadenza del professore. Nei prossimi giorni servono più ore o qualche taglio, da decidere entro la revisione di domenica.',
+  sintesi: 'Giornata di quasi tre ore, in gran parte spesa su un guasto: il sensore di pressione nel tappo non rispondeva. Le cause erano due insieme: un filo di massa allentato sulla basetta e la schedina del sensore bagnata dalla condensa che si forma nella bottiglia. Asciugata con il phon, funziona di nuovo; domani una mano di smalto trasparente la proteggerà. Il palombaro, dopo due giorni fermo a galla, non scendeva più con la siringa: la punta si era asciugata e il pelo dell\'acqua lo tratteneva di nuovo, mentre la pressione dell\'aria esterna era calata. Con un colpetto scende: è una lezione utile per il controllo, che non dovrà mai farlo riemergere. Sulla meccanica: misure fatte, braccio del motore finito, posizione del motore segnata sulla tavoletta. L\'asticella d\'acciaio non si taglia con gli attrezzi di casa: domani si compra un tronchese. Il montaggio slitta di un giorno. Il conto delle ore peggiora: siamo circa tre giorni indietro rispetto al piano e, togliendo le ore una tantum, la fine prevista passa dal 26 dicembre al 4 gennaio. Si prosegue con il piano originale.',
 
   fasi: [
     {
@@ -186,18 +186,18 @@ window.PalombaroProgresso = Object.freeze({
   ],
 
   prossimi: [
-    'Giovedì 22: smalto protettivo sul sensore, poi fissaggio del motore, asticella e siringa sulla tavoletta, con le prime prove a vuoto.',
-    'Venerdì 23: calibrazione del motore (comando → pressione), decisione sul piano B e soglie del palombaro.',
+    'Giovedì 22: smalto protettivo sul sensore, montaggio rimasto da finire (motore, asticella, siringa), poi calibrazione del motore e decisione sul piano B, come da calendario.',
+    'Venerdì 23: margine.',
     'Sabato 24 – domenica 25: palombaro mosso dal motore e video del secondo traguardo (M1).',
   ],
 
   rischi: [
     { titolo: 'Più ore del previsto per ogni attività', livello: 'alto',
-      nota: 'Il tappo con il sensore ha richiesto circa 15 ore contro le 3 previste. Il 18 elettronica e prova di tenuta hanno richiesto meno delle ore stimate, ma il 19 il palombaro ne ha prese più di 5 contro le 3 previste per tutta la sottofase, e il 21 il guasto del sensore un\'ora e venti. Togliendo le ore una tantum la fine prevista è il 4 gennaio, oltre la scadenza del professore (31 dicembre): ritardo di circa 3 giorni, al limite della regola dei tagli.' },
+      nota: 'Il tappo con il sensore ha richiesto circa 15 ore contro le 3 previste. Il 18 elettronica e prova di tenuta hanno richiesto meno delle ore stimate, ma il 19 il palombaro ne ha prese più di 5 contro le 3 previste per tutta la sottofase, e il 21 il guasto del sensore un\'ora e venti. Togliendo le ore una tantum la fine prevista è il 4 gennaio, oltre la scadenza del professore (31 dicembre): ritardo di circa 3 giorni. Si prosegue con il piano originale.' },
     { titolo: 'La siringa cambia la pressione meno del necessario', livello: 'basso',
       nota: 'Le siringhe da 20 ml danno 4 kPa (misurato il 19), contro i 2–3 necessari. Resta da verificare con il motore montato, mercoledì.' },
     { titolo: 'Meccanica del motore imprecisa', livello: 'medio',
-      nota: 'Il collegamento tra braccio e siringa deve avere pochissimo gioco: l\'asticella entra nel foro del braccio senza gioco (misurato il 21). L\'acciaio non si taglia con gli attrezzi di casa: serve un tronchese. La decisione sul piano B (motore passo-passo con vite) slitta a venerdì 23.' },
+      nota: 'Il collegamento tra braccio e siringa deve avere pochissimo gioco: l\'asticella entra nel foro del braccio senza gioco (misurato il 21). L\'acciaio non si taglia con gli attrezzi di casa: serve un tronchese. La decisione sul piano B (motore passo-passo con vite) è prevista giovedì 22.' },
     { titolo: 'Palombaro difficile da tarare', livello: 'basso',
       nota: 'La tensione superficiale torna quando la punta del palombaro si asciuga (21 ottobre), e la pressione dell\'aria esterna cambia di un kPa in pochi giorni. Rimedi: punta ribagnata con la soluzione, palombaro sempre sott\'acqua durante il controllo, punto di lavoro ritrovato a ogni sessione. Resta da tarare il palombaro di riserva.' },
     { titolo: 'Umidità sul sensore di pressione', livello: 'medio',
