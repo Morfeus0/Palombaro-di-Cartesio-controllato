@@ -129,7 +129,7 @@ Con il foro a 35,25 mm: ±56° fanno 58 mm, cioè **circa 16,7 ml e circa 3,3 kP
 | Angolo massimo dell'asticella | circa 12° |
 
 - **Firmware del banco** (`firmware/src/prova_banco.cpp`): servo limitato a `ANGOLO_CENTRO ± 60` (30–150 finché c0 non è misurato), sempre un grado ogni 15 ms anche con i comandi singoli, `s` = 150 → 30 → 90.
-- **Stato a fine giornata:** linee a matita tracciate (asse della siringa a 100 mm, alberino a 25 mm); servo posizionato a secco, non ancora fissato. L'asticella non si è potuta tagliare: con le forbici non si scalfisce e la lima non c'è.
+- **Stato a fine giornata:** linee a matita tracciate (asse della siringa a 100 mm, alberino a 25 mm); servo posizionato e contorno tracciato (Blocco 4, passi 1–2), non ancora fissato. Asticella tagliata in serata.
 
 ## Da fare nella 1.7 (dal piano)
 

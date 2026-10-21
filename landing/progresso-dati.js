@@ -17,7 +17,7 @@ window.PalombaroProgresso = Object.freeze({
   scadenzaProf: '2026-12-31',
   oreAlGiorno: 2, // media dichiarata, tutti i giorni: base del prospetto di fine progetto
 
-  sintesi: 'Giornata di quasi tre ore, in gran parte spesa su un guasto: il sensore di pressione nel tappo non rispondeva. Le cause erano due insieme: un filo di massa allentato sulla basetta e la schedina del sensore bagnata dalla condensa che si forma nella bottiglia. Asciugata con il phon, funziona di nuovo; domani una mano di smalto trasparente la proteggerà. Il palombaro, dopo due giorni fermo a galla, non scendeva più con la siringa: la punta si era asciugata e il pelo dell\'acqua lo tratteneva di nuovo, mentre la pressione dell\'aria esterna era calata. Con un colpetto scende: è una lezione utile per il controllo, che non dovrà mai farlo riemergere. Sulla meccanica: misure fatte, braccio del motore finito, posizione del motore segnata sulla tavoletta. L\'asticella d\'acciaio non si taglia con gli attrezzi di casa: domani si compra un tronchese. Il montaggio slitta di un giorno. Il conto delle ore peggiora: siamo circa tre giorni indietro rispetto al piano e, togliendo le ore una tantum, la fine prevista passa dal 26 dicembre al 4 gennaio. Si prosegue con il piano originale.',
+  sintesi: 'Giornata di quasi tre ore, in gran parte spesa su un guasto: il sensore di pressione nel tappo non rispondeva. Le cause erano due insieme: un filo di massa allentato sulla basetta e la schedina del sensore bagnata dalla condensa che si forma nella bottiglia. Asciugata con il phon, funziona di nuovo; domani una mano di smalto trasparente la proteggerà. Il palombaro, dopo due giorni fermo a galla, non scendeva più con la siringa: la punta si era asciugata e il pelo dell\'acqua lo tratteneva di nuovo, mentre la pressione dell\'aria esterna era calata. Con un colpetto scende: è una lezione utile per il controllo, che non dovrà mai farlo riemergere. Sulla meccanica: misure fatte, braccio del motore finito, posizione del motore segnata sulla tavoletta. In serata anche l\'asticella d\'acciaio è tagliata. Il fissaggio del motore e la siringa restano per domani. Il conto delle ore peggiora: siamo circa tre giorni indietro rispetto al piano e, togliendo le ore una tantum, la fine prevista passa dal 26 dicembre al 4 gennaio. Si prosegue con il piano originale.',
 
   fasi: [
     {
@@ -43,7 +43,7 @@ window.PalombaroProgresso = Object.freeze({
         { id: '1.4', nome: 'Circuito dell\'aria', da: '2026-10-17', a: '2026-10-19', ore: 2, fatto: 100, oreEffettive: 3.15, nota: 'Chiusa il 19 ottobre: spingendo la siringa da 20 ml il palombaro scende, tirandola risale.' },
         { id: '1.5', nome: 'Elettronica minima', da: '2026-10-18', a: '2026-10-18', ore: 3, fatto: 100, oreEffettive: 0.58, nota: 'Chiusa il 18 ottobre: pressione letta 50 volte al secondo, il motore si muove senza far riavviare la scheda.' },
         { id: '1.6', nome: 'Prova di tenuta della bottiglia', da: '2026-10-18', a: '2026-10-18', ore: 1.5, fatto: 100, oreEffettive: 0.32, nota: 'Chiusa il 18 ottobre al primo tentativo: dopo 10 minuti resta il 93 % della pressione (ne bastava il 70 %).' },
-        { id: '1.7', nome: 'Meccanica motore e siringa', da: '2026-10-17', a: '2026-10-22', ore: 3, fatto: 35, oreEffettive: 2.25, nota: 'Misure fatte, braccio del motore finito e posizione segnata sulla tavoletta: daranno circa 3,5 kPa. Mancano il fissaggio, l\'asticella (serve un tronchese) e la siringa.' },
+        { id: '1.7', nome: 'Meccanica motore e siringa', da: '2026-10-17', a: '2026-10-22', ore: 3, fatto: 40, oreEffettive: 2.25, nota: 'Misure fatte, braccio del motore finito e posizione segnata sulla tavoletta: daranno circa 3,5 kPa. Asticella tagliata. Mancano il fissaggio del motore e la siringa.' },
         { id: '1.8', nome: 'Prova d\'insieme e video', da: '2026-10-24', a: '2026-10-25', ore: 2, fatto: 0 },
       ],
     },
@@ -137,7 +137,7 @@ window.PalombaroProgresso = Object.freeze({
       'Asciugata con il phon, la schedina funziona di nuovo, 50 letture al secondo per un\'ora. Nella bottiglia l\'aria è satura d\'acqua: domani una mano di smalto trasparente la proteggerà dalla condensa.',
       'Il programma della scheda ora controlla ogni secondo che il sensore risponda, e lo segnala subito se si perde.',
       'Il palombaro, fermo due giorni a galla, non scendeva più con la siringa: la punta asciutta si attacca di nuovo al pelo dell\'acqua, e la pressione esterna era calata. Con un colpetto si stacca e va a fondo: durante il controllo non dovrà mai riemergere.',
-      'Meccanica: misure del motore e della siringa, braccio lungo finito, posizione del motore segnata sulla tavoletta. L\'asticella d\'acciaio non si taglia con gli attrezzi di casa: serve un tronchese.',
+      'Meccanica: misure del motore e della siringa, braccio lungo finito, posizione del motore segnata sulla tavoletta. In serata l\'asticella d\'acciaio è stata tagliata.',
     ] },
     { data: '2026-10-19', testo: [
       'Circa cinque ore di lavoro. Arrivate le pipette, l\'ultimo materiale che mancava: primo traguardo (M0) raggiunto. Si accorciano a 6 cm, tenendo la tettarella e un pezzo di gambo per il filo di rame. Comprate e misurate due siringhe da 20 ml.',
@@ -197,7 +197,7 @@ window.PalombaroProgresso = Object.freeze({
     { titolo: 'La siringa cambia la pressione meno del necessario', livello: 'basso',
       nota: 'Le siringhe da 20 ml danno 4 kPa (misurato il 19), contro i 2–3 necessari. Resta da verificare con il motore montato, mercoledì.' },
     { titolo: 'Meccanica del motore imprecisa', livello: 'medio',
-      nota: 'Il collegamento tra braccio e siringa deve avere pochissimo gioco: l\'asticella entra nel foro del braccio senza gioco (misurato il 21). L\'acciaio non si taglia con gli attrezzi di casa: serve un tronchese. La decisione sul piano B (motore passo-passo con vite) è prevista giovedì 22.' },
+      nota: 'Il collegamento tra braccio e siringa deve avere pochissimo gioco: l\'asticella entra nel foro del braccio senza gioco (misurato il 21). Asticella tagliata il 21. La decisione sul piano B (motore passo-passo con vite) è prevista giovedì 22.' },
     { titolo: 'Palombaro difficile da tarare', livello: 'basso',
       nota: 'La tensione superficiale torna quando la punta del palombaro si asciuga (21 ottobre), e la pressione dell\'aria esterna cambia di un kPa in pochi giorni. Rimedi: punta ribagnata con la soluzione, palombaro sempre sott\'acqua durante il controllo, punto di lavoro ritrovato a ogni sessione. Resta da tarare il palombaro di riserva.' },
     { titolo: 'Umidità sul sensore di pressione', livello: 'medio',

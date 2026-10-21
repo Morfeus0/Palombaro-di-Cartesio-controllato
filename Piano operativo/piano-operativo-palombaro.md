@@ -262,8 +262,8 @@ Sono le sottofasi che, se ritardano, fanno slittare la consegna. Le altre hanno 
   - [x] Scegliere la geometria. *(18 ott: siringa da 20 ml, meno aria nella 0,5 L, due squadrette sovrapposte con il foro di lavoro a circa 35 mm; conti in `hardware/calibrazione-servo.md`)*
   - [x] Prolunga del braccio. *(18 ott: squadrette incollate con l'epossidica e 3 perni di rame)*
   - [x] Comprare 2 siringhe da 20 ml (lun 19) e misurarle. *(PIC Solution, 3,5 mm/ml, +4,0 kPa con 20 ml; 21 ott: cilindro 103 mm, alette 38 × 12 mm, spessore 1–2 mm)*
-  - [ ] Montare servo e siringa su una tavoletta di legno. *(21 ott: misure fatte, prolunga finita (perni accorciati, braccio libero tagliato), linee tracciate e servo posizionato a secco; manca il fissaggio. Geometria in `hardware/calibrazione-servo.md`, sezione 8)*
-  - [ ] Realizzare il collegamento braccetto–stantuffo, il più possibile senza gioco. *(21 ott: l'asticella non si taglia con gli attrezzi di casa; serve un tronchese per acciaio o un seghetto, oppure la rottura per fatica. Firmware con i limiti di corsa pronto)*
+  - [ ] Montare servo e siringa su una tavoletta di legno. *(21 ott: misure fatte, prolunga finita (perni accorciati, braccio libero tagliato), linee tracciate, servo posizionato e contorno tracciato; manca il fissaggio. Geometria in `hardware/calibrazione-servo.md`, sezione 8)*
+  - [ ] Realizzare il collegamento braccetto–stantuffo, il più possibile senza gioco. *(21 ott: asticella tagliata; firmware con i limiti di corsa pronto)*
   - [ ] Misurare la corsa utile. *(18 ott: misure preliminari e problema di corsa e pressione in `hardware/calibrazione-servo.md`)*
   - [ ] Costruire la tabella di calibrazione dal comando del servo ai ml spostati.
   - [ ] Stimare la zona morta e il gioco meccanico.
