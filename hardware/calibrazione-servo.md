@@ -131,13 +131,33 @@ Con il foro a 35,25 mm: ±56° fanno 58 mm, cioè **circa 16,7 ml e circa 3,3 kP
 - **Firmware del banco** (`firmware/src/prova_banco.cpp`): servo limitato a `ANGOLO_CENTRO ± 60` (30–150 finché c0 non è misurato), sempre un grado ogni 15 ms anche con i comandi singoli, `s` = 150 → 30 → 90.
 - **Stato a fine giornata:** linee a matita tracciate (asse della siringa a 100 mm, alberino a 25 mm); servo posizionato e contorno tracciato (Blocco 4, passi 1–2), non ancora fissato. Asticella tagliata in serata.
 
+**9. Montaggio e calibrazione (23 ottobre).** Registro: `dati/2026-10-23/2026-10-23_seriale.log.gz`.
+
+- **Montaggio:** servo sdraiato su un fianco largo, alberino verso il bordo lontano a circa 36 mm dal bordo sinistro (la linea a 25 mm è finita sul bordo del corpo: va bene così), 5 viti come pioli più colla a caldo; leggermente ruotato (9,1 e 9,4 cm dal bordo vicino ai due estremi). Prolunga sui dentini con il braccio verticale e la vite centrale. Asticella rifatta con un filo nuovo, più dritta (la prima era incurvata). Siringa n. 2 con foro da 1,5 mm nella lamella superiore dello stantuffo (4 mm sopra l'asse, 4 mm davanti al disco) e tacca nel disco; M6 (asta scoperta a 0 ml, dalle alette al disco) = **15 mm**. Siringa su due distanziali di cartone ondulato con le fascette sotto; le fascette da sole non la tenevano (a ogni spinta scivolava di parecchio): bloccata con **viti e nastro isolante** attorno all'aletta in basso.
+- **c0 = 86** (braccio verticale); aumentando il comando il braccio va verso la siringa e la pressione sale. Firmware: `ANGOLO_CENTRO = 86`, limiti 26–146.
+- **Comando → ml (tubo staccato, letto a occhio):** 86 ≈ 11, 96 ≈ 9,5, 106 ≈ 7, 116 ≈ 6, 126 ≈ 4,5, 136 ≈ 3 ml, entro ±0,5 ml dal modello della sezione 8.
+- **Isteresi:** a 86 si legge 11 ml arrivando da 36 e 10 ml arrivando da 136, sempre uguale; la siringa non si muove. È una **zona morta di circa 10°** a ogni inversione (da 36 a 46, dopo aver tirato, la pressione sale solo di 0,03 kPa invece di circa 0,2): gioco dei fori e degli ingranaggi, attrito di primo distacco della gomma, asticella che si accorcia.
+- **Prima calibrazione (22:48–22:55, chiusura a 86, 101,29 kPa):** da 86 a 36 −1,05 kPa; gioco tra andata e ritorno 150–200 Pa.
+- **Estremo 26 da evitare:** il 23 alle 23:02:52, tirando fino a 26 con il circuito in depressione (−2,2 kPa), la pressione è risalita di colpo di 0,24 kPa e la siringa si è spostata. Proposta (da decidere): limite minimo a 36.
+- **Calibrazione con la bottiglia nuova (23:22–23:27, chiusura a 36, 101,31 kPa):**
+
+| Comando | 36 | 46 | 56 | 66 | 76 | 86 | 96 | 106 | 116 | 126 | 136 | 146 |
+|---|---|---|---|---|---|---|---|---|---|---|---|---|
+| Spingendo [kPa] | 0 | +0,03 | +0,20 | +0,42 | +0,64 | +0,92 | +1,16 | +1,37 | +1,69 | +1,91 | +2,17 | +2,37 |
+| Tirando [kPa] | −0,14 | +0,03 | +0,22 | +0,43 | +0,66 | +0,95 | +1,19 | +1,46 | +1,75 | +1,97 | +2,21 | |
+
+  Gioco tra andata e ritorno 15–90 Pa nella parte centrale. Guadagno circa 0,15 kPa/ml (0,20 il 19: più aria nel circuito con la bottiglia nuova).
+- **Ripetibilità (23:29–23:34, 5 cicli 36 ↔ 146, 30 s per estremo):** escursione 2,421 / 2,412 / 2,411 / 2,412 / 2,403 kPa, cioè **±9 Pa**. Gli estremi scendono insieme di circa 17–20 Pa a ciclo: è il circuito (perdita lenta e cedimento delle pareti), non il servo.
+- **+50 ml d'acqua nella bottiglia grande** (23:4x) per ridurre l'aria: escursione **2,66 / 2,64 / 2,64 kPa** su 3 cicli (23:55–23:59), cioè **±11 Pa**. **Il «Fatto quando» della 1.7 è raggiunto** (≥ 2,5 kPa, ripetibile entro ±25 Pa).
+- **Tenuta da ricontrollare:** fermo a 146 (+2,6 kPa) il calo tra 10 e 40 s è stato 0,044 kPa alle 23:24, 0,074 alle 23:52 e 0,103 alle 23:56 (con la temperatura in salita di 0,2 °C, che dovrebbe far salire la pressione). Il limite della prova rapida è 0,05: va fatta la prova di 10 minuti della 1.6.
+
 ## Da fare nella 1.7 (dal piano)
 
 - [x] Scelta della geometria (sopra): siringa da 20 ml, meno aria, foro a circa 35 mm. Prolunga incollata il 18 ottobre.
 - [x] Siringhe da 20 ml (lun 19) e loro misure (19 e 21 ott).
-- [ ] Montaggio di servo e siringa sulla tavoletta: misure, prolunga e posizioni fatte il 21 (sezione 8), fissaggio da fare. Posizioni proposte: alberino a 25 mm dal bordo sinistro con il corpo del servo verso la siringa, asse della siringa a 100 mm dal bordo lungo, perno sullo stantuffo a circa 108 mm dall'alberino con il braccio verticale (21 ott).
-- [ ] Collegamento braccetto–stantuffo il più possibile senza gioco (asticella a Z).
-- [ ] Misura della corsa utile.
-- [ ] Tabella di calibrazione: comando del servo → ml spostati.
-- [ ] Stima della zona morta e del gioco meccanico.
+- [x] Montaggio di servo e siringa sulla tavoletta (21 e 23 ott, sezioni 8 e 9).
+- [x] Collegamento braccetto–stantuffo (asticella a Z e L, 23 ott).
+- [x] Misura della corsa utile (36–146: 2,64 kPa).
+- [x] Tabella di calibrazione comando → kPa (sezione 9).
+- [x] Zona morta e gioco (circa 10° a ogni inversione; 15–200 Pa).
 - **Fatto quando:** escursione di pressione ≥ 2,5 kPa, ripetibile entro ±25 Pa su 5 andate e ritorni (cambiato il 18 ottobre, prima era ≥ 8 ml entro ±0,1 ml). **Giovedì 22 ottobre si decide sul piano B** (passo-passo + barra filettata) se la ripetibilità non basta (rischio R3).

@@ -11,13 +11,13 @@
    5. Aggiornare `sintesi`, `diario` (in cima la voce nuova), `prossimi` e `rischi`.
    Le date sono AAAA-MM-GG; `ore` è l'impegno stimato nel piano operativo e fa da peso. */
 window.PalombaroProgresso = Object.freeze({
-  aggiornato: '2026-10-21',
+  aggiornato: '2026-10-23',
   provvisorio: false, // true finché le stime non sono confrontate con il diario della sera
   consegna: '2026-12-13',
   scadenzaProf: '2026-12-31',
   oreAlGiorno: 2, // media dichiarata, tutti i giorni: base del prospetto di fine progetto
 
-  sintesi: 'Giornata di quasi tre ore, in gran parte spesa su un guasto: il sensore di pressione nel tappo non rispondeva. Le cause erano due insieme: un filo di massa allentato sulla basetta e la schedina del sensore bagnata dalla condensa che si forma nella bottiglia. Asciugata con il phon, funziona di nuovo; domani una mano di smalto trasparente la proteggerà. Il palombaro, dopo due giorni fermo a galla, non scendeva più con la siringa: la punta si era asciugata e il pelo dell\'acqua lo tratteneva di nuovo, mentre la pressione dell\'aria esterna era calata. Con un colpetto scende: è una lezione utile per il controllo, che non dovrà mai farlo riemergere. Sulla meccanica: misure fatte, braccio del motore finito, posizione del motore segnata sulla tavoletta. In serata anche l\'asticella d\'acciaio è tagliata. Il fissaggio del motore e la siringa restano per domani. Il conto delle ore peggiora: siamo circa tre giorni indietro rispetto al piano e, togliendo le ore una tantum, la fine prevista passa dal 26 dicembre al 4 gennaio. Si prosegue con il piano originale.',
+  sintesi: 'Serata lunga, quasi sei ore, che chiude due sottofasi. Motore e siringa sono montati sulla tavoletta: il motore spinge e tira lo stantuffo e cambia la pressione nella bottiglia di 2,6 kPa, sopra i 2,5 richiesti, tornando ogni volta allo stesso valore entro un centesimo di kPa. Per arrivarci sono serviti una siringa bloccata con le viti, un\'asticella rifatta più dritta e 50 ml d\'acqua in più nella bottiglia. Il palombaro, finito sul fondo dopo due giorni, è stato ritarato in una bottiglia nuova: comandato dal motore scende e risale cinque volte su cinque. Resta un difetto noto: a ogni cambio di direzione il motore perde circa 10 gradi, un gioco costante che si potrà correggere nel programma. Con queste due chiusure il progetto torna in linea con il calendario (circa un giorno di ritardo). Le ore spese restano più del previsto: togliendo quelle una tantum, la fine prevista è il 4 gennaio. Si prosegue con il piano originale.',
 
   fasi: [
     {
@@ -38,12 +38,12 @@ window.PalombaroProgresso = Object.freeze({
         descrizione: 'Bottiglia, siringa, motore ed elettronica montati e funzionanti insieme.' },
       sottofasi: [
         { id: '1.1', nome: 'Ambiente di lavoro e programmi', da: '2026-10-12', a: '2026-10-14', ore: 2.5, fatto: 100, oreEffettive: 1, nota: 'Chiusa il 10 ottobre in un\'ora: iPhone come telecamera a circa 30 fps.' },
-        { id: '1.2', nome: 'Costruire e tarare il palombaro', da: '2026-10-13', a: '2026-10-20', ore: 3, fatto: 55, oreEffettive: 5.7, nota: 'Il palombaro principale funziona, ma dopo due giorni a galla la punta si asciuga e il pelo dell\'acqua lo trattiene di nuovo: si stacca con un colpetto. Restano da misurare le soglie con il palombaro già sott\'acqua e da tarare quello di riserva.' },
+                { id: '1.2', nome: 'Costruire e tarare il palombaro', da: '2026-10-13', a: '2026-10-20', ore: 3, fatto: 100, oreEffettive: 6.4, nota: 'Chiusa il 23 ottobre con il solo palombaro principale: comandato dal motore va a fondo e risale 5 volte su 5. I palombari di riserva non si fanno, per risparmiare tempo.' },
         { id: '1.3', nome: 'Tappo con il sensore di pressione', da: '2026-10-15', a: '2026-10-17', ore: 3, fatto: 100, oreEffettive: 16.47, oreUnaTantum: 4.5, nota: 'Chiusa il 17 ottobre. Il 21 la schedina del sensore si è bagnata di condensa: asciugata, funziona; domani lo smalto protettivo.' },
         { id: '1.4', nome: 'Circuito dell\'aria', da: '2026-10-17', a: '2026-10-19', ore: 2, fatto: 100, oreEffettive: 3.15, nota: 'Chiusa il 19 ottobre: spingendo la siringa da 20 ml il palombaro scende, tirandola risale.' },
         { id: '1.5', nome: 'Elettronica minima', da: '2026-10-18', a: '2026-10-18', ore: 3, fatto: 100, oreEffettive: 0.58, nota: 'Chiusa il 18 ottobre: pressione letta 50 volte al secondo, il motore si muove senza far riavviare la scheda.' },
         { id: '1.6', nome: 'Prova di tenuta della bottiglia', da: '2026-10-18', a: '2026-10-18', ore: 1.5, fatto: 100, oreEffettive: 0.32, nota: 'Chiusa il 18 ottobre al primo tentativo: dopo 10 minuti resta il 93 % della pressione (ne bastava il 70 %).' },
-        { id: '1.7', nome: 'Meccanica motore e siringa', da: '2026-10-17', a: '2026-10-22', ore: 3, fatto: 40, oreEffettive: 2.25, nota: 'Misure fatte, braccio del motore finito e posizione segnata sulla tavoletta: daranno circa 3,5 kPa. Asticella tagliata. Mancano il fissaggio del motore e la siringa.' },
+                { id: '1.7', nome: 'Meccanica motore e siringa', da: '2026-10-17', a: '2026-10-22', ore: 3, fatto: 100, oreEffettive: 7.2, nota: 'Chiusa il 23 ottobre: il motore cambia la pressione di 2,6 kPa e torna sempre allo stesso punto (entro un centesimo di kPa). A ogni cambio di direzione perde circa 10 gradi, da correggere nel programma.' },
         { id: '1.8', nome: 'Prova d\'insieme e video', da: '2026-10-24', a: '2026-10-25', ore: 2, fatto: 0 },
       ],
     },
@@ -129,9 +129,18 @@ window.PalombaroProgresso = Object.freeze({
     { data: '2026-10-17', fatto: 11.3 },
     { data: '2026-10-18', fatto: 16.2 },
     { data: '2026-10-19', fatto: 18.0 },
+    { data: '2026-10-21', fatto: 18.4 },
   ],
 
   diario: [
+    { data: '2026-10-23', testo: [
+      'Serata lunga, quasi sei ore: motore e siringa montati sulla tavoletta e collegati da un\'asticella d\'acciaio. Il motore spinge e tira lo stantuffo, e la scheda legge la pressione intanto.',
+      'Le fascette non bastavano a tenere ferma la siringa: ora la bloccano delle viti. L\'asticella, un po\' storta, è stata rifatta con un filo nuovo.',
+      'Prima calibrazione: da un estremo all\'altro il motore cambia la pressione di 2,4 kPa; con 50 ml d\'acqua in più nella bottiglia (meno aria da comprimere) si arriva a 2,6, sopra i 2,5 richiesti. Ripetendo la corsa cinque volte, la pressione torna uguale entro un centesimo di kPa.',
+      'A ogni cambio di direzione il motore "perde" circa 10 gradi prima che lo stantuffo si muova: è un difetto costante, che si potrà correggere nel programma.',
+      'Il palombaro era finito sul fondo e nella bottiglia si era formata schiuma: bottiglia nuova e palombaro ritarato. Ora, comandato dal motore, scende e risale cinque volte su cinque. Le sottofasi del palombaro e della meccanica sono chiuse.',
+    ] },
+    { data: '2026-10-22', testo: ['Nessuna attività registrata.'] },
     { data: '2026-10-21', testo: [
       'Quasi tre ore di lavoro (il 20 era giorno di riposo). Il sensore di pressione non rispondeva: con un piccolo programma di prova e il multimetro si sono trovati un filo di massa allentato sulla basetta e, aprendo il tappo, la schedina del sensore umida.',
       'Asciugata con il phon, la schedina funziona di nuovo, 50 letture al secondo per un\'ora. Nella bottiglia l\'aria è satura d\'acqua: domani una mano di smalto trasparente la proteggerà dalla condensa.',
@@ -186,21 +195,20 @@ window.PalombaroProgresso = Object.freeze({
   ],
 
   prossimi: [
-    'Giovedì 22: smalto protettivo sul sensore, montaggio rimasto da finire (motore, asticella, siringa), poi calibrazione del motore e decisione sul piano B, come da calendario.',
-    'Venerdì 23: margine.',
-    'Sabato 24 – domenica 25: palombaro mosso dal motore e video del secondo traguardo (M1).',
+    'Sabato 24 – domenica 25: prova di tenuta della bottiglia nuova, poi il palombaro mosso dal motore comandato dalla tastiera, e il video del secondo traguardo (M1).',
+    'Lunedì 26: inizio della fase 2 (postazione di ripresa con la telecamera).',
   ],
 
   rischi: [
     { titolo: 'Più ore del previsto per ogni attività', livello: 'alto',
       nota: 'Il tappo con il sensore ha richiesto circa 15 ore contro le 3 previste. Il 18 elettronica e prova di tenuta hanno richiesto meno delle ore stimate, ma il 19 il palombaro ne ha prese più di 5 contro le 3 previste per tutta la sottofase, e il 21 il guasto del sensore un\'ora e venti. Togliendo le ore una tantum la fine prevista è il 4 gennaio, oltre la scadenza del professore (31 dicembre): ritardo di circa 3 giorni. Si prosegue con il piano originale.' },
     { titolo: 'La siringa cambia la pressione meno del necessario', livello: 'basso',
-      nota: 'Le siringhe da 20 ml danno 4 kPa (misurato il 19), contro i 2–3 necessari. Resta da verificare con il motore montato, mercoledì.' },
-    { titolo: 'Meccanica del motore imprecisa', livello: 'medio',
-      nota: 'Il collegamento tra braccio e siringa deve avere pochissimo gioco: l\'asticella entra nel foro del braccio senza gioco (misurato il 21). Asticella tagliata il 21. La decisione sul piano B (motore passo-passo con vite) è prevista giovedì 22.' },
+      nota: 'Con il motore montato la siringa dà 2,6 kPa (misurato il 23, dopo 50 ml d\'acqua in più nella bottiglia), sopra i 2,5 richiesti.' },
+    { titolo: 'Meccanica del motore imprecisa', livello: 'basso',
+      nota: 'Misurato il 23: la pressione torna allo stesso valore entro un centesimo di kPa, quindi il piano B (motore passo-passo con vite) non serve secondo il criterio del piano. Resta un gioco di circa 10 gradi a ogni cambio di direzione, da compensare nel programma.' },
     { titolo: 'Palombaro difficile da tarare', livello: 'basso',
-      nota: 'La tensione superficiale torna quando la punta del palombaro si asciuga (21 ottobre), e la pressione dell\'aria esterna cambia di un kPa in pochi giorni. Rimedi: punta ribagnata con la soluzione, palombaro sempre sott\'acqua durante il controllo, punto di lavoro ritrovato a ogni sessione. Resta da tarare il palombaro di riserva.' },
+      nota: 'Tarato e verificato con il motore il 23. Il suo punto di equilibrio però cambia di giorno in giorno (meteo, temperatura, aria che si scioglie nell\'acqua): il programma dovrà ritrovarlo a ogni avvio.' },
     { titolo: 'Umidità sul sensore di pressione', livello: 'medio',
-      nota: 'Il 21 il sensore si è fermato di nuovo: schedina bagnata dalla condensa e filo di massa allentato. Asciugato, funziona. Rimedi: smalto protettivo (giovedì 22), bottiglia mai stretta con l\'acqua al collo, tappo aperto quando il banco resta fermo, e il programma che segnala subito se il sensore non risponde.' },
+      nota: 'Il 21 il sensore si è fermato per la condensa; asciugato, funziona. Lo smalto protettivo si mette quando il banco funziona. Il 23 la prova rapida di tenuta è peggiorata dopo molte aperture del tappo: va rifatta la prova di 10 minuti.' },
   ],
 });

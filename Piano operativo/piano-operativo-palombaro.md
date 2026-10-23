@@ -191,7 +191,7 @@ Sono le sottofasi che, se ritardano, fanno slittare la consegna. Le altre hanno 
 - **Quando:** mar 13 → mar 20 ott (lun 19 parte 1, mar 20 taratura fine: le pipette arrivano lun 19) · **Scadenza:** mar 20 ott · **Impegno:** ~3 h · **Prerequisiti:** contagocce, filo di rame, bottiglia (dalla farmacia, non serve aspettare Amazon)
 - **Obiettivo:** avere 3 palombari in galleggiamento neutro "per un pelo", con un marcatore rosso visibile alla telecamera.
 - **Attività:**
-  - [ ] Costruire 3 palombari: 1 principale e 2 di riserva. *(19 ott: P1 con ugello e R1 senza ugello costruiti; R2 da fare)*
+  - [x] Costruire 3 palombari: 1 principale e 2 di riserva. *(19 ott: P1 con ugello e R1 senza ugello costruiti. 23 ott: R1 e R2 non si fanno, decisione di Gabriele per risparmiare tempo)*
   - [ ] Primo tentativo in un bicchiere, poi taratura fine nella bottiglia chiusa.
   - [ ] Misurare e annotare per ognuno massa, volume esterno e volume della bolla.
   - [ ] Applicare il marcatore rosso in cima.
@@ -201,6 +201,7 @@ Sono le sottofasi che, se ritardano, fanno slittare la consegna. Le altre hanno 
   - **Lezioni del 19 ottobre** (diario): la taratura con le gocce non converge; si tara nella bottiglia d'uso, con il rame per la correzione fine (2 mm = 0,009 g); vicino alla superficie la tensione superficiale trattiene il palombaro fino a circa 0,3 g. **Rimedio confermato la sera del 19:** marcatore senza pieghe e una soluzione di detersivo (una goccia in un cucchiaino d'acqua) sul pelo dell'acqua e sulla punta del palombaro.
   - **Lezioni del 21 ottobre:** dopo due giorni a galla la punta si asciuga e il menisco torna: con tutta la corsa P1 non scende, ma si stacca di colpo con un colpetto o con una spinta rapida, e poi va a fondo. La pressione della stanza era scesa di 0,9 kPa (100,65 contro 101,55). Le soglie vanno misurate **con il palombaro già sott'acqua**, e durante il controllo non deve mai riemergere.
 - **Attenzione:** più è vicino al galleggiamento neutro a pressione ambiente, più margine avrà la siringa (vedi il calcolo nel foglio A4).
+- ✅ **Chiusa il 23 ottobre** con il solo P1, nella bottiglia nuova (la vecchia aveva fatto schiuma): comandato dal servo va a fondo a circa +2,2 kPa e risale dal fondo a circa +0,4 kPa, 5 volte su 5 (più 3 su 3 dopo l'acqua aggiunta). Soddisfa la proposta in kPa del 19 ottobre. Masse e volumi della bolla non misurati (pesate del 19 non valide), sostituiti dalle soglie in kPa.
 
 ### 1.3 · Tappo con il sensore di pressione
 - **Quando:** gio 15 → sab 17 ott · **Scadenza:** sab 17 ott · **Impegno:** ~3 h (più 24 h di indurimento dell'epossidica) · **Prerequisiti:** BMP280 arrivato, 1.1
@@ -262,14 +263,15 @@ Sono le sottofasi che, se ritardano, fanno slittare la consegna. Le altre hanno 
   - [x] Scegliere la geometria. *(18 ott: siringa da 20 ml, meno aria nella 0,5 L, due squadrette sovrapposte con il foro di lavoro a circa 35 mm; conti in `hardware/calibrazione-servo.md`)*
   - [x] Prolunga del braccio. *(18 ott: squadrette incollate con l'epossidica e 3 perni di rame)*
   - [x] Comprare 2 siringhe da 20 ml (lun 19) e misurarle. *(PIC Solution, 3,5 mm/ml, +4,0 kPa con 20 ml; 21 ott: cilindro 103 mm, alette 38 × 12 mm, spessore 1–2 mm)*
-  - [ ] Montare servo e siringa su una tavoletta di legno. *(21 ott: misure fatte, prolunga finita (perni accorciati, braccio libero tagliato), linee tracciate, servo posizionato e contorno tracciato; manca il fissaggio. Geometria in `hardware/calibrazione-servo.md`, sezione 8)*
-  - [ ] Realizzare il collegamento braccetto–stantuffo, il più possibile senza gioco. *(21 ott: asticella tagliata; firmware con i limiti di corsa pronto)*
-  - [ ] Misurare la corsa utile. *(18 ott: misure preliminari e problema di corsa e pressione in `hardware/calibrazione-servo.md`)*
-  - [ ] Costruire la tabella di calibrazione dal comando del servo ai ml spostati.
-  - [ ] Stimare la zona morta e il gioco meccanico.
+  - [x] Montare servo e siringa su una tavoletta di legno. *(21 e 23 ott: servo sdraiato con 5 viti e colla a caldo; siringa su distanziali, bloccata con viti e nastro isolante sull'aletta; `hardware/calibrazione-servo.md`, sezioni 8 e 9)*
+  - [x] Realizzare il collegamento braccetto–stantuffo, il più possibile senza gioco. *(23 ott: asticella da 110 mm, Z nel foro a 35 mm, L in un foro da 1,5 mm nella lamella dello stantuffo; c0 = 86)*
+  - [x] Misurare la corsa utile. *(23 ott: tra i comandi 36 e 146, 2,64 kPa dopo 50 ml d'acqua in più nella bottiglia grande)*
+  - [x] Costruire la tabella di calibrazione dal comando del servo ai ml spostati. *(23 ott: comando → ml e comando → kPa)*
+  - [x] Stimare la zona morta e il gioco meccanico. *(23 ott: circa 10° a ogni inversione, 15–200 Pa tra andata e ritorno)*
 - **Output:** banco montato, `hardware/calibrazione-servo.md`.
 - **Fatto quando:** escursione di pressione ≥ 2,5 kPa (circa 12–13 ml con la siringa da 20 ml), ripetibile entro ±25 Pa (circa ±0,12 ml) su 5 andate e ritorni. *(Fino al 18 ottobre era: corsa utile ≥ 8 ml entro ±0,1 ml. Cambiato perché con la siringa da 20 ml conta la pressione, non i ml.)*
 - **Attenzione:** **giovedì 22 ottobre si decide sul piano B** (passo-passo + barra filettata) se la ripetibilità non basta (rischio R3).
+- ✅ **Chiusa il 23 ottobre:** escursione 2,64 kPa tra i comandi 36 e 146, ripetibile entro ±11 Pa su 3 cicli (±9 Pa su 5 cicli prima dell'acqua aggiunta). Il criterio di R3 non scatta. Restano una zona morta di circa 10° a ogni inversione (compensabile nel programma) e l'estremo 26 da evitare (proposta: limite minimo a 36).
 
 ### 1.8 · Prova integrata e milestone M1
 - **Quando:** sab 24 → dom 25 ott · **Scadenza:** **dom 25 ott** · **Impegno:** ~2 h · **Prerequisiti:** 1.2, 1.6, 1.7
@@ -647,12 +649,12 @@ Sono le sottofasi che, se ritardano, fanno slittare la consegna. Le altre hanno 
 |---|---|---|---|
 | R1 | I componenti arrivano in ritardo | non arrivati entro **ven 16 ott** | acquisto in un negozio di elettronica a Roma; intanto si anticipano le sottofasi senza hardware (3.1, 2.4, 1.1) |
 | R2 | Il tappo perde aria | τ < 30 min dopo 2 tentativi (1.6) | tappo nuovo con passanti per tubo, nastro teflon; in ultima istanza ci si affida alla compensazione dell'anello interno |
-| R3 | Servo impreciso o con troppo gioco | ripetibilità peggiore di ±25 Pa (circa ±0,12 ml con la siringa da 20 ml) entro **gio 22 ott** (1.7) | passo-passo + barra filettata (circa 15 €, +2 giorni); oppure più volume d'aria per avere più risoluzione |
+| R3 | Servo impreciso o con troppo gioco | ripetibilità peggiore di ±25 Pa (circa ±0,12 ml con la siringa da 20 ml) entro **gio 22 ott** (1.7) *(23 ott: ripetibilità ±9–11 Pa, il criterio non scatta; zona morta di circa 10° a ogni inversione, da compensare nel programma)* | passo-passo + barra filettata (circa 15 €, +2 giorni); oppure più volume d'aria per avere più risoluzione |
 | R4 | Riconoscimento instabile (riflessi, luce) | perdite del palombaro entro **ven 30 ott** (2.2) | cambiare sfondo e luce, marcatore più grande o di altro colore |
 | R5 | Continuity Camera lenta o si disconnette | latenza > 150 ms o disconnessioni (2.3) | webcam USB (+20 €) |
-| R6 | Palombaro difficile da tarare | dopo 2 sessioni (1.2) | bilancino 0,01 g, palombari di riserva, zavorra a passi più piccoli. *(19 ott: in corso. Taratura nella bottiglia d'uso con il rame, detersivo contro la tensione superficiale, circuito chiuso già in pressione. 21 ott: dopo due giorni a galla P1 non scende più con tutta la corsa, ma si stacca di colpo con un colpetto o una spinta rapida della siringa: il menisco è tornato (punta asciutta) e la pressione esterna è calata di 0,9 kPa. Il palombaro non deve mai riemergere durante il controllo; lo zero si ritrova a ogni sessione)* |
+| R6 | Palombaro difficile da tarare | dopo 2 sessioni (1.2) | bilancino 0,01 g, palombari di riserva, zavorra a passi più piccoli. *(19 ott: in corso. Taratura nella bottiglia d'uso con il rame, detersivo contro la tensione superficiale, circuito chiuso già in pressione. 21 ott: dopo due giorni a galla P1 non scende più con tutta la corsa, ma si stacca di colpo con un colpetto o una spinta rapida della siringa: il menisco è tornato (punta asciutta) e la pressione esterna è calata di 0,9 kPa. Il palombaro non deve mai riemergere durante il controllo; lo zero si ritrova a ogni sessione. 23 ott: con la bottiglia aperta P1 era sul fondo, cioè troppo pesante; bottiglia cambiata per la schiuma e P1 ritarato: va a fondo a +2,2 kPa e risale a +0,4 kPa. Poco detersivo: troppo fa schiuma, l'acqua aggiunta lo diluisce)* |
 | R7 | L'ESP32 si riavvia quando si muove il servo | durante la 1.5 | alimentazione separata più potente, condensatore più grande, cavi più corti |
-| R8 | L'acqua raggiunge l'elettronica | sempre | vaschetta di contenimento, elettronica sopraelevata e lontana; asciugare e controllare prima di alimentare. *(19 ott, 20:25: il BMP280 del tappo smette di rispondere dopo un brownout; acqua sul sensore o pin sfilato, da verificare. **21 ott: confermato.** Schedina del sensore umida (condensa nell'aria satura della bottiglia, forse residui di detersivo), più il jumper GND della breadboard allentato: il chip risponde all'accensione e sparisce appena misura. Asciugata con il phon, funziona. Rimedi: smalto trasparente su schedina e saldature, lasciando libero il forellino del chip; mai stringere la bottiglia con l'acqua al collo; detersivo lontano dal tappo; tappo aperto quando il banco resta fermo per giorni; il firmware segnala ogni secondo se il sensore risponde)* |
+| R8 | L'acqua raggiunge l'elettronica | sempre | vaschetta di contenimento, elettronica sopraelevata e lontana; asciugare e controllare prima di alimentare. *(19 ott, 20:25: il BMP280 del tappo smette di rispondere dopo un brownout; acqua sul sensore o pin sfilato, da verificare. **21 ott: confermato.** Schedina del sensore umida (condensa nell'aria satura della bottiglia, forse residui di detersivo), più il jumper GND della breadboard allentato: il chip risponde all'accensione e sparisce appena misura. Asciugata con il phon, funziona. Rimedi: smalto trasparente su schedina e saldature, lasciando libero il forellino del chip; mai stringere la bottiglia con l'acqua al collo; detersivo lontano dal tappo; tappo aperto quando il banco resta fermo per giorni; il firmware segnala ogni secondo se il sensore risponde. 23 ott: smalto rimandato a quando il banco funziona, decisione di Gabriele)* |
 | R9 | Ritardo generale | una fase slitta > 3 giorni (T5) | usare il margine della fase successiva; poi "Ordine dei tagli" |
 
 ### Ordine dei tagli (se il tempo non basta)

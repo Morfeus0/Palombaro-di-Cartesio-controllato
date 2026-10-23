@@ -541,3 +541,63 @@ Nessuna attività sul progetto (altri impegni e materie).
 2. Smalto sul sensore (chip coperto), un'ora d'asciugatura, prova di funzionamento; tappo sulla bottiglia con la procedura e la prova rapida di tenuta; punta di P1 ribagnata con la soluzione.
 3. 1.7: fissaggio del servo e c0 (Blocco 4, passi 3–6), piega a L dell'asticella a 110 mm (se non è già fatta), foro nella nervatura e tacca nel disco, siringa sui distanziali, prove a vuoto.
 4. Come da calendario: calibrazione comando → kPa e decisione sul piano B (R3). Venerdì 23 resta il giorno di margine.
+
+## 2026-10-22 · nessuna attività registrata
+
+Nel progetto non ci sono registri né note per giovedì 22 (da confermare con Gabriele).
+
+## 2026-10-23 · sottofasi 1.7 (chiusa) e 1.2 (chiusa) · circa 5 h 40
+
+**Orario:** circa **18:20–23:59**. La divisione viene dal registro della seriale (`dati/2026-10-23/2026-10-23_seriale.log.gz`), dagli orari delle foto e dai comandi inviati al servo; i confini tra un blocco e l'altro sono approssimati di ±10 minuti. Lo smalto sul sensore è rimandato (decisione di Gabriele: si fa quando il banco funziona, per risparmiare tempo).
+
+| Orario | Durata | Attività |
+|---|---|---|
+| 18:20–18:57 | 37 min | 1.7: servo riposizionato (alberino verso il bordo lontano), 5 viti come pioli, colla a caldo |
+| 18:57–19:14 | 17 min | 1.7: registrazione, braccio verticale, c0 = 86 e direzione, firmware aggiornato |
+| 19:14–20:09 | 55 min | 1.7: asticella raddrizzata, M6, foro nella lamella dello stantuffo, tacca nel disco, distanziali |
+| 20:09–21:05 | 56 min | 1.7: asticella agganciata, siringa sui distanziali e allineata, asticella nuova più dritta, distanziali incollati e fascette |
+| 21:05–21:50 | 45 min | 1.7: prove a vuoto; la siringa scivolava, bloccata con viti e nastro isolante; tabella comando → ml |
+| 21:50–22:40 | 50 min | 1.7: isteresi (136 → 86 contro 36 → 86) e ricerca della causa; 1.2: P1 trovato sul fondo |
+| 22:40–22:48 | 8 min | circuito: tappo chiuso (22:43), prova rapida di tenuta superata |
+| 22:48–23:04 | 16 min | 1.7: prima calibrazione; 1.2: misura su P1 tirando fino a 26 |
+| 23:04–23:22 | 18 min | 1.2: bottiglia cambiata (schiuma di detersivo), P1 ritarato |
+| 23:22–23:35 | 13 min | 1.7 e 1.2: calibrazione con prova di tenuta, ripetibilità su 5 cicli |
+| 23:35–23:59 | 24 min | 1.7: +50 ml d'acqua nella bottiglia grande, menisco tornato (detersivo diluito), prova finale |
+
+**Fatto (1.7, chiusa):**
+- **Montaggio:** servo sdraiato su un fianco largo, alberino verso il bordo lontano, bloccato da 5 viti e colla a caldo; prolunga con il braccio verticale e la vite centrale; asticella da 110 mm con la Z nel foro a 35 mm e la L in un foro da 1,5 mm nella lamella dello stantuffo, fatto con lo spezzone d'acciaio scaldato; tacca nel disco di spinta; siringa n. 2 su due distanziali di cartone, bloccata con fascette, viti e nastro isolante attorno all'aletta in basso.
+- **c0 = 86**; aumentando il comando il braccio va verso la siringa e la pressione sale. Firmware con `ANGOLO_CENTRO = 86` (limiti 26–146).
+- **Comando → ml** (tubo staccato): 86 ≈ 11, 96 ≈ 9,5, 106 ≈ 7, 116 ≈ 6, 126 ≈ 4,5, 136 ≈ 3 ml, entro ±0,5 ml dal modello.
+- **Calibrazione** (bottiglia nuova, chiusura a 36): da 36 a 146 la pressione sale di 2,37 kPa; gioco tra andata e ritorno 15–90 Pa. Tabella in `hardware/calibrazione-servo.md`, sezione 9.
+- **Ripetibilità:** 5 cicli 36 ↔ 146 con escursione 2,403–2,421 kPa (**±9 Pa**). Dopo **50 ml d'acqua in più** nella bottiglia grande (meno aria nel circuito): **2,64–2,66 kPa** su 3 cicli (**±11 Pa**). **Il «Fatto quando» della 1.7 è raggiunto**: escursione ≥ 2,5 kPa, ripetibile entro ±25 Pa. Il criterio del rischio R3 (ripetibilità peggiore di ±25 Pa) non scatta.
+
+**Fatto (1.2, chiusa):**
+- P1 era sul fondo con la bottiglia aperta: rispetto al 21, stanza +0,6 kPa, acqua più fredda di circa 1,5 °C, un po' d'aria della bolla disciolta. Tirando fino a −2,2 kPa si stacca appena dal fondo.
+- Bottiglia cambiata (si era formata schiuma di detersivo), P1 ritarato con il metodo del 19. **Soglie misurate con il servo:** va a fondo a circa **+2,2 kPa**, risale dal fondo a circa **+0,4 kPa**. **5 discese e 5 risalite su 5** (scende in circa 2 s, risale in circa 2,5 s), poi altre 3 su 3 dopo l'acqua aggiunta.
+- È la **proposta di «Fatto quando» in kPa** del 19 (scende tra +2 e +7 kPa, risale dal fondo entro zero, 5 volte). **R1 e R2 non si fanno** (decisione di Gabriele).
+
+**Problemi (e cosa si è capito):**
+1. **Istruzioni poco chiare:** il verso dell'alberino («verso sinistra» intendeva la posizione, non la direzione), la tacca nel disco, i buchi nei distanziali poi corretti, le misure M4 e M5. Il contorno del servo è stato rifatto una volta. Da qui in avanti: riferimenti concreti, disegni, una sola versione definitiva per ogni blocco.
+2. **Le fascette non bastano** a tenere la siringa: il cilindro di plastica liscia scivola, il cartone cede. Servono fermi rigidi sull'aletta (viti).
+3. **Zona morta di circa 10° a ogni inversione** (gioco più attrito di primo distacco della gomma): circa 1 ml, cioè 150–200 Pa nella prima prova e 15–90 Pa nella seconda. È ripetibile, quindi si può compensare nel programma (compensazione del gioco).
+4. **Estremo 26:** tirando fino a 26 con il circuito in depressione la siringa si è spostata e la pressione è risalita di colpo di 0,24 kPa. Proposta: limite minimo a 36 (da decidere).
+5. **Il punto di equilibrio del palombaro cambia di giorno in giorno** di 1–2 kPa (meteo, temperatura, aria disciolta): il 21 era troppo leggero, il 23 troppo pesante. Lo stato CALIBRAZIONE dovrà ritrovarlo a ogni avvio.
+6. **Detersivo:** troppo fa schiuma (bottiglia da cambiare); l'acqua aggiunta senza detersivo lo diluisce e il menisco torna. Bastano 3–4 gocce di soluzione sul pelo dell'acqua.
+7. **Tenuta in peggioramento:** la prova rapida a +2,4–2,6 kPa ha dato 0,044, poi 0,074, poi 0,103 kPa tra 10 e 40 s (limite 0,05), dopo diverse aperture del tappo. Va rifatta la prova di 10 minuti della 1.6 e, se serve, stretto meglio il tappo.
+
+**Decisioni (e perché):**
+- **Smalto sul sensore rimandato** a quando il banco funziona (Gabriele): il sensore asciutto ha funzionato tutta la sera.
+- **R1 e R2 non si fanno** (Gabriele): si risparmia tempo, P1 basta.
+- **+50 ml d'acqua** nella bottiglia grande (meno aria nel circuito): l'escursione passa da 2,41 a 2,64 kPa. P1 va a fondo alla stessa pressione e risale un po' prima.
+- **Il gioco non si corregge adesso in meccanica:** è ripetibile e si misura bene con il sensore; si valuterà la compensazione nel programma.
+
+**Foto** (cartella Download): `IMG_1948`–`IMG_1951` servo con le viti; `IMG_1952`–`IMG_1954` asticella curva; `IMG_1955`–`IMG_1958` foro e tacca nello stantuffo; `IMG_1960`–`IMG_1964` siringa sui distanziali; `IMG_1965`–`IMG_1966` asticella nuova.
+
+**Stato a fine giornata:** banco montato e calibrato; 1.2 e 1.7 chiuse; circuito chiuso con la bottiglia nuova; registrazione fermata alle 23:59.
+
+**Ore:** 1.7 circa 4 h 57; 1.2 circa 42 min. **Totale circa 5 h 40.**
+
+**Prossimo passo (sabato 24 – domenica 25, 1.8 e milestone M1):**
+1. Prova di tenuta di 10 minuti (1.6) e tappo stretto meglio se serve.
+2. Decidere il limite minimo del servo (36?) e lo smalto quando il banco funziona.
+3. 1.8: comando manuale della posizione via seriale, prova di 10 minuti con P1, video di M1.

@@ -69,9 +69,10 @@ Dopo l'accensione bisogna aspettare 2–3 minuti prima della prima pesata.
 
 | | 1 | 2 | 3 | 4 | 5 |
 |---|---|---|---|---|---|
-| P1 scende con una leggera pressione | | | | | |
-| P1 risale lasciando | | | | | |
-| P1 risale **dal fondo** lasciando | | | | | |
+| P1 scende spingendo il servo a 146 (circa +2,4 kPa) | ✅ | ✅ | ✅ | ✅ | ✅ |
+| P1 risale **dal fondo** tornando a 36 (circa 0 kPa) | ✅ | ✅ | ✅ | ✅ | ✅ |
+
+23 ottobre, 23:29–23:34, bottiglia nuova, servo comandato dalla seriale: scende in circa 2 s, risale in circa 2,5 s. Soglie misurate a passi (23:22–23:27): **va a fondo a circa +2,2 kPa** (comando 136), **risale dal fondo a circa +0,4 kPa** (comando 66). Dopo +50 ml d'acqua e qualche goccia di soluzione sul pelo dell'acqua, altri 3 cicli su 3 (23:55–23:59). Senza soluzione fresca il menisco lo tratteneva anche a +2,6 kPa (23:52).
 
 ## Note
 
@@ -81,4 +82,5 @@ Dopo l'accensione bisogna aspettare 2–3 minuti prima della prima pesata.
 - **Fascia utile stretta:** P_neutra ≈ 101,5 kPa × E / V_bolla. Con circa 2 ml di bolla, la fascia +2…+3 kPa è larga circa 0,02 g, cioè meno di una goccia. Correzione fine solo con il rame (2 mm = 0,009 g).
 - **Tensione superficiale (ipotesi):** con la punta fuori dall'acqua il menisco trattiene il palombaro fino a circa 3 mN (0,3 g), più della spinta tolta dalla siringa (circa 0,02 g per kPa). **Confermato la sera del 19.** Il rimedio è una **soluzione** di detersivo (una goccia in un cucchiaino d'acqua; la goccia pura va a fondo) messa sul pelo dell'acqua e strofinata sulla punta del palombaro, più il **marcatore senza pieghe** (le pieghe trattengono aria). Con questi due accorgimenti P1 scende e risale con una sola corsa della siringa da 20 ml (21:51–21:56, tra 0 e circa +3,6 kPa).
 - **21 ottobre, dopo due giorni a galla** (circuito lasciato chiuso con la siringa collegata): con il tubo aperto la stanza è a **100,65 kPa** (101,55 la sera del 19). Chiuso a 20 ml alle 17:46 e spinto 2 ml alla volta fino a 0: **P1 non scende**. Scende con un **colpetto** sulla bottiglia o con una **spinta rapida** della siringa, staccandosi sempre **di colpo**: è di nuovo il menisco (punta asciutta), con 0,9 kPa in meno di margine. Pressioni non registrate: il sensore era guasto (vedi `hardware/collegamenti.md`). Le soglie vanno rimisurate **con P1 già sott'acqua**, ribagnando la punta con la soluzione alla prossima apertura del tappo.
+- **23 ottobre:** con la bottiglia aperta da due giorni P1 era **sul fondo** (stanza a 101,36 kPa contro 100,75 del 21, circa 1,5 °C in meno, aria della bolla disciolta). Tirando fino a −2,2 kPa si è staccato appena dal fondo. Nella bottiglia si era formata **schiuma** di detersivo: **bottiglia cambiata** e P1 ritarato con lo stesso metodo del 19 (marcatore, soluzione sulla punta e sul pelo dell'acqua). **R1 e R2 non si fanno** (decisione di Gabriele, per risparmiare tempo): la 1.2 si chiude con il solo P1. Le misure di massa e di bolla (pesate non valide del 19) sono sostituite dalle soglie in kPa.
 - **Nella gemella**, P1 a 5,44 g scende con una stretta della mano (10–20 kPa) e risale dal fondo; **con la siringa non scende** (P1 fermo a +12–14 kPa). R1 (50 cm di rame) scende a circa +8–10 kPa; con 2 cm di rame in più affonda anche a zero.

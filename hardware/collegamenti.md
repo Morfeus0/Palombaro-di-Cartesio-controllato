@@ -1,6 +1,6 @@
 # Collegamenti del banco elettronico (sottofase 1.5)
 
-> Stato al 21 ottobre 2026. Foto: `IMG_1841`, `IMG_1842` (banco dall'alto, cartella Download).
+> Stato al 23 ottobre 2026. Foto: `IMG_1841`, `IMG_1842` (banco dall'alto, cartella Download).
 
 ## Schema
 
@@ -48,7 +48,7 @@ Spegnimento in ordine inverso: prima l'alimentatore del servo, poi l'USB.
 | Ambiente | File | Cosa fa | Caricamento |
 |---|---|---|---|
 | `esp32dev` | `main.cpp` | prova del BMP280 del tappo (5 letture al secondo, diagnosi) | `pio run -e esp32dev -t upload --upload-port /dev/cu.usbserial-0001` |
-| `banco` | `prova_banco.cpp` | BMP280 a 50 Hz + servo su GPIO 18; comandi dalla seriale: un numero sposta il servo **entro `ANGOLO_CENTRO` ± 60°**, un grado ogni 15 ms; `s` fa l'escursione completa. Stampa il motivo dell'ultimo riavvio; se il sensore non risponde (o smette di rispondere: rilegge il registro d'identità ogni secondo) scrive `# BMP280 assente/perso`, riprova ogni secondo e il servo funziona lo stesso | `pio run -e banco -t upload --upload-port /dev/cu.usbserial-0001` |
+| `banco` | `prova_banco.cpp` | BMP280 a 50 Hz + servo su GPIO 18; comandi dalla seriale: un numero sposta il servo **entro `ANGOLO_CENTRO` ± 60°** (centro 86 dal 23 ottobre: limiti 26–146; l'estremo 26 è da evitare), un grado ogni 15 ms; `s` fa l'escursione completa. Stampa il motivo dell'ultimo riavvio; se il sensore non risponde (o smette di rispondere: rilegge il registro d'identità ogni secondo) scrive `# BMP280 assente/perso`, riprova ogni secondo e il servo funziona lo stesso | `pio run -e banco -t upload --upload-port /dev/cu.usbserial-0001` |
 | `diagnosi` | `diagnosi_i2c.cpp` | ogni 5 s: stato delle linee SDA e SCL (pull-up del modulo presente, linea a massa o flottante) e scansione di tutti gli indirizzi I²C con il chip ID | `pio run -e diagnosi -t upload --upload-port /dev/cu.usbserial-0001` |
 
 ## Misure (18 ottobre)

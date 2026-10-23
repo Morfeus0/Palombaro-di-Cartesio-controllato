@@ -24,7 +24,8 @@ constexpr uint8_t BMP280_REG_ID = 0xD0;
 constexpr uint8_t BMP280_ID = 0x58;
 constexpr int SERVO_US_MIN = 500;   // impulso a 0°
 constexpr int SERVO_US_MAX = 2400;  // impulso a 180°
-constexpr int ANGOLO_CENTRO = 90;   // comando con il braccio verticale: da correggere dopo il montaggio
+constexpr int ANGOLO_CENTRO = 86;   // comando con il braccio verticale (misurato il 23 ottobre)
+// Aumentando il comando il braccio va verso la siringa: spinge lo stantuffo e la pressione sale.
 constexpr int SEMI_CORSA = 60;      // oltre ±60° dalla verticale la prolunga può urtare il servo
 constexpr int ANGOLO_MIN = ANGOLO_CENTRO - SEMI_CORSA;
 constexpr int ANGOLO_MAX = ANGOLO_CENTRO + SEMI_CORSA;
