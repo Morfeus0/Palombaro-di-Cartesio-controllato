@@ -149,6 +149,7 @@ Con il foro a 35,25 mm: ±56° fanno 58 mm, cioè **circa 16,7 ml e circa 3,3 kP
   Gioco tra andata e ritorno 15–90 Pa nella parte centrale. Guadagno circa 0,15 kPa/ml (0,20 il 19: più aria nel circuito con la bottiglia nuova).
 - **Ripetibilità (23:29–23:34, 5 cicli 36 ↔ 146, 30 s per estremo):** escursione 2,421 / 2,412 / 2,411 / 2,412 / 2,403 kPa, cioè **±9 Pa**. Gli estremi scendono insieme di circa 17–20 Pa a ciclo: è il circuito (perdita lenta e cedimento delle pareti), non il servo.
 - **+50 ml d'acqua nella bottiglia grande** (23:4x) per ridurre l'aria: escursione **2,66 / 2,64 / 2,64 kPa** su 3 cicli (23:55–23:59), cioè **±11 Pa**. **Il «Fatto quando» della 1.7 è raggiunto** (≥ 2,5 kPa, ripetibile entro ±25 Pa).
+- **24 ottobre:** 10 cicli 36 ↔ 146 con escursione 2,62–2,67 kPa (P1 10 volte su 10); tenuta di 10 minuti al 79 %. Limite inferiore del firmware portato a **36** (`ANGOLO_MIN`).
 - **Tenuta da ricontrollare:** fermo a 146 (+2,6 kPa) il calo tra 10 e 40 s è stato 0,044 kPa alle 23:24, 0,074 alle 23:52 e 0,103 alle 23:56 (con la temperatura in salita di 0,2 °C, che dovrebbe far salire la pressione). Il limite della prova rapida è 0,05: va fatta la prova di 10 minuti della 1.6.
 
 ## Da fare nella 1.7 (dal piano)

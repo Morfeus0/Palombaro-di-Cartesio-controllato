@@ -277,13 +277,14 @@ Sono le sottofasi che, se ritardano, fanno slittare la consegna. Le altre hanno 
 - **Quando:** sab 24 → dom 25 ott · **Scadenza:** **dom 25 ott** · **Impegno:** ~2 h · **Prerequisiti:** 1.2, 1.6, 1.7
 - **Obiettivo:** comandare il servo dalla tastiera via seriale e veder scendere e risalire il palombaro.
 - **Attività:**
-  - [ ] Comando manuale della posizione via seriale.
-  - [ ] Prova di 10 minuti con il palombaro.
-  - [ ] Video di M1.
-  - [ ] Bozza del capitolo "Il banco sperimentale" (T4).
-  - [ ] Revisione settimanale (T5).
+  - [x] Comando manuale della posizione via seriale. *(24 ott: dashboard su localhost, `pc/dashboard/`, limiti 36–146)*
+  - [x] Prova di 10 minuti con il palombaro. *(24 ott: 10 cicli, P1 scende e risale 10 volte su 10)*
+  - [x] Video di M1. *(`media/2026-10-24_M1_palombaro-comandato-dal-servo.mp4`)*
+  - [x] Bozza del capitolo "Il banco sperimentale" (T4). *(`relazione/02-banco-sperimentale.md`)*
+  - [x] Revisione settimanale (T5). *(diario del 24 ottobre)*
 - **Output:** video di M1, bozza del capitolo.
 - **Fatto quando:** ✅ **M1 · il palombaro si muove con la siringa comandata dal servo.**
+- ✅ **Chiusa il 24 ottobre, M1 raggiunta** (un giorno prima della scadenza). Tenuta ricontrollata: 79 % dopo 10 minuti (requisito 70 %). Limite inferiore del servo portato a 36 nel firmware.
 
 ---
 
@@ -648,7 +649,7 @@ Sono le sottofasi che, se ritardano, fanno slittare la consegna. Le altre hanno 
 | ID | Rischio | Segnale di allarme (entro quando) | Piano B |
 |---|---|---|---|
 | R1 | I componenti arrivano in ritardo | non arrivati entro **ven 16 ott** | acquisto in un negozio di elettronica a Roma; intanto si anticipano le sottofasi senza hardware (3.1, 2.4, 1.1) |
-| R2 | Il tappo perde aria | τ < 30 min dopo 2 tentativi (1.6) | tappo nuovo con passanti per tubo, nastro teflon; in ultima istanza ci si affida alla compensazione dell'anello interno |
+| R2 | Il tappo perde aria | τ < 30 min dopo 2 tentativi (1.6) *(24 ott: dopo molte aperture resta il 79 % in 10 minuti, τ ≈ 43 min; era 93 %)* | tappo nuovo con passanti per tubo, nastro teflon; in ultima istanza ci si affida alla compensazione dell'anello interno |
 | R3 | Servo impreciso o con troppo gioco | ripetibilità peggiore di ±25 Pa (circa ±0,12 ml con la siringa da 20 ml) entro **gio 22 ott** (1.7) *(23 ott: ripetibilità ±9–11 Pa, il criterio non scatta; zona morta di circa 10° a ogni inversione, da compensare nel programma)* | passo-passo + barra filettata (circa 15 €, +2 giorni); oppure più volume d'aria per avere più risoluzione |
 | R4 | Riconoscimento instabile (riflessi, luce) | perdite del palombaro entro **ven 30 ott** (2.2) | cambiare sfondo e luce, marcatore più grande o di altro colore |
 | R5 | Continuity Camera lenta o si disconnette | latenza > 150 ms o disconnessioni (2.3) | webcam USB (+20 €) |

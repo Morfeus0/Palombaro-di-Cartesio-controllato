@@ -1,0 +1,127 @@
+<!doctype html>
+<html lang="it">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Banco del palombaro</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&display=swap">
+  <link rel="stylesheet" href="/style.css">
+  <script type="module" src="/app.js"></script>
+</head>
+<body>
+  <header class="testata">
+    <div class="marchio">
+      <span class="marchio-segno" aria-hidden="true"></span>
+      <div>
+        <p class="marchio-nome">Palombaro di Cartesio</p>
+        <p class="marchio-sotto">Banco · comando manuale del servo</p>
+      </div>
+    </div>
+    <ul class="stati" aria-label="Stato del banco">
+      <li class="pillola" id="stato-registro" data-livello="attesa"><span class="pillola-punto" aria-hidden="true"></span><span class="pillola-testo">Registro: in attesa</span></li>
+      <li class="pillola" id="stato-sensore" data-livello="attesa"><span class="pillola-punto" aria-hidden="true"></span><span class="pillola-testo">Sensore: —</span></li>
+      <li class="pillola pillola-numero" id="stato-letture"><span class="pillola-testo">— letture/s</span></li>
+    </ul>
+    <button class="bottone-tema" id="tema" type="button" aria-label="Cambia tema chiaro/scuro">
+      <span aria-hidden="true">◐</span>
+    </button>
+  </header>
+
+  <main class="griglia">
+    <section class="comando" aria-labelledby="titolo-comando">
+      <p class="occhiello">Comando</p>
+      <h1 id="titolo-comando" class="comando-titolo">Inclinazione del braccio</h1>
+
+      <div class="comando-valore">
+        <output id="angolo-comandato" class="numero-grande" for="cursore">—</output>
+        <p class="comando-dettaglio">
+          attuale <span id="angolo-attuale" class="mono">—</span> ·
+          stantuffo ≈ <span id="stima-ml" class="mono">—</span> ml
+        </p>
+      </div>
+
+      <div class="corsa">
+        <p class="corsa-estremo"><strong>Tira</strong> · P1 sale <span class="mono" id="etichetta-min">36°</span></p>
+        <div class="corsa-binario">
+          <input id="cursore" class="cursore" type="range" min="36" max="146" step="1" value="86"
+                 aria-label="Angolo del servo: in alto tira, in basso spinge" aria-valuetext="86 gradi">
+          <span class="corsa-centro" aria-hidden="true">centro</span>
+        </div>
+        <p class="corsa-estremo"><strong>Spinge</strong> · P1 scende <span class="mono" id="etichetta-max">146°</span></p>
+      </div>
+
+      <div class="passi" role="group" aria-label="Passi">
+        <button type="button" class="passo" data-passo="-10">▲ Tira 10°</button>
+        <button type="button" class="passo" data-passo="-2">▲ Tira 2°</button>
+        <button type="button" class="passo" data-passo="2">▼ Spinge 2°</button>
+        <button type="button" class="passo" data-passo="10">▼ Spinge 10°</button>
+      </div>
+
+      <div class="preset" role="group" aria-label="Posizioni fisse">
+        <button type="button" class="preset-voce" data-angolo="min">Tira tutto</button>
+        <button type="button" class="preset-voce" data-angolo="centro">Centro</button>
+        <button type="button" class="preset-voce" data-angolo="max">Spinge tutto</button>
+      </div>
+
+      <p class="esito" id="esito" role="status" aria-live="polite">Pronto.</p>
+      <p class="tasti">Tastiera: <kbd>↑</kbd> <kbd>↓</kbd> 2° · <kbd>Maiusc</kbd> + freccia 10° · <kbd>C</kbd> centro</p>
+    </section>
+
+    <section class="misure" aria-labelledby="titolo-misure">
+      <h2 id="titolo-misure" class="visivamente-nascosto">Misure</h2>
+      <div class="letture">
+        <div class="lettura lettura-eroe">
+          <p class="lettura-etichetta">Sovrapressione</p>
+          <p class="lettura-valore"><span id="dp" class="mono">—</span><span class="unita">kPa</span></p>
+          <p class="lettura-nota">rispetto a <span id="riferimento" class="mono">—</span> kPa
+            <button type="button" class="bottone-piccolo" id="azzera">Azzera qui</button></p>
+        </div>
+        <div class="lettura">
+          <p class="lettura-etichetta">Pressione assoluta</p>
+          <p class="lettura-valore lettura-valore-medio"><span id="p" class="mono">—</span><span class="unita">kPa</span></p>
+        </div>
+        <div class="lettura">
+          <p class="lettura-etichetta">Temperatura dell'aria</p>
+          <p class="lettura-valore lettura-valore-medio"><span id="temperatura" class="mono">—</span><span class="unita">°C</span></p>
+        </div>
+      </div>
+
+      <div class="grafici">
+        <div class="grafici-barra">
+          <p class="grafici-titolo">Andamento</p>
+          <div class="segmenti" role="group" aria-label="Finestra di tempo">
+            <button type="button" class="segmento" data-finestra="60" aria-pressed="false">1 min</button>
+            <button type="button" class="segmento" data-finestra="120" aria-pressed="true">2 min</button>
+            <button type="button" class="segmento" data-finestra="300" aria-pressed="false">5 min</button>
+          </div>
+        </div>
+        <div class="grafici-area" id="area-grafici">
+          <figure class="grafico">
+            <figcaption>Sovrapressione <span class="unita">kPa</span></figcaption>
+            <canvas id="grafico-pressione" role="img" aria-label="Sovrapressione nel tempo"></canvas>
+          </figure>
+          <figure class="grafico">
+            <figcaption>Comando del servo <span class="unita">gradi</span></figcaption>
+            <canvas id="grafico-servo" role="img" aria-label="Angolo del servo nel tempo"></canvas>
+          </figure>
+          <div class="suggerimento" id="suggerimento" hidden></div>
+        </div>
+        <details class="tabella">
+          <summary>Tabella: ultimi 10 secondi</summary>
+          <table>
+            <thead><tr><th scope="col">Ora</th><th scope="col">Δp [kPa]</th><th scope="col">p [kPa]</th><th scope="col">T [°C]</th><th scope="col">Servo [°]</th></tr></thead>
+            <tbody id="tabella-corpo"></tbody>
+          </table>
+        </details>
+      </div>
+
+      <div class="eventi">
+        <p class="grafici-titolo">Eventi</p>
+        <ol class="eventi-lista" id="eventi"></ol>
+      </div>
+    </section>
+  </main>
+</body>
+</html>

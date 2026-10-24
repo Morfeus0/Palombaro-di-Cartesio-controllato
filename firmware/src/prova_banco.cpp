@@ -27,7 +27,9 @@ constexpr int SERVO_US_MAX = 2400;  // impulso a 180°
 constexpr int ANGOLO_CENTRO = 86;   // comando con il braccio verticale (misurato il 23 ottobre)
 // Aumentando il comando il braccio va verso la siringa: spinge lo stantuffo e la pressione sale.
 constexpr int SEMI_CORSA = 60;      // oltre ±60° dalla verticale la prolunga può urtare il servo
-constexpr int ANGOLO_MIN = ANGOLO_CENTRO - SEMI_CORSA;
+// Il minimo è 36 e non 26 (= centro − 60): il 23 ottobre, tirando fino a 26 con il circuito
+// in depressione, la siringa si è spostata. A 36 lo stantuffo è a circa 18 ml, con margine dal bordo.
+constexpr int ANGOLO_MIN = 36;
 constexpr int ANGOLO_MAX = ANGOLO_CENTRO + SEMI_CORSA;
 constexpr uint32_t PERIODO_LETTURA_US = 20000;  // 50 Hz
 constexpr uint32_t PASSO_MS = 15;               // 1° ogni 15 ms: circa 1,8 s per 120°

@@ -601,3 +601,44 @@ Nel progetto non ci sono registri né note per giovedì 22 (da confermare con Ga
 1. Prova di tenuta di 10 minuti (1.6) e tappo stretto meglio se serve.
 2. Decidere il limite minimo del servo (36?) e lo smalto quando il banco funziona.
 3. 1.8: comando manuale della posizione via seriale, prova di 10 minuti con P1, video di M1.
+
+## 2026-10-24 · sottofase 1.8 (chiusa) e milestone M1 · circa 1 h 12
+
+**Orario:** circa **15:10–16:22**. Divisione dal registro della seriale (`dati/2026-10-24/2026-10-24_seriale.log.gz`) e dagli orari dei video. Mentre si collegava il banco è stata scritta la bozza della dashboard (lavoro di Claude, non contato nelle ore).
+
+| Orario | Durata | Attività |
+|---|---|---|
+| 15:10–15:24 | 14 min | A: ESP32 collegato (registrazione dalle 15:24); B: inizio dello scambio dei tappi |
+| 15:24–15:38 | 14 min | B: tappo del sensore; il sensore si perde alle 15:28:48 avvitando il tappo, pin reinseriti, di nuovo a posto alle 15:35:03 |
+| 15:38–15:50 | 12 min | C: prova di tenuta di 10 minuti |
+| 15:50–16:06 | 16 min | D: circuito richiuso alla pressione della stanza, 10 cicli con P1, video di M1 |
+| 16:06–16:22 | 16 min | E: P1 tenuto a mano a mezz'acqua dalla dashboard (16:14–16:16), video; limite del servo portato a 36 |
+
+**Fatto (1.8, chiusa, e M1):**
+- **Comando manuale via seriale:** dalla nuova **dashboard** su localhost (`pc/dashboard/`): cursore verticale (in alto tira e P1 sale), passi di 2° e 10°, posizioni fisse, tastiera; letture in diretta di pressione, sovrapressione e temperatura; due grafici (sovrapressione e comando) con mirino; elenco degli eventi; stato del registro e del sensore, con l'allarme "valori fuori scala" (il caso dei 2,5 kPa e 180 °C). Il server legge il registro e scrive il file dei comandi: la porta seriale resta del solo registratore. Limiti 36–146. 8 test del modulo che legge il registro.
+- **C, tenuta di 10 minuti:** a 146 la sovrapressione passa da +1,69 a +1,34 kPa, cioè **resta il 79 %** (τ ≈ 43 min; il requisito è il 70 %). Il 18 e il 19 era il 93–94 %: dopo le tante aperture del tappo tiene un po' peggio.
+- **D, prova di 10 minuti:** 10 cicli 36 ↔ 146, **P1 scende e risale 10 volte su 10**, escursione 2,62–2,67 kPa, nessun errore del sensore. Video di M1: `media/2026-10-24_M1_palombaro-comandato-dal-servo.mp4` (2 min, sincronizzato con il registro entro un secondo).
+- **E, prova a mano:** P1 tenuto a mezz'acqua comandando il servo con la dashboard (262 comandi in 70 s, pressione attorno a +1,3…+1,7 kPa). Video: `media/2026-10-24_prova-E_palombaro-a-mano-dalla-dashboard.mp4`.
+- **Firmware del banco:** `ANGOLO_MIN = 36` (prima 26), caricato alle 16:22 («limiti 36-146»).
+- **Bozza del capitolo 2** della relazione: `relazione/02-banco-sperimentale.md`.
+
+**Problemi (e cosa si è capito):**
+1. **Il sensore si è perso avvitando il tappo** (15:28:48, errori I²C e poi la solita firma 2,48 kPa / 180 °C). Pin e jumper reinseriti e ESP32 riacceso: di nuovo a posto. Il cavo non deve ruotare né tirare: si tiene fermo il tappo e si gira la bottiglia.
+2. **Il circuito si era chiuso sotto la pressione della stanza** (−0,9 kPa), perché il servo si è mosso con il tubo già infilato durante la riaccensione: a 146 si arrivava solo a +1,7 kPa e P1 non scendeva. Riaperto e richiuso a 36 alla pressione della stanza: tutto a posto.
+3. **Meteo:** la stanza era a 100,90 kPa (101,31 il 23 sera). Con il circuito chiuso alla pressione della stanza, a 146 si arriva proprio alla soglia di P1 del giorno prima: ha funzionato, anche grazie al tappo scaldato dalle mani (26,4 °C). Il punto di lavoro va ritrovato a ogni avvio.
+4. **Dashboard:** il numero del comando non seguiva i comandi dati da fuori (le sequenze automatiche). Corretto: segue anche gli "inviato" del registro.
+5. **Per la fase 2:** il nastro rosso del livello dell'acqua ha lo stesso colore del marcatore di P1, quindi va cambiato prima del riconoscimento per colore.
+
+**Decisioni (e perché):**
+- **Limite inferiore del servo a 36** (Gabriele): a 26 la siringa si era spostata; a 36 lo stantuffo resta a circa 18 ml.
+- **Dashboard come base del prodotto finale** (Gabriele): oggi comanda l'angolo; il verso del cursore è già quello del futuro comando della quota.
+
+**Stato a fine giornata:** **M1 raggiunta** (il palombaro si muove con la siringa comandata dal servo), un giorno prima della scadenza di domenica 25. F1 chiusa.
+
+**Ore:** 1.8 circa 1 h 12.
+
+### Revisione settimanale (T5), 19–25 ottobre
+- **Milestone della settimana:** M1 **raggiunta** il 24 ottobre (scadenza 25).
+- **Ore della settimana:** 19: 5 h 35 · 20: 0 · 21: 2 h 55 · 22: 0 · 23: 5 h 40 · 24: 1 h 12 → **circa 15 h 20**, contro le circa 14 h previste (2 h al giorno). Tutta la fase F1: circa 36 h contro le 20 h del piano; la differenza viene soprattutto dal tappo con il sensore (circa 16 h, di cui 4,5 una tantum per imparare a saldare) e dal palombaro (circa 6 h).
+- **Rischi:** R2 (tenuta) peggiorata ma nei limiti (79 %); R3 (gioco del servo) non scatta, resta la zona morta di circa 10° da compensare; R6 (palombaro) chiuso con P1, punto di lavoro che cambia con meteo e temperatura; R8 (acqua sull'elettronica) attivo, smalto da fare.
+- **Settimana prossima (F2, dal piano):** 2.1 postazione di ripresa (lun 26 – mar 27), 2.2 riconoscimento del palombaro nel video (mar 27 – ven 30), 2.3 calibrazione della misura (ven 30 – dom 1), 2.4 regole di dialogo computer–scheda (dom 1 – lun 2). Prima della 2.1: nastro del livello di un altro colore.

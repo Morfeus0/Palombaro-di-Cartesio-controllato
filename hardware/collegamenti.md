@@ -1,6 +1,6 @@
 # Collegamenti del banco elettronico (sottofase 1.5)
 
-> Stato al 23 ottobre 2026. Foto: `IMG_1841`, `IMG_1842` (banco dall'alto, cartella Download).
+> Stato al 24 ottobre 2026. Foto: `IMG_1841`, `IMG_1842` (banco dall'alto, cartella Download).
 
 ## Schema
 
@@ -48,7 +48,7 @@ Spegnimento in ordine inverso: prima l'alimentatore del servo, poi l'USB.
 | Ambiente | File | Cosa fa | Caricamento |
 |---|---|---|---|
 | `esp32dev` | `main.cpp` | prova del BMP280 del tappo (5 letture al secondo, diagnosi) | `pio run -e esp32dev -t upload --upload-port /dev/cu.usbserial-0001` |
-| `banco` | `prova_banco.cpp` | BMP280 a 50 Hz + servo su GPIO 18; comandi dalla seriale: un numero sposta il servo **entro `ANGOLO_CENTRO` ± 60°** (centro 86 dal 23 ottobre: limiti 26–146; l'estremo 26 è da evitare), un grado ogni 15 ms; `s` fa l'escursione completa. Stampa il motivo dell'ultimo riavvio; se il sensore non risponde (o smette di rispondere: rilegge il registro d'identità ogni secondo) scrive `# BMP280 assente/perso`, riprova ogni secondo e il servo funziona lo stesso | `pio run -e banco -t upload --upload-port /dev/cu.usbserial-0001` |
+| `banco` | `prova_banco.cpp` | BMP280 a 50 Hz + servo su GPIO 18; comandi dalla seriale: un numero sposta il servo **entro `ANGOLO_CENTRO` ± 60°** (centro 86 dal 23 ottobre; dal 24 ottobre limiti **36–146**: a 26 la siringa si era spostata), un grado ogni 15 ms; `s` fa l'escursione completa. Stampa il motivo dell'ultimo riavvio; se il sensore non risponde (o smette di rispondere: rilegge il registro d'identità ogni secondo) scrive `# BMP280 assente/perso`, riprova ogni secondo e il servo funziona lo stesso | `pio run -e banco -t upload --upload-port /dev/cu.usbserial-0001` |
 | `diagnosi` | `diagnosi_i2c.cpp` | ogni 5 s: stato delle linee SDA e SCL (pull-up del modulo presente, linea a massa o flottante) e scansione di tutti gli indirizzi I²C con il chip ID | `pio run -e diagnosi -t upload --upload-port /dev/cu.usbserial-0001` |
 
 ## Misure (18 ottobre)
@@ -63,3 +63,10 @@ Spegnimento in ordine inverso: prima l'alimentatore del servo, poi l'USB.
 - **Tappo aperto: schedina umida.** Continuità dei 4 fili fino alla schedina e nessun corto. VCC–GND (stessa polarità dei puntali) da 45,5 a 122,9 kΩ dopo il phon tiepido; CSB–VCC 8,7–9,2 kΩ (il pull-up della scheda, come il 16). Riacceso alle 18:59:51: 50 letture al secondo, rumore ±7 Pa, nessuna perdita fino alle 19:55.
 - Il giunto del pin bianco (trefoli non stagnati sotto, rame scoperto, niente manicotto) è stato rifatto, ma non era il guasto.
 - **Da fare:** smalto trasparente su schedina e saldature, con il chip coperto dal nastro durante la verniciatura; manicotto di colla a caldo sul giunto del pin bianco, con il filo dritto.
+
+## Programmi sul PC (dal 24 ottobre)
+
+| Programma | Cosa fa | Avvio (dalla cartella del progetto) |
+|---|---|---|
+| `pc/registra_seriale.py` | registra la seriale su `dati/<giorno>/<giorno>_seriale.log` e inoltra all'ESP32 i comandi scritti in `dati/<giorno>/comandi.txt`; è l'unico programma che apre la porta | `nohup .venv/bin/python pc/registra_seriale.py dati/<giorno>/<giorno>_seriale.log 21600 dati/<giorno>/comandi.txt > /dev/null 2>&1 &` |
+| `pc/dashboard/server.py` | dashboard su **http://localhost:8780**: segue il registro e scrive i comandi del servo (36–146) nel file dei comandi | `.venv/bin/python pc/dashboard/server.py` (Ctrl+C per chiuderla; la registrazione continua) |

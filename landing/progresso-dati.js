@@ -11,13 +11,13 @@
    5. Aggiornare `sintesi`, `diario` (in cima la voce nuova), `prossimi` e `rischi`.
    Le date sono AAAA-MM-GG; `ore` è l'impegno stimato nel piano operativo e fa da peso. */
 window.PalombaroProgresso = Object.freeze({
-  aggiornato: '2026-10-23',
+  aggiornato: '2026-10-24',
   provvisorio: false, // true finché le stime non sono confrontate con il diario della sera
   consegna: '2026-12-13',
   scadenzaProf: '2026-12-31',
   oreAlGiorno: 2, // media dichiarata, tutti i giorni: base del prospetto di fine progetto
 
-  sintesi: 'Serata lunga, quasi sei ore, che chiude due sottofasi. Motore e siringa sono montati sulla tavoletta: il motore spinge e tira lo stantuffo e cambia la pressione nella bottiglia di 2,6 kPa, sopra i 2,5 richiesti, tornando ogni volta allo stesso valore entro un centesimo di kPa. Per arrivarci sono serviti una siringa bloccata con le viti, un\'asticella rifatta più dritta e 50 ml d\'acqua in più nella bottiglia. Il palombaro, finito sul fondo dopo due giorni, è stato ritarato in una bottiglia nuova: comandato dal motore scende e risale cinque volte su cinque. Resta un difetto noto: a ogni cambio di direzione il motore perde circa 10 gradi, un gioco costante che si potrà correggere nel programma. Con queste due chiusure il progetto torna in linea con il calendario (circa un giorno di ritardo). Le ore spese restano più del previsto: togliendo quelle una tantum, la fine prevista è il 4 gennaio. Si prosegue con il piano originale.',
+  sintesi: 'Secondo traguardo raggiunto (M1), un giorno prima della scadenza: il palombaro si muove con la siringa comandata dal motore. Nella prova di dieci minuti è sceso e risalito dieci volte su dieci, e con la nuova dashboard, la pagina di comando del banco, è stato tenuto a mano a mezz\'acqua. La bottiglia tiene ancora la pressione, un po\' meno dei primi giorni. Il sensore si è scollegato una volta avvitando il tappo ed è stato rimesso a posto in pochi minuti. Con la fase di costruzione chiusa il progetto è in anticipo di circa un giorno sul calendario. Le ore spese per costruire il banco sono state quasi il doppio del previsto: togliendo quelle una tantum, la fine prevista è il 30 dicembre, prima della scadenza del professore. Dalla settimana prossima si passa alla telecamera.',
 
   fasi: [
     {
@@ -44,7 +44,7 @@ window.PalombaroProgresso = Object.freeze({
         { id: '1.5', nome: 'Elettronica minima', da: '2026-10-18', a: '2026-10-18', ore: 3, fatto: 100, oreEffettive: 0.58, nota: 'Chiusa il 18 ottobre: pressione letta 50 volte al secondo, il motore si muove senza far riavviare la scheda.' },
         { id: '1.6', nome: 'Prova di tenuta della bottiglia', da: '2026-10-18', a: '2026-10-18', ore: 1.5, fatto: 100, oreEffettive: 0.32, nota: 'Chiusa il 18 ottobre al primo tentativo: dopo 10 minuti resta il 93 % della pressione (ne bastava il 70 %).' },
                 { id: '1.7', nome: 'Meccanica motore e siringa', da: '2026-10-17', a: '2026-10-22', ore: 3, fatto: 100, oreEffettive: 7.2, nota: 'Chiusa il 23 ottobre: il motore cambia la pressione di 2,6 kPa e torna sempre allo stesso punto (entro un centesimo di kPa). A ogni cambio di direzione perde circa 10 gradi, da correggere nel programma.' },
-        { id: '1.8', nome: 'Prova d\'insieme e video', da: '2026-10-24', a: '2026-10-25', ore: 2, fatto: 0 },
+                { id: '1.8', nome: 'Prova d\'insieme e video', da: '2026-10-24', a: '2026-10-25', ore: 2, fatto: 100, oreEffettive: 1.2, nota: 'Chiusa il 24 ottobre: il palombaro scende e risale 10 volte su 10 comandato dal motore, e si tiene a mezz\'acqua a mano da una nuova dashboard. Video registrati.' },
       ],
     },
     {
@@ -130,9 +130,17 @@ window.PalombaroProgresso = Object.freeze({
     { data: '2026-10-18', fatto: 16.2 },
     { data: '2026-10-19', fatto: 18.0 },
     { data: '2026-10-21', fatto: 18.4 },
+    { data: '2026-10-23', fatto: 21.3 },
   ],
 
   diario: [
+    { data: '2026-10-24', testo: [
+      'Secondo traguardo raggiunto (M1), un giorno prima della scadenza: il palombaro si muove con la siringa comandata dal motore.',
+      'Prova di 10 minuti: il motore spinge e tira per dieci volte, e il palombaro scende e risale tutte le dieci volte. Registrato il video.',
+      'Pronta la prima versione della dashboard, la pagina di comando del banco: un cursore per muovere il motore, la pressione in diretta, i grafici e gli avvisi. Con questa il palombaro è stato tenuto a mano a mezz\'acqua.',
+      'La bottiglia tiene ancora la pressione (79 % dopo 10 minuti, ne serve il 70 %), un po\' meno dei giorni scorsi dopo le tante aperture del tappo. Il sensore si è scollegato una volta avvitando il tappo: rimesso a posto in pochi minuti.',
+      'Scritta la bozza del capitolo della relazione sul banco sperimentale. Dalla settimana prossima si passa alla telecamera.',
+    ] },
     { data: '2026-10-23', testo: [
       'Serata lunga, quasi sei ore: motore e siringa montati sulla tavoletta e collegati da un\'asticella d\'acciaio. Il motore spinge e tira lo stantuffo, e la scheda legge la pressione intanto.',
       'Le fascette non bastavano a tenere ferma la siringa: ora la bloccano delle viti. L\'asticella, un po\' storta, è stata rifatta con un filo nuovo.',
@@ -195,8 +203,9 @@ window.PalombaroProgresso = Object.freeze({
   ],
 
   prossimi: [
-    'Sabato 24 – domenica 25: prova di tenuta della bottiglia nuova, poi il palombaro mosso dal motore comandato dalla tastiera, e il video del secondo traguardo (M1).',
-    'Lunedì 26: inizio della fase 2 (postazione di ripresa con la telecamera).',
+    'Lunedì 26 – martedì 27: postazione di ripresa con la telecamera (con un nastro di livello di un altro colore, per non confonderlo con il marcatore rosso del palombaro).',
+    'Martedì 27 – venerdì 30: riconoscimento del palombaro nel video.',
+    'Venerdì 30 – lunedì 2: calibrazione della misura della quota e regole di dialogo tra computer e scheda.',
   ],
 
   rischi: [
@@ -208,7 +217,7 @@ window.PalombaroProgresso = Object.freeze({
       nota: 'Misurato il 23: la pressione torna allo stesso valore entro un centesimo di kPa, quindi il piano B (motore passo-passo con vite) non serve secondo il criterio del piano. Resta un gioco di circa 10 gradi a ogni cambio di direzione, da compensare nel programma.' },
     { titolo: 'Palombaro difficile da tarare', livello: 'basso',
       nota: 'Tarato e verificato con il motore il 23. Il suo punto di equilibrio però cambia di giorno in giorno (meteo, temperatura, aria che si scioglie nell\'acqua): il programma dovrà ritrovarlo a ogni avvio.' },
-    { titolo: 'Umidità sul sensore di pressione', livello: 'medio',
-      nota: 'Il 21 il sensore si è fermato per la condensa; asciugato, funziona. Lo smalto protettivo si mette quando il banco funziona. Il 23 la prova rapida di tenuta è peggiorata dopo molte aperture del tappo: va rifatta la prova di 10 minuti.' },
+    { titolo: 'Umidità e contatti del sensore di pressione', livello: 'medio',
+      nota: 'Il 21 la condensa, il 24 un contatto mosso avvitando il tappo: entrambi risolti in pochi minuti, e ora sia la scheda sia la dashboard avvisano subito. Lo smalto protettivo si mette quando il banco è finito. La tenuta della bottiglia è scesa dal 93 al 79 % dopo 10 minuti: ancora sopra il 70 % richiesto.' },
   ],
 });

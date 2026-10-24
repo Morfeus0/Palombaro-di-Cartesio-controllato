@@ -4,8 +4,22 @@
     {
       "name": "landing",
       "runtimeExecutable": "python3",
-      "runtimeArgs": ["-m", "http.server", "8765", "--directory", "landing"],
+      "runtimeArgs": [
+        "-m",
+        "http.server",
+        "8765",
+        "--directory",
+        "landing"
+      ],
       "port": 8765
+    },
+    {
+      "name": "dashboard",
+      "runtimeExecutable": ".venv/bin/python",
+      "runtimeArgs": [
+        "pc/dashboard/server.py"
+      ],
+      "port": 8780
     }
   ]
 }
