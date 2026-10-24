@@ -26,3 +26,10 @@ relazione/*.log
 relazione/*.out
 relazione/*.toc
 relazione/*.synctex.gz
+
+# Telecamera (2.1): anteprime, video di prova e file di passaggio; restano versionati gli orari dei fotogrammi
+dati/**/telecamera/*.mp4
+dati/**/telecamera/*.jpg
+dati/**/telecamera/stato.json
+dati/**/telecamera/comandi/
+dati/**/*.out

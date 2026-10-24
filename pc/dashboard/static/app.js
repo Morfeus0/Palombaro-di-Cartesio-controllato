@@ -14,7 +14,7 @@ const LIMITI_PLAUSIBILI = { pMin: 80, pMax: 120, tMin: -10, tMax: 60 };
 const $ = (id) => document.getElementById(id);
 const el = {
   cursore: $("cursore"), comandato: $("angolo-comandato"), attuale: $("angolo-attuale"), ml: $("stima-ml"),
-  esito: $("esito"), dp: $("dp"), p: $("p"), temperatura: $("temperatura"), riferimento: $("riferimento"),
+  esito: $("esito"), dp: $("dp"), dpComando: $("dp-comando"), p: $("p"), temperatura: $("temperatura"), riferimento: $("riferimento"),
   registro: $("stato-registro"), sensore: $("stato-sensore"), letture: $("stato-letture"),
   eventi: $("eventi"), tabella: $("tabella-corpo"), area: $("area-grafici"), suggerimento: $("suggerimento"),
   etichettaMin: $("etichetta-min"), etichettaMax: $("etichetta-max"),
@@ -198,12 +198,15 @@ function preparaComandi() {
     inviaLimitato(Number(el.cursore.value));
   });
   el.cursore.addEventListener("change", () => { clearTimeout(inSospeso); invia(Number(el.cursore.value)); });
-  for (const b of document.querySelectorAll(".passo")) b.addEventListener("click", () => passo(Number(b.dataset.passo)));
+  for (const b of document.querySelectorAll(".comando .passo")) b.addEventListener("click", () => passo(Number(b.dataset.passo)));
   const fissi = { min: () => stato.config.angoloMin, centro: () => stato.config.angoloCentro, max: () => stato.config.angoloMax };
   for (const b of document.querySelectorAll(".preset-voce")) b.addEventListener("click", () => invia(fissi[b.dataset.angolo]()));
-  $("azzera").addEventListener("click", () => {
+  // Due pulsanti, stesso zero: uno vicino ai comandi, uno nelle letture.
+  const azzera = () => {
     if (stato.ultima) { stato.riferimento = stato.ultima.p; mostraEsito(`Zero di Δp a ${numero(stato.riferimento, 3)} kPa.`); }
-  });
+  };
+  $("azzera").addEventListener("click", azzera);
+  $("azzera-comando").addEventListener("click", azzera);
 
   // In alto si tira, in basso si spinge: freccia su = angolo più piccolo.
   document.addEventListener("keydown", (e) => {
@@ -214,10 +217,10 @@ function preparaComandi() {
     else if ((e.key === "c" || e.key === "C") && !e.metaKey && !e.ctrlKey) invia(stato.config.angoloCentro);
   });
 
-  for (const b of document.querySelectorAll(".segmento")) {
+  for (const b of document.querySelectorAll(".grafici .segmento")) {
     b.addEventListener("click", () => {
       stato.finestra = Number(b.dataset.finestra);
-      for (const altro of document.querySelectorAll(".segmento")) altro.setAttribute("aria-pressed", String(altro === b));
+      for (const altro of document.querySelectorAll(".grafici .segmento")) altro.setAttribute("aria-pressed", String(altro === b));
     });
   }
 
@@ -273,6 +276,7 @@ function aggiornaLetture() {
   el.p.textContent = numero(u.p, 3);
   el.temperatura.textContent = numero(u.T, 1);
   el.dp.textContent = conSegno(u.p - stato.riferimento, 3);
+  el.dpComando.textContent = conSegno(u.p - stato.riferimento, 2);
   el.riferimento.textContent = numero(stato.riferimento, 3);
   el.attuale.textContent = `${u.servo}°`;
 }

@@ -1,0 +1,31 @@
+22:19:29 cartella: /Users/gabrielecaruso/Progetto Automatica/dati/2026-10-24/telecamera (Ctrl+C per chiudere)
+22:19:29 telecamera aperta: Fotocamera di iPhone di Gabriele via ffmpeg, 1920 × 1080 a 30 fps
+22:26:16 cartella: /Users/gabrielecaruso/Progetto Automatica/dati/2026-10-24/telecamera (Ctrl+C per chiudere)
+22:26:16 telecamera aperta: Fotocamera di iPhone di Gabriele via ffmpeg, 1920 × 1080 a 30 fps
+22:26:19 fotogrammi troppo veloci (69 fps): sono ripetuti, l'immagine è in ritardo
+22:28:15 colonna: [1082, 88, 330, 984]
+22:28:18 registrazione di 3 s: 2026-10-24_postazione_01.mp4
+22:28:21 registrazione chiusa: 176 fotogrammi in 2026-10-24_postazione_01.mp4
+22:32:54 cartella: /Users/gabrielecaruso/Progetto Automatica/dati/2026-10-24/telecamera (Ctrl+C per chiudere)
+22:32:54 telecamera aperta: Fotocamera di iPhone di Gabriele via ffmpeg, 1920 × 1080 a 60 fps
+22:35:43 colonna: [787, 17, 309, 1063]
+22:41:12 riferimento salvato
+22:41:14 registrazione di 120 s: 2026-10-24_postazione_01.mp4
+22:43:14 registrazione chiusa: 7076 fotogrammi in 2026-10-24_postazione_01.mp4
+22:52:13 riferimento salvato
+22:52:14 registrazione di 120 s: 2026-10-24_postazione_02.mp4
+22:54:14 registrazione chiusa: 7033 fotogrammi in 2026-10-24_postazione_02.mp4
+22:58:25 registrazione di 120 s: 2026-10-24_postazione_03.mp4
+22:58:45 registrazione chiusa: 1122 fotogrammi in 2026-10-24_postazione_03.mp4
+22:59:57 registrazione di 120 s: 2026-10-24_postazione_04.mp4
+23:00:04 registrazione chiusa: 397 fotogrammi in 2026-10-24_postazione_04.mp4
+23:16:29 interruzione di 0.5 s senza fotogrammi
+23:27:51 cartella: /Users/gabrielecaruso/Progetto Automatica/dati/2026-10-24/telecamera (Ctrl+C per chiudere)
+23:27:51 telecamera aperta: Fotocamera di iPhone di Gabriele via ffmpeg, 1920 × 1080 a 60 fps
+23:27:54 fotogrammi troppo veloci (553 fps): sono ripetuti, l'immagine è in ritardo
+23:30:47 colonna tolta: misure su tutta l'immagine
+23:30:49 colonna tolta: misure su tutta l'immagine
+23:31:28 colonna: [776, 37, 296, 1043]
+23:32:32 registrazione di 120 s: 2026-10-24_postazione_05.mp4
+23:33:13 registrazione chiusa: 2288 fotogrammi in 2026-10-24_postazione_05.mp4
+23:42:04 nessun fotogramma da 5 s: riavvio la telecamera

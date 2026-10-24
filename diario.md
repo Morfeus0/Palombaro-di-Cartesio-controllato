@@ -642,3 +642,65 @@ Nel progetto non ci sono registri né note per giovedì 22 (da confermare con Ga
 - **Ore della settimana:** 19: 5 h 35 · 20: 0 · 21: 2 h 55 · 22: 0 · 23: 5 h 40 · 24: 1 h 12 → **circa 15 h 20**, contro le circa 14 h previste (2 h al giorno). Tutta la fase F1: circa 36 h contro le 20 h del piano; la differenza viene soprattutto dal tappo con il sensore (circa 16 h, di cui 4,5 una tantum per imparare a saldare) e dal palombaro (circa 6 h).
 - **Rischi:** R2 (tenuta) peggiorata ma nei limiti (79 %); R3 (gioco del servo) non scatta, resta la zona morta di circa 10° da compensare; R6 (palombaro) chiuso con P1, punto di lavoro che cambia con meteo e temperatura; R8 (acqua sull'elettronica) attivo, smalto da fare.
 - **Settimana prossima (F2, dal piano):** 2.1 postazione di ripresa (lun 26 – mar 27), 2.2 riconoscimento del palombaro nel video (mar 27 – ven 30), 2.3 calibrazione della misura (ven 30 – dom 1), 2.4 regole di dialogo computer–scheda (dom 1 – lun 2). Prima della 2.1: nastro del livello di un altro colore.
+
+## 2026-10-24 (sera) · sottofase 2.1 (postazione di ripresa, in corso) · circa 4 h 56
+
+**Orario:** **16:38–23:45**, con una pausa lunga nel pomeriggio. Gli orari vengono dai messaggi della sessione, dal registro della seriale (`dati/2026-10-24/2026-10-24_seriale_sera.log.gz`, dalle 22:30), dal registro della telecamera (`dati/2026-10-24/telecamera/telecamera.log`) e dalla foto `IMG_2006` (22:02). Tra le 17:14 e le 20:05 non ci sono registri: la durata dei blocchi A e B è stimata.
+
+| Orario | Durata | Attività |
+|---|---|---|
+| 16:38–17:14 | 36 min | 2.1: lettura del piano della postazione, decisioni (vaschetta tolta, bottiglie sul tavolo) |
+| 17:14–20:05 | circa 40 min effettivi (stima) | blocco A (etichetta tolta, riga nera del livello) e blocco B (misure); un urto alla bottiglia ha fatto schiuma |
+| 20:05–21:38 | 1 h 33 | blocco C: bottiglia sulla diagonale del tavolo, cartone dietro, bottiglia piccola dietro il cartone, segni |
+| 21:38–22:15 | 37 min | metro da sarta su un'asta di cartone accanto alla bottiglia, Livella, foto della postazione |
+| 22:15–22:36 | 21 min | blocchi D ed E: iPhone in orizzontale nell'angolo opposto, sonda della telecamera, programma della telecamera, colonna disegnata |
+| 22:36–22:49 | 13 min | blocco F: avvio del banco, P1 che non risale a 36, circuito richiuso a 66 |
+| 22:49–23:00 | 11 min | prova 1 (riferimento alle 22:52, 2 minuti di video con P1 sul fondo), prova 2 iniziata |
+| 23:00–23:16 | 16 min | incidente: bottiglia piccola rovesciata spostando la tavoletta, bottiglia grande inclinata, acqua sul sensore; asciugatura e riaccensione |
+| 23:16–23:32 | 16 min | circuito richiuso a 96 per misurare il distacco di P1: spingendo la pressione non sale |
+| 23:32–23:45 | 13 min | servo rimontato con il nastro isolante (si solleva ancora), spegnimento |
+
+**Fatto (programmi, lavoro di Claude, non contato nelle ore):**
+- `pc/telecamera.py`: unico programma che apre la telecamera, come il registratore per la seriale. Prende i fotogrammi dall'iPhone con ffmpeg nel formato vero (1920 × 1080), scrive anteprima, stato e video di prova con l'orario di ogni fotogramma in `dati/<giorno>/telecamera/`, e si ricollega da solo se l'iPhone tace per 5 secondi.
+- `pc/postazione.py`: misure della postazione (luminosità, riflessi, nitidezza, maschera del rosso) e comandi tra dashboard e telecamera; 26 test in tutto con quelli della dashboard.
+- Dashboard: pannello «Telecamera» (immagine dal vivo, guide, colonna da disegnare, riferimento sovrapposto per differenza, maschera del rosso, misure e controlli, «Salva riferimento» e «Registra 2 min»); pannello dei comandi sempre tutto visibile nella finestra; sovrapressione con «Azzera» vicino ai comandi.
+- `pc/sonda_telecamera.swift`: elenca i formati delle telecamere e dice se esposizione, fuoco e bilanciamento si possono bloccare.
+- Piano della 2.1 in `hardware/postazione-ripresa.md`.
+
+**Fatto (postazione):**
+- **Misure:** P1 lungo 7,3–7,5 cm, acqua a 25 cm dal tavolo, circonferenze della bottiglia 28 / 25 / 28,4 cm (diametri 8,9 / 8,0 / 9,0: strozzatura a metà altezza). Corsa del marcatore 7–23 cm, lente a 15 cm (misurata circa 16).
+- **Disposizione:** tavolo 60 × 60 cm, bottiglia e iPhone sulla diagonale (85 cm), distanza prevista lente–asse della bottiglia circa 50 cm; cartone marrone dietro, bottiglia piccola dietro il cartone; metro da sarta su un'asta di cartone in piedi accanto alla bottiglia, con lo 0 in alto, reso verticale con la Livella dell'iPhone.
+- **Telecamera:** la sonda, lanciata con il permesso concesso, conferma che dal Mac **non si bloccano esposizione, fuoco e bilanciamento**. L'iPhone manda **60 fotogrammi veri al secondo** anche chiedendone 30 (176 in 2,98 s, nessuno ripetuto). Inquadratura di circa 33,5 cm in altezza, **0,31 mm per pixel**; immagine ruotata di 1,5° (si corregge nel programma con la calibrazione della 2.3).
+- **Prova 1 (video del 22:52–22:54, P1 fermo sul fondo):** 58,6 fps, nessun buco oltre 0,5 s (intervallo massimo 97 ms); luminosità della colonna ferma a 87 per 2 minuti (deriva 0 %); marcatore trovato in tutti i 1172 campioni, **rumore del centro 0,28 px, cioè circa 0,09 mm** (la simulazione stimava 0,3 mm). Tacche dei millimetri del metro leggibili sul riferimento a piena risoluzione (verificato tra 12 e 21 cm).
+
+**Problemi (e cosa si è capito):**
+1. **ffmpeg ripeteva i fotogrammi:** circa 580 al secondo invece di 30, con una coda che cresceva e l'immagine sempre più in ritardo. Risolto chiedendo a ffmpeg di passare ogni fotogramma una volta sola (`-fps_mode passthrough`).
+2. **Telefono in verticale:** la Fotocamera Continuity offre solo formati orizzontali, e in verticale il Mac ritagliava una striscia di circa 18 cm. Va tenuto in orizzontale.
+3. **Il filo di rame di P1 risultava «rosso».** Misurato sull'immagine: tinta del marcatore da −4 a 6, del rame da 8 a 16 (su 180). Soglia del rosso portata da 10 a 6. Il rosso fuori dalla colonna non conta, perché P1 si cerca solo lì. Resta una zona minuscola in cima alla colonna (il filo rosso del cavo del sensore): la colonna va disegnata dal pelo dell'acqua in giù, non dal tappo.
+4. **P1 più pesante di sera.** Alle 22:43, con il circuito chiuso a 36, a −0,3 kPa P1 si è staccato dal fondo solo dopo più di 10 secondi (il 23 bastava +0,4 kPa). L'aria nel tappo è scesa da 26,4 °C (24 pomeriggio) a 24 °C e poi a 23 °C. Richiuso a 66 (a 36 −0,65 kPa, a 146 +2,0 kPa) ha funzionato. Il punto di chiusura va scelto ogni sessione: è il lavoro dello stato CALIBRAZIONE.
+5. **Incidente alle 23:00:40:** spostando la tavoletta, il tubo A ha rovesciato la bottiglia piccola, che con il tubo B ha inclinato la grande; l'acqua saponata ha bagnato il sensore. Alle 23:01:23 il sensore si è bloccato con la solita firma (85,51 kPa, 25,30 °C). Alimentatore e USB staccati, tappo aperto, phon tiepido; **riacceso alle 23:15:48, funziona** (101,20 kPa ± 10 Pa, 50 letture al secondo). Resta il rischio dei residui di sapone sulla schedina.
+6. **Il servo si solleva spingendo.** Alle 23:32, da 56 a 146 la pressione è salita solo fino a quella della stanza (101,08 kPa invece di circa 102,3): sembrava una perdita in pressione, ma era il servo che si spostava. La colla a caldo non fa presa sulla plastica del servo, e le viti come pioli impediscono che scivoli ma non che rotoli sullo spigolo. Rimontato con il nastro isolante (asticella staccata e riattaccata, siringa mossa): si solleva ancora.
+7. A bottiglia aperta P1 sul fondo è rimasto giù (sul fondo la bolla è più compressa, e a sovrapressione zero è un equilibrio stabile), poi alle 23:44 è risalito da solo: **non ha perso aria** nella caduta.
+
+**Decisioni (e perché):**
+- **Vaschetta tolta, bottiglie sul tavolo** (Gabriele): la parete di 9–10 cm avrebbe nascosto P1 sul fondo, e i lavori che potevano versare acqua sono finiti.
+- **«Bloccare esposizione e messa a fuoco» diventa «scena costante e controllo F4»** (Gabriele): il blocco non è possibile dal Mac. Scena costante vuol dire luce artificiale, tende chiuse, TV spenta ed effetti video spenti.
+- **Filo a piombo tolto** (Gabriele): la verticale la dà il metro, reso verticale con la Livella.
+- **Metro con lo 0 in alto e cartone marrone senza foglio bianco** (Gabriele): si cambia solo se un controllo lo richiede.
+- **Telecamera a 60 fps:** è quello che l'iPhone manda comunque; la misura a 60 Hz non impedisce un anello esterno a 30 Hz.
+- **Regole nuove:** prima di spostare la tavoletta si sfila il tubo A; la bottiglia piccola va fissata al tavolo con il nastro.
+
+**Foto** (cartella Download): `IMG_2006` (22:02), la postazione con il metro su un'asta.
+
+**Stato a fine giornata:**
+- 2.1: blocchi A–E fatti; del blocco F superati F1, F2 (rotazione 1,5° accettata), F3, F5 e F7, F8 fatto, F4 solo per 2 minuti; restano **F6** (P1 su tutta la colonna, il «Fatto quando»), F9 (ripetibilità) e F10.
+- Servo da fissare di nuovo e taratura da ricontrollare (braccio verticale a 86, volumi a 36, 86 e 146, escursione 36 ↔ 146 di circa 2,6 kPa).
+- Tappo del sensore fuori dalla bottiglia ad asciugare; bottiglia con il tappo normale; ESP32 staccato.
+- `letturaPlausibile()` e `verdetto_postazione()` ancora da scrivere (Gabriele).
+
+**Ore:** 2.1 circa 4 h 27 (di cui circa 40 min stimati); sensore bagnato circa 16 min; servo circa 13 min. **Totale circa 4 h 56.**
+
+**Prossimo passo (domenica 25):**
+1. Servo fissato con due fascette che passano sotto la tavoletta e sopra il servo, con il cartone piegato in mezzo.
+2. Controlli della taratura: braccio verticale a 86, volumi della siringa, escursione 36 ↔ 146 ripetuta due volte.
+3. Poi, come da piano (lunedì 26 – martedì 27): colonna ridisegnata dal pelo dell'acqua, prove F6 e F9 per chiudere la 2.1.

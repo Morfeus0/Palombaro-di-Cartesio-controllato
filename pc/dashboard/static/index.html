@@ -9,6 +9,7 @@
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&display=swap">
   <link rel="stylesheet" href="/style.css">
   <script type="module" src="/app.js"></script>
+  <script type="module" src="/telecamera.js"></script>
 </head>
 <body>
   <header class="testata">
@@ -16,7 +17,7 @@
       <span class="marchio-segno" aria-hidden="true"></span>
       <div>
         <p class="marchio-nome">Palombaro di Cartesio</p>
-        <p class="marchio-sotto">Banco · comando manuale del servo</p>
+        <p class="marchio-sotto">Banco · comando manuale del servo e telecamera</p>
       </div>
     </div>
     <ul class="stati" aria-label="Stato del banco">
@@ -40,6 +41,8 @@
           attuale <span id="angolo-attuale" class="mono">—</span> ·
           stantuffo ≈ <span id="stima-ml" class="mono">—</span> ml
         </p>
+        <p class="comando-dp">Sovrapressione <strong><span id="dp-comando" class="mono">—</span> kPa</strong>
+          <button type="button" class="bottone-piccolo" id="azzera-comando">Azzera</button></p>
       </div>
 
       <div class="corsa">
@@ -71,6 +74,51 @@
 
     <section class="misure" aria-labelledby="titolo-misure">
       <h2 id="titolo-misure" class="visivamente-nascosto">Misure</h2>
+      <section class="telecamera" aria-labelledby="titolo-telecamera">
+        <div class="tc-barra">
+          <h3 id="titolo-telecamera" class="grafici-titolo">Telecamera</h3>
+          <span class="pillola" id="tc-stato" data-livello="attesa"><span class="pillola-punto" aria-hidden="true"></span><span class="pillola-testo">Telecamera: in attesa</span></span>
+          <div class="segmenti tc-strati" role="group" aria-label="Sovrapposizioni sull'immagine">
+            <button type="button" class="segmento" data-strato="guide" aria-pressed="true">Guide</button>
+            <button type="button" class="segmento" data-strato="fantasma" aria-pressed="false">Riferimento</button>
+            <button type="button" class="segmento" data-strato="rosso" aria-pressed="false">Rosso</button>
+          </div>
+        </div>
+        <div class="tc-corpo">
+          <div class="tc-scena" id="tc-scena">
+            <img id="tc-immagine" class="tc-immagine" alt="Inquadratura dal vivo della bottiglia" hidden>
+            <img id="tc-fantasma" class="tc-fantasma" alt="" hidden>
+            <canvas id="tc-sovrapposto" class="tc-sovrapposto" role="img"
+                    aria-label="Guide, colonna d'acqua e zone rosse; trascina per disegnare la colonna"></canvas>
+            <div class="tc-vuoto" id="tc-vuoto">
+              <p><strong>Telecamera spenta</strong></p>
+              <p>In Terminal.app, dalla cartella del progetto:</p>
+              <code>.venv/bin/python pc/telecamera.py</code>
+            </div>
+          </div>
+          <div class="tc-lato">
+            <ul class="tc-controlli" id="tc-controlli" aria-label="Controlli della postazione"></ul>
+            <dl class="tc-misure">
+              <div><dt>Risoluzione</dt><dd class="mono" id="tc-risoluzione">—</dd></div>
+              <div><dt>Fotogrammi</dt><dd class="mono" id="tc-fps">—</dd></div>
+              <div><dt>Interruzioni</dt><dd class="mono" id="tc-interruzioni">—</dd></div>
+              <div><dt>Luminosità</dt><dd class="mono" id="tc-luce">—</dd></div>
+              <div><dt>Riflessi</dt><dd class="mono" id="tc-riflessi">—</dd></div>
+              <div><dt>Nitidezza</dt><dd class="mono" id="tc-nitidezza">—</dd></div>
+              <div><dt>Zone rosse</dt><dd class="mono" id="tc-rosse">—</dd></div>
+              <div><dt>Colonna</dt><dd class="mono" id="tc-colonna">—</dd></div>
+              <div><dt>Riferimento</dt><dd class="mono" id="tc-rif">—</dd></div>
+            </dl>
+            <div class="tc-azioni">
+              <button type="button" class="tc-azione" id="tc-riferimento">Salva riferimento</button>
+              <button type="button" class="tc-azione" id="tc-registra">Registra 2 min</button>
+              <button type="button" class="bottone-piccolo" id="tc-colonna-via">Togli la colonna</button>
+            </div>
+            <p class="esito" id="tc-esito" role="status" aria-live="polite">Trascina sull'immagine per disegnare la colonna d'acqua.</p>
+            <ol class="tc-eventi" id="tc-eventi" aria-label="Eventi della telecamera"></ol>
+          </div>
+        </div>
+      </section>
       <div class="letture">
         <div class="lettura lettura-eroe">
           <p class="lettura-etichetta">Sovrapressione</p>

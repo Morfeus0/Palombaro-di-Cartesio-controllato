@@ -144,7 +144,10 @@ button:active { transform: translateY(1px); }
 
 /* Pannello del comando */
 .comando {
-  position: sticky; top: var(--spazio-6); align-self: start;
+  /* Sempre tutto visibile: il pannello non supera l'altezza della finestra e a cedere è il cursore (riga 4). */
+  position: sticky; top: var(--spazio-4); align-self: start;
+  height: calc(100dvh - 8rem); overflow-y: auto; /* 8rem: testata e margine sopra, a pagina in cima */
+  grid-template-rows: auto auto auto minmax(0, 1fr) auto auto auto auto;
   background: var(--pannello); border: 1px solid var(--filo); border-radius: calc(var(--raggio) * 2);
   padding: var(--spazio-6); box-shadow: var(--ombra);
   display: grid; gap: var(--spazio-4);
@@ -154,12 +157,14 @@ button:active { transform: translateY(1px); }
 .comando-valore { border-top: 1px solid var(--filo); padding-top: var(--spazio-4); }
 .numero-grande { display: block; font-family: var(--font-numeri); font-size: var(--t-numero); font-weight: 500; line-height: 1; letter-spacing: -0.04em; }
 .comando-dettaglio { color: var(--inchiostro-2); font-size: var(--t-piccolo); margin-top: var(--spazio-2); }
+.comando-dp { display: flex; align-items: baseline; gap: var(--spazio-2); flex-wrap: wrap; margin-top: var(--spazio-2); font-size: var(--t-piccolo); color: var(--inchiostro-2); }
+.comando-dp strong { font-family: var(--font-numeri); font-size: 1.25rem; font-weight: 500; color: var(--inchiostro); font-variant-numeric: tabular-nums; }
 
-.corsa { display: grid; justify-items: center; gap: var(--spazio-2); padding: var(--spazio-2) 0; }
+.corsa { display: grid; grid-template-rows: auto minmax(0, 1fr) auto; justify-items: center; gap: var(--spazio-2); padding: var(--spazio-2) 0; min-height: 0; }
 .corsa-estremo { font-size: var(--t-piccolo); color: var(--inchiostro-2); }
 .corsa-estremo .mono { color: var(--inchiostro-3); margin-left: var(--spazio-1); }
 .corsa-binario {
-  position: relative; height: 18rem; width: 6rem; display: grid; place-items: center;
+  position: relative; height: 100%; min-height: 5rem; max-height: 18rem; width: 6rem; display: grid; place-items: center;
   /* una tacca ogni 10°: 11 intervalli tra 36° e 146°, dentro la corsa del cursore (7 px di margine) */
   background: repeating-linear-gradient(to bottom, var(--filo-forte) 0 1px, transparent 1px calc(100% / 11))
     center 7px / 2.25rem calc(100% - 13px) no-repeat;
@@ -260,7 +265,15 @@ kbd { font-family: var(--font-numeri); font-size: 0.6875rem; padding: 0 0.3rem; 
 
 @media (max-width: 60rem) {
   .griglia { grid-template-columns: 1fr; }
-  .comando { position: static; }
+  .comando { position: static; height: auto; }
+  .corsa-binario { height: 18rem; }
+}
+/* Finestre basse (portatile con il browser non a tutto schermo): numero e spazi più piccoli, così il cursore resta usabile. */
+@media (max-height: 52rem) and (min-width: 60rem) {
+  .comando { padding: var(--spazio-4); gap: var(--spazio-3); }
+  .numero-grande { font-size: clamp(2.25rem, 7dvh, 3.5rem); }
+  .comando-valore { padding-top: var(--spazio-3); }
+  .passo, .preset-voce { padding-block: 0.4rem; }
 }
 @media (max-width: 30rem) {
   .testata { flex-wrap: wrap; gap: var(--spazio-3); }
@@ -270,3 +283,37 @@ kbd { font-family: var(--font-numeri); font-size: 0.6875rem; padding: 0 0.3rem; 
 @media (prefers-reduced-motion: reduce) {
   * { transition: none !important; }
 }
+
+/* Telecamera (2.1): l'immagine è il pezzo grande, misure e controlli stanno di lato */
+.telecamera { background: var(--pannello); border: 1px solid var(--filo); border-radius: calc(var(--raggio) * 2); padding: var(--spazio-4) var(--spazio-6) var(--spazio-6); display: grid; gap: var(--spazio-3); min-width: 0; container-type: inline-size; }
+.tc-barra { display: flex; align-items: center; gap: var(--spazio-3); flex-wrap: wrap; }
+.tc-barra h3 { margin: 0; font-size: inherit; }
+.tc-strati { margin-left: auto; }
+.tc-corpo { display: grid; grid-template-columns: minmax(0, 1fr) 17rem; gap: var(--spazio-6); align-items: start; }
+@container (max-width: 48rem) { .tc-corpo { grid-template-columns: 1fr; } }
+.tc-scena { position: relative; background: var(--pannello-incassato); border-radius: var(--raggio); overflow: hidden; min-height: 12rem; }
+.tc-immagine { display: block; width: 100%; height: auto; }
+.tc-fantasma { position: absolute; inset: 0; width: 100%; height: 100%; mix-blend-mode: difference; pointer-events: none; }
+.tc-sovrapposto { position: absolute; inset: 0; width: 100%; height: 100%; cursor: crosshair; touch-action: none; }
+.tc-vuoto { position: absolute; inset: 0; display: grid; place-content: center; gap: var(--spazio-1); text-align: center; padding: var(--spazio-4); color: var(--inchiostro-2); font-size: var(--t-piccolo); }
+.tc-vuoto[hidden] { display: none; }
+.tc-vuoto code { font-family: var(--font-numeri); font-size: 0.75rem; background: var(--pannello); border: 1px solid var(--filo); border-radius: 4px; padding: 0.2rem 0.45rem; }
+.tc-lato { display: grid; gap: var(--spazio-4); align-content: start; }
+.tc-controlli { list-style: none; padding: 0; margin: 0; display: grid; border: 1px solid var(--filo); border-radius: var(--raggio); overflow: hidden; }
+.tc-controllo { display: grid; grid-template-columns: 1.25rem 1fr auto; gap: var(--spazio-2); align-items: center; padding: 0.35rem var(--spazio-3); font-size: var(--t-piccolo); }
+.tc-controllo + .tc-controllo { border-top: 1px solid var(--filo); }
+.tc-segno { font-weight: 600; text-align: center; color: var(--inchiostro-3); }
+.tc-controllo[data-esito="si"] .tc-segno { color: var(--stato-buono); }
+.tc-controllo[data-esito="no"] { background: color-mix(in oklab, var(--stato-critico) 8%, transparent); }
+.tc-controllo[data-esito="no"] .tc-segno { color: var(--stato-critico); }
+.tc-passo { font-size: 0.6875rem; color: var(--inchiostro-3); }
+.tc-nota { padding: 0.35rem var(--spazio-3); font-size: 0.75rem; color: var(--stato-attenzione); border-top: 1px solid var(--filo); }
+.tc-misure { margin: 0; display: grid; gap: 0; }
+.tc-misure div { display: grid; grid-template-columns: 6.5rem 1fr; gap: var(--spazio-2); padding: 0.25rem 0; border-bottom: 1px solid var(--filo); font-size: var(--t-piccolo); }
+.tc-misure dt { color: var(--inchiostro-3); }
+.tc-misure dd { margin: 0; text-align: right; }
+.tc-azioni { display: grid; grid-template-columns: 1fr 1fr; gap: var(--spazio-2); }
+.tc-azione { padding: 0.55rem 0.5rem; font-size: var(--t-piccolo); font-weight: 500; }
+.tc-azioni .bottone-piccolo { grid-column: 1 / -1; justify-self: start; }
+#tc-registra[data-attiva="si"] { border-color: var(--stato-critico); color: var(--stato-critico); }
+.tc-eventi { list-style: none; padding: 0; margin: 0; display: grid; gap: 2px; font-family: var(--font-numeri); font-size: 0.6875rem; color: var(--inchiostro-3); white-space: pre-wrap; }
