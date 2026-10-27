@@ -704,3 +704,52 @@ Nel progetto non ci sono registri né note per giovedì 22 (da confermare con Ga
 1. Servo fissato con due fascette che passano sotto la tavoletta e sopra il servo, con il cartone piegato in mezzo.
 2. Controlli della taratura: braccio verticale a 86, volumi della siringa, escursione 36 ↔ 146 ripetuta due volte.
 3. Poi, come da piano (lunedì 26 – martedì 27): colonna ridisegnata dal pelo dell'acqua, prove F6 e F9 per chiudere la 2.1.
+
+## 2026-10-25 · nessuna attività al banco
+
+Preparati da Claude (circa 17:00) i passaggi per fissare il servo con le fascette, per i controlli della taratura (braccio verticale a 86, volumi a 36, 86 e 146, escursione 36 ↔ 146) e per scegliere il punto di chiusura del circuito per P1. Dashboard e registrazione erano pronte, ma l'ESP32 non è stato collegato: impegni personali di Gabriele. **Ore: 0.**
+
+## 2026-10-26 · nessuna attività registrata
+
+## 2026-10-27 · lavoro di Claude: dashboard, 2.2, parte della 2.3, bozza della 2.4 · 0 h di Gabriele
+
+**Orario:** circa **18:45–19:35**, dagli orari dei file. Banco fermo (impegni personali di Gabriele): tutto il lavoro è di Claude, su richiesta di Gabriele, e non è contato nelle ore. Il servo resta da fissare: **la 2.1 non è chiusa alla sua scadenza (martedì 27)**; nessuno spostamento di calendario deciso.
+
+| Orario | Durata | Attività |
+|---|---|---|
+| 18:45–19:05 | 20 min | dashboard: telecamera sempre visibile mentre si scorrono i dati |
+| 19:05–19:20 | 15 min | 2.2: `pc/tracking.py` con i test, prova sui video del 24, video annotato, riconoscimento dal vivo in `pc/telecamera.py` e nella dashboard |
+| 19:20–19:30 | 10 min | 2.3: `pc/calibrazione.py`, rotazione e scala dal metro del riferimento |
+| 19:30–19:35 | 5 min | 2.4: bozza di `docs/protocollo.md` |
+
+**Fatto (dashboard):** su schermo largo tre colonne (comandi, telecamera, dati): comandi e telecamera restano fermi mentre scorrono letture, grafici ed eventi; su schermo stretto, quando l'immagine esce dalla finestra, compare una miniatura dal vivo in basso a destra (un clic riporta all'immagine grande). Misure e controlli della postazione in una scheda nuova, «Postazione». Provata con dati finti a 1440, 1100 e 375 pixel di larghezza.
+
+**Fatto (2.2, in corso):**
+- `pc/tracking.py`: centro della zona rossa più grande dentro la colonna; buchi fino a 0,25 s scavalcati con l'ultima posizione, oltre P1 è «perso»; scartate le zone oltre 8000 pixel e i salti più veloci di quanto P1 possa muoversi. 18 test.
+- **Video del 24:** P1 trovato nel **100 %** dei fotogrammi in 2 + 2 minuti da fermo e nei 41 s in cui sale dal fondo al pelo dell'acqua (circa 20 cm, nessun buco). Circa 1,3 ms per fotogramma, cioè fino a circa 760 fotogrammi al secondo. Video di prova: `media/2026-10-24_2.2_riconoscimento-P1-che-sale.mp4`. Righe per fotogramma in `dati/2026-10-24/telecamera/*_marcatore.csv.gz`.
+- **Dal vivo:** `pc/telecamera.py` cerca P1 in ogni fotogramma (60 al secondo, provato facendogli leggere il video 05 come se fosse l'iPhone); la dashboard disegna il riquadro verde con la quota in pixel e la riga «Palombaro»; i video di prova salvano anche la posizione di P1.
+- Manca il «Fatto quando» su 2 minuti di movimento nella scena attuale: si fa con il video di F6.
+
+**Fatto (2.3, la parte possibile dalle immagini):**
+- **Rotazione** della telecamera **1,45°** (bordo del metro, pendenza −0,0254): la quota si calcola lungo la verticale vera.
+- **Rumore** con P1 fermo: 0,15–0,43 px, cioè circa **0,05–0,14 mm** (la simulazione stimava 0,3 mm).
+- `pc/calibrazione.py` (13 test): rotazione, scala a tratti lungo il metro, modello prospettico della quota da punti noti; valori in `pc/config/calibrazione.json`.
+
+**Fatto (2.4, bozza):** `docs/protocollo.md`: righe di testo con controllo XOR, quota a ogni fotogramma con la sua età, telemetria a 100 Hz con i termini del PID, SAFE deciso dall'ESP32; otto scelte da decidere insieme.
+
+**Problemi e scoperte:**
+1. **La pelle della mano risulta «rossa».** Nel video 03 del 24 una mano davanti alla telecamera dava una posizione falsa in cima alla bottiglia. Rimedio: area massima e salto massimo. Ora nessuna posizione falsa.
+2. **Il metro accanto alla bottiglia non dà la scala di P1.** Lungo il metro la scala passa da 3,42 px/mm in alto a 3,04 in basso (−12 %): il metro non è parallelo all'immagine (iPhone inclinato o asta che pende, circa 10°). E P1 appare circa il 15 % più grande del metro (più vicino alla telecamera, dietro l'acqua che fa da lente): calibrando con il metro la quota sbaglierebbe di 1–3 cm.
+3. **Il BMP280 con il sovracampionamento di oggi (×4) arriva a circa 75 letture al secondo**, non alle 100 del piano (2.5).
+
+**Da discutere nei prossimi giorni (Gabriele):**
+- Calibrazione della 2.3 **nel piano di P1**, con uno spiedino segnato ogni 2 cm nella bottiglia (proposta di Claude) al posto del metro accanto alla bottiglia.
+- Le otto scelte della bozza del protocollo (sezione 9 di `docs/protocollo.md`), tra cui la velocità della seriale, SAFE con P1 a fondo invece della risalita, e la pressione a 100 Hz.
+
+**Stato a fine giornata:** 2.1 ferma al 70 % (servo da fissare, poi F4, F6, F9); 2.2 scritta e provata sui video registrati; 2.3 per un terzo; 2.4 in bozza. Programmi di prova spenti, nessun programma in esecuzione.
+
+**Ore di Gabriele:** 0.
+
+**Prossimo passo:**
+1. Al banco: servo con le fascette, controlli della taratura, punto di chiusura per P1 (passaggi del 25), poi F4, F6 (chiude anche la 2.2) e F9.
+2. Discutere calibrazione e protocollo.

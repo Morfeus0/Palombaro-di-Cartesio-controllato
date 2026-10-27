@@ -11,13 +11,13 @@
    5. Aggiornare `sintesi`, `diario` (in cima la voce nuova), `prossimi` e `rischi`.
    Le date sono AAAA-MM-GG; `ore` è l'impegno stimato nel piano operativo e fa da peso. */
 window.PalombaroProgresso = Object.freeze({
-  aggiornato: '2026-10-24',
+  aggiornato: '2026-10-27',
   provvisorio: false, // true finché le stime non sono confrontate con il diario della sera
   consegna: '2026-12-13',
   scadenzaProf: '2026-12-31',
   oreAlGiorno: 2, // media dichiarata, tutti i giorni: base del prospetto di fine progetto
 
-  sintesi: 'Iniziata la fase della telecamera, in anticipo sul calendario: in una serata la postazione di ripresa è quasi pronta. L\'iPhone guarda la bottiglia da circa mezzo metro, 60 volte al secondo, e la dashboard mostra il video accanto ai comandi. Con il palombaro fermo, la misura della sua posizione oscilla di meno di un decimo di millimetro. Mancano due prove: il palombaro su tutta l\'altezza dell\'acqua e il telefono rimesso nello stesso punto. In serata due inconvenienti: la bottiglia piccola si è rovesciata e ha bagnato il sensore (asciugato, funziona), e il motore si stacca dalla tavoletta quando spinge, quindi va fissato meglio. Le ore spese restano più del previsto.',
+  sintesi: 'Al banco tre giorni di pausa per impegni personali: il motore è ancora da fissare meglio alla tavoletta, e la postazione della telecamera resta al 70 % oltre la sua scadenza di oggi. Intanto sono andate avanti le parti al computer, sui video già registrati: il programma riconosce il palombaro in ogni fotogramma, 60 volte al secondo, anche mentre sale per 20 cm, e la dashboard lo segue dal vivo con un riquadro. È scritta la bozza delle regole di dialogo tra computer e scheda, da rivedere insieme. Una scoperta importante: il metro accanto alla bottiglia non va bene per misurare il palombaro, che sta più vicino alla telecamera e dietro l\'acqua che fa da lente; la calibrazione andrà fatta dentro la bottiglia.',
 
   fasi: [
     {
@@ -52,10 +52,10 @@ window.PalombaroProgresso = Object.freeze({
       milestone: { id: 'M2', titolo: 'Quota e pressione misurate 20 volte al secondo',
         descrizione: 'La telecamera trova il palombaro e il computer registra tutte le misure.' },
       sottofasi: [
-        { id: '2.1', nome: 'Postazione di ripresa', da: '2026-10-26', a: '2026-10-27', ore: 1.5, fatto: 70, oreEffettive: 4.45, nota: 'Iniziata il 24 sera, in anticipo: telefono, sfondo, metro e luce sistemati, telecamera a 60 fotogrammi al secondo nella dashboard. Mancano il palombaro su tutta l\'altezza dell\'acqua e il telefono rimesso nello stesso punto.' },
-        { id: '2.2', nome: 'Riconoscimento del palombaro nel video', da: '2026-10-27', a: '2026-10-30', ore: 4, fatto: 0 },
-        { id: '2.3', nome: 'Calibrazione della misura', da: '2026-10-30', a: '2026-11-01', ore: 2, fatto: 0 },
-        { id: '2.4', nome: 'Regole di dialogo computer–scheda', da: '2026-11-01', a: '2026-11-02', ore: 1.5, fatto: 0 },
+        { id: '2.1', nome: 'Postazione di ripresa', da: '2026-10-26', a: '2026-10-27', ore: 1.5, fatto: 70, oreEffettive: 4.45, nota: 'Iniziata il 24 sera, in anticipo: telefono, sfondo, metro e luce sistemati, telecamera a 60 fotogrammi al secondo nella dashboard. Ferma dal 25 per impegni personali: prima va fissato il motore. Mancano il palombaro su tutta l\'altezza dell\'acqua e il telefono rimesso nello stesso punto.' },
+        { id: '2.2', nome: 'Riconoscimento del palombaro nel video', da: '2026-10-27', a: '2026-10-30', ore: 4, fatto: 80, nota: 'Programma scritto il 27 e provato sui video del 24: il palombaro è trovato in tutti i fotogrammi, fermo e mentre sale per 20 cm, 60 volte al secondo dal vivo. Manca la prova di 2 minuti di movimento con la postazione di oggi.' },
+        { id: '2.3', nome: 'Calibrazione della misura', da: '2026-10-30', a: '2026-11-01', ore: 2, fatto: 35, nota: 'Dalle immagini del 24: telecamera ruotata di 1,45° (si corregge nel programma) e misura ferma entro circa un decimo di millimetro. Il metro accanto alla bottiglia però non va bene per il palombaro: la calibrazione si farà dentro la bottiglia, al banco.' },
+        { id: '2.4', nome: 'Regole di dialogo computer–scheda', da: '2026-11-01', a: '2026-11-02', ore: 1.5, fatto: 80, nota: 'Bozza scritta il 27: messaggi, frequenze, controllo degli errori e cosa fa la scheda se il computer tace. Da rivedere insieme, con otto scelte da decidere.' },
         { id: '2.5', nome: 'Programma di base della scheda', da: '2026-11-02', a: '2026-11-05', ore: 4, fatto: 0 },
         { id: '2.6', nome: 'Registrazione dei dati', da: '2026-11-05', a: '2026-11-07', ore: 3, fatto: 0 },
         { id: '2.7', nome: 'Prova completa e video', da: '2026-11-08', a: '2026-11-08', ore: 2, fatto: 0 },
@@ -131,9 +131,20 @@ window.PalombaroProgresso = Object.freeze({
     { data: '2026-10-19', fatto: 18.0 },
     { data: '2026-10-21', fatto: 18.4 },
     { data: '2026-10-23', fatto: 21.3 },
+    { data: '2026-10-24', fatto: 24.1 },
   ],
 
   diario: [
+    { data: '2026-10-27', testo: [
+      'Banco fermo per impegni personali; lavoro al computer sui video già registrati.',
+      'Il programma che riconosce il palombaro è pronto: lo trova in tutti i fotogrammi, sia fermo sul fondo sia mentre sale per 20 cm, e lavora molto più in fretta dei 60 fotogrammi al secondo della telecamera. La dashboard lo segue dal vivo con un riquadro verde.',
+      'Una mano passata davanti alla telecamera veniva scambiata per il marcatore rosso: ora il programma la scarta e non dà mai una posizione falsa.',
+      'Dashboard più comoda: la telecamera resta sempre visibile mentre si guardano grafici e misure.',
+      'Dalle immagini: la telecamera è ruotata di 1,45° (si corregge nel programma) e la posizione del palombaro fermo oscilla di circa un decimo di millimetro. Il metro accanto alla bottiglia però non è adatto a misurare il palombaro: la calibrazione andrà fatta dentro la bottiglia.',
+      'Scritta la bozza delle regole di dialogo tra computer e scheda, da rivedere insieme nei prossimi giorni.',
+    ] },
+    { data: '2026-10-26', testo: ['Nessuna attività registrata.'] },
+    { data: '2026-10-25', testo: ['Nessuna attività al banco: preparate le istruzioni per fissare il motore e ricontrollarne la taratura.'] },
     { data: '2026-10-24', testo: [
       'Secondo traguardo raggiunto (M1), un giorno prima della scadenza: il palombaro si muove con la siringa comandata dal motore.',
       'Prova di 10 minuti: il motore spinge e tira per dieci volte, e il palombaro scende e risale tutte le dieci volte. Registrato il video.',
@@ -207,22 +218,24 @@ window.PalombaroProgresso = Object.freeze({
   ],
 
   prossimi: [
-    'Domenica 25: fissare meglio il motore alla tavoletta e ricontrollare che spinga la pressione come prima (2,6 kPa).',
-    'Lunedì 26 – martedì 27: ultime prove della postazione di ripresa (palombaro su tutta l\'altezza dell\'acqua, telefono rimesso nello stesso punto).',
-    'Martedì 27 – venerdì 30: riconoscimento del palombaro nel video.',
+    'Al banco: fissare il motore alla tavoletta con le fascette e ricontrollare che spinga la pressione come prima (2,6 kPa).',
+    'Chiudere la postazione di ripresa: palombaro su tutta l\'altezza dell\'acqua (prova che chiude anche il riconoscimento) e telefono rimesso nello stesso punto.',
+    'Decidere insieme come calibrare la misura dentro la bottiglia e le scelte delle regole di dialogo computer–scheda.',
   ],
 
   rischi: [
     { titolo: 'Più ore del previsto per ogni attività', livello: 'alto',
-      nota: 'Il tappo con il sensore ha richiesto circa 15 ore contro le 3 previste. Il 18 elettronica e prova di tenuta hanno richiesto meno delle ore stimate, ma il 19 il palombaro ne ha prese più di 5 contro le 3 previste per tutta la sottofase, e il 21 il guasto del sensore un\'ora e venti. Il 24 sera la postazione di ripresa ha richiesto circa 4 ore e mezza contro 1,5 previste, ed è al 70 %. Togliendo le ore una tantum la fine prevista è il 4 gennaio, oltre la scadenza del professore (31 dicembre): ritardo di circa 3 giorni. Si prosegue con il piano originale.' },
+      nota: 'Il tappo con il sensore ha richiesto circa 15 ore contro le 3 previste. Il 18 elettronica e prova di tenuta hanno richiesto meno delle ore stimate, ma il 19 il palombaro ne ha prese più di 5 contro le 3 previste per tutta la sottofase, e il 21 il guasto del sensore un\'ora e venti. Il 24 sera la postazione di ripresa ha richiesto circa 4 ore e mezza contro 1,5 previste, ed è al 70 %. Il 27 riconoscimento del palombaro, parte della calibrazione e bozza delle regole di dialogo sono andati avanti al computer senza ore al banco. Togliendo le ore una tantum la fine prevista è il 3 gennaio, oltre la scadenza del professore (31 dicembre): ritardo di circa 3 giorni. Si prosegue con il piano originale.' },
     { titolo: 'La siringa cambia la pressione meno del necessario', livello: 'basso',
       nota: 'Con il motore montato la siringa dà 2,6 kPa (misurato il 23, dopo 50 ml d\'acqua in più nella bottiglia), sopra i 2,5 richiesti.' },
     { titolo: 'Meccanica del motore imprecisa', livello: 'medio',
-      nota: 'Misurato il 23: la pressione torna allo stesso valore entro un centesimo di kPa, quindi il piano B (motore passo-passo con vite) non serve secondo il criterio del piano. Resta un gioco di circa 10 gradi a ogni cambio di direzione, da compensare nel programma. Il 24 sera la colla del motore ha ceduto: spingendo si solleva e la pressione non sale. Domani fascette attorno alla tavoletta e nuovo controllo della taratura.' },
+      nota: 'Misurato il 23: la pressione torna allo stesso valore entro un centesimo di kPa, quindi il piano B (motore passo-passo con vite) non serve secondo il criterio del piano. Resta un gioco di circa 10 gradi a ogni cambio di direzione, da compensare nel programma. Il 24 sera la colla del motore ha ceduto: spingendo si solleva e la pressione non sale. Al 27 non è ancora stato fissato: servono fascette attorno alla tavoletta e un nuovo controllo della taratura.' },
     { titolo: 'Palombaro difficile da tarare', livello: 'basso',
       nota: 'Tarato e verificato con il motore il 23. Il suo punto di equilibrio però cambia di giorno in giorno (meteo, temperatura, aria che si scioglie nell\'acqua): il programma dovrà ritrovarlo a ogni avvio.' },
     { titolo: 'Umidità e contatti del sensore di pressione', livello: 'medio',
       nota: 'Il 21 la condensa, il 24 un contatto mosso avvitando il tappo: entrambi risolti in pochi minuti, e ora sia la scheda sia la dashboard avvisano subito. Il 24 sera l\'acqua saponata della bottiglia rovesciata ha bagnato la schedina: asciugata, funziona, ma qualche residuo di sapone potrebbe farla sparire di nuovo. Lo smalto protettivo si mette quando il banco è finito. La tenuta della bottiglia è scesa dal 93 al 79 % dopo 10 minuti: ancora sopra il 70 % richiesto.' },
+    { titolo: 'Misura della quota in centimetri', livello: 'medio',
+      nota: 'Il 27 si è visto che il metro accanto alla bottiglia dà una scala sbagliata per il palombaro di circa il 15 %, e che la scala cambia dall\'alto in basso: calibrando con il metro la quota sbaglierebbe di 1–3 cm. Rimedio proposto: calibrare dentro la bottiglia, con un bastoncino segnato ogni 2 cm. Da decidere.' },
     { titolo: 'Telecamera dell\'iPhone lenta o instabile', livello: 'basso',
       nota: 'Il 24 sera: 60 fotogrammi al secondo veri, nessuna interruzione in 2 minuti; se l\'iPhone si scollega, il programma si ricollega da solo. Esposizione e messa a fuoco non si possono bloccare dal Mac: si tiene costante la scena (luce, tende, TV spenta).' },
   ],

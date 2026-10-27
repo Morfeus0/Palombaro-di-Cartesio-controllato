@@ -72,54 +72,37 @@
       <p class="tasti">Tastiera: <kbd>↑</kbd> <kbd>↓</kbd> 2° · <kbd>Maiusc</kbd> + freccia 10° · <kbd>C</kbd> centro</p>
     </section>
 
-    <section class="misure" aria-labelledby="titolo-misure">
-      <h2 id="titolo-misure" class="visivamente-nascosto">Misure</h2>
-      <section class="telecamera" aria-labelledby="titolo-telecamera">
-        <div class="tc-barra">
-          <h3 id="titolo-telecamera" class="grafici-titolo">Telecamera</h3>
-          <span class="pillola" id="tc-stato" data-livello="attesa"><span class="pillola-punto" aria-hidden="true"></span><span class="pillola-testo">Telecamera: in attesa</span></span>
-          <div class="segmenti tc-strati" role="group" aria-label="Sovrapposizioni sull'immagine">
-            <button type="button" class="segmento" data-strato="guide" aria-pressed="true">Guide</button>
-            <button type="button" class="segmento" data-strato="fantasma" aria-pressed="false">Riferimento</button>
-            <button type="button" class="segmento" data-strato="rosso" aria-pressed="false">Rosso</button>
-          </div>
+    <section class="telecamera" id="telecamera" aria-labelledby="titolo-telecamera">
+      <div class="tc-barra">
+        <h2 id="titolo-telecamera" class="grafici-titolo">Telecamera</h2>
+        <span class="pillola" id="tc-stato" data-livello="attesa"><span class="pillola-punto" aria-hidden="true"></span><span class="pillola-testo">Telecamera: in attesa</span></span>
+        <div class="segmenti tc-strati" role="group" aria-label="Sovrapposizioni sull'immagine">
+          <button type="button" class="segmento" data-strato="guide" aria-pressed="true">Guide</button>
+          <button type="button" class="segmento" data-strato="fantasma" aria-pressed="false">Riferimento</button>
+          <button type="button" class="segmento" data-strato="rosso" aria-pressed="false">Rosso</button>
         </div>
-        <div class="tc-corpo">
-          <div class="tc-scena" id="tc-scena">
-            <img id="tc-immagine" class="tc-immagine" alt="Inquadratura dal vivo della bottiglia" hidden>
-            <img id="tc-fantasma" class="tc-fantasma" alt="" hidden>
-            <canvas id="tc-sovrapposto" class="tc-sovrapposto" role="img"
-                    aria-label="Guide, colonna d'acqua e zone rosse; trascina per disegnare la colonna"></canvas>
-            <div class="tc-vuoto" id="tc-vuoto">
-              <p><strong>Telecamera spenta</strong></p>
-              <p>In Terminal.app, dalla cartella del progetto:</p>
-              <code>.venv/bin/python pc/telecamera.py</code>
-            </div>
-          </div>
-          <div class="tc-lato">
-            <ul class="tc-controlli" id="tc-controlli" aria-label="Controlli della postazione"></ul>
-            <dl class="tc-misure">
-              <div><dt>Risoluzione</dt><dd class="mono" id="tc-risoluzione">—</dd></div>
-              <div><dt>Fotogrammi</dt><dd class="mono" id="tc-fps">—</dd></div>
-              <div><dt>Interruzioni</dt><dd class="mono" id="tc-interruzioni">—</dd></div>
-              <div><dt>Luminosità</dt><dd class="mono" id="tc-luce">—</dd></div>
-              <div><dt>Riflessi</dt><dd class="mono" id="tc-riflessi">—</dd></div>
-              <div><dt>Nitidezza</dt><dd class="mono" id="tc-nitidezza">—</dd></div>
-              <div><dt>Zone rosse</dt><dd class="mono" id="tc-rosse">—</dd></div>
-              <div><dt>Colonna</dt><dd class="mono" id="tc-colonna">—</dd></div>
-              <div><dt>Riferimento</dt><dd class="mono" id="tc-rif">—</dd></div>
-            </dl>
-            <div class="tc-azioni">
-              <button type="button" class="tc-azione" id="tc-riferimento">Salva riferimento</button>
-              <button type="button" class="tc-azione" id="tc-registra">Registra 2 min</button>
-              <button type="button" class="bottone-piccolo" id="tc-colonna-via">Togli la colonna</button>
-            </div>
-            <p class="esito" id="tc-esito" role="status" aria-live="polite">Trascina sull'immagine per disegnare la colonna d'acqua.</p>
-            <ol class="tc-eventi" id="tc-eventi" aria-label="Eventi della telecamera"></ol>
-          </div>
+      </div>
+      <div class="tc-scena" id="tc-scena">
+        <img id="tc-immagine" class="tc-immagine" alt="Inquadratura dal vivo della bottiglia" hidden>
+        <img id="tc-fantasma" class="tc-fantasma" alt="" hidden>
+        <canvas id="tc-sovrapposto" class="tc-sovrapposto" role="img"
+                aria-label="Guide, colonna d'acqua e zone rosse; trascina per disegnare la colonna"></canvas>
+        <div class="tc-vuoto" id="tc-vuoto">
+          <p><strong>Telecamera spenta</strong></p>
+          <p>In Terminal.app, dalla cartella del progetto:</p>
+          <code>.venv/bin/python pc/telecamera.py</code>
         </div>
-      </section>
-      <div class="letture">
+      </div>
+      <div class="tc-azioni">
+        <button type="button" class="tc-azione" id="tc-riferimento">Salva riferimento</button>
+        <button type="button" class="tc-azione" id="tc-registra">Registra 2 min</button>
+        <button type="button" class="bottone-piccolo" id="tc-colonna-via">Togli la colonna</button>
+      </div>
+      <p class="esito" id="tc-esito" role="status" aria-live="polite">Trascina sull'immagine per disegnare la colonna d'acqua.</p>
+    </section>
+
+    <div class="dati">
+      <section class="letture" aria-label="Letture del sensore">
         <div class="lettura lettura-eroe">
           <p class="lettura-etichetta">Sovrapressione</p>
           <p class="lettura-valore"><span id="dp" class="mono">—</span><span class="unita">kPa</span></p>
@@ -134,11 +117,11 @@
           <p class="lettura-etichetta">Temperatura dell'aria</p>
           <p class="lettura-valore lettura-valore-medio"><span id="temperatura" class="mono">—</span><span class="unita">°C</span></p>
         </div>
-      </div>
+      </section>
 
-      <div class="grafici">
+      <section class="grafici" aria-labelledby="titolo-grafici">
         <div class="grafici-barra">
-          <p class="grafici-titolo">Andamento</p>
+          <h2 id="titolo-grafici" class="grafici-titolo">Andamento</h2>
           <div class="segmenti" role="group" aria-label="Finestra di tempo">
             <button type="button" class="segmento" data-finestra="60" aria-pressed="false">1 min</button>
             <button type="button" class="segmento" data-finestra="120" aria-pressed="true">2 min</button>
@@ -163,13 +146,39 @@
             <tbody id="tabella-corpo"></tbody>
           </table>
         </details>
-      </div>
+      </section>
 
-      <div class="eventi">
-        <p class="grafici-titolo">Eventi</p>
+      <section class="postazione" aria-labelledby="titolo-postazione">
+        <h2 id="titolo-postazione" class="grafici-titolo">Postazione</h2>
+        <div class="postazione-corpo">
+          <ul class="tc-controlli" id="tc-controlli" aria-label="Controlli della postazione"></ul>
+          <dl class="tc-misure">
+            <div><dt>Risoluzione</dt><dd class="mono" id="tc-risoluzione">—</dd></div>
+            <div><dt>Fotogrammi</dt><dd class="mono" id="tc-fps">—</dd></div>
+            <div><dt>Interruzioni</dt><dd class="mono" id="tc-interruzioni">—</dd></div>
+            <div><dt>Luminosità</dt><dd class="mono" id="tc-luce">—</dd></div>
+            <div><dt>Riflessi</dt><dd class="mono" id="tc-riflessi">—</dd></div>
+            <div><dt>Nitidezza</dt><dd class="mono" id="tc-nitidezza">—</dd></div>
+            <div><dt>Palombaro</dt><dd class="mono" id="tc-palombaro">—</dd></div>
+            <div><dt>Zone rosse</dt><dd class="mono" id="tc-rosse">—</dd></div>
+            <div><dt>Colonna</dt><dd class="mono" id="tc-colonna">—</dd></div>
+            <div><dt>Riferimento</dt><dd class="mono" id="tc-rif">—</dd></div>
+          </dl>
+        </div>
+        <ol class="tc-eventi" id="tc-eventi" aria-label="Eventi della telecamera"></ol>
+      </section>
+
+      <section class="eventi" aria-labelledby="titolo-eventi">
+        <h2 id="titolo-eventi" class="grafici-titolo">Eventi</h2>
         <ol class="eventi-lista" id="eventi"></ol>
-      </div>
-    </section>
+      </section>
+    </div>
   </main>
+
+  <!-- Miniatura: compare quando l'immagine grande esce dallo schermo; un clic riporta alla telecamera -->
+  <button type="button" class="tc-mini" id="tc-mini" hidden aria-label="Telecamera dal vivo: torna all'immagine grande">
+    <canvas id="tc-mini-tela" aria-hidden="true"></canvas>
+    <span class="tc-mini-etichetta"><span class="tc-mini-punto" aria-hidden="true"></span>Telecamera <span aria-hidden="true">↑</span></span>
+  </button>
 </body>
 </html>

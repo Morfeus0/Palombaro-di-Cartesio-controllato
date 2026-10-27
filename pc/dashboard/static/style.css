@@ -137,9 +137,19 @@ button:active { transform: translateY(1px); }
 .griglia {
   display: grid;
   grid-template-columns: minmax(18rem, 22rem) minmax(0, 1fr);
+  grid-template-areas: "comando telecamera" "comando dati";
+  align-items: start;
   gap: clamp(1rem, 2.5vw, 2rem);
   padding: clamp(1rem, 3vw, 2.5rem);
-  max-width: 96rem; margin: 0 auto;
+  max-width: 120rem; margin: 0 auto;
+}
+.comando { grid-area: comando; }
+.telecamera { grid-area: telecamera; }
+.dati { grid-area: dati; }
+/* Schermo largo: tre colonne. Comando e telecamera restano fermi, scorrono solo i dati. */
+@media (min-width: 75rem) {
+  .griglia { grid-template-columns: minmax(17rem, 20rem) minmax(0, 1.15fr) minmax(0, 1fr); grid-template-areas: "comando telecamera dati"; }
+  .telecamera { position: sticky; top: var(--spazio-4); max-height: calc(100dvh - 2rem); overflow-y: auto; }
 }
 
 /* Pannello del comando */
@@ -206,7 +216,7 @@ button:active { transform: translateY(1px); }
 kbd { font-family: var(--font-numeri); font-size: 0.6875rem; padding: 0 0.3rem; border: 1px solid var(--filo-forte); border-bottom-width: 2px; border-radius: 4px; background: var(--pannello-incassato); }
 
 /* Letture */
-.misure { display: grid; gap: clamp(1rem, 2vw, 1.5rem); min-width: 0; container-type: inline-size; }
+.dati { display: grid; gap: clamp(1rem, 2vw, 1.5rem); min-width: 0; container-type: inline-size; }
 .letture { display: grid; grid-template-columns: 1.6fr 1fr 1fr; border: 1px solid var(--filo); border-radius: calc(var(--raggio) * 2); background: var(--pannello); overflow: hidden; }
 .lettura-eroe .lettura-valore { font-size: clamp(2.5rem, 7.5cqi, 4.75rem); }
 @container (max-width: 46rem) {
@@ -226,7 +236,7 @@ kbd { font-family: var(--font-numeri); font-size: 0.6875rem; padding: 0 0.3rem; 
 /* Grafici */
 .grafici { background: var(--pannello); border: 1px solid var(--filo); border-radius: calc(var(--raggio) * 2); padding: var(--spazio-4) var(--spazio-6) var(--spazio-6); display: grid; gap: var(--spazio-3); min-width: 0; }
 .grafici-barra { display: flex; align-items: center; justify-content: space-between; gap: var(--spazio-4); }
-.grafici-titolo { font-weight: 600; letter-spacing: -0.01em; }
+.grafici-titolo { font-size: var(--t-base); font-weight: 600; letter-spacing: -0.01em; }
 .segmenti { display: inline-flex; border: 1px solid var(--filo-forte); border-radius: var(--raggio); overflow: hidden; }
 .segmento { border: 0; border-radius: 0; padding: 0.3rem 0.75rem; font-size: var(--t-piccolo); background: transparent; color: var(--inchiostro-2); }
 .segmento + .segmento { border-left: 1px solid var(--filo-forte); }
@@ -264,7 +274,7 @@ kbd { font-family: var(--font-numeri); font-size: 0.6875rem; padding: 0 0.3rem; 
 .evento-vuoto { color: var(--inchiostro-3); font-size: var(--t-piccolo); }
 
 @media (max-width: 60rem) {
-  .griglia { grid-template-columns: 1fr; }
+  .griglia { grid-template-columns: 1fr; grid-template-areas: "comando" "telecamera" "dati"; }
   .comando { position: static; height: auto; }
   .corsa-binario { height: 18rem; }
 }
@@ -284,13 +294,10 @@ kbd { font-family: var(--font-numeri); font-size: 0.6875rem; padding: 0 0.3rem; 
   * { transition: none !important; }
 }
 
-/* Telecamera (2.1): l'immagine è il pezzo grande, misure e controlli stanno di lato */
+/* Telecamera (2.1): immagine e azioni; su schermo largo la colonna resta ferma. Misure e controlli nella scheda «Postazione». */
 .telecamera { background: var(--pannello); border: 1px solid var(--filo); border-radius: calc(var(--raggio) * 2); padding: var(--spazio-4) var(--spazio-6) var(--spazio-6); display: grid; gap: var(--spazio-3); min-width: 0; container-type: inline-size; }
 .tc-barra { display: flex; align-items: center; gap: var(--spazio-3); flex-wrap: wrap; }
-.tc-barra h3 { margin: 0; font-size: inherit; }
 .tc-strati { margin-left: auto; }
-.tc-corpo { display: grid; grid-template-columns: minmax(0, 1fr) 17rem; gap: var(--spazio-6); align-items: start; }
-@container (max-width: 48rem) { .tc-corpo { grid-template-columns: 1fr; } }
 .tc-scena { position: relative; background: var(--pannello-incassato); border-radius: var(--raggio); overflow: hidden; min-height: 12rem; }
 .tc-immagine { display: block; width: 100%; height: auto; }
 .tc-fantasma { position: absolute; inset: 0; width: 100%; height: 100%; mix-blend-mode: difference; pointer-events: none; }
@@ -298,7 +305,9 @@ kbd { font-family: var(--font-numeri); font-size: 0.6875rem; padding: 0 0.3rem; 
 .tc-vuoto { position: absolute; inset: 0; display: grid; place-content: center; gap: var(--spazio-1); text-align: center; padding: var(--spazio-4); color: var(--inchiostro-2); font-size: var(--t-piccolo); }
 .tc-vuoto[hidden] { display: none; }
 .tc-vuoto code { font-family: var(--font-numeri); font-size: 0.75rem; background: var(--pannello); border: 1px solid var(--filo); border-radius: 4px; padding: 0.2rem 0.45rem; }
-.tc-lato { display: grid; gap: var(--spazio-4); align-content: start; }
+.postazione { background: var(--pannello); border: 1px solid var(--filo); border-radius: calc(var(--raggio) * 2); padding: var(--spazio-4) var(--spazio-6); display: grid; gap: var(--spazio-3); container-type: inline-size; }
+.postazione-corpo { display: grid; grid-template-columns: 1fr 1fr; gap: var(--spazio-4); align-items: start; }
+@container (max-width: 36rem) { .postazione-corpo { grid-template-columns: 1fr; } }
 .tc-controlli { list-style: none; padding: 0; margin: 0; display: grid; border: 1px solid var(--filo); border-radius: var(--raggio); overflow: hidden; }
 .tc-controllo { display: grid; grid-template-columns: 1.25rem 1fr auto; gap: var(--spazio-2); align-items: center; padding: 0.35rem var(--spazio-3); font-size: var(--t-piccolo); }
 .tc-controllo + .tc-controllo { border-top: 1px solid var(--filo); }
@@ -312,8 +321,29 @@ kbd { font-family: var(--font-numeri); font-size: 0.6875rem; padding: 0 0.3rem; 
 .tc-misure div { display: grid; grid-template-columns: 6.5rem 1fr; gap: var(--spazio-2); padding: 0.25rem 0; border-bottom: 1px solid var(--filo); font-size: var(--t-piccolo); }
 .tc-misure dt { color: var(--inchiostro-3); }
 .tc-misure dd { margin: 0; text-align: right; }
-.tc-azioni { display: grid; grid-template-columns: 1fr 1fr; gap: var(--spazio-2); }
-.tc-azione { padding: 0.55rem 0.5rem; font-size: var(--t-piccolo); font-weight: 500; }
-.tc-azioni .bottone-piccolo { grid-column: 1 / -1; justify-self: start; }
+.tc-azioni { display: flex; flex-wrap: wrap; align-items: center; gap: var(--spazio-2); }
+.tc-azione { padding: 0.5rem 0.85rem; font-size: var(--t-piccolo); font-weight: 500; }
+.tc-azioni .bottone-piccolo { margin-left: auto; }
 #tc-registra[data-attiva="si"] { border-color: var(--stato-critico); color: var(--stato-critico); }
 .tc-eventi { list-style: none; padding: 0; margin: 0; display: grid; gap: 2px; font-family: var(--font-numeri); font-size: 0.6875rem; color: var(--inchiostro-3); white-space: pre-wrap; }
+
+/* Miniatura della telecamera: compare in basso a destra quando l'immagine grande esce dallo schermo */
+.tc-mini {
+  position: fixed; right: clamp(0.75rem, 2vw, 1.5rem); bottom: clamp(0.75rem, 2vw, 1.5rem); z-index: 10;
+  width: min(22rem, 42vw); padding: 0; overflow: hidden; display: grid;
+  border: 1px solid var(--filo-forte); border-radius: calc(var(--raggio) * 2); background: var(--pannello-incassato);
+  box-shadow: 0 2px 0 rgb(0 0 0 / 0.05), 0 18px 40px -18px rgb(0 0 0 / 0.55);
+  opacity: 0; transform: translateY(0.75rem) scale(0.98);
+  transition: opacity var(--durata) var(--curva), transform var(--durata) var(--curva);
+}
+.tc-mini[hidden] { display: none; }
+.tc-mini[data-visibile="si"] { opacity: 1; transform: none; }
+.tc-mini:hover { border-color: var(--accento); }
+.tc-mini canvas { display: block; width: 100%; height: auto; aspect-ratio: 16 / 9; }
+.tc-mini-etichetta {
+  position: absolute; left: var(--spazio-2); top: var(--spazio-2); display: inline-flex; align-items: center; gap: var(--spazio-1);
+  padding: 0.1rem 0.5rem; border-radius: 999px; font-size: 0.6875rem; font-weight: 600; letter-spacing: 0.04em;
+  background: rgb(0 0 0 / 0.55); color: #fff;
+}
+.tc-mini-punto { width: 7px; height: 7px; border-radius: 50%; background: var(--stato-critico); }
+@media (max-width: 30rem) { .tc-mini { width: 55vw; } }

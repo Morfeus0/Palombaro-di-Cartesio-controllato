@@ -4,7 +4,7 @@
 // È la base dell'interfaccia finale: qui la 2.2 disegnerà il riquadro del palombaro e la quota.
 
 const PERIODO_IMMAGINE_MS = 200; // 5 immagini al secondo: per guardare basta, e il Mac non fatica
-const PERIODO_STATO_MS = 500;
+const PERIODO_STATO_MS = 200;  // come il giro di pc/telecamera.py: il riquadro di P1 segue l'immagine
 const VECCHIO_S = 2;             // stato più vecchio di così: il programma della telecamera è fermo
 const SECONDI_REGISTRAZIONE = 120;
 const LATO_MIN_COLONNA = 20;     // come LATO_MIN_ROI in pc/postazione.py
@@ -23,8 +23,9 @@ const el = {
   scena: $("tc-scena"), immagine: $("tc-immagine"), fantasma: $("tc-fantasma"), tela: $("tc-sovrapposto"),
   vuoto: $("tc-vuoto"), stato: $("tc-stato"), controlli: $("tc-controlli"), esito: $("tc-esito"), eventi: $("tc-eventi"),
   risoluzione: $("tc-risoluzione"), fps: $("tc-fps"), interruzioni: $("tc-interruzioni"), luce: $("tc-luce"),
-  riflessi: $("tc-riflessi"), nitidezza: $("tc-nitidezza"), rosse: $("tc-rosse"), colonna: $("tc-colonna"), rif: $("tc-rif"),
+  riflessi: $("tc-riflessi"), nitidezza: $("tc-nitidezza"), rosse: $("tc-rosse"), palombaro: $("tc-palombaro"), colonna: $("tc-colonna"), rif: $("tc-rif"),
   riferimento: $("tc-riferimento"), registra: $("tc-registra"), colonnaVia: $("tc-colonna-via"),
+  mini: $("tc-mini"), miniTela: $("tc-mini-tela"),
 };
 
 const tc = {
@@ -33,6 +34,7 @@ const tc = {
   trascinamento: null,      // {x0, y0, x1, y1} in pixel della tela, mentre si disegna la colonna
   numeroImmagine: 0,
   riferimentoVersione: "",
+  scenaInVista: true,       // l'immagine grande è sullo schermo: la miniatura non serve
 };
 
 const numero = (v, decimali = 0) =>
@@ -70,12 +72,14 @@ function preparaImmagine() {
     el.immagine.hidden = false;
     el.vuoto.hidden = true;
     adattaTela();
+    aggiornaMini();
     const trascorso = performance.now() - Number(el.immagine.dataset.inizio);
     setTimeout(prossimaImmagine, Math.max(0, PERIODO_IMMAGINE_MS - trascorso));
   });
   el.immagine.addEventListener("error", () => {
     el.immagine.hidden = true;
     el.vuoto.hidden = false;
+    aggiornaMini();
     setTimeout(prossimaImmagine, 1000);
   });
   prossimaImmagine();
@@ -89,6 +93,41 @@ function aggiornaFantasma() {
     el.fantasma.src = `/api/telecamera/riferimento.jpg?v=${encodeURIComponent(versione)}`;
   }
   el.fantasma.hidden = !(tc.strati.fantasma && versione && !el.immagine.hidden);
+}
+
+// ---------- miniatura: la telecamera resta visibile mentre si scorre fino ai grafici ----------
+// Ricopia l'ultimo fotogramma (con guide e zone rosse) senza chiedere al server un'immagine in più.
+function aggiornaMini() {
+  const mostra = !tc.scenaInVista && !el.immagine.hidden;
+  if (mostra === el.mini.hidden) {
+    el.mini.hidden = !mostra;
+    requestAnimationFrame(() => { el.mini.dataset.visibile = mostra ? "si" : "no"; });
+  }
+  if (!mostra) return;
+  const { naturalWidth: wi, naturalHeight: hi } = el.immagine;
+  if (!wi || !hi) return;
+  const dpr = window.devicePixelRatio || 1;
+  const larghezza = Math.round(el.mini.clientWidth * dpr), altezza = Math.round(larghezza * hi / wi);
+  if (el.miniTela.width !== larghezza || el.miniTela.height !== altezza) {
+    el.miniTela.width = larghezza;
+    el.miniTela.height = altezza;
+    el.miniTela.style.aspectRatio = `${wi} / ${hi}`;
+  }
+  const ctx = el.miniTela.getContext("2d");
+  ctx.drawImage(el.immagine, 0, 0, larghezza, altezza);
+  if (el.tela.width) ctx.drawImage(el.tela, 0, 0, larghezza, altezza);
+}
+
+function preparaMini() {
+  new IntersectionObserver(([voce]) => {
+    // in vista se se ne vede almeno un terzo: con meno, P1 può essere già fuori dallo schermo
+    tc.scenaInVista = voce.intersectionRatio >= 0.35;
+    aggiornaMini();
+  }, { threshold: [0, 0.35, 1] }).observe(el.scena);
+  el.mini.addEventListener("click", () => {
+    const riduci = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    $("telecamera").scrollIntoView({ behavior: riduci ? "auto" : "smooth", block: "start" });
+  });
 }
 
 // ---------- sovrapposizioni: guide, colonna, zone rosse ----------
@@ -148,8 +187,28 @@ function disegna() {
     ctx.font = "600 11px 'IBM Plex Mono', monospace";
     ctx.fillText(String(i + 1), z.x / s - 3, z.y / s - 6);
   }
+  disegnaPalombaro(ctx, s, w, colore("--stato-buono"), critico);
   const t = tc.trascinamento;
   if (t) rettangolo(ctx, Math.min(t.x0, t.x1), Math.min(t.y0, t.y1), Math.abs(t.x1 - t.x0), Math.abs(t.y1 - t.y0), accento, 1.5, [4, 3]);
+}
+
+// Il riconoscimento della 2.2: riquadro verde sul marcatore, oppure l'avviso se P1 manca o è perso.
+function disegnaPalombaro(ctx, s, larghezza, verde, rosso) {
+  const m = tc.stato?.marcatore;
+  if (!m) return;
+  ctx.save();
+  ctx.font = "600 12px 'IBM Plex Mono', monospace";
+  if (m.trovato && m.riquadro) {
+    const [x, y, w, h] = m.riquadro;
+    rettangolo(ctx, x / s - 4, y / s - 4, w / s + 8, h / s + 8, verde, 2);
+    ctx.fillStyle = verde;
+    ctx.fillText(`P1 · y ${numero(m.y)} px`, x / s + w / s + 8, y / s + 10);
+  } else {
+    const testo = m.perso ? "P1 perso" : `P1 non visto da ${numero(m.da_quanto_s, 2)} s`;
+    ctx.fillStyle = rosso;
+    ctx.fillText(testo, larghezza - ctx.measureText(testo).width - 10, 18);
+  }
+  ctx.restore();
 }
 
 function puntoTela(evento) {
@@ -230,6 +289,9 @@ function mostraMisure(s) {
   const zone = s.zone_rosse || [], nellaColonna = s.zone_rosse_colonna || [];
   el.rosse.textContent = `${nellaColonna.length} nella colonna · ${zone.length} in tutto`;
   el.colonna.textContent = s.roi ? `${s.roi[2]} × ${s.roi[3]} da (${s.roi[0]}, ${s.roi[1]})` : "tutta l'immagine";
+  const m = s.marcatore;
+  el.palombaro.textContent = !m ? "—"
+    : `${m.trovato ? `y ${numero(m.y, 1)} px` : m.perso ? "perso" : "non visto"} · ${numero(m.fps, 0)} fps`;
   el.rif.textContent = s.riferimento ? `${s.riferimento.data} ${s.riferimento.ora}` : "nessuno";
   const reg = s.registrazione || {};
   el.registra.textContent = reg.attiva ? `Ferma (${minuti(reg.secondi_rimasti)})` : "Registra 2 min";
@@ -289,11 +351,13 @@ function preparaComandi() {
     else invia({ comando: "registra", secondi: SECONDI_REGISTRAZIONE }, "Registrazione avviata: 2 minuti.");
   });
   el.colonnaVia.addEventListener("click", () => invia({ comando: "roi_via" }, "Colonna tolta: le misure valgono su tutta l'immagine."));
-  window.addEventListener("resize", adattaTela);
+  // la colonna può cambiare larghezza anche senza ridimensionare la finestra (cambio di disposizione)
+  new ResizeObserver(adattaTela).observe(el.scena);
 }
 
 preparaImmagine();
 preparaColonna();
+preparaMini();
 preparaComandi();
 mostraControlli(null);
 leggiStato();

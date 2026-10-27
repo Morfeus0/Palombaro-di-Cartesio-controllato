@@ -290,4 +290,4 @@ iPhone tolto dal supporto **senza spostare il supporto**.
 | Campo verticale, mm per pixel | circa 33,5 cm, 0,31 mm/px |
 | Luminosità della colonna, deriva | 87 / 0 % in 2 minuti (5 minuti da rifare) |
 | Ripetibilità (scostamento tacche 0 e 20) | ___ / ___ px |
-| Rotazione dell'immagine (bordo del metro contro la verticale) | 1,5° (24 ottobre, misurata dall'anteprima; vale circa 0,9 mm al massimo con P1 spostato di lato di 3,5 cm: si corregge nel programma con la calibrazione della 2.3, non serve rifare il supporto) |
+| Rotazione dell'immagine (bordo del metro contro la verticale) | **1,45°** (27 ottobre, `pc/calibrazione.py metro` sul riferimento: pendenza −0,0254; il 24 era 1,5° stimata dall'anteprima; vale circa 0,9 mm al massimo con P1 spostato di lato di 3,5 cm: si corregge nel programma con la calibrazione della 2.3, non serve rifare il supporto) |

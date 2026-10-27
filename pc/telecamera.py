@@ -10,7 +10,8 @@ Uso (dalla cartella del progetto, in Terminal.app, che ha il permesso della tele
 Ctrl+C per chiuderlo.
 
 Scrive in dati/<oggi>/telecamera/: anteprima.jpg e rosso.jpg (5 volte al secondo), stato.json, i video di prova
-(AAAA-MM-GG_postazione_NN.mp4) con l'orario di ogni fotogramma (..._fotogrammi.csv) e telecamera.log.
+(AAAA-MM-GG_postazione_NN.mp4) con l'orario di ogni fotogramma e la posizione di P1 (..._fotogrammi.csv) e
+telecamera.log. P1 si cerca in ogni fotogramma (pc/tracking.py, sottofase 2.2), dentro la colonna d'acqua.
 Legge i comandi da dati/<oggi>/telecamera/comandi/. La colonna e il riferimento stanno in pc/config/postazione.json.
 """
 import argparse
@@ -28,6 +29,7 @@ import cv2
 import numpy as np
 
 import postazione as p
+import tracking
 
 RADICE = Path(__file__).resolve().parents[1]
 CONFIG = RADICE / "pc" / "config"
@@ -157,12 +159,14 @@ class Registrazione:
              "-c:v", "h264_videotoolbox", "-b:v", "12M", "-pix_fmt", "yuv420p", str(self.video)],
             stdin=subprocess.PIPE)
         self.csv = self.orari.open("w", encoding="utf-8")
-        self.csv.write("n,t_unix,ora\n")
+        self.csv.write("n,t_unix,ora,trovato,x,y\n")
 
-    def scrivi(self, fotogramma: np.ndarray, t: float) -> None:
+    def scrivi(self, fotogramma: np.ndarray, t: float, marcatore: dict | None) -> None:
         self.n += 1
         self.codificatore.stdin.write(fotogramma.tobytes())
-        self.csv.write(f"{self.n},{t:.3f},{orario(t)}\n")
+        trovato = bool(marcatore and marcatore["trovato"])
+        xy = f"{marcatore['x']:.2f},{marcatore['y']:.2f}" if trovato else ","
+        self.csv.write(f"{self.n},{t:.3f},{orario(t)},{int(trovato)},{xy}\n")
 
     def chiudi(self) -> None:
         self.csv.close()
@@ -186,6 +190,9 @@ class Acquisizione(threading.Thread):
         self.attiva = True
         self.ultimo_segnale = time.time()  # apertura della sorgente o ultimo fotogramma
         self.apertura = time.time()
+        self.inseguitore = tracking.Inseguitore()   # P1, cercato in ogni fotogramma
+        self.marcatore: dict | None = None          # ultimo risultato dell'inseguitore
+        self.tempi_riconoscimento: deque[float] = deque()
 
     def evento(self, testo: str) -> None:
         log.info(testo)
@@ -206,7 +213,28 @@ class Acquisizione(threading.Thread):
                 self.evento("telecamera persa: riprovo tra 2 s")
                 time.sleep(2)
 
+    def imposta_colonna(self, roi: list | None) -> None:
+        """P1 si cerca solo nella colonna: cambiata la colonna, si riparte da capo."""
+        with self.blocco:
+            self.inseguitore = tracking.Inseguitore(tuple(roi) if roi else None)
+            self.marcatore = None
+
+    def riconosci(self, fotogramma: np.ndarray, t: float) -> dict | None:
+        try:
+            marcatore = self.inseguitore.aggiorna(fotogramma, t)
+        except ValueError:  # colonna disegnata con un'altra risoluzione: si cerca in tutta l'immagine
+            self.imposta_colonna(None)
+            self.evento("colonna fuori dall'immagine: P1 si cerca ovunque, ridisegna la colonna")
+            marcatore = self.inseguitore.aggiorna(fotogramma, t)
+        with self.blocco:
+            self.marcatore = marcatore
+            self.tempi_riconoscimento.append(t)
+            while self.tempi_riconoscimento and t - self.tempi_riconoscimento[0] > FINESTRA_FPS_S:
+                self.tempi_riconoscimento.popleft()
+        return marcatore
+
     def nuovo(self, fotogramma: np.ndarray, t: float) -> None:
+        marcatore = self.riconosci(fotogramma, t)  # circa 1,3 ms a 1920 × 1080: si fa su ogni fotogramma
         with self.blocco:
             if self.tempi and t - self.tempi[-1] > BUCO_S:
                 self.interruzioni += 1
@@ -221,7 +249,7 @@ class Acquisizione(threading.Thread):
         with self.blocco_video:
             if self.registrazione:
                 if t < self.registrazione.fine:
-                    self.registrazione.scrivi(fotogramma, t)
+                    self.registrazione.scrivi(fotogramma, t, marcatore)
                 else:
                     scaduta = True
         if scaduta:
@@ -247,6 +275,14 @@ class Acquisizione(threading.Thread):
     def fotografia(self) -> tuple[np.ndarray | None, list[float], int, int]:
         with self.blocco:
             return self.ultimo, list(self.tempi), self.fotogrammi, self.interruzioni
+
+    def stato_marcatore(self) -> dict | None:
+        """L'ultima posizione di P1 per la dashboard, con quanti fotogrammi al secondo vengono riconosciuti."""
+        with self.blocco:
+            if self.marcatore is None:
+                return None
+            fps = p.statistiche_fotogrammi(list(self.tempi_riconoscimento))["fps"]
+            return {**self.marcatore, "fps": fps}
 
 
 # ---------- configurazione e analisi ----------
@@ -313,6 +349,7 @@ class Postazione:
     def __init__(self, acquisizione: Acquisizione, cartella: Path, eventi: deque):
         self.acq, self.cartella, self.eventi = acquisizione, cartella, eventi
         self.config = leggi_config()
+        self.acq.imposta_colonna(self.config.get("roi"))
         self.luci: deque[tuple[float, float]] = deque()
         self.avvisato_fps = False
         self.ultimo_riavvio = 0.0
@@ -322,6 +359,7 @@ class Postazione:
         if nome in ("roi", "roi_via"):
             self.config["roi"] = [comando[k] for k in ("x", "y", "w", "h")] if nome == "roi" else None
             self.luci.clear()  # la luminosità di un'altra zona non è confrontabile
+            self.acq.imposta_colonna(self.config["roi"])
             salva_config(self.config)
             self.acq.evento(f"colonna: {self.config['roi']}" if nome == "roi" else "colonna tolta: misure su tutta l'immagine")
         elif nome == "registra":
@@ -389,6 +427,7 @@ class Postazione:
                                    "secondi_rimasti": max(0, round(registrazione.fine - adesso))}
                                   if registrazione else {"attiva": False})
         stato["riferimento"] = self.config.get("riferimento")
+        stato["marcatore"] = self.acq.stato_marcatore()
         stato["verdetto"] = giudica(stato)
         p.scrivi_atomico(self.cartella / "stato.json", json.dumps(stato, ensure_ascii=False).encode("utf-8"))
 

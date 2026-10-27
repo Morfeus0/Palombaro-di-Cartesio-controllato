@@ -301,19 +301,20 @@ Sono le sottofasi che, se ritardano, fanno slittare la consegna. Le altre hanno 
   - [ ] Scena costante (luce artificiale, tende chiuse, TV spenta, effetti video spenti) e controllo F4 della stabilità. *(24 ott, decisione di Gabriele: la Fotocamera Continuity non permette di bloccare esposizione, fuoco e bilanciamento dal Mac, verificato con `pc/sonda_telecamera.swift` con il permesso concesso; prima era «Bloccare esposizione e messa a fuoco».)*
 - **Output:** foto della postazione, impostazioni annotate nel diario.
 - **Fatto quando:** il palombaro è nitido e senza riflessi in ogni punto della colonna d'acqua.
-- 🔶 **In corso (24 ottobre sera, in anticipo):** blocchi A–E di `hardware/postazione-ripresa.md` fatti; telecamera a 1920 × 1080 e 60 fps veri, 0,31 mm per pixel, rumore del marcatore fermo 0,09 mm, luminosità stabile in 2 minuti. Restano F6 (P1 su tutta la colonna, il «Fatto quando») e F9 (ripetibilità), dopo aver fissato di nuovo il servo (vedi R3).
+- 🔶 **In corso (24 ottobre sera, in anticipo):** blocchi A–E di `hardware/postazione-ripresa.md` fatti; telecamera a 1920 × 1080 e 60 fps veri, 0,31 mm per pixel, rumore del marcatore fermo 0,09 mm, luminosità stabile in 2 minuti. Restano F6 (P1 su tutta la colonna, il «Fatto quando») e F9 (ripetibilità), dopo aver fissato di nuovo il servo (vedi R3). **27 ottobre: ferma dal 25 per impegni personali di Gabriele, scadenza superata; nessuno spostamento di calendario deciso.**
 
 ### 2.2 · Riconoscimento del palombaro con OpenCV
 - **Quando:** mar 27 → ven 30 ott · **Scadenza:** ven 30 ott · **Impegno:** ~4 h · **Prerequisiti:** 2.1, 1.1
 - **Obiettivo:** trovare in ogni fotogramma la posizione del marcatore rosso.
 - **Attività:**
-  - [ ] Acquisire il video dall'iPhone.
-  - [ ] Riconoscere il colore rosso nello spazio HSV.
-  - [ ] Calcolare il centro del marcatore.
-  - [ ] Gestire il caso "palombaro non trovato".
-  - [ ] Mostrare a video il riquadro del riconoscimento.
+  - [x] Acquisire il video dall'iPhone. *(24 ott, con la 2.1: `pc/telecamera.py`)*
+  - [x] Riconoscere il colore rosso nello spazio HSV. *(27 ott: la maschera della 2.1, solo dentro la colonna d'acqua)*
+  - [x] Calcolare il centro del marcatore. *(27 ott: centro della zona rossa più grande, in pixel a piena risoluzione)*
+  - [x] Gestire il caso "palombaro non trovato". *(27 ott: buchi fino a 0,25 s scavalcati con l'ultima posizione, oltre «perso»; scartate le zone rosse oltre 8000 pixel, come una mano davanti alla telecamera, e i salti più veloci di quanto P1 possa muoversi)*
+  - [x] Mostrare a video il riquadro del riconoscimento. *(27 ott: nella dashboard dal vivo e nel video di prova)*
 - **Output:** `pc/tracking.py`, video di prova con il riquadro sovrapposto.
 - **Fatto quando:** almeno 25 fotogrammi al secondo e nessuna perdita del palombaro in 2 minuti di movimento.
+- 🔶 **In corso (27 ottobre, in anticipo, lavoro di Claude sui video del 24):** `pc/tracking.py` con 18 test; riconoscimento in ogni fotogramma di `pc/telecamera.py` (60 al secondo dal vivo, circa 1,3 ms per fotogramma, cioè fino a circa 760 al secondo) e posizione di P1 nei file dei video di prova. Video del 24: P1 trovato nel 100 % dei fotogrammi in 2 + 2 minuti da fermo (deviazione 0,15–0,43 px) e nei 41 s in cui sale dal fondo al pelo dell'acqua (20 cm, nessun buco); nel video con la mano davanti, nessuna posizione falsa. Video di prova: `media/2026-10-24_2.2_riconoscimento-P1-che-sale.mp4`. **Manca** il controllo del «Fatto quando» su 2 minuti di movimento nella scena attuale: si fa con il video di F6 della 2.1.
 
 ### 2.3 · Calibrazione e caratterizzazione della misura
 - **Quando:** ven 30 ott → dom 1 nov · **Scadenza:** dom 1 nov · **Impegno:** ~2 h · **Prerequisiti:** 2.2
@@ -324,6 +325,11 @@ Sono le sottofasi che, se ritardano, fanno slittare la consegna. Le altre hanno 
   - [ ] Misurare la latenza della telecamera.
 - **Output:** parametri di calibrazione in `pc/config`; rumore (mm) e latenza (ms) nel diario. Sono i valori reali da confrontare con le stime della simulazione: 0,3 mm e 66 ms.
 - **Fatto quando:** errore inferiore a 2 mm su 5 quote note.
+- 🔶 **In corso (27 ottobre, in anticipo, lavoro di Claude sulle immagini del 24):** `pc/calibrazione.py` con 13 test e `pc/config/calibrazione.json`.
+  - **Rotazione:** il bordo del metro pende di −0,0254 (telecamera ruotata di **1,45°**); la quota si calcola lungo la verticale vera.
+  - **Rumore** con P1 fermo (video 01 e 02 del 24, 2 minuti ciascuno): deviazione del centro 0,15–0,43 px, cioè circa **0,05–0,14 mm** (la simulazione stimava 0,3 mm).
+  - **Il metro accanto alla bottiglia non dà la scala di P1.** Lungo il metro la scala passa da 3,42 px/mm in alto a 3,04 in basso (−12 %): il metro non è parallelo all'immagine (telecamera inclinata o asta che pende). E P1, che sta più vicino alla telecamera e dietro l'acqua che fa da lente, appare circa il 15 % più grande del metro (video 05: 653 px per circa 17,3 cm). Proposta, da decidere con Gabriele: calibrare **nel piano di P1**, con uno spiedino segnato ogni 2 cm infilato nella bottiglia lungo l'asse, e il modello prospettico h = (a + b·s)/(1 + c·s) di `pc/calibrazione.py`; i segni non usati per adattarlo sono le «5 quote note» del «Fatto quando».
+  - **Restano al banco:** la calibrazione nel piano di P1, la latenza e il «Fatto quando».
 
 ### 2.4 · Protocollo di comunicazione tra Mac ed ESP32
 - **Quando:** dom 1 → lun 2 nov · **Scadenza:** lun 2 nov · **Impegno:** ~1,5 h · **Prerequisiti:** 1.5, 2.2
@@ -334,6 +340,7 @@ Sono le sottofasi che, se ritardano, fanno slittare la consegna. Le altre hanno 
   - [ ] Velocità della seriale, frequenze dei messaggi, controllo degli errori, comportamento se i messaggi smettono di arrivare.
 - **Output:** `docs/protocollo.md`.
 - **Fatto quando:** il documento è completo e lo abbiamo rivisto insieme.
+- 🔶 **Bozza scritta (27 ottobre, Claude):** righe di testo con controllo XOR, quota dal Mac a ogni fotogramma con la sua età (niente orologi da sincronizzare), telemetria `T` a 100 Hz e `C` con i tre termini del PID, SAFE deciso dall'ESP32 se il Mac tace per 500 ms, la telecamera per 200 ms o P1 è perso. Otto scelte da decidere nella revisione (sezione 9), tra cui 460 800 baud, SAFE con P1 a fondo invece della risalita, e la pressione a 100 Hz (con il sovracampionamento di oggi il BMP280 arriva a circa 75 letture al secondo).
 
 ### 2.5 · Firmware di base dell'ESP32
 - **Quando:** lun 2 → gio 5 nov · **Scadenza:** gio 5 nov · **Impegno:** ~4 h · **Prerequisiti:** 2.4
@@ -652,7 +659,7 @@ Sono le sottofasi che, se ritardano, fanno slittare la consegna. Le altre hanno 
 | R1 | I componenti arrivano in ritardo | non arrivati entro **ven 16 ott** | acquisto in un negozio di elettronica a Roma; intanto si anticipano le sottofasi senza hardware (3.1, 2.4, 1.1) |
 | R2 | Il tappo perde aria | τ < 30 min dopo 2 tentativi (1.6) *(24 ott: dopo molte aperture resta il 79 % in 10 minuti, τ ≈ 43 min; era 93 %)* | tappo nuovo con passanti per tubo, nastro teflon; in ultima istanza ci si affida alla compensazione dell'anello interno |
 | R3 | Servo impreciso o con troppo gioco | ripetibilità peggiore di ±25 Pa (circa ±0,12 ml con la siringa da 20 ml) entro **gio 22 ott** (1.7) *(23 ott: ripetibilità ±9–11 Pa, il criterio non scatta; zona morta di circa 10° a ogni inversione, da compensare nel programma. 24 ott sera: la colla a caldo del servo ha ceduto, spingendo il servo si solleva e la pressione non sale oltre quella della stanza; rimontato con il nastro isolante, si solleva ancora. Rimedio: fascette attorno alla tavoletta, poi braccio verticale a 86, volumi a 36/86/146 ed escursione 36 ↔ 146 ricontrollati)* | passo-passo + barra filettata (circa 15 €, +2 giorni); oppure più volume d'aria per avere più risoluzione |
-| R4 | Riconoscimento instabile (riflessi, luce) | perdite del palombaro entro **ven 30 ott** (2.2) *(24 ott: il filo di rame di P1 risultava rosso; soglia della tinta portata da 10 a 6, misurata: marcatore −4…6, rame 8…16; il rosso fuori dalla colonna non conta)* | cambiare sfondo e luce, marcatore più grande o di altro colore |
+| R4 | Riconoscimento instabile (riflessi, luce) | perdite del palombaro entro **ven 30 ott** (2.2) *(24 ott: il filo di rame di P1 risultava rosso; soglia della tinta portata da 10 a 6, misurata: marcatore −4…6, rame 8…16; il rosso fuori dalla colonna non conta. 27 ott: anche la pelle risulta «rossa» (una mano davanti alla telecamera, video 03 del 24): il riconoscimento scarta le zone oltre 8000 pixel e i salti impossibili; nei video del 24 nessuna perdita)* | cambiare sfondo e luce, marcatore più grande o di altro colore |
 | R5 | Continuity Camera lenta o si disconnette | latenza > 150 ms o disconnessioni (2.3) *(24 ott: 60 fps veri, nessun buco in 2 minuti; esposizione e fuoco non bloccabili dal Mac, quindi scena costante; un distacco alle 23:16, dopo il quale il programma ora si ricollega da solo)* | webcam USB (+20 €) |
 | R6 | Palombaro difficile da tarare | dopo 2 sessioni (1.2) | bilancino 0,01 g, palombari di riserva, zavorra a passi più piccoli. *(19 ott: in corso. Taratura nella bottiglia d'uso con il rame, detersivo contro la tensione superficiale, circuito chiuso già in pressione. 21 ott: dopo due giorni a galla P1 non scende più con tutta la corsa, ma si stacca di colpo con un colpetto o una spinta rapida della siringa: il menisco è tornato (punta asciutta) e la pressione esterna è calata di 0,9 kPa. Il palombaro non deve mai riemergere durante il controllo; lo zero si ritrova a ogni sessione. 23 ott: con la bottiglia aperta P1 era sul fondo, cioè troppo pesante; bottiglia cambiata per la schiuma e P1 ritarato: va a fondo a +2,2 kPa e risale a +0,4 kPa. Poco detersivo: troppo fa schiuma, l'acqua aggiunta lo diluisce)* |
 | R7 | L'ESP32 si riavvia quando si muove il servo | durante la 1.5 | alimentazione separata più potente, condensatore più grande, cavi più corti |
