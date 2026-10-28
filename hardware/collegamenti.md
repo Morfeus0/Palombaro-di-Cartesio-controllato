@@ -31,6 +31,7 @@
 - Condensatore elettrolitico: la **striscia chiara è il −**. Montato al contrario si può gonfiare e rompere.
 - Nella breadboard vanno solo pin rigidi della misura giusta (pin a pettine, jumper). Fori rovinati: riga a, colonne 1, 2, 5, 6, 7, 8, 11, 14, 15.
 - Il cavo del sensore è **ancorato al tavolo con il nastro** a circa 10 cm dalla breadboard: la trazione non deve arrivare ai pin. I tappi si avvitano girando la bottiglia, non il tappo.
+- **Verde nella colonna 40 (SDA), giallo nella colonna 43 (SCL):** il 28 ottobre erano invertiti e il sensore non rispondeva. Etichette di nastro vicino ai fori.
 - **Prima di accendere, continuità tra il metallo del pin bianco del sensore e il GND dell'ESP32** (deve suonare). Il 21 ottobre il jumper GND (colonna 31 → striscia blu) era allentato: senza massa il BMP280 tace, ma le linee SDA e SCL restano alte e sembrano a posto.
 - **Il sensore vive nell'aria satura della bottiglia:** se la schedina si bagna (condensa, detersivo) il chip risponde all'accensione e sparisce appena misura. Mai stringere la bottiglia con l'acqua al collo; detersivo lontano dal tappo; tappo aperto quando il banco resta fermo per giorni.
 - La calza del cavo del sensore (codina isolata lato breadboard) per ora non è collegata: si collegherà alla massa se compariranno disturbi.

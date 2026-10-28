@@ -20,7 +20,7 @@ Le grandezze misurate sono la pressione e la temperatura dell'aria sopra l'acqua
 ## 2.2 Parte pneumatica
 
 - **Bottiglia principale:** PET da 1,5 L, acqua fino all'inizio della spalla. Dal 23 ottobre è una bottiglia nuova, con 50 ml d'acqua in più rispetto alla prima configurazione, per ridurre l'aria nel circuito.
-- **Bottiglia da 0,5 L** in serie (tubo A dalla siringa, tubo B verso il tappo principale), con 500 ml d'acqua: ne restano circa 50 ml d'aria. Nel progetto iniziale doveva aggiungere aria (per avere più risoluzione); le misure hanno mostrato che di aria ce n'era già troppa.
+- **Bottiglia da 0,5 L** in serie (tubo A dalla siringa, tubo B verso il tappo principale), con 500 ml d'acqua: ne restano circa 50 ml d'aria. Nel progetto iniziale doveva aggiungere aria (per avere più risoluzione); le misure hanno mostrato che di aria ce n'era già troppa. **Tolta il 28 ottobre** (decisione di Gabriele): da allora la siringa è collegata al tappo principale direttamente con il tubo B, con meno aria nel circuito e due giunti in meno che possono perdere. Lo schema qui sopra è da aggiornare.
 - **Tubi** per acquario, 4 mm interni (A 50 cm, B 65 cm), incollati nei tappi con epossidica.
 - **Siringa:** PIC Solution da 20 ml, 3,5 mm di corsa per ml.
 - **Il tappo con il sensore:** forato per il tubo e per i 4 fili, sigillato con due colate di epossidica (1.3).

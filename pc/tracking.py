@@ -47,6 +47,8 @@ class Marcatore:
     y: float
     area: int                             # pixel rossi della zona
     riquadro: tuple[int, int, int, int]   # x, y, larghezza, altezza
+    altezza: float = 0.0                  # altezza in pixel con la frazione (dalla dispersione delle righe): fa da
+                                          # righello, perché il marcatore ha un'altezza fisica fissa (pc/righello.py)
 
 
 def trova_marcatore(bgr: np.ndarray, roi: tuple[int, int, int, int] | None = None,
@@ -58,14 +60,18 @@ def trova_marcatore(bgr: np.ndarray, roi: tuple[int, int, int, int] | None = Non
     """
     pezzo = p.ritaglia(bgr, roi)
     x0, y0 = (max(0, roi[0]), max(0, roi[1])) if roi else (0, 0)
-    n, _, statistiche, centri = cv2.connectedComponentsWithStats(p.maschera_rosso(pezzo), connectivity=8)
+    n, etichette, statistiche, centri = cv2.connectedComponentsWithStats(p.maschera_rosso(pezzo), connectivity=8)
     if n <= 1:  # solo lo sfondo
         return None
     i = 1 + int(np.argmax(statistiche[1:, cv2.CC_STAT_AREA]))
     x, y, w, h, area = (int(v) for v in statistiche[i])
     if not area_min <= area <= area_max:
         return None
-    return Marcatore(x=float(centri[i][0]) + x0, y=float(centri[i][1]) + y0, area=area, riquadro=(x + x0, y + y0, w, h))
+    # n righe piene hanno varianza (n² − 1)/12: da qui un'altezza con la frazione, più fine del riquadro
+    righe = np.nonzero(etichette[y:y + h, x:x + w] == i)[0]
+    altezza = float(np.sqrt(12 * righe.var() + 1))
+    return Marcatore(x=float(centri[i][0]) + x0, y=float(centri[i][1]) + y0, area=area,
+                     riquadro=(x + x0, y + y0, w, h), altezza=altezza)
 
 
 class Inseguitore:
@@ -99,7 +105,7 @@ class Inseguitore:
         u = self.ultimo
         return {"t": t, "trovato": m is not None, "perso": perso, "da_quanto_s": da_quanto,
                 "x": u.x if u else None, "y": u.y if u else None, "area": m.area if m else 0,
-                "riquadro": m.riquadro if m else None}
+                "altezza": m.altezza if m else None, "riquadro": m.riquadro if m else None}
 
 
 def riassunto(righe: list[dict], tolleranza_s: float = TOLLERANZA_S) -> dict:

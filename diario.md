@@ -753,3 +753,51 @@ Preparati da Claude (circa 17:00) i passaggi per fissare il servo con le fascett
 **Prossimo passo:**
 1. Al banco: servo con le fascette, controlli della taratura, punto di chiusura per P1 (passaggi del 25), poi F4, F6 (chiude anche la 2.2) e F9.
 2. Discutere calibrazione e protocollo.
+
+## 2026-10-28 · servo, circuito e tappo del sensore (riparato), 2.1 (F4 superata, F9 no) · circa 2 h 45
+
+**Orario:** circa **18:45–21:30**. Divisione dal registro della seriale (`dati/2026-10-28/2026-10-28_seriale.log.gz`, 18:51–19:35), dal registro della telecamera e dagli orari delle foto; i confini sono approssimati di ±5 minuti. Il servo era già stato fissato prima (foto `IMG_2122`–`IMG_2125`, 18:42): quel tempo non è registrato. Spesa: squadretta da 35 cm, fascette da 30 e 20 cm, nastro biadesivo.
+
+| Orario | Durata | Attività |
+|---|---|---|
+| 18:45–18:54 | 9 min | accensione; sensore assente dall'avvio: fili verde (SDA) e giallo (SCL) invertiti, sistemati alle 18:54 |
+| 18:54–19:13 | 19 min | 1.7: controlli del servo (prima non si muoveva: alimentazione e fili), spazi, prova di spinta |
+| 19:13–19:21 | 8 min | soglia di P1 con il circuito chiuso a 146: perdita forte, tappi stretti, P1 si stacca a 46 |
+| 19:21–19:31 | 10 min | 1.4: bottiglia piccola tolta (decisione di Gabriele), prove di tenuta, prova delle bolle |
+| 19:31–19:46 | 15 min | 1.3: tappo del sensore smontato, collare di epossidica |
+| 19:46–19:53 | 7 min | 2.1: telecamera, colonna dal pelo dell'acqua |
+| 19:53–20:01 | 8 min | 2.1: F4 |
+| 20:01–21:21 | 80 min | 2.1: ripetibilità del telefono (squadretta, poi supporto legato alla gamba del tavolo), riferimento nuovo |
+| 21:21–21:30 | 9 min | 2.1: F9, foto `IMG_2137`–`IMG_2139`, decisione sulla misura della quota |
+
+**Fatto:**
+- **Servo fissato** con due fascette che passano sotto la tavoletta, ai lati del servo, sopra una matita e un cartone piegato: non bascula, le fascette non toccano il braccio a 36 né a 146. Resta il gioco noto di circa 1 ml quando tira, e un piccolo movimento del servo in tiro, sostenibile.
+- **Sensore:** non rispondeva per i fili SDA e SCL invertiti sulla breadboard; sistemato, 50 letture al secondo, ±7 Pa.
+- **Soglia di P1:** con il circuito chiuso a 146 e tirando a passi di 10°, P1 si stacca dal fondo a **−1,85 kPa** (servo 46). Il 23 si staccava a +0,4 kPa: oggi va a fondo già alla pressione della stanza (è sceso aprendo il tappo di riserva). Aria nel tappo a 23 °C.
+- **Bottiglia piccola tolta** (decisione di Gabriele): tubo B tagliato a filo del suo tappo e infilato direttamente sulla siringa. Meno aria nel circuito, quindi più escursione (prevista circa 2,9 kPa).
+- **Perdita trovata:** prova delle bolle con l'acqua saponata a circa +2,5 kPa: l'aria esce **dove il tubo B entra nel tappo del sensore**; il tubo, tirato per arrivare alla siringa, si è staccato dalla colla. Riparato con un **collare di epossidica** sulla colla vecchia e sul tubo carteggiati; indurisce durante la notte.
+- **F4 superata:** luminosità della colonna ferma tra 97 e 98 per 5 minuti e 17 secondi (deriva 1 %), dopo un solo evento alle 19:55.
+- **Supporto dell'iPhone legato alla gamba del tavolo** con due fascette: telefono e bottiglia si muovono insieme, a terra non resta niente. Riferimento nuovo alle 21:21:48: pelo dell'acqua visibile in cima all'immagine, circa 40 px per cm, 60 fotogrammi al secondo.
+- **Programmi (Claude):** `pc/righello.py` con 10 test: il palombaro fa da righello (zero = P1 fermo sul fondo, scala = altezza del marcatore in pixel); quota in cm dal vivo nella dashboard (provvisoria). Il riconoscimento misura anche l'altezza del marcatore con la frazione di pixel.
+
+**Problemi (e cosa si è capito):**
+1. **Fili SDA e SCL invertiti:** etichette di nastro vicino ai fori (colonna 40 verde SDA, colonna 43 giallo SCL).
+2. **La perdita era nel tappo, non nella siringa:** stringendo il tubo vicino alla siringa la pressione calava lo stesso (prova di Gabriele). Costante di tempo da circa 1,5 minuti (19:21) a circa 3–6 secondi (19:26–19:28) dopo aver portato il tubo B fino alla siringa. Il giunto del tappo non deve mai portare trazione: domani fermo del tubo al cartone con un'ansa.
+3. **F9 non superata:** rimettendo il telefono l'immagine si sposta di circa 45 px in verticale e 11 in orizzontale (circa 1 cm alla bottiglia), con un ingrandimento dell'1,2 %. Le cause probabili sono la pinza e l'**«Inquadratura automatica»** della Fotocamera Continuity, che ritaglia e ingrandisce da sola: da spegnere nel Centro di Controllo del Mac, in «Effetti video».
+4. **Il marcatore cambia altezza lungo la bottiglia:** sul video del 24 è alto 64 px sul fondo e in cima, ma solo 53,5 px alla strozzatura (diametro 8,0 cm invece di 9): la bottiglia fa da lente anche in verticale. La quota «semplice» di stasera ne risente; la versione che segue la deformazione si scrive dopo la prova con lo spiedino.
+5. **Il salotto è abitato:** niente segni né nastro sul pavimento; segni sul tavolo del banco sì.
+
+**Decisioni (Gabriele):**
+- **Bottiglia piccola tolta.**
+- **Niente inquadratura fissa:** il programma si ricalibra a ogni sessione usando P1 («il palombaro fa da righello»); lo spiedino segnato ogni 2 cm serve una volta sola, per l'altezza vera del marcatore e per le 5 quote note del «Fatto quando» della 2.3. Gabriele compra uno spiedino lungo.
+- **Squadretta** per ora non usata; supporto legato al tavolo.
+
+**Stato a fine giornata:** tappo del sensore fuori dalla bottiglia, con l'epossidica che indurisce; bottiglia con il tappo normale, P1 sul fondo; ESP32 staccato, registrazione ferma alle 19:35.
+
+**Ore:** 1.3 circa 24 min; 1.4 circa 18 min; 1.7 circa 19 min; 2.1 circa 1 h 44. **Totale circa 2 h 45.**
+
+**Prossimo passo:**
+1. «Inquadratura automatica» spenta; tappo rimontato con il fermo del tubo; prova di tenuta e nuova escursione; punto di chiusura per P1.
+2. Spiedino nella bottiglia (10 minuti, tappo aperto): altezza vera del marcatore e 5 quote note.
+3. F6 con «Registra 2 min»: chiude 2.1 e 2.2.
+4. Da discutere: le otto scelte del protocollo (2.4).

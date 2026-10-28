@@ -29,6 +29,7 @@ import cv2
 import numpy as np
 
 import postazione as p
+import righello
 import tracking
 
 RADICE = Path(__file__).resolve().parents[1]
@@ -191,6 +192,7 @@ class Acquisizione(threading.Thread):
         self.ultimo_segnale = time.time()  # apertura della sorgente o ultimo fotogramma
         self.apertura = time.time()
         self.inseguitore = tracking.Inseguitore()   # P1, cercato in ogni fotogramma
+        self.righello = righello.Righello()          # quota in mm ricavata da P1 stesso (zero sul fondo)
         self.marcatore: dict | None = None          # ultimo risultato dell'inseguitore
         self.tempi_riconoscimento: deque[float] = deque()
 
@@ -217,6 +219,7 @@ class Acquisizione(threading.Thread):
         """P1 si cerca solo nella colonna: cambiata la colonna, si riparte da capo."""
         with self.blocco:
             self.inseguitore = tracking.Inseguitore(tuple(roi) if roi else None)
+            self.righello.ricomincia()
             self.marcatore = None
 
     def riconosci(self, fotogramma: np.ndarray, t: float) -> dict | None:
@@ -226,6 +229,10 @@ class Acquisizione(threading.Thread):
             self.imposta_colonna(None)
             self.evento("colonna fuori dall'immagine: P1 si cerca ovunque, ridisegna la colonna")
             marcatore = self.inseguitore.aggiorna(fotogramma, t)
+        if marcatore["trovato"]:
+            self.righello.aggiorna(t, marcatore["y"], marcatore["altezza"])
+        quota = self.righello.quota_mm(marcatore["y"]) if marcatore["y"] is not None else None
+        marcatore = {**marcatore, "quota_mm": quota}
         with self.blocco:
             self.marcatore = marcatore
             self.tempi_riconoscimento.append(t)
@@ -282,7 +289,10 @@ class Acquisizione(threading.Thread):
             if self.marcatore is None:
                 return None
             fps = p.statistiche_fotogrammi(list(self.tempi_riconoscimento))["fps"]
-            return {**self.marcatore, "fps": fps}
+            scala = self.righello.scala()
+            return {**self.marcatore, "fps": fps, "scala": None if scala is None else {
+                "altezza_px": scala.altezza_px, "k": scala.k, "y_fondo": scala.y_fondo,
+                "altezza_mm": self.righello.altezza_mm, "provvisoria": True}}
 
 
 # ---------- configurazione e analisi ----------

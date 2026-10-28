@@ -1,0 +1,295 @@
+19:46:39 cartella: /Users/gabrielecaruso/Progetto Automatica/dati/2026-10-28/telecamera (Ctrl+C per chiudere)
+19:46:39 telecamera aperta: Fotocamera di iPhone di Gabriele via ffmpeg, 1920 × 1080 a 60 fps
+19:46:44 nessun fotogramma da 5 s: riavvio la telecamera
+19:46:44 ffmpeg: lid, non monotonically increasing dts to muxer in stream 0: 12715314740 >= 12714970570
+[rawvideo @ 0x75d4c24280] Application provided invalid, non monotonically increasing dts to muxer in stream 0: 12715314740 >= 12714987237
+[rawvideo @ 0x75d4c24280] Application provided invalid, non monotonically increasing dts to muxer in stream 0: 12715314740 >= 12715287267
+[rawvideo @ 0x75d4c24280] Application provided invalid, non monotonically increasing dts to muxer in stream 0: 12715314740 >= 12715303927
+19:46:44 telecamera persa: riprovo tra 2 s
+19:46:46 telecamera aperta: Fotocamera di iPhone di Gabriele via ffmpeg, 1920 × 1080 a 60 fps
+19:46:49 interruzione di 4.2 s senza fotogrammi
+19:49:47 colonna tolta: misure su tutta l'immagine
+19:49:52 colonna: [737, 86, 366, 968]
+19:50:01 colonna: [682, 97, 285, 892]
+20:06:27 nessun fotogramma da 5 s: riavvio la telecamera
+20:06:27 interruzione di 80.2 s senza fotogrammi
+20:06:27 telecamera persa: riprovo tra 2 s
+20:06:27 fotogrammi troppo veloci (118 fps): sono ripetuti, l'immagine è in ritardo
+20:06:29 telecamera aperta: Fotocamera di iPhone di Gabriele via ffmpeg, 1920 × 1080 a 60 fps
+20:06:29 ffmpeg: [AVFoundation indev @ 0x7a42c18140] Video device not found
+[in#0 @ 0x7a42c18000] Error opening input: Input/output error
+Error opening input file Fotocamera di iPhone di Gabriele:none.
+Error opening input files: Input/output error
+20:06:29 telecamera persa: riprovo tra 2 s
+20:06:31 telecamera aperta: Fotocamera di iPhone di Gabriele via ffmpeg, 1920 × 1080 a 60 fps
+20:06:31 ffmpeg: [AVFoundation indev @ 0x751500c140] Video device not found
+[in#0 @ 0x751500c000] Error opening input: Input/output error
+Error opening input file Fotocamera di iPhone di Gabriele:none.
+Error opening input files: Input/output error
+20:06:31 telecamera persa: riprovo tra 2 s
+20:06:33 telecamera aperta: Fotocamera di iPhone di Gabriele via ffmpeg, 1920 × 1080 a 60 fps
+20:06:34 ffmpeg: [AVFoundation indev @ 0x7765010140] Video device not found
+[in#0 @ 0x7765010000] Error opening input: Input/output error
+Error opening input file Fotocamera di iPhone di Gabriele:none.
+Error opening input files: Input/output error
+20:06:34 telecamera persa: riprovo tra 2 s
+20:06:36 telecamera aperta: Fotocamera di iPhone di Gabriele via ffmpeg, 1920 × 1080 a 60 fps
+20:06:36 ffmpeg: [AVFoundation indev @ 0x7cdec18140] Video device not found
+[in#0 @ 0x7cdec18000] Error opening input: Input/output error
+Error opening input file Fotocamera di iPhone di Gabriele:none.
+Error opening input files: Input/output error
+20:06:36 telecamera persa: riprovo tra 2 s
+20:06:38 telecamera aperta: Fotocamera di iPhone di Gabriele via ffmpeg, 1920 × 1080 a 60 fps
+20:06:38 ffmpeg: [AVFoundation indev @ 0x79e6c1c140] Video device not found
+[in#0 @ 0x79e6c1c000] Error opening input: Input/output error
+Error opening input file Fotocamera di iPhone di Gabriele:none.
+Error opening input files: Input/output error
+20:06:38 telecamera persa: riprovo tra 2 s
+20:06:40 telecamera aperta: Fotocamera di iPhone di Gabriele via ffmpeg, 1920 × 1080 a 60 fps
+20:06:40 ffmpeg: [AVFoundation indev @ 0x7a4700c140] Video device not found
+[in#0 @ 0x7a4700c000] Error opening input: Input/output error
+Error opening input file Fotocamera di iPhone di Gabriele:none.
+Error opening input files: Input/output error
+20:06:40 telecamera persa: riprovo tra 2 s
+20:06:42 telecamera aperta: Fotocamera di iPhone di Gabriele via ffmpeg, 1920 × 1080 a 60 fps
+20:06:42 ffmpeg: [AVFoundation indev @ 0x78fb010140] Video device not found
+[in#0 @ 0x78fb010000] Error opening input: Input/output error
+Error opening input file Fotocamera di iPhone di Gabriele:none.
+Error opening input files: Input/output error
+20:06:42 telecamera persa: riprovo tra 2 s
+20:06:44 telecamera aperta: Fotocamera di iPhone di Gabriele via ffmpeg, 1920 × 1080 a 60 fps
+20:06:44 ffmpeg: [AVFoundation indev @ 0x7b8cc1c140] Video device not found
+[in#0 @ 0x7b8cc1c000] Error opening input: Input/output error
+Error opening input file Fotocamera di iPhone di Gabriele:none.
+Error opening input files: Input/output error
+20:06:44 telecamera persa: riprovo tra 2 s
+20:06:46 telecamera aperta: Fotocamera di iPhone di Gabriele via ffmpeg, 1920 × 1080 a 60 fps
+20:06:47 ffmpeg: [AVFoundation indev @ 0x78e4c18140] Video device not found
+[in#0 @ 0x78e4c18000] Error opening input: Input/output error
+Error opening input file Fotocamera di iPhone di Gabriele:none.
+Error opening input files: Input/output error
+20:06:47 telecamera persa: riprovo tra 2 s
+20:06:49 telecamera aperta: Fotocamera di iPhone di Gabriele via ffmpeg, 1920 × 1080 a 60 fps
+20:06:49 ffmpeg: [AVFoundation indev @ 0x7610c1c140] Video device not found
+[in#0 @ 0x7610c1c000] Error opening input: Input/output error
+Error opening input file Fotocamera di iPhone di Gabriele:none.
+Error opening input files: Input/output error
+20:06:49 telecamera persa: riprovo tra 2 s
+20:06:51 telecamera aperta: Fotocamera di iPhone di Gabriele via ffmpeg, 1920 × 1080 a 60 fps
+20:06:51 ffmpeg: [AVFoundation indev @ 0x7822c18140] Video device not found
+[in#0 @ 0x7822c18000] Error opening input: Input/output error
+Error opening input file Fotocamera di iPhone di Gabriele:none.
+Error opening input files: Input/output error
+20:06:51 telecamera persa: riprovo tra 2 s
+20:06:53 telecamera aperta: Fotocamera di iPhone di Gabriele via ffmpeg, 1920 × 1080 a 60 fps
+20:06:53 ffmpeg: [AVFoundation indev @ 0x7acb010140] Video device not found
+[in#0 @ 0x7acb010000] Error opening input: Input/output error
+Error opening input file Fotocamera di iPhone di Gabriele:none.
+Error opening input files: Input/output error
+20:06:53 telecamera persa: riprovo tra 2 s
+20:06:55 telecamera aperta: Fotocamera di iPhone di Gabriele via ffmpeg, 1920 × 1080 a 60 fps
+20:06:55 ffmpeg: [AVFoundation indev @ 0x7a74c18140] Video device not found
+[in#0 @ 0x7a74c18000] Error opening input: Input/output error
+Error opening input file Fotocamera di iPhone di Gabriele:none.
+Error opening input files: Input/output error
+20:06:55 telecamera persa: riprovo tra 2 s
+20:06:57 telecamera aperta: Fotocamera di iPhone di Gabriele via ffmpeg, 1920 × 1080 a 60 fps
+20:06:57 ffmpeg: [AVFoundation indev @ 0x75af00c140] Video device not found
+[in#0 @ 0x75af00c000] Error opening input: Input/output error
+Error opening input file Fotocamera di iPhone di Gabriele:none.
+Error opening input files: Input/output error
+20:06:57 telecamera persa: riprovo tra 2 s
+20:06:59 telecamera aperta: Fotocamera di iPhone di Gabriele via ffmpeg, 1920 × 1080 a 60 fps
+20:06:59 ffmpeg: [AVFoundation indev @ 0x7b90c1c140] Video device not found
+[in#0 @ 0x7b90c1c000] Error opening input: Input/output error
+Error opening input file Fotocamera di iPhone di Gabriele:none.
+Error opening input files: Input/output error
+20:06:59 telecamera persa: riprovo tra 2 s
+20:07:01 telecamera aperta: Fotocamera di iPhone di Gabriele via ffmpeg, 1920 × 1080 a 60 fps
+20:07:02 ffmpeg: [AVFoundation indev @ 0x7bb8c1c140] Video device not found
+[in#0 @ 0x7bb8c1c000] Error opening input: Input/output error
+Error opening input file Fotocamera di iPhone di Gabriele:none.
+Error opening input files: Input/output error
+20:07:02 telecamera persa: riprovo tra 2 s
+20:07:04 telecamera aperta: Fotocamera di iPhone di Gabriele via ffmpeg, 1920 × 1080 a 60 fps
+20:07:04 ffmpeg: [AVFoundation indev @ 0x7502c1c140] Video device not found
+[in#0 @ 0x7502c1c000] Error opening input: Input/output error
+Error opening input file Fotocamera di iPhone di Gabriele:none.
+Error opening input files: Input/output error
+20:07:04 telecamera persa: riprovo tra 2 s
+20:07:06 telecamera aperta: Fotocamera di iPhone di Gabriele via ffmpeg, 1920 × 1080 a 60 fps
+20:07:06 ffmpeg: [AVFoundation indev @ 0x75e3010140] Video device not found
+[in#0 @ 0x75e3010000] Error opening input: Input/output error
+Error opening input file Fotocamera di iPhone di Gabriele:none.
+Error opening input files: Input/output error
+20:07:06 telecamera persa: riprovo tra 2 s
+20:07:08 telecamera aperta: Fotocamera di iPhone di Gabriele via ffmpeg, 1920 × 1080 a 60 fps
+20:07:08 ffmpeg: [AVFoundation indev @ 0x7bc0c1c140] Video device not found
+[in#0 @ 0x7bc0c1c000] Error opening input: Input/output error
+Error opening input file Fotocamera di iPhone di Gabriele:none.
+Error opening input files: Input/output error
+20:07:08 telecamera persa: riprovo tra 2 s
+20:07:10 telecamera aperta: Fotocamera di iPhone di Gabriele via ffmpeg, 1920 × 1080 a 60 fps
+20:07:10 ffmpeg: [AVFoundation indev @ 0x7b28c18140] Video device not found
+[in#0 @ 0x7b28c18000] Error opening input: Input/output error
+Error opening input file Fotocamera di iPhone di Gabriele:none.
+Error opening input files: Input/output error
+20:07:10 telecamera persa: riprovo tra 2 s
+20:07:12 telecamera aperta: Fotocamera di iPhone di Gabriele via ffmpeg, 1920 × 1080 a 60 fps
+20:07:12 ffmpeg: [AVFoundation indev @ 0x7cd2c18140] Video device not found
+[in#0 @ 0x7cd2c18000] Error opening input: Input/output error
+Error opening input file Fotocamera di iPhone di Gabriele:none.
+Error opening input files: Input/output error
+20:07:12 telecamera persa: riprovo tra 2 s
+20:09:31 nessun fotogramma da 5 s: riavvio la telecamera
+20:09:32 telecamera aperta: Fotocamera di iPhone di Gabriele via ffmpeg, 1920 × 1080 a 60 fps
+20:09:32 ffmpeg: [AVFoundation indev @ 0x768ec1c140] Video device not found
+[in#0 @ 0x768ec1c000] Error opening input: Input/output error
+Error opening input file Fotocamera di iPhone di Gabriele:none.
+Error opening input files: Input/output error
+20:09:32 telecamera persa: riprovo tra 2 s
+20:09:34 telecamera aperta: Fotocamera di iPhone di Gabriele via ffmpeg, 1920 × 1080 a 60 fps
+20:09:34 ffmpeg: [AVFoundation indev @ 0x750900c140] Video device not found
+[in#0 @ 0x750900c000] Error opening input: Input/output error
+Error opening input file Fotocamera di iPhone di Gabriele:none.
+Error opening input files: Input/output error
+20:09:34 telecamera persa: riprovo tra 2 s
+20:09:36 telecamera aperta: Fotocamera di iPhone di Gabriele via ffmpeg, 1920 × 1080 a 60 fps
+20:09:36 ffmpeg: [AVFoundation indev @ 0x74bf010140] Video device not found
+[in#0 @ 0x74bf010000] Error opening input: Input/output error
+Error opening input file Fotocamera di iPhone di Gabriele:none.
+Error opening input files: Input/output error
+20:09:36 telecamera persa: riprovo tra 2 s
+20:09:38 telecamera aperta: Fotocamera di iPhone di Gabriele via ffmpeg, 1920 × 1080 a 60 fps
+20:09:38 ffmpeg: [AVFoundation indev @ 0x77eac18140] Video device not found
+[in#0 @ 0x77eac18000] Error opening input: Input/output error
+Error opening input file Fotocamera di iPhone di Gabriele:none.
+Error opening input files: Input/output error
+20:09:38 telecamera persa: riprovo tra 2 s
+20:09:40 telecamera aperta: Fotocamera di iPhone di Gabriele via ffmpeg, 1920 × 1080 a 60 fps
+20:09:40 ffmpeg: [AVFoundation indev @ 0x77ad00c140] Video device not found
+[in#0 @ 0x77ad00c000] Error opening input: Input/output error
+Error opening input file Fotocamera di iPhone di Gabriele:none.
+Error opening input files: Input/output error
+20:09:40 telecamera persa: riprovo tra 2 s
+20:09:42 telecamera aperta: Fotocamera di iPhone di Gabriele via ffmpeg, 1920 × 1080 a 60 fps
+20:09:42 ffmpeg: [AVFoundation indev @ 0x7cbb010140] Video device not found
+[in#0 @ 0x7cbb010000] Error opening input: Input/output error
+Error opening input file Fotocamera di iPhone di Gabriele:none.
+Error opening input files: Input/output error
+20:09:42 telecamera persa: riprovo tra 2 s
+20:09:44 telecamera aperta: Fotocamera di iPhone di Gabriele via ffmpeg, 1920 × 1080 a 60 fps
+20:09:45 ffmpeg: [AVFoundation indev @ 0x7c44c18140] Video device not found
+[in#0 @ 0x7c44c18000] Error opening input: Input/output error
+Error opening input file Fotocamera di iPhone di Gabriele:none.
+Error opening input files: Input/output error
+20:09:45 telecamera persa: riprovo tra 2 s
+20:09:47 telecamera aperta: Fotocamera di iPhone di Gabriele via ffmpeg, 1920 × 1080 a 60 fps
+20:09:47 ffmpeg: [AVFoundation indev @ 0x77e100c140] Video device not found
+[in#0 @ 0x77e100c000] Error opening input: Input/output error
+Error opening input file Fotocamera di iPhone di Gabriele:none.
+Error opening input files: Input/output error
+20:09:47 telecamera persa: riprovo tra 2 s
+20:09:49 telecamera aperta: Fotocamera di iPhone di Gabriele via ffmpeg, 1920 × 1080 a 60 fps
+20:09:49 ffmpeg: [AVFoundation indev @ 0x7c3b00c140] Video device not found
+[in#0 @ 0x7c3b00c000] Error opening input: Input/output error
+Error opening input file Fotocamera di iPhone di Gabriele:none.
+Error opening input files: Input/output error
+20:09:49 telecamera persa: riprovo tra 2 s
+20:09:51 telecamera aperta: Fotocamera di iPhone di Gabriele via ffmpeg, 1920 × 1080 a 60 fps
+20:09:51 ffmpeg: [AVFoundation indev @ 0x7ba100c140] Video device not found
+[in#0 @ 0x7ba100c000] Error opening input: Input/output error
+Error opening input file Fotocamera di iPhone di Gabriele:none.
+Error opening input files: Input/output error
+20:09:51 telecamera persa: riprovo tra 2 s
+20:09:53 telecamera aperta: Fotocamera di iPhone di Gabriele via ffmpeg, 1920 × 1080 a 60 fps
+20:09:53 ffmpeg: [AVFoundation indev @ 0x75a8c18140] Video device not found
+[in#0 @ 0x75a8c18000] Error opening input: Input/output error
+Error opening input file Fotocamera di iPhone di Gabriele:none.
+Error opening input files: Input/output error
+20:09:53 telecamera persa: riprovo tra 2 s
+20:09:55 telecamera aperta: Fotocamera di iPhone di Gabriele via ffmpeg, 1920 × 1080 a 60 fps
+20:09:55 ffmpeg: [AVFoundation indev @ 0x76a100c140] Video device not found
+[in#0 @ 0x76a100c000] Error opening input: Input/output error
+Error opening input file Fotocamera di iPhone di Gabriele:none.
+Error opening input files: Input/output error
+20:09:55 telecamera persa: riprovo tra 2 s
+20:09:57 telecamera aperta: Fotocamera di iPhone di Gabriele via ffmpeg, 1920 × 1080 a 60 fps
+20:09:58 ffmpeg: [AVFoundation indev @ 0x78cac18140] Video device not found
+[in#0 @ 0x78cac18000] Error opening input: Input/output error
+Error opening input file Fotocamera di iPhone di Gabriele:none.
+Error opening input files: Input/output error
+20:09:58 telecamera persa: riprovo tra 2 s
+20:10:00 telecamera aperta: Fotocamera di iPhone di Gabriele via ffmpeg, 1920 × 1080 a 60 fps
+20:10:00 ffmpeg: [AVFoundation indev @ 0x79ff010140] Video device not found
+[in#0 @ 0x79ff010000] Error opening input: Input/output error
+Error opening input file Fotocamera di iPhone di Gabriele:none.
+Error opening input files: Input/output error
+20:10:00 telecamera persa: riprovo tra 2 s
+20:10:02 telecamera aperta: Fotocamera di iPhone di Gabriele via ffmpeg, 1920 × 1080 a 60 fps
+20:10:02 ffmpeg: [AVFoundation indev @ 0x74a6c1c140] Video device not found
+[in#0 @ 0x74a6c1c000] Error opening input: Input/output error
+Error opening input file Fotocamera di iPhone di Gabriele:none.
+Error opening input files: Input/output error
+20:10:02 telecamera persa: riprovo tra 2 s
+20:10:04 telecamera aperta: Fotocamera di iPhone di Gabriele via ffmpeg, 1920 × 1080 a 60 fps
+20:10:04 ffmpeg: [AVFoundation indev @ 0x7944c18140] Video device not found
+[in#0 @ 0x7944c18000] Error opening input: Input/output error
+Error opening input file Fotocamera di iPhone di Gabriele:none.
+Error opening input files: Input/output error
+20:10:04 telecamera persa: riprovo tra 2 s
+20:10:06 telecamera aperta: Fotocamera di iPhone di Gabriele via ffmpeg, 1920 × 1080 a 60 fps
+20:10:06 ffmpeg: [AVFoundation indev @ 0x7593010140] Video device not found
+[in#0 @ 0x7593010000] Error opening input: Input/output error
+Error opening input file Fotocamera di iPhone di Gabriele:none.
+Error opening input files: Input/output error
+20:10:06 telecamera persa: riprovo tra 2 s
+20:10:08 telecamera aperta: Fotocamera di iPhone di Gabriele via ffmpeg, 1920 × 1080 a 60 fps
+20:10:08 ffmpeg: [AVFoundation indev @ 0x76a700c140] Video device not found
+[in#0 @ 0x76a700c000] Error opening input: Input/output error
+Error opening input file Fotocamera di iPhone di Gabriele:none.
+Error opening input files: Input/output error
+20:10:08 telecamera persa: riprovo tra 2 s
+20:10:10 telecamera aperta: Fotocamera di iPhone di Gabriele via ffmpeg, 1920 × 1080 a 60 fps
+20:10:10 ffmpeg: [AVFoundation indev @ 0x769700c140] Video device not found
+[in#0 @ 0x769700c000] Error opening input: Input/output error
+Error opening input file Fotocamera di iPhone di Gabriele:none.
+Error opening input files: Input/output error
+20:10:10 telecamera persa: riprovo tra 2 s
+20:10:12 telecamera aperta: Fotocamera di iPhone di Gabriele via ffmpeg, 1920 × 1080 a 60 fps
+20:10:13 ffmpeg: [AVFoundation indev @ 0x78ef00c140] Video device not found
+[in#0 @ 0x78ef00c000] Error opening input: Input/output error
+Error opening input file Fotocamera di iPhone di Gabriele:none.
+Error opening input files: Input/output error
+20:10:13 telecamera persa: riprovo tra 2 s
+20:10:15 telecamera aperta: Fotocamera di iPhone di Gabriele via ffmpeg, 1920 × 1080 a 60 fps
+20:10:15 ffmpeg: [AVFoundation indev @ 0x7af4c18140] Video device not found
+[in#0 @ 0x7af4c18000] Error opening input: Input/output error
+Error opening input file Fotocamera di iPhone di Gabriele:none.
+Error opening input files: Input/output error
+20:10:15 telecamera persa: riprovo tra 2 s
+20:10:17 telecamera aperta: Fotocamera di iPhone di Gabriele via ffmpeg, 1920 × 1080 a 60 fps
+20:10:17 ffmpeg: [AVFoundation indev @ 0x782d00c140] Video device not found
+[in#0 @ 0x782d00c000] Error opening input: Input/output error
+Error opening input file Fotocamera di iPhone di Gabriele:none.
+Error opening input files: Input/output error
+20:10:17 telecamera persa: riprovo tra 2 s
+20:10:42 nessun fotogramma da 5 s: riavvio la telecamera
+20:10:43 telecamera aperta: Fotocamera di iPhone di Gabriele via ffmpeg, 1920 × 1080 a 60 fps
+20:10:43 ffmpeg: [AVFoundation indev @ 0x7936c18140] Video device not found
+[in#0 @ 0x7936c18000] Error opening input: Input/output error
+Error opening input file Fotocamera di iPhone di Gabriele:none.
+Error opening input files: Input/output error
+20:10:43 telecamera persa: riprovo tra 2 s
+20:10:45 telecamera aperta: Fotocamera di iPhone di Gabriele via ffmpeg, 1920 × 1080 a 60 fps
+20:10:48 interruzione di 261.5 s senza fotogrammi
+20:22:37 colonna tolta: misure su tutta l'immagine
+20:23:49 interruzione di 1.4 s senza fotogrammi
+20:23:55 nessun fotogramma da 5 s: riavvio la telecamera
+21:20:23 cartella: /Users/gabrielecaruso/Progetto Automatica/dati/2026-10-28/telecamera (Ctrl+C per chiudere)
+21:20:23 telecamera aperta: Fotocamera di iPhone di Gabriele via ffmpeg, 1920 × 1080 a 60 fps
+21:21:42 colonna: [757, 52, 385, 1027]
+21:21:48 riferimento salvato
+21:24:35 telecamera aperta: Fotocamera di iPhone di Gabriele via ffmpeg, 1920 × 1080 a 60 fps
+21:24:35 cartella: /Users/gabrielecaruso/Progetto Automatica/dati/2026-10-28/telecamera (Ctrl+C per chiudere)
+21:33:06 interruzione di 0.7 s senza fotogrammi

@@ -266,12 +266,12 @@ iPhone tolto dal supporto **senza spostare il supporto**.
 | F2 | ✓ | rotazione 1,5° (si corregge nella 2.3); guida orizzontale sul metro a circa 16 cm |
 | F2b | ✓ | circa 33,5 cm inquadrati in altezza, 0,31 mm per pixel (32 pixel per cm sul metro) |
 | F3 | ✓ | cifre e tacche dei millimetri leggibili sul riferimento a piena risoluzione (controllato tra 12 e 21 cm) |
-| F4 | in parte | luminosità della colonna ferma a 87 per 2 minuti (deriva 0 %); i 5 minuti sono da rifare |
+| F4 | ✓ (28 ott) | 24 ott: ferma a 87 per 2 minuti. 28 ott: tra 97 e 98 per 5 min 17 s (deriva 1 %), dopo un solo evento alle 19:55 |
 | F5 | ✓ | una sola zona grande nella colonna (il marcatore, circa 2700 px); una zona di circa 50 px in cima è il filo rosso del cavo del sensore: la colonna va disegnata dal pelo dell'acqua in giù |
 | F6 | da fare | interrotto dall'incidente delle 23:00 e dal servo che si solleva |
 | F7 | ✓ | P1 fermo sul fondo: centro del marcatore con deviazione 0,28 px (circa 0,09 mm), escursione 2 px, in 1172 campioni |
 | F8 | ✓ | riferimento delle 22:52:13 (`pc/config/postazione_riferimento.jpg`) |
-| F9 | da fare | |
+| F9 | ✗ (28 ott) | supporto legato alla gamba del tavolo, riferimento alle 21:21:48; rimettendo il telefono l'immagine si sposta di circa 45 px in verticale e 11 in orizzontale, ingrandita dell'1,2 % (pinza e «Inquadratura automatica»). Decisione di Gabriele: il programma si ricalibra a ogni sessione con P1 (`pc/righello.py`) |
 | F10 | in parte | nessun buco in 2 minuti; una disconnessione alle 23:16 dopo la caduta (ora il programma si ricollega da solo) |
 
 ## Valori misurati
@@ -291,3 +291,10 @@ iPhone tolto dal supporto **senza spostare il supporto**.
 | Luminosità della colonna, deriva | 87 / 0 % in 2 minuti (5 minuti da rifare) |
 | Ripetibilità (scostamento tacche 0 e 20) | ___ / ___ px |
 | Rotazione dell'immagine (bordo del metro contro la verticale) | **1,45°** (27 ottobre, `pc/calibrazione.py metro` sul riferimento: pendenza −0,0254; il 24 era 1,5° stimata dall'anteprima; vale circa 0,9 mm al massimo con P1 spostato di lato di 3,5 cm: si corregge nel programma con la calibrazione della 2.3, non serve rifare il supporto) |
+
+## 28 ottobre: cosa è cambiato nella postazione
+
+- **Supporto dell'iPhone** a terra (sul tavolo sarebbe troppo alto), **legato alla gamba del tavolo** con due fascette da 30 cm: telefono e bottiglia si muovono insieme. Il salotto è abitato: niente segni né nastro sul pavimento.
+- **Inquadratura nuova:** bottiglia più grande nell'immagine, circa 40 px per cm; pelo dell'acqua a circa 45 px dal bordo alto (non abbassare né avvicinare di più il telefono); il metro non è più nell'inquadratura. Colonna `[757, 52, 385, 1027]`.
+- **Fotocamera Continuity:** spegnere «Inquadratura automatica» (Centro di Controllo del Mac → «Effetti video»): ritaglia e ingrandisce l'immagine da sola.
+- **Quota in centimetri:** dal 28 ottobre la dashboard mostra la quota di P1 sopra il fondo, ricavata da P1 stesso (provvisoria finché non si fa la prova con lo spiedino).

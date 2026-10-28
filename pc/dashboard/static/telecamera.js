@@ -202,7 +202,9 @@ function disegnaPalombaro(ctx, s, larghezza, verde, rosso) {
     const [x, y, w, h] = m.riquadro;
     rettangolo(ctx, x / s - 4, y / s - 4, w / s + 8, h / s + 8, verde, 2);
     ctx.fillStyle = verde;
-    ctx.fillText(`P1 · y ${numero(m.y)} px`, x / s + w / s + 8, y / s + 10);
+    const etichetta = m.quota_mm === null || m.quota_mm === undefined
+      ? `P1 · y ${numero(m.y)} px` : `P1 · ${numero(m.quota_mm / 10, 1)} cm`;
+    ctx.fillText(etichetta, x / s + w / s + 8, y / s + 10);
   } else {
     const testo = m.perso ? "P1 perso" : `P1 non visto da ${numero(m.da_quanto_s, 2)} s`;
     ctx.fillStyle = rosso;
@@ -290,8 +292,10 @@ function mostraMisure(s) {
   el.rosse.textContent = `${nellaColonna.length} nella colonna · ${zone.length} in tutto`;
   el.colonna.textContent = s.roi ? `${s.roi[2]} × ${s.roi[3]} da (${s.roi[0]}, ${s.roi[1]})` : "tutta l'immagine";
   const m = s.marcatore;
+  const quota = !m || m.quota_mm === null || m.quota_mm === undefined ? "fondo non ancora visto"
+    : `${numero(m.quota_mm / 10, 1)} cm sopra il fondo${m.scala?.provvisoria ? " (provv.)" : ""}`;
   el.palombaro.textContent = !m ? "—"
-    : `${m.trovato ? `y ${numero(m.y, 1)} px` : m.perso ? "perso" : "non visto"} · ${numero(m.fps, 0)} fps`;
+    : `${m.trovato ? `${quota} · y ${numero(m.y, 0)} px` : m.perso ? "perso" : "non visto"} · ${numero(m.fps, 0)} fps`;
   el.rif.textContent = s.riferimento ? `${s.riferimento.data} ${s.riferimento.ora}` : "nessuno";
   const reg = s.registrazione || {};
   el.registra.textContent = reg.attiva ? `Ferma (${minuti(reg.secondi_rimasti)})` : "Registra 2 min";
