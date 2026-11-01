@@ -339,23 +339,26 @@ Sono le sottofasi che, se ritardano, fanno slittare la consegna. Le altre hanno 
 - **Quando:** dom 1 → lun 2 nov · **Scadenza:** lun 2 nov · **Impegno:** ~1,5 h · **Prerequisiti:** 1.5, 2.2
 - **Obiettivo:** definire per iscritto **prima** di programmare come si parlano Mac ed ESP32.
 - **Attività:**
-  - [ ] Messaggi dal Mac all'ESP32: misura della quota con istante di acquisizione, modalità, setpoint, profilo, guadagni, emergenza.
-  - [ ] Messaggi dall'ESP32 al Mac (telemetria): pressione, comando della siringa, stato della macchina a stati, termini del PID.
-  - [ ] Velocità della seriale, frequenze dei messaggi, controllo degli errori, comportamento se i messaggi smettono di arrivare.
+  - [x] Messaggi dal Mac all'ESP32: misura della quota con istante di acquisizione, modalità, setpoint, profilo, guadagni, emergenza.
+  - [x] Messaggi dall'ESP32 al Mac (telemetria): pressione, comando della siringa, stato della macchina a stati, termini del PID.
+  - [x] Velocità della seriale, frequenze dei messaggi, controllo degli errori, comportamento se i messaggi smettono di arrivare.
 - **Output:** `docs/protocollo.md`.
 - **Fatto quando:** il documento è completo e lo abbiamo rivisto insieme.
 - 🔶 **Bozza scritta (27 ottobre, Claude):** righe di testo con controllo XOR, quota dal Mac a ogni fotogramma con la sua età (niente orologi da sincronizzare), telemetria `T` a 100 Hz e `C` con i tre termini del PID, SAFE deciso dall'ESP32 se il Mac tace per 500 ms, la telecamera per 200 ms o P1 è perso. Otto scelte da decidere nella revisione (sezione 9), tra cui 460 800 baud, SAFE con P1 a fondo invece della risalita, e la pressione a 100 Hz (con il sovracampionamento di oggi il BMP280 arriva a circa 75 letture al secondo).
+- ✅ **Chiusa il 1 novembre** (un giorno prima della scadenza): rivista con Gabriele, approvate tutte le proposte: 460 800 baud, testo con controllo XOR, SAFE con P1 a fondo, `Z` a 60 Hz, quota da P1 fermo sul fondo, servo in decimi di grado, pressione a 100 Hz con ×2, filtro α-β deciso nella 5.3; più tre nuove: soglia di SAFE a +5 kPa, SAFE se il sensore si ferma, servo fermo all'accensione.
 
 ### 2.5 · Firmware di base dell'ESP32
 - **Quando:** lun 2 → gio 5 nov · **Scadenza:** gio 5 nov · **Impegno:** ~4 h · **Prerequisiti:** 2.4
 - **Obiettivo:** l'ossatura del firmware su cui poggeranno i controllori.
 - **Attività:**
-  - [ ] Progetto PlatformIO diviso in moduli.
-  - [ ] Task periodici: lettura della pressione a 100 Hz, ricezione dei messaggi, invio della telemetria.
-  - [ ] Modulo servo con i limiti di corsa.
-  - [ ] Modalità manuale comandata dal Mac.
+  - [x] Progetto PlatformIO diviso in moduli.
+  - [x] Task periodici: lettura della pressione a 100 Hz, ricezione dei messaggi, invio della telemetria.
+  - [x] Modulo servo con i limiti di corsa.
+  - [x] Modalità manuale comandata dal Mac.
 - **Output:** `firmware/` versione 0.1.
 - **Fatto quando:** l'irregolarità del periodo a 100 Hz misurata è sotto 1 ms, e il firmware gira 30 minuti senza bloccarsi.
+- 🔶 **In corso (1 novembre sera, in anticipo):** firmware 0.1 in `firmware/src/palombaro/` (ambiente `palombaro`): moduli `protocollo` (10 test sul Mac, `pio test -e protocollo`), `sensore`, `siringa`, `principale`; un solo ciclo da 10 ms in un task di FreeRTOS (comandi, sensore, sicurezza, rampa del servo, telemetria `T`); stati MANUALE e SAFE; servo fermo all'accensione; SAFE per emergenza, sensore e sovrapressione. Sul Mac: `pc/protocollo.py`, registratore a 460 800 baud che traduce i comandi della dashboard, dashboard che legge le righe nuove, `pc/verifica_firmware.py` per il «Fatto quando». Al banco (20:29–20:34): 100 righe al secondo, nessuna persa, scarto del periodo 0 µs; 16 comandi su 16 accettati; emergenza → SAFE in meno di 10 ms e servo da 116 a 146 in mezzo secondo; in SAFE i comandi rifiutati; ritorno in MANUALE con `M`. Prova di 30 minuti dalle 20:29:01 alle 20:59:35: **183 072 righe T in 30,5 minuti (100,0 al secondo), nessuna persa, scarto massimo del periodo 0 µs** (il limite è 1000), nessun ciclo in ritardo, nessun riavvio, nessun errore di controllo o di formato; le letture del sensore sempre 100 al secondo (`pc/verifica_firmware.py`, registro `dati/2026-11-01/2026-11-01_firmware01_30min.log.gz`). Lo scarto è nullo perché il ciclo si risveglia sul battito di FreeRTOS (1 ms, dal quarzo): misura la regolarità dei risvegli, non quanto dura ogni ciclo. `letturaPlausibile()` scritta da Claude (Gabriele non scrive codice): pressione tra 90 e 110 kPa, temperatura tra 0 e 50 °C; caricata alle 21:00.
+- ✅ **Chiusa il 1 novembre** (4 giorni prima della scadenza).
 
 ### 2.6 · Ponte sul Mac e registrazione dei dati
 - **Quando:** gio 5 → sab 7 nov · **Scadenza:** sab 7 nov · **Impegno:** ~3 h · **Prerequisiti:** 2.3, 2.5

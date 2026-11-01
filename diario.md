@@ -851,9 +851,16 @@ Preparati da Claude (circa 17:00) i passaggi per fissare il servo con le fascett
 - **Zoom regolato a mano** sulla bottiglia (si cambia solo a mano).
 - **SDO del sensore: per ora solo il rimedio nel programma**, niente ponticello SDO → GND. Ci si ripensa se diventa un problema nel controllo automatico (fase 4); Claude segnala a ogni sessione se nel registro ricompaiono «perso/ritrovato» o una temperatura del sensore più di 3 °C sopra la stanza con la pressione ferma.
 
-**Stato a fine giornata (20:15):** circuito chiuso a 36, servo a 146 (+3,66 kPa); sensore a 0x77. **2.1, 2.2 e 2.3 chiuse** (la 2.3 nel giorno della scadenza). Il ritardo della telecamera (156 ms) supera la soglia di 150 ms del rischio R5: **decisione di Gabriele** sul piano B (webcam USB).
+**Stato alle 20:15:** circuito chiuso a 36, servo a 146 (+3,66 kPa); sensore a 0x77. **2.1, 2.2 e 2.3 chiuse** (la 2.3 nel giorno della scadenza). Il ritardo della telecamera (156 ms) supera la soglia di 150 ms del rischio R5: **decisione di Gabriele** sul piano B (webcam USB).
 
 **Ore:** al banco circa 2 h 39 registrate (11:13–11:47, 16:57–18:15 e 19:26–20:13); il riequilibrio di P1 non è contato (orari non registrati). Per sottofase, circa: 2.1 0 h 20, 2.2 0 h 10, 2.3 0 h 45, manutenzione del banco (1.2, 1.4, sensore) 1 h 24.
+
+**Sera (dalle 20:15): 2.4 chiusa, 2.5 avviata.**
+- **2.4 (20:15–20:20):** rivista con Gabriele, approvate tutte le proposte della sezione 9 più tre nuove (soglia di SAFE a +5 kPa, SAFE se il sensore si ferma, servo fermo all'accensione).
+- **2.5, firmware 0.1 (Claude, 20:20–20:29):** quattro moduli in `firmware/src/palombaro/`, test del protocollo sul Mac, registratore a 460 800 baud e dashboard aggiornati, `pc/verifica_firmware.py`. Riaprendo la porta a 115 200 baud (20:16) l'ESP32 si era riavviato e il servo era saltato a 86: è il motivo della decisione 11.
+- **Al banco (20:29–20:34):** 100 righe al secondo, nessuna persa, scarto del periodo 0 µs; 16 comandi su 16 accettati; emergenza → SAFE e servo da 116 a 146 con la rampa in mezzo secondo; in SAFE il comando della dashboard è rifiutato (`NO,S,SAFE`); ritorno in MANUALE con `M`. Un primo invio dell'emergenza non è partito: file dei comandi scritto in modo non atomico e letto vuoto dal registratore (il ponte della 2.6 non userà più il file).
+- **«Fatto quando» della 2.5 superato:** dalle 20:29:01 alle 20:59:35: **183 072 righe T in 30,5 minuti (100,0 al secondo), nessuna persa, scarto massimo del periodo 0 µs** (il limite è 1000), nessun ciclo in ritardo, nessun riavvio, nessun errore di controllo o di formato; le letture del sensore sempre 100 al secondo (`pc/verifica_firmware.py`, registro `dati/2026-11-01/2026-11-01_firmware01_30min.log.gz`). Lo scarto è nullo perché il ciclo si risveglia sul battito di FreeRTOS (1 ms, dal quarzo): misura la regolarità dei risvegli, non quanto dura ogni ciclo. **2.5 chiusa.**
+- **`letturaPlausibile()`** scritta da Claude su richiesta di Gabriele (che non scrive codice): pressione tra 90 e 110 kPa, temperatura tra 0 e 50 °C (i 39 °C del chip scaldato da SDO si accettano: la pressione era giusta). Caricata alle 21:00, sensore regolare.
 
 ### Revisione settimanale (T5), 26 ottobre – 1 novembre
 - **Milestone:** nessuna in scadenza; M2 è per domenica 8 novembre.

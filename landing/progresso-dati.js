@@ -55,8 +55,8 @@ window.PalombaroProgresso = Object.freeze({
         { id: '2.1', nome: 'Postazione di ripresa', da: '2026-10-26', a: '2026-10-27', ore: 1.5, fatto: 100, oreEffettive: 6.38, nota: 'Chiusa il 1 novembre, cinque giorni dopo la scadenza: il palombaro si vede bene su tutta l\'altezza dell\'acqua, dal fondo fin quasi alla superficie. Spenta l\'inquadratura automatica del telefono, che cambiava lo zoom da sola.' },
         { id: '2.2', nome: 'Riconoscimento del palombaro nel video', da: '2026-10-27', a: '2026-10-30', ore: 4, fatto: 100, oreEffettive: 0.17, nota: 'Chiusa il 1 novembre, due giorni dopo la scadenza: due minuti con il palombaro comandato a mano, seguito 59 volte al secondo e mai perso. Sul fondo, contro la parete, la bottiglia lo fa sembrare più largo: il programma ora lo accetta.' },
         { id: '2.3', nome: 'Calibrazione della misura', da: '2026-10-30', a: '2026-11-01', ore: 2, fatto: 100, oreEffettive: 0.75, nota: 'Spiedino segnato ogni 2 cm nella bottiglia: la bottiglia deforma l\'immagine a tratti, e con la sua tabella la quota si misura entro 1,3 mm (ne bastano 2). Il palombaro fermo oscilla di 0,3 mm. A ogni sessione il programma ricava da solo zero e scala dal palombaro sul fondo. Chiusa il 1 novembre, il giorno della scadenza. Il ritardo della telecamera è 156 millesimi di secondo, più del previsto (66): il controllo ne dovrà tenere conto.' },
-        { id: '2.4', nome: 'Regole di dialogo computer–scheda', da: '2026-11-01', a: '2026-11-02', ore: 1.5, fatto: 80, nota: 'Bozza scritta il 27: messaggi, frequenze, controllo degli errori e cosa fa la scheda se il computer tace. Da rivedere insieme, con otto scelte da decidere.' },
-        { id: '2.5', nome: 'Programma di base della scheda', da: '2026-11-02', a: '2026-11-05', ore: 4, fatto: 0 },
+        { id: '2.4', nome: 'Regole di dialogo computer–scheda', da: '2026-11-01', a: '2026-11-02', ore: 1.5, fatto: 100, oreEffettive: 0.25, nota: 'Chiusa il 1 novembre, un giorno prima della scadenza: rivista insieme e approvata, con tre regole nuove nate dalle prove di oggi (tra cui: all\'accensione il motore non si muove finché il computer non lo comanda).' },
+        { id: '2.5', nome: 'Programma di base della scheda', da: '2026-11-02', a: '2026-11-05', ore: 4, fatto: 100, oreEffettive: 0.4, nota: 'Chiusa il 1 novembre, quattro giorni prima della scadenza: la scheda legge la pressione 100 volte al secondo con un ritmo perfettamente regolare, per 30 minuti di fila senza perdere un messaggio. Comandi del motore, emergenza e stato di sicurezza provati al banco.' },
         { id: '2.6', nome: 'Registrazione dei dati', da: '2026-11-05', a: '2026-11-07', ore: 3, fatto: 0 },
         { id: '2.7', nome: 'Prova completa e video', da: '2026-11-08', a: '2026-11-08', ore: 2, fatto: 0 },
       ],
@@ -146,6 +146,7 @@ window.PalombaroProgresso = Object.freeze({
       'Prova finale della telecamera: due minuti con il palombaro comandato a mano, seguito 59 volte al secondo e mai perso. Chiuse la postazione di ripresa e il riconoscimento del palombaro.',
       'In serata il sensore di pressione si scaldava e spariva. Con un programma di diagnosi e il multimetro si è trovata la causa: un piedino della schedina, che sceglie l\'indirizzo del sensore, era rimasto libero e ogni tanto l\'indirizzo cambiava. Il programma ora cerca il sensore a tutti e due gli indirizzi.',
       'Misurato il ritardo della telecamera con lo schermo del computer che lampeggia: circa 156 millesimi di secondo, più dei 66 previsti nella simulazione. Chiusa anche la calibrazione.',
+      'In serata decise insieme le regole di dialogo tra computer e scheda, e scritto il nuovo programma della scheda: legge la pressione 100 volte al secondo, obbedisce ai comandi e, in caso di emergenza, porta da solo il palombaro sul fondo. Ha girato 30 minuti senza un errore: chiuse anche queste due attività, in anticipo.',
     ] },
     { data: '2026-10-31', testo: ['Nessuna attività.'] },
     { data: '2026-10-30', testo: ['Nessuna attività.'] },
@@ -240,9 +241,9 @@ window.PalombaroProgresso = Object.freeze({
   ],
 
   prossimi: [
-    'Misurare il ritardo della telecamera con lo schermo del computer che lampeggia: chiude la calibrazione.',
-    'Decidere insieme le otto scelte delle regole di dialogo tra computer e scheda.',
-    'Scrivere il programma di base della scheda, con la pressione letta e inviata 100 volte al secondo.',
+    'Il ponte sul computer: la quota del palombaro e la pressione registrate insieme, 20 volte al secondo o più.',
+    'Prova completa e video del traguardo M2, entro domenica 8 novembre.',
+    'Decidere se comprare una webcam USB al posto dell\'iPhone, per il ritardo della telecamera.',
   ],
 
   rischi: [

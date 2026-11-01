@@ -77,7 +77,8 @@ function aggiungiMisura(v, inDiretta) {
   stato.ultima = { ...v, s };
   if (stato.riferimento === null) stato.riferimento = v.p;
   if (inDiretta) { stato.arrivo = Date.now(); stato.sensoreAssente = false; }
-  if (!stato.toccato) impostaCursore(v.servo);
+  // dal firmware 0.1 il servo è null finché non riceve il primo comando (all'accensione resta fermo)
+  if (!stato.toccato && v.servo !== null) impostaCursore(v.servo);
 }
 
 function classifica(testo) {
@@ -278,7 +279,7 @@ function aggiornaLetture() {
   el.dp.textContent = conSegno(u.p - stato.riferimento, 3);
   el.dpComando.textContent = conSegno(u.p - stato.riferimento, 2);
   el.riferimento.textContent = numero(stato.riferimento, 3);
-  el.attuale.textContent = `${u.servo}°`;
+  el.attuale.textContent = u.servo === null ? "fermo" : `${u.servo}°`;
 }
 
 function aggiornaSuggerimento(serieP, serieS) {
@@ -331,7 +332,7 @@ function ciclo(adesso) {
   aggiornaLetture();
   const t1 = stato.punti.at(-1).s;
   const serieP = stato.punti.map((p) => ({ s: p.s, v: p.p - stato.riferimento }));
-  const serieS = stato.punti.map((p) => ({ s: p.s, v: p.servo }));
+  const serieS = stato.punti.filter((p) => p.servo !== null).map((p) => ({ s: p.s, v: p.servo }));
   graficoPressione.disegna(serieP, t1, stato.finestra, stato.mirino);
   graficoServo.disegna(serieS, t1, stato.finestra, stato.mirino);
   aggiornaSuggerimento(serieP, serieS);

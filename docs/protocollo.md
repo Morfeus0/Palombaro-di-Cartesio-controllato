@@ -1,8 +1,9 @@
 # Protocollo tra Mac ed ESP32 (sottofase 2.4)
 
-> **Bozza** del 27 ottobre 2026 (Claude), da rivedere insieme: il «Fatto quando» della 2.4 è «il documento è completo e
-> lo abbiamo rivisto insieme». Le scelte segnate **[da decidere]** hanno una proposta e il motivo; le decide Gabriele.
-> Dopo la revisione questo documento è il contratto per il firmware (2.5) e per il ponte sul Mac (2.6).
+> **Versione 1, rivista con Gabriele il 1 novembre 2026** (bozza del 27 ottobre, Claude). Tutte le proposte della
+> sezione 9, più tre nuove nate dalle prove del 1 novembre, sono state **approvate** (sezione 9). Questo documento è il
+> contratto per il firmware (2.5) e per il ponte sul Mac (2.6); dove il testo più sotto dice ancora «[da decidere]»,
+> vale la decisione della sezione 9.
 
 ## 1. Chi fa cosa
 
@@ -86,6 +87,11 @@ $TIPO,campo1,campo2,…*CC\n
 | `X` | da, a, motivo | `$X,HOLD,SAFE,PERSO*CC` | a ogni cambio di stato |
 | `OK` / `NO` | tipo, motivo | `$OK,R*CC` · `$NO,R,FUORI_LIMITI*CC` | risposta a ogni `M`, `R`, `P`, `K`, `S`, `E` |
 
+- **Firmware 0.1 (2.5, 1 novembre):** `T` ha in fondo un campo in più, la **temperatura in centesimi di grado**
+  (la dashboard la mostra a ogni lettura); `A` ha in fondo tre campi in più: **scarto massimo del periodo** nell'ultimo
+  secondo (µs, |periodo − 10 ms|: il «Fatto quando» della 2.5), **cicli in ritardo** di più di un periodo dall'avvio, e
+  l'**indirizzo** a cui risponde il sensore (118 = 0x76, 119 = 0x77, 0 = assente). In 0.1 `p_rif` e i termini del PI
+  valgono 0; `u` vale −1 finché il servo non ha ricevuto il primo comando (decisione 11).
 - `T` porta tutto quello che serve a disegnare e registrare l'anello interno; `C` quello dell'anello esterno, con i
   **tre termini del PID separati**, come chiede il piano, per vedere chi lavora.
 - Lo stato è una lettera: `M` MANUALE, `C` CALIBRAZIONE, `H` HOLD, `T` TRACKING, `S` SAFE.
@@ -129,7 +135,7 @@ $TIPO,campo1,campo2,…*CC\n
   misura, quindi fa al massimo circa 75 letture al secondo, non 100. Con ×2 ne servono circa 7,5 ms: 100 Hz sì, con un
   po' più di rumore (da misurare, oggi ±10 Pa). L'alternativa è l'anello interno a 50 Hz.
 
-## 9. Da decidere nella revisione
+## 9. Decisioni (1 novembre 2026, tutte approvate da Gabriele)
 
 | # | Domanda | Proposta |
 |---|---|---|
@@ -137,10 +143,16 @@ $TIPO,campo1,campo2,…*CC\n
 | 2 | Testo con controllo, oppure binario | testo con controllo (leggibile, banda sufficiente) |
 | 3 | Cosa fa SAFE | P1 a fondo, non risalita |
 | 4 | `Z` a ogni fotogramma (60 Hz) o a 30 Hz | 60 Hz: l'anello esterno a 30 Hz usa la più fresca, con meno ritardo |
-| 5 | Zero della quota | fondo interno della bottiglia (dove P1 si appoggia): dipende dalla calibrazione della 2.3 |
+| 5 | Zero della quota | **cambiata il 1 novembre:** centro del marcatore con P1 fermo sul fondo (lo zero che `pc/righello.py` ritrova da solo), in decimi di millimetro |
 | 6 | Servo in decimi di grado | sì, con `writeMicroseconds()` |
 | 7 | Pressione a 100 Hz con sovracampionamento ×2, o anello interno a 50 Hz | ×2 a 100 Hz, se il rumore misurato resta sotto ±15 Pa |
 | 8 | Dove gira il filtro α-β (5.3) | si decide nella 5.3; il protocollo va bene in tutti e due i casi (se gira sul Mac, `Z` prende un campo velocità) |
+| 9 | Soglia di sovrapressione che porta in SAFE | **+5,0 kPa** (era +3,5): a 146 si arriva a +3,6–4,0 kPa. Con il motivo `PRESSIONE` SAFE **ferma** il servo invece di portarlo a 146 |
+| 10 | Sensore fermo, riavviato o che non risponde | **SAFE** (`SENSORE`), con il conteggio nella telemetria `A` |
+| 11 | Servo all'accensione | **non si muove** (nessun impulso) finché il Mac non manda il primo comando: oggi a ogni riavvio, anche solo riaprendo la porta, saltava a 86 |
+
+Fuori dal protocollo: il ritardo della telecamera (156 ms) supera la soglia di 150 ms del rischio R5; il piano B (webcam
+USB) resta da decidere a parte.
 
 ### 9.1 Cosa dicono le misure del 1 novembre (per la revisione, Claude)
 
