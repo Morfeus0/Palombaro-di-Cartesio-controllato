@@ -27,6 +27,8 @@ Le grandezze misurate sono la pressione e la temperatura dell'aria sopra l'acqua
 
 **Guadagno pressione/volume.** La legge di Boyle prevede, per circa 276 ml d'aria, circa 0,37 kPa per ml. Le misure danno meno: 0,10 kPa/ml con la prima configurazione (18 ottobre), 0,20 kPa/ml togliendo aria dalla bottiglia piccola, circa 0,15 kPa/ml con la bottiglia nuova (23 ottobre). La differenza viene dalle **pareti delle bottiglie che cedono** sotto pressione: equivalgono a circa 210–235 ml d'aria in più, quasi tutti nella bottiglia da 1,5 L, e si vedono anche come un lento calo (−10…−13 %) dopo ogni spinta, il cedimento viscoelastico. Questo effetto andrà nel modello (fase 3).
 
+**Senza la bottiglia piccola (1 novembre).** Con il circuito chiuso alla pressione della stanza a 36, spingendo fino a 146 si arriva a circa **+4 kPa** (contro i 2,6 del 23 ottobre): meno aria, più guadagno. In depressione la stessa corsa dà solo **2,2 kPa**, perché le pareti sottili della bottiglia si incurvano verso l'interno molto più facilmente di quanto si gonfino: il banco va usato in sovrapressione.
+
 **Tenuta.** Con la bottiglia a circa +1,8 kPa, dopo 10 minuti restava il 93 % della sovrapressione (18 ottobre, τ di molte ore); il 24 ottobre, dopo molte aperture del tappo, il 79 % (τ ≈ 43 min). Il requisito è τ ≥ 30 minuti. Una perdita lenta fa sì che il circuito "dimentichi" la pressione di chiusura nel giro di ore: il punto di lavoro va ritrovato a ogni sessione.
 
 ## 2.3 Il palombaro
@@ -35,7 +37,7 @@ Le grandezze misurate sono la pressione e la temperatura dell'aria sopra l'acqua
 - **Sensibilità:** con una bolla di circa 2 ml, 1 kPa di pressione cambia la spinta di circa 0,02 g, meno di una goccia d'acqua: la taratura con le gocce non converge.
 - **Tensione superficiale:** quando la punta sporge dall'acqua, il menisco trattiene il palombaro con una forza fino a circa 3 mN (0,3 g), più di quanto la siringa possa togliere. Rimedi: marcatore senza pieghe e qualche goccia di **soluzione** di detersivo (una goccia in un cucchiaino d'acqua) sul pelo dell'acqua e sulla punta. Troppo detersivo fa schiuma; l'acqua aggiunta senza detersivo lo diluisce e il menisco torna.
 - **Soglie** (23 ottobre, bottiglia nuova, servo): va a fondo a circa **+2,2 kPa**, risale dal fondo a circa **+0,4 kPa**. La differenza (circa 1,8 kPa) corrisponde quasi tutta alla colonna d'acqua sopra il fondo (circa 22 cm, cioè 2,2 kPa): sul fondo la bolla è più compressa.
-- **Deriva del punto di equilibrio:** la pressione atmosferica (±1 kPa in pochi giorni), la temperatura dell'acqua (circa 0,5 kPa per °C, tra gas e vapore) e l'aria della bolla che si scioglie nell'acqua spostano l'equilibrio di 1–2 kPa da un giorno all'altro. Il 21 ottobre il palombaro era troppo leggero, il 23 troppo pesante.
+- **Deriva del punto di equilibrio:** la pressione atmosferica (±1 kPa in pochi giorni), la temperatura dell'acqua (circa 0,5 kPa per °C, tra gas e vapore) e l'aria della bolla che si scioglie nell'acqua spostano l'equilibrio di 1–2 kPa da un giorno all'altro. Il 21 ottobre il palombaro era troppo leggero, il 23 troppo pesante. Dal 28 ottobre al 1 novembre P1 è diventato più pesante di almeno 0,85 kPa a temperatura uguale (aria della bolla sciolta nell'acqua): a −2,2 kPa non si staccava più dal fondo. Ritarato togliendo e rimettendo acqua dentro il palombaro, ora si stacca a circa **+1,1 kPa**. Un palombaro che non vada riequilibrato è tra gli Extra (E4).
 
 ## 2.4 L'attuatore: servo, braccio e siringa
 
@@ -61,11 +63,14 @@ Le grandezze misurate sono la pressione e la temperatura dell'aria sopra l'acqua
 
 - **Registratore** (`pc/registra_seriale.py`): scrive la seriale su file con l'orario al millisecondo, riapre la porta se l'USB viene staccato, e inoltra all'ESP32 i comandi scritti in un file. È l'unico programma che usa la porta seriale.
 - **Dashboard** (`pc/dashboard/`, bozza del 24 ottobre, solo su localhost): segue il registro (Server-Sent Events) e mostra pressione, sovrapressione, temperatura, angolo del servo, grafici ed eventi; comanda il servo con un cursore verticale (in alto tira e il palombaro sale, in basso spinge). Il verso è pensato per il comando della quota che verrà.
+- **Telecamera** (`pc/telecamera.py`, `pc/tracking.py`): fotogrammi dell'iPhone a 1920 × 1080 e 59 fps, marcatore rosso cercato in ogni fotogramma dentro la colonna d'acqua (1,5 ms per fotogramma); P1 trovato nel 99,9 % dei fotogrammi in 2 minuti di movimento, nessuna perdita (2.2).
+- **Quota** (`pc/righello.py`, 2.3): la bottiglia deforma l'immagine a tratti (2 cm valgono da 46 a 106 pixel). Uno spiedino segnato ogni 2 cm, messo una volta sola nella bottiglia, dà la tabella pixel → millimetri; a ogni sessione il programma ricava solo lo zero (P1 fermo sul fondo) e la scala (altezza del marcatore sul fondo). Errore 1,3 mm su 12 quote note, rumore 0,32 mm con P1 fermo.
+- **Ritardo della telecamera** (`pc/latenza.py`): lo schermo del Mac lampeggia agli istanti esatti dell'orologio con cui il programma data i fotogrammi; mediana **156 ms** (138–266) dall'evento all'arrivo dell'immagine, contro i 66 ms stimati nella simulazione. Pesa sul progetto del controllo (fase 4).
 
 ## 2.7 Sicurezza e affidabilità
 
 - **Acqua ed elettronica (R8):** nell'aria satura della bottiglia la schedina del sensore si è bagnata di condensa (21 ottobre): il chip rispondeva all'accensione e spariva appena misurava. Rimedi: asciugatura, smalto protettivo (da fare), mai stringere la bottiglia con l'acqua al collo, tappo del sensore fuori dalla bottiglia quando il banco è fermo.
-- **Contatti:** il sensore si è perso tre volte per un contatto (jumper della massa allentato, pin mossi avvitando il tappo). Rimedi: continuità misurata con il multimetro, tappo avvitato tenendo fermo il cavo e girando la bottiglia, e la segnalazione automatica nel firmware e nella dashboard.
+- **Contatti:** il sensore si è perso tre volte per un contatto (jumper della massa allentato, pin mossi avvitando il tappo). Rimedi: continuità misurata con il multimetro, tappo avvitato tenendo fermo il cavo e girando la bottiglia, e la segnalazione automatica nel firmware e nella dashboard. Il 1 novembre il sensore si è anche riavviato da solo restando a riposo (valori fissi a 85,51 kPa e 25,30 °C, i valori di fabbrica dei registri): rispondeva all'identità, quindi il firmware non se ne accorgeva. Il firmware del banco ora controlla anche il modo di misura e lo riconfigura.
 - **Pressioni:** stringendo la bottiglia con il tubo collegato si superano +25 kPa, fuori dalla scala del sensore (110 kPa assoluti): non si fa.
 - **Servo:** limiti di corsa nel firmware e nella dashboard, movimento graduale, servo riportato al centro prima di spegnere.
 

@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<title>Latenza telecamera</title>
+<style>
+  :root { --nero: #000; --bianco: #fff; }
+  html, body { margin: 0; height: 100%; background: var(--nero); cursor: none; }
+  #quadro { position: fixed; inset: 0; }
+</style>
+</head>
+<body>
+<!-- Sottofase 2.3: lo schermo cambia colore a ogni multiplo esatto di PERIODO_MS dell'orologio del Mac.
+     pc/latenza.py confronta questi istanti con l'arrivo dei fotogrammi (stesso orologio). -->
+<div id="quadro"></div>
+<script>
+  const PERIODO_MS = 500;
+  const quadro = document.getElementById("quadro");
+  function passo() {
+    const bianco = Math.floor(Date.now() / PERIODO_MS) % 2 === 1;
+    quadro.style.background = bianco ? "var(--bianco)" : "var(--nero)";
+    requestAnimationFrame(passo);
+  }
+  requestAnimationFrame(passo);
+</script>
+</body>
+</html>

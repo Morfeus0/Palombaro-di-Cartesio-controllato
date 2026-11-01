@@ -34,6 +34,7 @@
 - **Verde nella colonna 40 (SDA), giallo nella colonna 43 (SCL):** il 28 ottobre erano invertiti e il sensore non rispondeva. Etichette di nastro vicino ai fori.
 - **Prima di accendere, continuità tra il metallo del pin bianco del sensore e il GND dell'ESP32** (deve suonare). Il 21 ottobre il jumper GND (colonna 31 → striscia blu) era allentato: senza massa il BMP280 tace, ma le linee SDA e SCL restano alte e sembrano a posto.
 - **Il sensore vive nell'aria satura della bottiglia:** se la schedina si bagna (condensa, detersivo) il chip risponde all'accensione e sparisce appena misura. Mai stringere la bottiglia con l'acqua al collo; detersivo lontano dal tappo; tappo aperto quando il banco resta fermo per giorni.
+- **Piedino SDO della schedina del tappo non collegato** (dal 15 ottobre): l'indirizzo I²C è indefinito (datasheet). Fino al 1 novembre era 0x76; il 1 novembre alle 19:58 è diventato 0x77, con SDO misurato a metà tensione e il chip che si scaldava fino a 39 °C. Il firmware del banco cerca il sensore a 0x76 e a 0x77. Rimedio definitivo, se servirà: un ponticello saldato da SDO a GND sulla schedina (decisione di Gabriele: per ora no).
 - La calza del cavo del sensore (codina isolata lato breadboard) per ora non è collegata: si collegherà alla massa se compariranno disturbi.
 
 ## Ordine di accensione
@@ -49,7 +50,7 @@ Spegnimento in ordine inverso: prima l'alimentatore del servo, poi l'USB.
 | Ambiente | File | Cosa fa | Caricamento |
 |---|---|---|---|
 | `esp32dev` | `main.cpp` | prova del BMP280 del tappo (5 letture al secondo, diagnosi) | `pio run -e esp32dev -t upload --upload-port /dev/cu.usbserial-0001` |
-| `banco` | `prova_banco.cpp` | BMP280 a 50 Hz + servo su GPIO 18; comandi dalla seriale: un numero sposta il servo **entro `ANGOLO_CENTRO` ± 60°** (centro 86 dal 23 ottobre; dal 24 ottobre limiti **36–146**: a 26 la siringa si era spostata), un grado ogni 15 ms; `s` fa l'escursione completa. Stampa il motivo dell'ultimo riavvio; se il sensore non risponde (o smette di rispondere: rilegge il registro d'identità ogni secondo) scrive `# BMP280 assente/perso`, riprova ogni secondo e il servo funziona lo stesso | `pio run -e banco -t upload --upload-port /dev/cu.usbserial-0001` |
+| `banco` | `prova_banco.cpp` | BMP280 a 50 Hz (cercato a 0x76 e a 0x77; riconfigurato se si riavvia da solo) + servo su GPIO 18; comandi dalla seriale: un numero sposta il servo **entro `ANGOLO_CENTRO` ± 60°** (centro 86 dal 23 ottobre; dal 24 ottobre limiti **36–146**: a 26 la siringa si era spostata), un grado ogni 15 ms; `s` fa l'escursione completa. Stampa il motivo dell'ultimo riavvio; se il sensore non risponde (o smette di rispondere: rilegge il registro d'identità ogni secondo) scrive `# BMP280 assente/perso`, riprova ogni secondo e il servo funziona lo stesso | `pio run -e banco -t upload --upload-port /dev/cu.usbserial-0001` |
 | `diagnosi` | `diagnosi_i2c.cpp` | ogni 5 s: stato delle linee SDA e SCL (pull-up del modulo presente, linea a massa o flottante) e scansione di tutti gli indirizzi I²C con il chip ID | `pio run -e diagnosi -t upload --upload-port /dev/cu.usbserial-0001` |
 
 ## Misure (18 ottobre)

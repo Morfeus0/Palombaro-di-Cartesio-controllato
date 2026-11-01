@@ -268,7 +268,7 @@ iPhone tolto dal supporto **senza spostare il supporto**.
 | F3 | ✓ | cifre e tacche dei millimetri leggibili sul riferimento a piena risoluzione (controllato tra 12 e 21 cm) |
 | F4 | ✓ (28 ott) | 24 ott: ferma a 87 per 2 minuti. 28 ott: tra 97 e 98 per 5 min 17 s (deriva 1 %), dopo un solo evento alle 19:55 |
 | F5 | ✓ | una sola zona grande nella colonna (il marcatore, circa 2700 px); una zona di circa 50 px in cima è il filo rosso del cavo del sensore: la colonna va disegnata dal pelo dell'acqua in giù |
-| F6 | da fare | interrotto dall'incidente delle 23:00 e dal servo che si solleva |
+| F6 | ✓ (1 nov) | video `2026-11-01_postazione_05` (77 s) e `_06` (120 s): P1 dal fondo fino a circa 2 cm sotto il pelo dell'acqua, trovato nel 99,9 % dei fotogrammi a 59 fps, nessuna perdita; alla strozzatura e sui bordi delle costole il marcatore appare schiacciato o tagliato (rifrazione), mai nascosto. Il 24 era stato interrotto dall'incidente delle 23:00 |
 | F7 | ✓ | P1 fermo sul fondo: centro del marcatore con deviazione 0,28 px (circa 0,09 mm), escursione 2 px, in 1172 campioni |
 | F8 | ✓ | riferimento delle 22:52:13 (`pc/config/postazione_riferimento.jpg`) |
 | F9 | ✗ (28 ott) | supporto legato alla gamba del tavolo, riferimento alle 21:21:48; rimettendo il telefono l'immagine si sposta di circa 45 px in verticale e 11 in orizzontale, ingrandita dell'1,2 % (pinza e «Inquadratura automatica»). Decisione di Gabriele: il programma si ricalibra a ogni sessione con P1 (`pc/righello.py`) |
@@ -298,3 +298,14 @@ iPhone tolto dal supporto **senza spostare il supporto**.
 - **Inquadratura nuova:** bottiglia più grande nell'immagine, circa 40 px per cm; pelo dell'acqua a circa 45 px dal bordo alto (non abbassare né avvicinare di più il telefono); il metro non è più nell'inquadratura. Colonna `[757, 52, 385, 1027]`.
 - **Fotocamera Continuity:** spegnere «Inquadratura automatica» (Centro di Controllo del Mac → «Effetti video»): ritaglia e ingrandisce l'immagine da sola.
 - **Quota in centimetri:** dal 28 ottobre la dashboard mostra la quota di P1 sopra il fondo, ricavata da P1 stesso (provvisoria finché non si fa la prova con lo spiedino).
+
+## 1 novembre: spiedino, F6 e cosa è cambiato
+
+- **«Inquadratura automatica» spenta:** l'immagine intera della telecamera è circa il 25 % più larga di quella del 28 (che era un ritaglio ingrandito). Lo zoom ora si cambia solo a mano, dalla Fotocamera Continuity: per le prove di oggi è stato ingrandito sulla bottiglia (colonna `[846, 65, 326, 1003]`, circa 38–40 px per cm).
+- **Spiedino segnato ogni 2 cm** nella bottiglia aperta, appoggiato sul fondo lungo l'asse (video `2026-11-01_postazione_01` e `_02`; spezzone in `media/2026-11-01_2.3_spiedino-ogni-2-cm.mp4`). Tabella dei 13 segni in `pc/config/spiedino.json`. La bottiglia deforma l'immagine **a tratti**: 2 cm valgono da 46 px (strozzatura) a 106 px (subito sopra); una scala unica sbaglia fino a 5 mm, la tabella no. Rileggendo il video 02 con la tabella del 01 e solo zero e scala: **errore massimo 1,3 mm** su 12 quote note (1,5 mm prendendo la scala solo dal fondo).
+- **Altezza vera del marcatore:** circa **18,5 mm** (16,5–19,5 mm dalla tabella, fuori dalla strozzatura dove appare di 12 mm).
+- **Rumore** con P1 fermo sul fondo (primi 15 s del video 05): **0,32 mm**.
+- **F6 superata** (video 05 e 06, sopra). Video annotato: `media/2026-11-01_F6_2.2_P1-comandato-a-mano-2-minuti.mp4`.
+- **Riconoscimento:** sul fondo, contro la parete, il marcatore appare largo 138 px e arriva a 9200 px rossi; il limite contro la mano è passato da 8000 a 16000 px (il filtro dei salti impossibili resta: sul video della mano del 24 nessuna posizione falsa). Al bordo delle costole il centro del marcatore salta di 35–47 px in un fotogramma (pezzo nascosto dalla rifrazione): rumore di quota da filtrare nel controllo (5.3).
+- **Quota in dashboard:** dal 1 novembre il righello usa la tabella dello spiedino (zero e scala da P1 fermo sul fondo); non più «provvisoria».
+

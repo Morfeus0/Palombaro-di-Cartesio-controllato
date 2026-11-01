@@ -141,3 +141,15 @@ $TIPO,campo1,campo2,…*CC\n
 | 6 | Servo in decimi di grado | sì, con `writeMicroseconds()` |
 | 7 | Pressione a 100 Hz con sovracampionamento ×2, o anello interno a 50 Hz | ×2 a 100 Hz, se il rumore misurato resta sotto ±15 Pa |
 | 8 | Dove gira il filtro α-β (5.3) | si decide nella 5.3; il protocollo va bene in tutti e due i casi (se gira sul Mac, `Z` prende un campo velocità) |
+
+### 9.1 Cosa dicono le misure del 1 novembre (per la revisione, Claude)
+
+Le proposte della tabella restano da decidere con Gabriele; qui solo i fatti nuovi che le riguardano.
+
+- **3 · SAFE:** dopo il riequilibrio del 1 novembre P1 **galleggia alla pressione della stanza** (si stacca dal fondo a circa +1,1 kPa). Una «risalita» lo porterebbe al pelo dell'acqua, dove il menisco lo trattiene. Confermata la proposta: SAFE = servo all'estremo che spinge (146), P1 a fondo.
+- **4 · `Z` a 60 Hz:** la telecamera ha dato 59 fps per 2 minuti senza interruzioni; il riconoscimento costa 1,5 ms per fotogramma. Latenza misurata alle 20:10: **156 ms** in mediana (138–266), dallo schermo all'arrivo del fotogramma. È l'età tipica di `Z` quando lascia il Mac (più 1–2 ms di riconoscimento): va bene per il campo `età_ms`, ma nel progetto del controllo (fase 4) pesa più dei 66 ms stimati. Il limite «nessuna `Z` nuova da 200 ms» della sezione 6 riguarda gli intervalli tra fotogrammi (al massimo 47 ms misurati), non l'età, e resta valido.
+- **5 · Zero della quota:** il programma (`pc/righello.py`) ora misura la quota **sopra il centro del marcatore con P1 fermo sul fondo**, non sopra il fondo interno della bottiglia: è lo zero che si ritrova da solo a ogni sessione. Proposta aggiornata: `Z` in millimetri sopra quella posizione. Il fondo della bottiglia è circa 52 mm più in basso (spiedino).
+- **7 · Pressione a 100 Hz:** con il sovracampionamento ×4 a 50 Hz il rumore misurato è **2,5 Pa** (deviazione su 500 letture, 1 novembre). Con ×2 dovrebbe restare sotto 4 Pa, molto sotto i ±15 Pa del criterio: da confermare con una misura nella 2.5.
+- **8 · Filtro α-β:** al bordo delle costole della bottiglia il centro del marcatore salta di 35–47 px (circa 1 cm) in un solo fotogramma, perché la rifrazione ne nasconde un pezzo. Il filtro (dove che giri) deve sopportare salti isolati di questa ampiezza.
+- **Sezione 6, sovrapressione oltre +3,5 kPa → SAFE:** senza la bottiglia piccola, con il circuito chiuso a 36, a 146 si arriva a **+3,6–4,0 kPa** (1 novembre). Con la proposta «SAFE = servo a 146» la soglia scatterebbe da sola: va alzata (bottiglie e tubi reggono ben di più) oppure SAFE va fermato prima di 146.
+- **Nuovo, sezione 6:** il 1 novembre il BMP280 si è riavviato da solo e per 3 minuti ha dato valori fissi (85,51 kPa, 25,30 °C) rispondendo all'identità. Il firmware del banco ora lo riconosce dal registro `ctrl_meas`; nel firmware vero (2.5) un sensore «a riposo» o con valori fissi dovrebbe portare a SAFE e comparire nella telemetria come errore del sensore.

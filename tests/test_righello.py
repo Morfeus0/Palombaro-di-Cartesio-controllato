@@ -89,5 +89,38 @@ class Righello(unittest.TestCase):
         self.assertIsNone(rig.quota_mm(900.0))
 
 
+class TabellaSpiedino(unittest.TestCase):
+    TAB = r.Tabella(quote_mm=(0.0, 20.0, 40.0, 60.0), y_px=(1000.0, 920.0, 880.0, 780.0),
+                    y_fondo_px=960.0, altezza_fondo_px=60.0)
+
+    def test_segue_i_tratti_della_tabella(self):
+        self.assertAlmostEqual(self.TAB.mm(920.0), 20.0)
+        self.assertAlmostEqual(self.TAB.mm(900.0), 30.0)   # tratto schiacciato: 40 px per 20 mm
+        self.assertAlmostEqual(self.TAB.mm(830.0), 50.0)   # tratto allargato: 100 px per 20 mm
+
+    def test_oltre_i_segni_prolunga_il_tratto(self):
+        self.assertAlmostEqual(self.TAB.mm(730.0), 70.0)
+        self.assertAlmostEqual(self.TAB.mm(1040.0), -10.0)
+
+    def test_zero_e_scala_della_sessione(self):
+        # sessione con lo zoom al 90 % e l'immagine spostata: il fondo è a 900, il marcatore alto 54 px
+        self.assertAlmostEqual(r.quota_da_tabella(900.0, 900.0, 54.0, self.TAB), 0.0)
+        y = 900.0 + 0.9 * (830.0 - 960.0)
+        self.assertAlmostEqual(r.quota_da_tabella(y, 900.0, 54.0, self.TAB), 50.0 - 10.0)
+
+    def test_righello_con_tabella(self):
+        rig = r.Righello(tabella=self.TAB)
+        for i in range(120):
+            rig.aggiorna(i / 60, 960.0, 60.0)
+        self.assertAlmostEqual(rig.quota_mm(960.0), 0.0)
+        self.assertAlmostEqual(rig.quota_mm(830.0), 40.0)
+
+    def test_tabella_vera_del_progetto(self):
+        tab = r.carica_tabella()
+        self.assertIsNotNone(tab)
+        self.assertEqual(len(tab.quote_mm), len(tab.y_px))
+        self.assertTrue(all(a > b for a, b in zip(tab.y_px, tab.y_px[1:])))
+
+
 if __name__ == "__main__":
     unittest.main()

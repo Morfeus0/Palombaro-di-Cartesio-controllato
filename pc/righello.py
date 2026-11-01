@@ -9,17 +9,22 @@ si ricava da P1 stesso, a ogni sessione:
   si stima anche come cambia la scala con l'altezza (k); se no si usa k = 0 (scala uniforme).
 La quota è in millimetri sopra la posizione del marcatore con P1 sul fondo.
 
-L'altezza «vera» del marcatore per il programma (ALTEZZA_MARCATORE_MM) si misura una volta sola con lo spiedino segnato
-ogni 2 cm nella bottiglia: corregge anche l'errore dei bordi della maschera del rosso.
+1 novembre, spiedino segnato ogni 2 cm nella bottiglia (pc/config/spiedino.json): la bottiglia deforma l'immagine a
+tratti (alla strozzatura 2 cm valgono 46 px, subito sopra 106), quindi una scala che cambia in modo regolare sbaglia
+fino a 5 mm. Se c'è la tabella dello spiedino, la forma della colonna viene da lì e da P1 servono solo lo zero e la
+scala della sessione (altezza del marcatore sul fondo rispetto a quella dell'immagine di riferimento): rileggendo un
+video dello spiedino con la tabella dell'altro, errore massimo 1,5 mm. Senza tabella resta la scala regolare.
 """
+import json
 from collections import deque
 from dataclasses import dataclass
+from pathlib import Path
 
 import numpy as np
 
-# PROVVISORIA: dal video 05 del 24 ottobre (marcatore alto circa 69 px, P1 salito di 653 px per circa 17,3 cm,
-# cioè circa 3,8 px/mm). Il valore vero viene dalla prova con lo spiedino.
-ALTEZZA_MARCATORE_MM = 18.0
+FILE_SPIEDINO = Path(__file__).resolve().parents[1] / "pc" / "config" / "spiedino.json"
+# Dalla tabella dello spiedino applicata ai video di F6 (1 novembre): 16,5–19,5 mm fuori dalla strozzatura.
+ALTEZZA_MARCATORE_MM = 18.5
 FINESTRA_FERMO_S = 1.0       # P1 è fermo se in questo tempo la sua y non cambia più di SPOSTAMENTO_FERMO_PX
 SPOSTAMENTO_FERMO_PX = 2.0
 VICINO_AL_FONDO_PX = 6.0     # l'altezza del marcatore sul fondo si prende dai campioni entro questa distanza
@@ -57,11 +62,51 @@ def adatta_scala(campioni: list[tuple[float, float]], y_fondo: float, k_predefin
     return Scala(altezza_px=float(np.median(vicini if vicini.size else h)), k=k_predefinito, y_fondo=y_fondo)
 
 
+@dataclass(frozen=True)
+class Tabella:
+    """Spiedino nell'immagine di riferimento: quota di ogni segno (mm, crescenti) e sua riga y (px, decrescenti),
+    più la riga e l'altezza del marcatore con P1 fermo sul fondo nella stessa inquadratura."""
+    quote_mm: tuple[float, ...]
+    y_px: tuple[float, ...]
+    y_fondo_px: float
+    altezza_fondo_px: float
+
+    def mm(self, y_rif: float) -> float:
+        """Quota del punto alla riga y_rif dell'immagine di riferimento; oltre l'ultimo segno si prolunga il tratto."""
+        y, q = np.array(self.y_px), np.array(self.quote_mm)
+        if y_rif > y[0]:
+            i = 0
+        elif y_rif < y[-1]:
+            i = len(y) - 2
+        else:
+            return float(np.interp(-y_rif, -y, q))
+        return float(q[i] + (q[i + 1] - q[i]) * (y_rif - y[i]) / (y[i + 1] - y[i]))
+
+
+def carica_tabella(percorso: Path = FILE_SPIEDINO) -> Tabella | None:
+    """La tabella dello spiedino indicata come riferimento nel file; None se manca."""
+    if not percorso.exists():
+        return None
+    dati = json.loads(percorso.read_text(encoding="utf-8"))
+    rif = dati["riferimento"]
+    return Tabella(quote_mm=tuple(10.0 * q for q in dati["quote_cm"]),
+                   y_px=tuple(float(v) for v in dati["video"][rif["video"]]["y_px"]),
+                   y_fondo_px=float(rif["y_fondo_px"]), altezza_fondo_px=float(rif["altezza_fondo_px"]))
+
+
+def quota_da_tabella(y: float, y_fondo: float, altezza_fondo_px: float, tabella: Tabella) -> float:
+    """Millimetri sopra il fondo: la riga y si riporta nell'immagine di riferimento con zero e scala della sessione."""
+    scala = altezza_fondo_px / tabella.altezza_fondo_px
+    y_rif = tabella.y_fondo_px + (y - y_fondo) / scala
+    return tabella.mm(y_rif) - tabella.mm(tabella.y_fondo_px)
+
+
 class Righello:
     """Raccoglie posizione e altezza del marcatore e dà la quota di P1 in millimetri, ricalibrandosi da solo."""
 
-    def __init__(self, altezza_mm: float = ALTEZZA_MARCATORE_MM, k_predefinito: float = 0.0):
-        self.altezza_mm, self.k_predefinito = altezza_mm, k_predefinito
+    def __init__(self, altezza_mm: float = ALTEZZA_MARCATORE_MM, k_predefinito: float = 0.0,
+                 tabella: Tabella | None = None):
+        self.altezza_mm, self.k_predefinito, self.tabella = altezza_mm, k_predefinito, tabella
         self.ricomincia()
 
     def ricomincia(self) -> None:
@@ -97,4 +142,10 @@ class Righello:
 
     def quota_mm(self, y: float) -> float | None:
         scala = self.scala()
-        return None if scala is None else quota_mm(y, scala, self.altezza_mm)
+        if scala is None:
+            return None
+        if self.tabella is None:
+            return quota_mm(y, scala, self.altezza_mm)
+        h = np.array([c[1] for c in self.campioni if abs(c[0] - scala.y_fondo) <= VICINO_AL_FONDO_PX])
+        altezza_fondo = float(np.median(h)) if h.size else scala.altezza_px
+        return quota_da_tabella(y, scala.y_fondo, altezza_fondo, self.tabella)

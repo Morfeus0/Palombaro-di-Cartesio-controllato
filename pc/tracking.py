@@ -29,7 +29,9 @@ FILE_CONFIG = RADICE / "pc" / "config" / "postazione.json"
 AREA_MIN_MARCATORE = 300  # pixel a piena risoluzione: circa un decimo del marcatore; il filo del cavo ne fa circa 50
 # Il marcatore misura 1400–4800 pixel lungo la colonna (video del 24 ottobre). Una zona «rossa» più grande è
 # qualcos'altro davanti alla bottiglia (nel video 03 una mano: 5000–36000 pixel) e in quel fotogramma non ci si fida.
-AREA_MAX_MARCATORE = 8000
+# 1 novembre: con lo zoom più stretto e P1 sul fondo contro la parete (la bottiglia lo allarga di lato) arriva a
+# 9200 pixel. Contro la mano restano il limite qui sotto e i salti impossibili (Inseguitore.plausibile).
+AREA_MAX_MARCATORE = 16000
 TOLLERANZA_S = 0.25       # un buco più breve si scavalca tenendo l'ultima posizione; oltre, P1 è «perso»
 # P1 si muove al massimo di 13 pixel per fotogramma (video 05: circa 300 px/s, 9,5 cm/s). Un salto più lungo di
 # SALTO_MIN_PX + VELOCITA_MAX_PX_S · Δt non è P1: si scarta, finché il palombaro non è dato per perso.

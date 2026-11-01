@@ -19,9 +19,14 @@ namespace {
 constexpr int PIN_SDA = 21;
 constexpr int PIN_SCL = 22;
 constexpr int PIN_SERVO = 18;
-constexpr uint8_t BMP280_INDIRIZZO = 0x76;
+// L'indirizzo dipende dal piedino SDO, che sulla scheda del tappo non è collegato (diario, 15 ottobre): il datasheet
+// dice che lasciato libero l'indirizzo è indefinito. Fino al 1 novembre era sempre 0x76; alle 19:58 rispondeva a 0x77.
+// Si provano tutti e due finché SDO non viene collegato alla massa.
+constexpr uint8_t INDIRIZZI_BMP280[] = {0x76, 0x77};
 constexpr uint8_t BMP280_REG_ID = 0xD0;
 constexpr uint8_t BMP280_ID = 0x58;
+constexpr uint8_t BMP280_REG_CTRL_MEAS = 0xF4;
+constexpr uint8_t BMP280_MODO_NORMALE = 0x03;  // i due bit bassi di ctrl_meas
 constexpr int SERVO_US_MIN = 500;   // impulso a 0°
 constexpr int SERVO_US_MAX = 2400;  // impulso a 180°
 constexpr int ANGOLO_CENTRO = 86;   // comando con il braccio verticale (misurato il 23 ottobre)
@@ -47,6 +52,7 @@ uint32_t ultimaLetturaUs = 0;
 uint32_t ultimoPassoMs = 0;
 uint32_t inizioSecondoMs = 0;
 uint32_t lettureNelSecondo = 0;
+uint8_t indirizzo = INDIRIZZI_BMP280[0];  // quello a cui il sensore ha risposto l'ultima volta
 bool sensoreOk = false;  // false finché il BMP280 non risponde: il servo funziona lo stesso
 
 const char* nomeRiavvio(esp_reset_reason_t r) {
@@ -63,17 +69,33 @@ const char* nomeRiavvio(esp_reset_reason_t r) {
 // Controllo di collegamento, non di plausibilità (quella è letturaPlausibile() in main.cpp):
 // rilegge il registro d'identità del chip. Senza risposta la libreria restituirebbe valori
 // assurdi ma "validi" (19 e 21 ottobre: p circa 2,5 kPa, T circa 180 °C).
-bool sensoreRisponde() {
-  Wire.beginTransmission(BMP280_INDIRIZZO);
-  Wire.write(BMP280_REG_ID);
-  if (Wire.endTransmission(false) != 0) return false;
-  if (Wire.requestFrom(BMP280_INDIRIZZO, static_cast<uint8_t>(1)) != 1) return false;
-  return Wire.read() == BMP280_ID;
+// Un registro del BMP280; -1 se il chip non risponde.
+int leggiRegistro(uint8_t registro) {
+  Wire.beginTransmission(indirizzo);
+  Wire.write(registro);
+  if (Wire.endTransmission(false) != 0) return -1;
+  if (Wire.requestFrom(indirizzo, static_cast<uint8_t>(1)) != 1) return -1;
+  return Wire.read();
 }
+
+bool sensoreRisponde() { return leggiRegistro(BMP280_REG_ID) == BMP280_ID; }
+
+// Il chip risponde ma si è riacceso da solo (1 novembre, 17:13; causa probabile: il piedino SDO libero): dopo un
+// riavvio resta a riposo e i registri delle misure valgono 0x80000, che la libreria traduce sempre in 85,51 kPa e
+// 25,30 °C. Lo si riconosce dal modo di misura in ctrl_meas, che non è più «normale».
+bool sensoreARiposo() { return (leggiRegistro(BMP280_REG_CTRL_MEAS) & BMP280_MODO_NORMALE) != BMP280_MODO_NORMALE; }
 
 // Misura più rapida della prova del tappo: circa 13 ms per lettura, quindi ben oltre i 50 Hz.
 bool avviaSensore() {
-  if (!bmp.begin(BMP280_INDIRIZZO)) return false;
+  bool trovato = false;
+  for (uint8_t candidato : INDIRIZZI_BMP280) {
+    if (bmp.begin(candidato)) {
+      indirizzo = candidato;
+      trovato = true;
+      break;
+    }
+  }
+  if (!trovato) return false;
   bmp.setSampling(Adafruit_BMP280::MODE_NORMAL, Adafruit_BMP280::SAMPLING_X1,
                   Adafruit_BMP280::SAMPLING_X4, Adafruit_BMP280::FILTER_OFF,
                   Adafruit_BMP280::STANDBY_MS_1);
@@ -122,7 +144,8 @@ void setup() {
 
   Wire.begin(PIN_SDA, PIN_SCL);
   sensoreOk = avviaSensore();
-  if (!sensoreOk) Serial.println("# ERRORE: BMP280 non trovato a 0x76. Riprovo ogni secondo; il servo funziona lo stesso.");
+  if (!sensoreOk) Serial.println("# ERRORE: BMP280 non trovato (0x76 e 0x77). Riprovo ogni secondo; il servo funziona lo stesso.");
+  else Serial.printf("# BMP280 a 0x%02X\n", indirizzo);
 
   servo.setPeriodHertz(50);
   servo.attach(PIN_SERVO, SERVO_US_MIN, SERVO_US_MAX);
@@ -147,16 +170,21 @@ void loop() {
     inizioSecondoMs += 1000;
     if (sensoreOk && !sensoreRisponde()) {
       sensoreOk = false;
-      Serial.println("# BMP280 perso a 0x76: riprovo ogni secondo");
+      Serial.printf("# BMP280 perso a 0x%02X: riprovo ogni secondo\n", indirizzo);
+    } else if (sensoreOk && sensoreARiposo()) {
+      sensoreOk = avviaSensore();
+      ultimaLetturaUs = micros();
+      Serial.println(sensoreOk ? "# BMP280 riavviato da solo: riconfigurato"
+                               : "# BMP280 riavviato da solo: riconfigurazione fallita, riprovo ogni secondo");
     } else if (sensoreOk) {
       Serial.printf("# letture/s: %u\n", lettureNelSecondo);
       lettureNelSecondo = 0;
     } else if (avviaSensore()) {
       sensoreOk = true;
       ultimaLetturaUs = micros();
-      Serial.println("# BMP280 ritrovato a 0x76");
+      Serial.printf("# BMP280 ritrovato a 0x%02X\n", indirizzo);
     } else {
-      Serial.printf("# BMP280 assente a 0x76  servo = %d\n", angolo);
+      Serial.printf("# BMP280 assente (0x76 e 0x77)  servo = %d\n", angolo);
     }
   }
 }

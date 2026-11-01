@@ -801,3 +801,63 @@ Preparati da Claude (circa 17:00) i passaggi per fissare il servo con le fascett
 2. Spiedino nella bottiglia (10 minuti, tappo aperto): altezza vera del marcatore e 5 quote note.
 3. F6 con «Registra 2 min»: chiude 2.1 e 2.2.
 4. Da discutere: le otto scelte del protocollo (2.4).
+
+## 2026-10-29 → 2026-10-31 · nessuna attività
+
+## 2026-11-01 · P1 riequilibrato, spiedino (2.3), F6: chiuse 2.1 e 2.2 · in corso
+
+**Orario:** dalle **11:13** (inizio della sessione) a oltre le 18:15. Divisione dal registro della seriale (`dati/2026-11-01/2026-11-01_seriale.log.gz`), dal registro della telecamera e dagli orari dei video. **Tra le 11:47 e le 16:57 l'USB era staccato:** riequilibrio di P1 con diverse pause, orari non registrati (scelta di Gabriele).
+
+| Orario | Durata | Attività |
+|---|---|---|
+| 11:13–11:30 | 17 min | ripresa; fili del tappo e del servo ricollegati, multimetro; prova in aria (sensore 50 letture/s, ±2,5 Pa; 52 comandi al servo senza riavvii) |
+| 11:30–11:47 | 17 min | tappo montato, circuito chiuso a 146, tirata a passi fino a 36 (−2,2 kPa): P1 resta sul fondo; circuito riaperto |
+| 11:47–16:57 | non registrata | P1 ritarato togliendo e rimettendo acqua dentro (rame invariato), con diverse pause |
+| 16:57–17:05 | 8 min | tappo e circuito richiusi; prova manuale: P1 tenuto a mano a metà bottiglia |
+| 17:05–17:16 | 11 min | telecamera, «Inquadratura automatica» spenta; sensore bloccato alle 17:13, ESP32 riavviato alle 17:16 |
+| 17:16–17:43 | 27 min | P1 sul fondo, spiedino segnato, circuito aperto e bottiglia svitata, zoom sulla bottiglia, colonna ridisegnata |
+| 17:43–17:55 | 12 min | spiedino nella bottiglia, due video (01 e 02, con due zoom) |
+| 17:55–18:03 | 8 min | bottiglia richiusa, fermo del tubo, circuito chiuso a 36, 146 per mandare giù P1 |
+| 18:03–18:13 | 10 min | F6: video 05 (77 s) e 06 (120 s) |
+| 18:25–19:26 | — | Gabriele fuori; Claude: righello con la tabella, firmware, documenti |
+| 19:26–20:05 | 39 min | firmware caricato; sensore che si scalda e sparisce: spegnimento, multimetro, diagnosi I²C (indirizzo 0x77), SDO misurato a metà tensione |
+| 20:05–20:08 | 3 min | circuito richiuso a 36, a 146 +3,66 kPa |
+| 20:08–20:13 | 5 min | 2.3: ritardo della telecamera (video 07, telefono davanti allo schermo del Mac) |
+
+**Fatto:**
+- **Prova in aria (11:30):** il sensore risponde subito dopo il ricollegamento, 50 letture al secondo, rumore 2,5 Pa; stanza a 100,68 kPa, 23,2 °C.
+- **P1 troppo pesante:** chiuso a 146 e tirato fino a 36 (−2,19 kPa), non si stacca. Il 28 si staccava a −1,85 kPa con la stanza a 101,2 kPa: in 4 giorni, a temperatura uguale, è diventato più pesante di almeno 0,85 kPa (aria della bolla sciolta). In depressione la corsa 146 → 36 dà solo 2,2 kPa: le pareti si incurvano verso l'interno, e i primi 10° dopo l'inversione non fanno niente (zona morta).
+- **P1 riequilibrato** da Gabriele togliendo e rimettendo acqua dentro P1 (rame invariato): ora si stacca dal fondo a circa **+1,09 kPa** (101,79 kPa assoluti, comando 84) e in 7 s arriva in cima.
+- **Corsa in pressione senza bottiglia piccola:** chiuso a 36, a 146 si arriva a circa **+4 kPa** (+3,6 kPa subito dopo l'ultima chiusura, poi cede di qualche centinaio di Pa nel primo mezzo minuto e circa 40 Pa al minuto dopo).
+- **Prova manuale:** P1 tenuto a metà bottiglia comandando il servo dalla dashboard (234 comandi in 5 minuti).
+- **Telecamera:** «Inquadratura automatica» spenta (l'immagine intera è circa il 25 % più larga di quella del 28); zoom poi regolato a mano da Gabriele sulla bottiglia. 59 fps, nessuna interruzione.
+- **Spiedino (2.3):** 13 segni da 0 a 24 cm letti sui video 01 e 02 (`pc/config/spiedino.json`). La bottiglia deforma l'immagine a tratti: 2 cm valgono da 46 px (strozzatura) a 106 px (subito sopra); una scala unica sbaglia fino a 5 mm. Rileggendo il video 02 con la tabella del 01, con solo zero e scala: **errore massimo 1,3 mm su 12 quote note**. Altezza vera del marcatore circa **18,5 mm**.
+- **F6 (2.1) e 2.2 chiuse:** video 05 (77 s) e 06 (120 s): P1 dal fondo a circa 2 cm sotto il pelo dell'acqua, **trovato nel 99,9 % dei fotogrammi a 59 fps, nessuna perdita**; nel video 06, 42 s lontano dal fondo e 10 passaggi a metà colonna. **Rumore** con P1 fermo sul fondo: **0,32 mm**. Video: `media/2026-11-01_F6_2.2_P1-comandato-a-mano-2-minuti.mp4`, `media/2026-11-01_2.3_spiedino-ogni-2-cm.mp4`.
+- **Ritardo della telecamera (2.3):** mediana **156 ms** (da 138 a 266 ms, deviazione 14 ms, 239 cambi; 148 ms da nero a bianco, 163 da bianco a nero), dallo schermo del Mac all'arrivo del fotogramma nel programma, compreso il ritardo dello schermo (circa 10–17 ms). La simulazione stimava 66 ms; il registro dei rischi fa scattare R5 sopra i 150 ms.
+- **Programmi (Claude):** righello con la tabella dello spiedino (zero e scala da P1 fermo sul fondo, quota non più «provvisoria»); limite di area del marcatore da 8000 a 16000 px; pagina lampeggiante e analisi per la latenza (`pc/latenza.html`, `pc/latenza.py`); firmware del banco che riconosce il sensore riavviato e lo riconfigura (compilato, non ancora caricato). **75 test.**
+
+**Problemi (e cosa si è capito):**
+1. **Il sensore si è riavviato da solo alle 17:13:01** ed è rimasto a riposo: 85,509 kPa e 25,30 °C fissi per 3 minuti, la stessa firma del 24 sera. Sono i valori di fabbrica dei registri (0x80000) dopo un riavvio del chip; il chip risponde all'identità, quindi il firmware non lo vedeva. Tra le 17:15 e le 17:16 i comandi al servo sono stati dati senza una pressione vera. Riavviando l'ESP32 è tornato a posto. Causa: un calo dell'alimentazione del sensore (contatto o umidità), da capire.
+2. **P1 «perso» sul fondo:** contro la parete la bottiglia allarga il marcatore fino a 9200 px rossi, oltre il limite contro la mano (8000). Limite portato a 16000; sul video della mano del 24 nessuna posizione falsa.
+3. **Bordi delle costole:** il centro del marcatore salta di 35–47 px in un fotogramma quando un pezzo è nascosto dalla rifrazione. Non è una perdita, ma è rumore sulla quota: da filtrare nel controllo (5.3).
+4. **P1 ha toccato la superficie per mezzo secondo** in F6: riportato giù subito, senza effetto del menisco.
+6. **Il sensore si scalda da solo e cambia indirizzo (19:12–19:58).** Dalle 19:12, con il servo fermo a 146, la temperatura del sensore è salita da 23 a 39 °C mentre la pressione restava ferma a 103,7 kPa (l'aria non si scaldava: si scaldava il chip). Dopo il caricamento del firmware nuovo (19:26) il sensore è sparito e ricomparso 6 volte in 4 minuti, poi più niente, neanche togliendo l'alimentazione. Il programma di diagnosi (19:58): SDA e SCL a posto, il chip risponde con l'identità giusta ma all'indirizzo **0x77** invece di 0x76. Sulla scheda del tappo il piedino **SDO** (che sceglie l'indirizzo) non è collegato (15 ottobre), e il datasheet dice che non va lasciato libero. **Misurato con il multimetro: SDO tra 0,3 e 3 V, cioè a metà, libero.** Spiega i salti d'indirizzo, il calore (un ingresso a metà tensione fa passare corrente) e probabilmente il riavvio delle 17:13. Rimedio nel firmware del banco: il sensore si cerca a 0x76 e a 0x77 (dalle 19:59 a 0x77, 50 letture al secondo, 23,4 °C).
+5. **Chiusura poco sotto la pressione della stanza** (−0,2 kPa) alle 18:01: probabilmente la bottiglia stretta mentre si infilava il tubo. Nessun effetto.
+
+**Decisioni (Gabriele):**
+- **Prova manuale prima dello spiedino** (quindi il tappo si è svitato una volta in più).
+- **P1 riequilibrato** togliendo e rimettendo acqua dentro (il rame non si tocca).
+- **Extra E4:** trovare un modo per non dover più riequilibrare il palombaro, quando il progetto sarà a buon punto.
+- **Zoom regolato a mano** sulla bottiglia (si cambia solo a mano).
+- **SDO del sensore: per ora solo il rimedio nel programma**, niente ponticello SDO → GND. Ci si ripensa se diventa un problema nel controllo automatico (fase 4); Claude segnala a ogni sessione se nel registro ricompaiono «perso/ritrovato» o una temperatura del sensore più di 3 °C sopra la stanza con la pressione ferma.
+
+**Stato a fine giornata (20:15):** circuito chiuso a 36, servo a 146 (+3,66 kPa); sensore a 0x77. **2.1, 2.2 e 2.3 chiuse** (la 2.3 nel giorno della scadenza). Il ritardo della telecamera (156 ms) supera la soglia di 150 ms del rischio R5: **decisione di Gabriele** sul piano B (webcam USB).
+
+**Ore:** al banco circa 2 h 39 registrate (11:13–11:47, 16:57–18:15 e 19:26–20:13); il riequilibrio di P1 non è contato (orari non registrati). Per sottofase, circa: 2.1 0 h 20, 2.2 0 h 10, 2.3 0 h 45, manutenzione del banco (1.2, 1.4, sensore) 1 h 24.
+
+### Revisione settimanale (T5), 26 ottobre – 1 novembre
+- **Milestone:** nessuna in scadenza; M2 è per domenica 8 novembre.
+- **Sottofasi:** 2.1 chiusa il 1 novembre (scadenza 27 ottobre, +5 giorni); 2.2 chiusa il 1 novembre (scadenza 30 ottobre, +2 giorni); 2.3 chiusa il 1 novembre, il giorno della scadenza (errore 1,3 mm, rumore 0,32 mm, ritardo 156 ms); 2.4 in bozza (scadenza 2 novembre: le otto scelte della sezione 9 da decidere).
+- **Ore della settimana (Gabriele):** 26: 0 · 27: 0 · 28: 2 h 45 · 29–31: 0 · 1: circa 2 h 39 registrate (il riequilibrio di P1 non è contato). Il 27 ha lavorato solo Claude (dashboard, 2.2, parte della 2.3, bozza della 2.4).
+- **Rischi:** R2 (tenuta) a posto dopo il collare; R4 (riconoscimento) nessuna perdita, salti ai bordi delle costole da filtrare; R5 (telecamera) 59 fps senza interruzioni, ma **ritardo 156 ms, oltre la soglia di 150 ms** (decisione di Gabriele sul piano B, webcam USB); R6 (palombaro) attivo: deriva di circa 0,2 kPa al giorno, riequilibrato il 1 novembre, Extra E4; R8 (elettronica) il sensore si è riavviato da solo, firmware aggiornato e da caricare. R9 (ritardo generale) scatta quando «una fase slitta di più di 3 giorni»: la 2.1 è finita 5 giorni dopo la sua scadenza, la fase F2 scade l'8 novembre. **Decisione di Gabriele.**
+- **Settimana prossima (dal piano):** 2.4 regole di dialogo (dom 1 – lun 2), 2.5 firmware di base (lun 2 – gio 5), 2.6 ponte sul Mac e registrazione (gio 5 – sab 7), 2.7 prova completa e **M2** (dom 8).

@@ -1,0 +1,69 @@
+{
+  "descrizione": "Spiedino segnato ogni 2 cm nella bottiglia aperta, appoggiato sul fondo lungo l'asse (1 novembre 2026). y = riga in pixel (1920 x 1080) del centro di ogni segno, dall'immagine mediana dei fotogrammi fermi. Serve come tabella fissa quota -> pixel; a ogni sessione si ricavano solo zero e scala.",
+  "quote_cm": [
+    0,
+    2,
+    4,
+    6,
+    8,
+    10,
+    12,
+    14,
+    16,
+    18,
+    20,
+    22,
+    24
+  ],
+  "video": {
+    "2026-11-01_postazione_01": {
+      "secondi": [
+        2,
+        14
+      ],
+      "y_px": [
+        1009,
+        934,
+        845,
+        780,
+        697,
+        613,
+        536,
+        445,
+        399,
+        293,
+        218,
+        148,
+        62
+      ]
+    },
+    "2026-11-01_postazione_02": {
+      "secondi": [
+        2,
+        12
+      ],
+      "y_px": [
+        991,
+        919,
+        840,
+        770,
+        692,
+        616,
+        538,
+        453,
+        405,
+        309,
+        234,
+        168,
+        86
+      ]
+    }
+  },
+  "note": "0 cm = estremità piatta dello spiedino sul fondo. Anelli spessi a 10 e 20 cm. Il 16 cm cade sulla strozzatura (immagine schiacciata: 46-48 px per 2 cm contro 75-90). Leggendo il video 02 con la tabella del 01 e solo zero e scala, errore massimo 1,3 mm.",
+  "riferimento": {
+    "video": "2026-11-01_postazione_02",
+    "y_fondo_px": 798.0,
+    "altezza_fondo_px": 65.8,
+    "nota": "riga e altezza del marcatore con P1 fermo sul fondo nella stessa inquadratura del video 02 (video 05, primi 15 s: scala diversa meno dell'1 %)"
+  }
+}
