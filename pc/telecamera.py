@@ -18,6 +18,7 @@ import argparse
 import json
 import logging
 import re
+import socket
 import subprocess
 import threading
 import time
@@ -31,6 +32,7 @@ import numpy as np
 import postazione as p
 import righello
 import tracking
+from protocollo import PORTA_QUOTA
 
 RADICE = Path(__file__).resolve().parents[1]
 CONFIG = RADICE / "pc" / "config"
@@ -195,6 +197,8 @@ class Acquisizione(threading.Thread):
         self.righello = righello.Righello(tabella=righello.carica_tabella())  # quota in mm: zero e scala da P1
         self.marcatore: dict | None = None          # ultimo risultato dell'inseguitore
         self.tempi_riconoscimento: deque[float] = deque()
+        # 2.6: la quota va al ponte (pc/bridge.py) a ogni fotogramma; se il ponte non gira, il pacchetto si perde
+        self.udp = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
 
     def evento(self, testo: str) -> None:
         log.info(testo)
@@ -233,12 +237,21 @@ class Acquisizione(threading.Thread):
             self.righello.aggiorna(t, marcatore["y"], marcatore["altezza"])
         quota = self.righello.quota_mm(marcatore["y"]) if marcatore["y"] is not None else None
         marcatore = {**marcatore, "quota_mm": quota}
+        if quota is not None:
+            self.manda_quota(quota, t, 0 if marcatore["trovato"] else 2 if marcatore["perso"] else 1)
         with self.blocco:
             self.marcatore = marcatore
             self.tempi_riconoscimento.append(t)
             while self.tempi_riconoscimento and t - self.tempi_riconoscimento[0] > FINESTRA_FPS_S:
                 self.tempi_riconoscimento.popleft()
         return marcatore
+
+    def manda_quota(self, quota_mm: float, t: float, vista: int) -> None:
+        """Pacchetto per il ponte: quota in decimi di mm, arrivo del fotogramma, 0 trovato / 1 buco breve / 2 perso."""
+        try:
+            self.udp.sendto(f"{round(quota_mm * 10)},{t:.4f},{vista}".encode("ascii"), ("127.0.0.1", PORTA_QUOTA))
+        except OSError:
+            pass  # ponte spento: la quota serve solo a lui, la telecamera continua
 
     def nuovo(self, fotogramma: np.ndarray, t: float) -> None:
         marcatore = self.riconosci(fotogramma, t)  # circa 1,3 ms a 1920 × 1080: si fa su ogni fotogramma

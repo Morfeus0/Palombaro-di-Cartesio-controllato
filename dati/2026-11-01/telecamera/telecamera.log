@@ -31,3 +31,11 @@
 20:15:30 cartella: /Users/gabrielecaruso/Progetto Automatica/dati/2026-11-01/telecamera (Ctrl+C per chiudere)
 20:15:30 telecamera aperta: Fotocamera di iPhone di Gabriele via ffmpeg, 1920 × 1080 a 60 fps
 20:30:31 colonna: [745, 46, 310, 949]
+21:50:57 cartella: /Users/gabrielecaruso/Progetto Automatica/dati/2026-11-01/telecamera (Ctrl+C per chiudere)
+21:50:57 telecamera aperta: Fotocamera di iPhone di Gabriele via ffmpeg, 1920 × 1080 a 60 fps
+21:51:12 colonna tolta: misure su tutta l'immagine
+21:51:19 colonna: [730, 116, 320, 918]
+21:53:11 registrazione di 120 s: 2026-11-01_postazione_08.mp4
+21:55:11 registrazione chiusa: 7052 fotogrammi in 2026-11-01_postazione_08.mp4
+22:18:25 interruzione di 0.6 s senza fotogrammi
+22:18:31 nessun fotogramma da 5 s: riavvio la telecamera

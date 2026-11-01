@@ -33,3 +33,7 @@ def comando_servo(angolo: str) -> str | None:
     """L'angolo intero scritto dalla dashboard (36–146) come comando S in decimi di grado; None se non è un intero."""
     angolo = angolo.strip()
     return componi(f"S,{int(angolo) * 10}") if angolo.isdigit() else None
+
+
+# telecamera.py manda la quota al ponte (pc/bridge.py) con un pacchetto UDP su 127.0.0.1 a questa porta.
+PORTA_QUOTA = 8781
