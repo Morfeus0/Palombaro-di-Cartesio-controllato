@@ -169,7 +169,21 @@ class Gestore(BaseHTTPRequestHandler):
             self._json(500, {"errore": "impossibile scrivere il comando per la telecamera"})
             return
         log.info("comando telecamera: %s", comando)
+        self._esperimento_con_il_video(comando)
         self._json(200, comando)
+
+    def _esperimento_con_il_video(self, comando: dict) -> None:
+        """2.7: con il video parte anche il file dell'esperimento del ponte (pc/bridge.py), che dura quanto il video."""
+        if comando["comando"] == "registra":
+            riga = f"ESPERIMENTO prova con il video della telecamera, durata={comando['secondi']}"
+        elif comando["comando"] == "ferma":
+            riga = "FINE"
+        else:
+            return
+        try:
+            postazione.scrivi_atomico(self.comandi.with_name("esperimento.txt"), (riga + "\n").encode("utf-8"))
+        except OSError as errore:
+            log.error("esperimento non avviato: %s", errore)
 
     def _invia_evento(self, nome: str, dati: dict) -> None:
         self.wfile.write(f"event: {nome}\ndata: {json.dumps(dati)}\n\n".encode("utf-8"))

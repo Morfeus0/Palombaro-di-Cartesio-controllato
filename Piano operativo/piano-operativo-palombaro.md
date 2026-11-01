@@ -382,6 +382,7 @@ Sono le sottofasi che, se ritardano, fanno slittare la consegna. Le altre hanno 
   - [ ] Revisione settimanale.
   - [ ] Eventuale aggiornamento al prof (T6).
 - **Fatto quando:** ✅ **M2 · quota e pressione registrate ad almeno 20 Hz.**
+- 🔶 **Preparata il 1 novembre (Claude, non ancora provata al banco):** «Registra 2 min» nella dashboard avvia insieme il video della telecamera e il file dell'esperimento del ponte (`esperimento.txt`, chiuso da solo dopo la stessa durata). Proposte per le 3 prove: salita e tenuta a metà bottiglia, su e giù tre volte, tenuta nel terzo superiore.
 
 ---
 

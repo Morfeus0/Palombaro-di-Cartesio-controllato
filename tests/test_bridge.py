@@ -49,6 +49,12 @@ class Esperimento(unittest.TestCase):
         self.assertEqual(br.riga_csv(50.5, campi, None), "50.500,7,1200,104285,1460,M,,,")
 
 
+class Durata(unittest.TestCase):
+    def test_durata_nei_parametri(self):
+        self.assertEqual(br.durata("con il video, durata=120"), 120.0)
+        self.assertIsNone(br.durata("senza limite"))
+
+
 class Verifica(unittest.TestCase):
     def righe(self, secondi: float, buco: tuple[float, float] | None = None) -> list[str]:
         out, t = [], 0.0

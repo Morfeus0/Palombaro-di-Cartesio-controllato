@@ -804,7 +804,7 @@ Preparati da Claude (circa 17:00) i passaggi per fissare il servo con le fascett
 
 ## 2026-10-29 → 2026-10-31 · nessuna attività
 
-## 2026-11-01 · P1 riequilibrato, spiedino (2.3), F6: chiuse 2.1 e 2.2 · in corso
+## 2026-11-01 · P1 riequilibrato, spiedino, F6, firmware 0.1, ponte: chiuse 2.1, 2.2, 2.3, 2.4, 2.5, 2.6 · circa 3 h 15 registrate
 
 **Orario:** dalle **11:13** (inizio della sessione) a oltre le 18:15. Divisione dal registro della seriale (`dati/2026-11-01/2026-11-01_seriale.log.gz`), dal registro della telecamera e dagli orari dei video. **Tra le 11:47 e le 16:57 l'USB era staccato:** riequilibrio di P1 con diverse pause, orari non registrati (scelta di Gabriele).
 
@@ -823,6 +823,13 @@ Preparati da Claude (circa 17:00) i passaggi per fissare il servo con le fascett
 | 19:26–20:05 | 39 min | firmware caricato; sensore che si scalda e sparisce: spegnimento, multimetro, diagnosi I²C (indirizzo 0x77), SDO misurato a metà tensione |
 | 20:05–20:08 | 3 min | circuito richiuso a 36, a 146 +3,66 kPa |
 | 20:08–20:13 | 5 min | 2.3: ritardo della telecamera (video 07, telefono davanti allo schermo del Mac) |
+| 20:13–20:20 | 7 min | chiusura anticipata e ripresa; 2.4: revisione delle undici scelte, tutte approvate |
+| 20:20–20:29 | — | Claude: firmware 0.1 (2.5) e programmi sul Mac |
+| 20:29–20:34 | 5 min | 2.5 al banco: primo comando, movimenti, emergenza, rifiuto in SAFE, ritorno in MANUALE |
+| 20:34–21:00 | — | 2.5: prova di 30 minuti senza toccare il banco; Claude: `letturaPlausibile()` |
+| 21:00–21:50 | — | Claude: ponte (2.6); Gabriele: iPhone staccato e poi rimesso |
+| 21:50–21:59 | 9 min | 2.6 al banco: telecamera riavviata, primo comando 146, esperimento di 6,7 minuti |
+| 21:59–22:47 | — | Claude: documenti, preparazione della 2.7; fine giornata |
 
 **Fatto:**
 - **Prova in aria (11:30):** il sensore risponde subito dopo il ricollegamento, 50 letture al secondo, rumore 2,5 Pa; stanza a 100,68 kPa, 23,2 °C.
@@ -851,9 +858,9 @@ Preparati da Claude (circa 17:00) i passaggi per fissare il servo con le fascett
 - **Zoom regolato a mano** sulla bottiglia (si cambia solo a mano).
 - **SDO del sensore: per ora solo il rimedio nel programma**, niente ponticello SDO → GND. Ci si ripensa se diventa un problema nel controllo automatico (fase 4); Claude segnala a ogni sessione se nel registro ricompaiono «perso/ritrovato» o una temperatura del sensore più di 3 °C sopra la stanza con la pressione ferma.
 
-**Stato alle 20:15:** circuito chiuso a 36, servo a 146 (+3,66 kPa); sensore a 0x77. **2.1, 2.2 e 2.3 chiuse** (la 2.3 nel giorno della scadenza). Il ritardo della telecamera (156 ms) supera la soglia di 150 ms del rischio R5: **decisione di Gabriele** sul piano B (webcam USB).
+**Stato alle 20:15 (prima della sera):** circuito chiuso a 36, servo a 146 (+3,66 kPa); sensore a 0x77. **2.1, 2.2 e 2.3 chiuse** (la 2.3 nel giorno della scadenza). Il ritardo della telecamera (156 ms) supera la soglia di 150 ms del rischio R5: **decisione di Gabriele** sul piano B (webcam USB).
 
-**Ore:** al banco circa 2 h 39 registrate (11:13–11:47, 16:57–18:15 e 19:26–20:13); il riequilibrio di P1 non è contato (orari non registrati). Per sottofase, circa: 2.1 0 h 20, 2.2 0 h 10, 2.3 0 h 45, manutenzione del banco (1.2, 1.4, sensore) 1 h 24.
+**Ore:** al banco circa **3 h 15** registrate (11:13–11:47, 16:57–18:15, 19:26–20:34 e 21:50–21:59); il riequilibrio di P1 non è contato (orari non registrati), né le attese della prova di 30 minuti. Per sottofase, circa: 2.1 0 h 20, 2.2 0 h 10, 2.3 0 h 45, 2.4 0 h 07, 2.5 0 h 05, 2.6 0 h 09, manutenzione del banco (1.2, 1.4, sensore) 1 h 24, fermata e ripresa 0 h 15.
 
 **Sera (dalle 20:15): 2.4 chiusa, 2.5 avviata.**
 - **2.4 (20:15–20:20):** rivista con Gabriele, approvate tutte le proposte della sezione 9 più tre nuove (soglia di SAFE a +5 kPa, SAFE se il sensore si ferma, servo fermo all'accensione).
@@ -864,9 +871,13 @@ Preparati da Claude (circa 17:00) i passaggi per fissare il servo con le fascett
 - **2.6 al banco (21:50–21:59):** iPhone rimesso, telecamera riavviata, primo comando 146. esperimento `dati/2026-11-01/2026-11-01_manuale_01.csv.gz` (21:51:57–21:58:39, P1 comandato a mano dalla dashboard): **6,7 minuti, 40 212 righe (100 al secondo), nessuna riga della scheda persa** (intervallo massimo 12 ms sull'orologio della scheda); P1 mai perso, dal fondo a 18,7 cm; età della quota 11 ms tipica, 28 ms al 99 %. **5 pause della quota oltre 50 ms** (100, 90, 57, 11 e 198 ms; età massima 256 ms; 60 righe su 40 212): coincidono con pause dei fotogrammi in arrivo dall'iPhone (153 ms all'avvio di una registrazione video, 252 ms alle 21:54:00 insieme a una pausa di 63 ms di tutto il Mac). Il criterio stretto («senza buchi» a 20 Hz) non passa per la telecamera; **decisione di Gabriele: 2.6 superata**, pause annotate sotto R5. **2.6 chiusa.**
 - **`letturaPlausibile()`** scritta da Claude su richiesta di Gabriele (che non scrive codice): pressione tra 90 e 110 kPa, temperatura tra 0 e 50 °C (i 39 °C del chip scaldato da SDO si accettano: la pressione era giusta). Caricata alle 21:00, sensore regolare.
 
+**Stato a fine giornata (22:47):** ponte, dashboard e registrazione fermati; scheda con il firmware 0.1 (sensore a 0x77), servo fermo a 146 (nessun impulso dall'ultimo riavvio delle 22:20), circuito chiuso, P1 sul fondo. **Chiuse 2.1, 2.2, 2.3, 2.4, 2.5 e 2.6.** Pronto per la 2.7, ma non provato al banco: «Registra 2 min» nella dashboard avvia anche il file dell'esperimento del ponte (`esperimento.txt`, `durata=`), con un test.
+
+**Prossimo passo (2.7, scadenza domenica 8):** tre prove registrate in modalità manuale (salita e tenuta, su e giù, più in alto) con «Registra 2 min»; video di M2 con quota e pressione sovrapposte (Claude); bozza del capitolo «Architettura, sensori e comunicazione» (Claude). Da decidere (Gabriele): piano B della telecamera (R5, webcam USB).
+
 ### Revisione settimanale (T5), 26 ottobre – 1 novembre
 - **Milestone:** nessuna in scadenza; M2 è per domenica 8 novembre.
-- **Sottofasi:** 2.1 chiusa il 1 novembre (scadenza 27 ottobre, +5 giorni); 2.2 chiusa il 1 novembre (scadenza 30 ottobre, +2 giorni); 2.3 chiusa il 1 novembre, il giorno della scadenza (errore 1,3 mm, rumore 0,32 mm, ritardo 156 ms); 2.4 in bozza (scadenza 2 novembre: le otto scelte della sezione 9 da decidere).
-- **Ore della settimana (Gabriele):** 26: 0 · 27: 0 · 28: 2 h 45 · 29–31: 0 · 1: circa 2 h 39 registrate (il riequilibrio di P1 non è contato). Il 27 ha lavorato solo Claude (dashboard, 2.2, parte della 2.3, bozza della 2.4).
+- **Sottofasi:** 2.1 chiusa il 1 novembre (scadenza 27 ottobre, +5 giorni); 2.2 chiusa il 1 novembre (scadenza 30 ottobre, +2 giorni); 2.3 chiusa il 1 novembre, il giorno della scadenza (errore 1,3 mm, rumore 0,32 mm, ritardo 156 ms); **in anticipo:** 2.4 (scadenza 2 novembre), 2.5 (scadenza 5 novembre: 30 minuti a 100 Hz, scarto del periodo 0 µs) e 2.6 (scadenza 7 novembre: 6,7 minuti registrati; 5 pause della quota fino a 0,26 s dovute alla telecamera, considerata superata da Gabriele) chiuse il 1 novembre.
+- **Ore della settimana (Gabriele):** 26: 0 · 27: 0 · 28: 2 h 45 · 29–31: 0 · 1: circa 3 h 15 registrate (il riequilibrio di P1 non è contato). **Totale circa 6 h.** Il 27 ha lavorato solo Claude (dashboard, 2.2, parte della 2.3, bozza della 2.4).
 - **Rischi:** R2 (tenuta) a posto dopo il collare; R4 (riconoscimento) nessuna perdita, salti ai bordi delle costole da filtrare; R5 (telecamera) 59 fps senza interruzioni, ma **ritardo 156 ms, oltre la soglia di 150 ms** (decisione di Gabriele sul piano B, webcam USB); R6 (palombaro) attivo: deriva di circa 0,2 kPa al giorno, riequilibrato il 1 novembre, Extra E4; R8 (elettronica) il sensore si è riavviato da solo, firmware aggiornato e da caricare. R9 (ritardo generale) scatta quando «una fase slitta di più di 3 giorni»: la 2.1 è finita 5 giorni dopo la sua scadenza, la fase F2 scade l'8 novembre. **Decisione di Gabriele.**
-- **Settimana prossima (dal piano):** 2.4 regole di dialogo (dom 1 – lun 2), 2.5 firmware di base (lun 2 – gio 5), 2.6 ponte sul Mac e registrazione (gio 5 – sab 7), 2.7 prova completa e **M2** (dom 8).
+- **Settimana prossima (dal piano):** 2.4, 2.5 e 2.6 già chiuse; resta la 2.7, prova completa e **M2** (dom 8). Poi F3 (dal 9 novembre): 3.1 modello fisico, 3.2 parametri statici. Le decisioni sul calendario sono di Gabriele.

@@ -3,7 +3,9 @@
 Prende il posto di pc/registra_seriale.py con il firmware 0.1: è l'unico programma che apre la porta della scheda.
 - Registro: ogni riga della seriale con l'orario al millisecondo, come prima (la dashboard lo segue uguale).
 - Comandi: le righe del file dei comandi (quelle della dashboard) vanno alla scheda: un angolo intero diventa `$S`,
-  le righe `$…` passano così come sono; `ESPERIMENTO <nome> [parametri]` apre un CSV, `FINE` lo chiude.
+  le righe `$…` passano così come sono; `ESPERIMENTO <nome> [parametri]` apre un CSV, `FINE` lo chiude. Le righe
+  di esperimento arrivano anche da `esperimento.txt` nella stessa cartella (la dashboard lo scrive con «Registra 2 min»,
+  così non si mescola con i comandi del servo); un parametro `durata=<secondi>` chiude il CSV da solo.
 - Quota: telecamera.py manda a ogni fotogramma un pacchetto UDP su 127.0.0.1 ("quota_dmm,t_fotogramma,vista");
   il ponte lo inoltra subito come `$Z` con la sua età in millisecondi (stesso orologio, niente da sincronizzare).
 - Battito: `$B` ogni 200 ms, perché la scheda sappia che il Mac è vivo.
@@ -58,6 +60,12 @@ def riga_z(seq: int, q: Quota, adesso: float) -> str:
     return componi(f"Z,{seq},{q.dmm},{max(0, round((adesso - q.t) * 1000))},{q.vista}")
 
 
+def durata(parametri: str) -> float | None:
+    """I secondi di `durata=<secondi>` nei parametri di un esperimento; None se non c'è."""
+    trovata = re.search(r"\bdurata=(\d+(?:\.\d+)?)", parametri)
+    return float(trovata.group(1)) if trovata else None
+
+
 def nome_esperimento(cartella: Path, giorno: str, esperimento: str) -> Path:
     pulito = re.sub(r"[^a-z0-9]+", "-", esperimento.lower()).strip("-") or "esperimento"
     numero = 1
@@ -109,6 +117,8 @@ class Ponte:
         self.quota: Quota | None = None
         self.seq_z = self.seq_b = 0
         self.csv = None
+        self.fine_esperimento: float | None = None
+        self.esperimento = comandi.with_name("esperimento.txt")
         self.prossimo_battito = self.prossimi_comandi = 0.0
         self.resto = b""
 
@@ -150,6 +160,8 @@ class Ponte:
                                ("quota", "decimi di mm sopra P1 fermo sul fondo; età dal fotogramma, ms")):
             self.csv.write(f"# {chiave}: {valore}\n")
         self.csv.write(COLONNE + "\n")
+        secondi = durata(parametri)
+        self.fine_esperimento = None if secondi is None else time.time() + secondi
         self.scrivi_log(f"# esperimento iniziato: {percorso.name}")
 
     def chiudi_esperimento(self) -> None:
@@ -160,12 +172,13 @@ class Ponte:
             self.scrivi_log(f"# esperimento chiuso: {nome}")
 
     def leggi_comandi(self) -> None:
-        if not self.comandi.exists():
-            return
-        righe = [r.strip() for r in self.comandi.read_text(encoding="utf-8").splitlines() if r.strip()]
-        os.remove(self.comandi)
-        for riga in righe:
-            self.comando(riga)
+        for file in (self.comandi, self.esperimento):
+            if not file.exists():
+                continue
+            righe = [r.strip() for r in file.read_text(encoding="utf-8").splitlines() if r.strip()]
+            os.remove(file)
+            for riga in righe:
+                self.comando(riga)
 
     def leggi_quote(self, adesso: float) -> None:
         while True:
@@ -199,6 +212,8 @@ class Ponte:
             self.seq_b += 1
             self.invia(componi(f"B,{self.seq_b}"))
             self.prossimo_battito = adesso + PERIODO_BATTITO_S
+        if self.csv and self.fine_esperimento is not None and adesso >= self.fine_esperimento:
+            self.chiudi_esperimento()
         if adesso >= self.prossimi_comandi:
             self.leggi_comandi()
             self.prossimi_comandi = adesso + PERIODO_COMANDI_S
