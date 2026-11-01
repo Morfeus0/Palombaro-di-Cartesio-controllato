@@ -37,6 +37,18 @@
 - **Piedino SDO della schedina del tappo non collegato** (dal 15 ottobre): l'indirizzo I²C è indefinito (datasheet). Fino al 1 novembre era 0x76; il 1 novembre alle 19:58 è diventato 0x77, con SDO misurato a metà tensione e il chip che si scaldava fino a 39 °C. Il firmware del banco cerca il sensore a 0x76 e a 0x77. Rimedio definitivo, se servirà: un ponticello saldato da SDO a GND sulla schedina (decisione di Gabriele: per ora no).
 - La calza del cavo del sensore (codina isolata lato breadboard) per ora non è collegata: si collegherà alla massa se compariranno disturbi.
 
+## Fine sessione: dove lasciare tappo e P1 (1 novembre, decisione di Gabriele)
+
+1. Tubo B sfilato dalla siringa (circuito aperto: la bottiglia torna alla pressione della stanza).
+2. Tappo del sensore **svitato** tenendolo fermo e girando la bottiglia; appoggiato sul tavolo con la schedina **verso
+   l'alto**, all'asciutto e lontano dall'acqua, senza tirare il tubo né il cavo: niente condensa sul sensore.
+3. Sulla bottiglia il **tappo normale**, avvitato senza forzare: niente polvere, l'acqua non evapora.
+4. P1 resta **nella bottiglia, a galla**: con la bolla alla pressione della stanza perde pochissima aria (sul fondo, o
+   con il circuito chiuso in pressione, diventa più pesante: almeno 0,85 kPa in 4 giorni dal 28 ottobre al 1 novembre).
+   Mai estrarlo: cambia l'acqua che ha dentro e va ritarato.
+5. Alla sessione dopo, **prima** di avvitare il tappo del sensore: 3–4 gocce di soluzione (una goccia di detersivo in
+   un cucchiaino d'acqua) sul pelo dell'acqua, contro il menisco sulla punta asciutta di P1.
+
 ## Ordine di accensione
 
 1. USB dell'ESP32 al Mac (il servo resta senza alimentazione).
