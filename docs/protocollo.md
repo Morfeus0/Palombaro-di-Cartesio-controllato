@@ -165,3 +165,35 @@ Le proposte della tabella restano da decidere con Gabriele; qui solo i fatti nuo
 - **8 · Filtro α-β:** al bordo delle costole della bottiglia il centro del marcatore salta di 35–47 px (circa 1 cm) in un solo fotogramma, perché la rifrazione ne nasconde un pezzo. Il filtro (dove che giri) deve sopportare salti isolati di questa ampiezza.
 - **Sezione 6, sovrapressione oltre +3,5 kPa → SAFE:** senza la bottiglia piccola, con il circuito chiuso a 36, a 146 si arriva a **+3,6–4,0 kPa** (1 novembre). Con la proposta «SAFE = servo a 146» la soglia scatterebbe da sola: va alzata (bottiglie e tubi reggono ben di più) oppure SAFE va fermato prima di 146.
 - **Nuovo, sezione 6:** il 1 novembre il BMP280 si è riavviato da solo e per 3 minuti ha dato valori fissi (85,51 kPa, 25,30 °C) rispondendo all'identità. Il firmware del banco ora lo riconosce dal registro `ctrl_meas`; nel firmware vero (2.5) un sensore «a riposo» o con valori fissi dovrebbe portare a SAFE e comparire nella telemetria come errore del sensore.
+
+## 10. Firmware 0.2 (5 novembre, Claude, compilato e provato sul Mac, non ancora al banco)
+
+Cosa aggiunge alla versione 1 del protocollo, senza cambiare il formato delle righe:
+
+| Riga | Formato e unità | Note |
+|---|---|---|
+| `M` | `MANUALE`, `CALIBRAZIONE`, `HOLD`, `SAFE` | CALIBRAZIONE e HOLD si accettano solo fuori da SAFE, con il sensore e la quota fresca e dopo almeno un `S` (servo attivo); HOLD solo se p0 è noto (da CALIBRAZIONE o da `K,E`). Risposte nuove: `NO,M,QUOTA`, `NO,M,SERVO_FERMO`, `NO,M,EQUILIBRIO` |
+| `R` | quota voluta in decimi di mm, da 100 a 1700 (1–17 cm) | `NO,R,FUORI_LIMITI` fuori |
+| `K,P` | `kp` [°/Pa], `ki` [°/(Pa·s)] | PI della pressione |
+| `K,Z` | `kp` [Pa/cm], `ki` [Pa/(cm·s)], `kd` [Pa·s/cm], `n` [1/s] | PID della quota; lo sceglie per HOLD |
+| `K,O` | `isteresi` [mm], `ampiezza` [Pa] | On-Off; lo sceglie per HOLD |
+| `K,E` | `p0` [Pa, assoluta] tra 90 000 e 110 000 | equilibrio con P1 sul fondo, senza calibrare |
+| `T` | `p_rif` = pressione voluta [Pa], `pi_p` [°], `pi_i` [°] | prima valevano 0; in MANUALE e SAFE restano 0 |
+| `C` | seq, t_ms, quota_dmm, età_ms, quota_rif_dmm, pid_p, pid_i, pid_d [Pa], p_rif [Pa] | in HOLD, ogni 30 ms (anello esterno a circa 33 Hz) |
+| `X` | motivi nuovi: `CALIBRATO` (CALIBRAZIONE → HOLD), `CALIBRAZIONE` (fallita → SAFE), `MAC_MUTO`, `TELECAMERA_MUTA`, `PERSO`, `ERRORE` | |
+
+**Guadagni iniziali** (dal progetto in simulazione, `analisi/progetto_controllori.m`): PI 0,02 °/Pa e 0,4 °/(Pa·s);
+PID 475 Pa/cm, 11,9 Pa/(cm·s), 400 Pa·s/cm, N = 10; On-Off ±5 mm e ±700 Pa.
+
+**CALIBRAZIONE** (`firmware/src/palombaro/calibrazione.cpp`): +1,5 kPa finché P1 è fermo sul fondo da 3 s (almeno
+6 s), poi rampa a −30 Pa/s da +0,6 kPa sopra la pressione di partenza; quando P1 supera 1,5 cm, p0 = pressione voluta
++ 30 Pa/s × 4 s (il tempo che P1 impiega a salire fino a 1,5 cm); se la rampa scende di 3 kPa senza stacco → SAFE.
+
+**Servo:** rampa di 0,7° per ciclo in MANUALE e SAFE (come la 0.1), 2,0° per ciclo (200 °/s) in CALIBRAZIONE e HOLD.
+
+**Da decidere (Gabriele):**
+1. **Errore troppo grande troppo a lungo → SAFE (`ERRORE`):** proposta 6 cm per più di 5 s (dalla simulazione della
+   proposta).
+2. **Telecamera muta dopo 200 ms (decisione già presa il 1 novembre):** il 5 novembre l'avvio della registrazione video
+   ha fermato i fotogrammi per 184 ms, e il 1 novembre c'è stata una pausa di 256 ms con il Mac fermo. Con 200 ms
+   quella del 1 novembre avrebbe portato in SAFE; con 300 ms nessuna delle due. La soglia è `supervisore::Soglie`.

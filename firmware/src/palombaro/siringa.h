@@ -21,6 +21,11 @@ void ferma();
 // Un passo della rampa, da chiamare a ogni ciclo da 10 ms: circa 0,7° per ciclo, come il grado ogni 15 ms di oggi.
 void passo();
 
+// Decimi di grado per ciclo della rampa (0.2): 7 (70 °/s) in MANUALE e SAFE, 20 (200 °/s) con i controllori.
+constexpr int VELOCITA_MANUALE = 7;
+constexpr int VELOCITA_CONTROLLO = 20;
+void velocita(int decimiPerCiclo);
+
 bool attivo();     // ha ricevuto almeno un comando
 int posizione();   // decimi di grado comandati in questo momento; -1 se non è ancora attivo
 

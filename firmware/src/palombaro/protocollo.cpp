@@ -72,4 +72,18 @@ bool intero(const char* testo, long& valore) {
   return true;
 }
 
+bool decimale(const char* testo, float& valore) {
+  if (testo == nullptr || *testo == '\0' || isspace(static_cast<unsigned char>(*testo))) return false;
+  for (const char* c = testo; *c != '\0'; c++) {
+    // solo cifre, segno e punto: niente «nan», «inf», esponenti o virgole
+    if (!isdigit(static_cast<unsigned char>(*c)) && *c != '.' && *c != '-' && *c != '+') return false;
+  }
+  char* fine = nullptr;
+  errno = 0;
+  const float v = strtof(testo, &fine);
+  if (errno != 0 || *fine != '\0') return false;
+  valore = v;
+  return true;
+}
+
 }  // namespace protocollo

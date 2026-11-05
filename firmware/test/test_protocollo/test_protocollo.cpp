@@ -93,6 +93,21 @@ void test_intero_accetta_solo_numeri_interi() {
   TEST_ASSERT_FALSE(intero("12a", v));
 }
 
+// Guadagni del comando K (firmware 0.2): numero con il punto, tutto e solo il numero.
+void test_decimale_accetta_numeri_con_il_punto() {
+  float v = 0.0f;
+  TEST_ASSERT_TRUE(decimale("0.02", v));
+  TEST_ASSERT_FLOAT_WITHIN(1e-6f, 0.02f, v);
+  TEST_ASSERT_TRUE(decimale("470", v));
+  TEST_ASSERT_FLOAT_WITHIN(1e-6f, 470.0f, v);
+  TEST_ASSERT_TRUE(decimale("-1.5", v));
+  TEST_ASSERT_FLOAT_WITHIN(1e-6f, -1.5f, v);
+  TEST_ASSERT_FALSE(decimale("", v));
+  TEST_ASSERT_FALSE(decimale("0,02", v));
+  TEST_ASSERT_FALSE(decimale("abc", v));
+  TEST_ASSERT_FALSE(decimale("nan", v));
+}
+
 int main() {
   UNITY_BEGIN();
   RUN_TEST(test_controllo_xor);
@@ -105,5 +120,6 @@ int main() {
   RUN_TEST(test_riga_senza_asterisco_e_malformata);
   RUN_TEST(test_tipo_troppo_lungo_e_malformato);
   RUN_TEST(test_intero_accetta_solo_numeri_interi);
+  RUN_TEST(test_decimale_accetta_numeri_con_il_punto);
   return UNITY_END();
 }

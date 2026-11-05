@@ -17,7 +17,7 @@ window.PalombaroProgresso = Object.freeze({
   scadenzaProf: '2026-12-31',
   oreAlGiorno: 2, // media dichiarata, tutti i giorni: base del prospetto di fine progetto
 
-  sintesi: 'Giovedì al banco per circa tre ore. Il palombaro, lasciato a galla per quattro giorni, era affondato: aveva perso aria. Ritarato e ripescato con una siringa usata come ventosa. Registrate quattro prove a mano e il video del terzo traguardo: altezza e pressione registrate insieme più di 20 volte al secondo, traguardo M2 raggiunto con tre giorni di anticipo. Poi, in anticipo sul calendario, misurata la retta della pressione di equilibrio (torna con la teoria entro il 10 %) e fatte 12 fughe del palombaro dall\'equilibrio comandate in automatico dal computer.',
+  sintesi: 'Giovedì al banco per circa tre ore e poi la sera al computer. Il palombaro, lasciato a galla per quattro giorni, era affondato: ripescato con una siringa usata come ventosa e ritarato. Registrate le prove del terzo traguardo (M2) con il video. In serata, in anticipo di dieci giorni, chiusa tutta la fase del modello (M3): le equazioni, confermate dalle misure, dicono con che rapidità il palombaro scappa, e un banco simulato le ripete. Progettati al computer i controllori, che nella simulazione rispettano tutti i criteri della proposta, e scritto il nuovo programma della scheda, da provare sul banco.',
 
   fasi: [
     {
@@ -58,7 +58,7 @@ window.PalombaroProgresso = Object.freeze({
         { id: '2.4', nome: 'Regole di dialogo computer–scheda', da: '2026-11-01', a: '2026-11-02', ore: 1.5, fatto: 100, oreEffettive: 0.12, nota: 'Chiusa il 1 novembre, un giorno prima della scadenza: rivista insieme e approvata, con tre regole nuove nate dalle prove di oggi (tra cui: all\'accensione il motore non si muove finché il computer non lo comanda).' },
         { id: '2.5', nome: 'Programma di base della scheda', da: '2026-11-02', a: '2026-11-05', ore: 4, fatto: 100, oreEffettive: 0.08, nota: 'Chiusa il 1 novembre, quattro giorni prima della scadenza: la scheda legge la pressione 100 volte al secondo con un ritmo perfettamente regolare, per 30 minuti di fila senza perdere un messaggio. Comandi del motore, emergenza e stato di sicurezza provati al banco.' },
         { id: '2.6', nome: 'Registrazione dei dati', da: '2026-11-05', a: '2026-11-07', ore: 3, fatto: 100, oreEffettive: 0.15, nota: 'Chiusa il 1 novembre, sei giorni prima della scadenza: altezza del palombaro, pressione e comando del motore registrati insieme 100 volte al secondo per quasi 7 minuti. Qualche brevissima pausa (al massimo un quarto di secondo) viene dalla telecamera dell\'iPhone.' },
-        { id: '2.7', nome: 'Prova completa e video', da: '2026-11-08', a: '2026-11-08', ore: 2, fatto: 70, oreEffettive: 0.8, nota: 'Il 5 novembre quattro prove registrate e il video: altezza e pressione registrate insieme più di 20 volte al secondo, traguardo M2 raggiunto. Mancano la bozza del capitolo della relazione e la revisione di domenica.' },
+        { id: '2.7', nome: 'Prova completa e video', da: '2026-11-08', a: '2026-11-08', ore: 2, fatto: 90, oreEffettive: 0.8, nota: 'Il 5 novembre quattro prove registrate, il video e la bozza del capitolo su sensori e comunicazione: altezza e pressione registrate insieme più di 20 volte al secondo, traguardo M2 raggiunto. Manca la revisione di domenica.' },
       ],
     },
     {
@@ -66,12 +66,12 @@ window.PalombaroProgresso = Object.freeze({
       milestone: { id: 'M3', titolo: 'Modello matematico verificato sui dati',
         descrizione: 'Le equazioni descrivono davvero come si comporta il banco reale.' },
       sottofasi: [
-        { id: '3.1', nome: 'Equazioni del sistema', da: '2026-11-09', a: '2026-11-10', ore: 3, fatto: 0 },
-        { id: '3.2', nome: 'Misura dei parametri da fermo', da: '2026-11-10', a: '2026-11-11', ore: 2, fatto: 60, oreEffettive: 0.4, nota: 'Anticipata al 5 novembre: sette punti di equilibrio, la pendenza misurata (0,098 kPa per cm) coincide con la teoria entro il 10 %. Mancano masse e volumi.' },
+        { id: '3.1', nome: 'Equazioni del sistema', da: '2026-11-09', a: '2026-11-10', ore: 3, fatto: 100, nota: 'Chiusa il 5 novembre, in anticipo: le equazioni dicono perché il palombaro scappa (la bolla si gonfia salendo) e con che rapidità (circa 0,35 al secondo), e quanto deve spingere un controllore per tenerlo.' },
+        { id: '3.2', nome: 'Misura dei parametri da fermo', da: '2026-11-10', a: '2026-11-11', ore: 2, fatto: 100, oreEffettive: 0.4, nota: 'Chiusa il 5 novembre, in anticipo: la pressione di equilibrio cresce di 0,098 kPa per centimetro come prevede la teoria; il circuito si comporta come 640 ml d\'aria, di cui solo 200 veri: il resto lo fanno le pareti della bottiglia che cedono.' },
         { id: '3.3', nome: 'Esperimenti senza controllo', da: '2026-11-11', a: '2026-11-12', ore: 2, fatto: 100, oreEffettive: 0.7, nota: 'Chiusa il 5 novembre, sei giorni prima: 12 fughe valide su 13, comandate dal computer (partenza dal fondo o dalla superficie, invece che a mano da quote diverse: tenerlo fermo a mano non riusciva). Il palombaro non è mai stato perso.' },
-        { id: '3.4', nome: 'Stima dei parametri dai dati', da: '2026-11-12', a: '2026-11-13', ore: 3, fatto: 0 },
-        { id: '3.5', nome: 'Gemello digitale in Simulink', da: '2026-11-13', a: '2026-11-14', ore: 3, fatto: 0 },
-        { id: '3.6', nome: 'Verifica e capitolo della relazione', da: '2026-11-15', a: '2026-11-15', ore: 1, fatto: 0 },
+        { id: '3.4', nome: 'Stima dei parametri dai dati', da: '2026-11-12', a: '2026-11-13', ore: 3, fatto: 100, nota: 'Chiusa il 5 novembre, in anticipo: dalle 12 fughe registrate la rapidità di fuga è 0,33 al secondo, come previsto dalle equazioni e dalla proposta; il modello riproduce le prove quasi perfettamente.' },
+        { id: '3.5', nome: 'Gemello digitale in Simulink', da: '2026-11-13', a: '2026-11-14', ore: 3, fatto: 100, nota: 'Chiusa il 5 novembre, in anticipo: il banco simulato (motore, aria, palombaro, sensore e telecamera con il suo ritardo) ripete le prove vere.' },
+        { id: '3.6', nome: 'Verifica e capitolo della relazione', da: '2026-11-15', a: '2026-11-15', ore: 1, fatto: 100, nota: 'Capitolo del modello scritto; terzo traguardo (M3) raggiunto il 5 novembre, dieci giorni prima. La revisione della settimana si fa domenica.' },
       ],
     },
     {
@@ -79,8 +79,8 @@ window.PalombaroProgresso = Object.freeze({
       milestone: { id: 'M4', titolo: 'Quota stabile per un minuto (livello Base)',
         descrizione: 'Il controllore tiene il palombaro fermo entro 1 cm: il risultato minimo garantito.' },
       sottofasi: [
-        { id: '4.1', nome: 'Progetto dei controllori al computer', da: '2026-11-16', a: '2026-11-17', ore: 3, fatto: 0 },
-        { id: '4.2', nome: 'Logica di sicurezza', da: '2026-11-17', a: '2026-11-18', ore: 2, fatto: 0 },
+        { id: '4.1', nome: 'Progetto dei controllori al computer', da: '2026-11-16', a: '2026-11-17', ore: 3, fatto: 100, nota: 'Fatta il 5 novembre, in anticipo: nel banco simulato il controllo tiene il palombaro entro un decimo di millimetro e cambia quota di 5 cm in 3 secondi; tutti i criteri della proposta sono rispettati.' },
+        { id: '4.2', nome: 'Logica di sicurezza', da: '2026-11-17', a: '2026-11-18', ore: 2, fatto: 50, nota: 'Il 5 novembre scritto e provato al computer il nuovo programma della scheda (calibrazione, mantenimento della quota, regole di sicurezza): mancano le prove sul banco.' },
         { id: '4.3', nome: 'Controllo On-Off', da: '2026-11-18', a: '2026-11-19', ore: 2, fatto: 0 },
         { id: '4.4', nome: 'Controllo della pressione', da: '2026-11-19', a: '2026-11-20', ore: 2, fatto: 0 },
         { id: '4.5', nome: 'Controllo della quota e video', da: '2026-11-20', a: '2026-11-22', ore: 3, fatto: 0 },
@@ -144,6 +144,8 @@ window.PalombaroProgresso = Object.freeze({
       'La linguetta della dashboard che comanda il motore è stata allungata, perché con il dito sul trackpad il palombaro si comanda meglio.',
       'In anticipo sul calendario: misurata la pressione che tiene il palombaro fermo a diverse altezze. Cresce di 0,098 kPa per ogni centimetro, come prevede la teoria (0,0978).',
       'Sempre in anticipo: il computer ha comandato da solo 13 «fughe» del palombaro dall\'equilibrio, verso l\'alto dal fondo e verso il basso dalla superficie. 12 valide, il palombaro mai perso. Serviranno a ricavare il modello matematico.',
+      'In serata, al computer: le equazioni del palombaro, confermate dalle misure (rapidità di fuga 0,33 al secondo, come previsto); un banco simulato in Simulink che ripete le prove vere; la fase del modello chiusa con dieci giorni di anticipo (traguardo M3).',
+      'Progettati i controllori: nel banco simulato tengono il palombaro entro un decimo di millimetro e una stretta alla bottiglia non si nota nemmeno. Scritto e provato al computer il nuovo programma della scheda, con la calibrazione automatica e le regole di sicurezza. Scritte le bozze di tre capitoli della relazione.',
     ] },
     { data: '2026-11-01', testo: [
       'Al banco la mattina e il tardo pomeriggio. Ricollegati i fili e provati sensore e motore: tutto a posto.',
@@ -250,15 +252,15 @@ window.PalombaroProgresso = Object.freeze({
   ],
 
   prossimi: [
-    'Bozza del capitolo della relazione su architettura, sensori e comunicazione; revisione settimanale di domenica.',
-    'Modello matematico (3.1) e stima dei parametri dalle fughe registrate (3.4).',
+    'Revisione settimanale di domenica.',
+    'Al banco: caricare il nuovo programma della scheda e provare la calibrazione, la sicurezza e il controllo (traguardo M4).',
     'Controllare se il palombaro, conservato fuori dall\'acqua, ha mantenuto la taratura.',
     'Decidere se comprare una webcam USB al posto dell\'iPhone, per il ritardo della telecamera.',
   ],
 
   rischi: [
     { titolo: 'Più ore del previsto per ogni attività', livello: 'medio',
-      nota: 'Il tappo con il sensore ha richiesto circa 15 ore contro le 3 previste. Il 18 elettronica e prova di tenuta hanno richiesto meno delle ore stimate, ma il 19 il palombaro ne ha prese più di 5 contro le 3 previste per tutta la sottofase, e il 21 il guasto del sensore un\'ora e venti. Il 24 sera la postazione di ripresa ha richiesto circa 4 ore e mezza contro 1,5 previste, ed è al 70 %. Il 27 riconoscimento del palombaro, parte della calibrazione e bozza delle regole di dialogo sono andati avanti al computer senza ore al banco. Il 28 quasi tre ore, in buona parte per riparare motore, tubo e tappo. Il 1 novembre sei attività chiuse in un giorno, quattro in anticipo, con circa 3 ore al banco: il progetto è al 38 % contro il 31 % previsto. Togliendo le ore una tantum la fine prevista è l\'11 dicembre, prima della consegna interna (13 dicembre); con le ore misurate così come sono, il 15 dicembre, dentro il margine fino al 31. Le ore del riequilibrio del palombaro non sono contate. Si prosegue con il piano originale. Il 5 novembre circa tre ore al banco: traguardo M2 raggiunto e due attività della fase successiva fatte in anticipo. Il progetto è al 42 % contro il 36 % previsto; fine prevista tra il 7 e il 14 dicembre, dentro il margine.' },
+      nota: 'Il tappo con il sensore ha richiesto circa 15 ore contro le 3 previste. Il 18 elettronica e prova di tenuta hanno richiesto meno delle ore stimate, ma il 19 il palombaro ne ha prese più di 5 contro le 3 previste per tutta la sottofase, e il 21 il guasto del sensore un\'ora e venti. Il 24 sera la postazione di ripresa ha richiesto circa 4 ore e mezza contro 1,5 previste, ed è al 70 %. Il 27 riconoscimento del palombaro, parte della calibrazione e bozza delle regole di dialogo sono andati avanti al computer senza ore al banco. Il 28 quasi tre ore, in buona parte per riparare motore, tubo e tappo. Il 1 novembre sei attività chiuse in un giorno, quattro in anticipo, con circa 3 ore al banco: il progetto è al 38 % contro il 31 % previsto. Togliendo le ore una tantum la fine prevista è l\'11 dicembre, prima della consegna interna (13 dicembre); con le ore misurate così come sono, il 15 dicembre, dentro il margine fino al 31. Le ore del riequilibrio del palombaro non sono contate. Si prosegue con il piano originale. Il 5 novembre circa tre ore al banco: traguardo M2 raggiunto e due attività della fase successiva fatte in anticipo. In serata, al computer, chiusa la fase del modello e progettato il controllo: il progetto è al 56 % contro il 36 % previsto; fine prevista tra il 29 novembre e il 4 dicembre, prima della consegna interna del 13.' },
     { titolo: 'La siringa cambia la pressione meno del necessario', livello: 'basso',
       nota: 'Con il motore montato la siringa dà 2,6 kPa (misurato il 23, dopo 50 ml d\'acqua in più nella bottiglia), sopra i 2,5 richiesti. Dal 1 novembre, senza la bottiglia piccola, circa 4 kPa.' },
     { titolo: 'Meccanica del motore imprecisa', livello: 'medio',

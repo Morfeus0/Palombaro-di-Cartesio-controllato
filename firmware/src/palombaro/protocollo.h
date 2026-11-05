@@ -28,4 +28,7 @@ Esito analizza(char* riga, Messaggio& m);
 // Un numero intero scritto tutto e solo con cifre (e un segno davanti).
 bool intero(const char* testo, long& valore);
 
+// Un numero con il punto decimale (i guadagni del comando K); niente testo in più, niente infinito né NaN.
+bool decimale(const char* testo, float& valore);
+
 }  // namespace protocollo

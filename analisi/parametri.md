@@ -61,5 +61,55 @@ retta: 0,10 kPa, cioè circa 1 cm di quota. L'intercetta (+0,21 kPa) torna con l
 
 ## 2. Massa, volumi e volume d'aria del circuito
 
-Da completare: dai dati della siringa (ml per comando) e della corsa (kPa tra 36° e 146°), più l'eventuale pesata
-di P1 sul bilancino all'estrazione (decisione di Gabriele).
+> Completata il 5 novembre con i dati già raccolti (Claude). Le voci «stima» si potranno raffinare con una pesata
+> di P1 sul bilancino all'estrazione (decisione di Gabriele) e con l'identificazione (3.4).
+
+### Siringa e servo
+
+| Grandezza | Valore | Fonte |
+|---|---|---|
+| Corsa utile del servo | 36°–146° (110°) | limiti del firmware (1.7, 2.5) |
+| Volume per grado | **0,16 ml/°** (al centro della corsa; la leva non è lineare agli estremi) | tabella comando → ml del 23 ottobre: 86° ≈ 11 ml, 136° ≈ 3 ml |
+| Volume spostato da 36° a 146° | circa **17,6 ml** | stessa tabella |
+| Gioco a ogni inversione | circa 10° (circa 1,6 ml) | 23 ottobre |
+
+### Aria del circuito
+
+Con la legge di Boyle, Δp/p = ΔV/V: dal guadagno misurato si ricava il volume d'aria «efficace», che comprende anche
+le pareti della bottiglia che cedono.
+
+| Misura | Δp per la corsa 36°→146° | Guadagno K_v | Volume efficace p/K_v |
+|---|---|---|---|
+| 1 novembre, subito dopo la chiusura | +3,6…+4,0 kPa | circa 0,21 kPa/ml | circa 480 ml |
+| 5 novembre, 16:13 (circuito chiuso a 36°) | +2,8…+2,9 kPa (picco, poi cede) | **0,16 kPa/ml** | **circa 640 ml** |
+
+Aria «vera»: la parte vuota della bottiglia da 1,5 L sopra l'acqua (circa 150–200 ml, dopo i 50 ml d'acqua aggiunti il
+23 ottobre), il tubo B (65 cm, 4 mm interni: circa 8 ml) e la siringa (fino a circa 18 ml): **circa 180–230 ml**. Le
+pareti valgono quindi altri **250–450 ml**, più dei 210–235 ml stimati il 18 ottobre con un'altra configurazione: il
+cedimento dipende da quanto è stata compressa la bottiglia e da quanto tempo prima. Per il modello si usa il valore
+misurato più vicino alle prove della 3.3, **K_v = 157 Pa/ml** (`analisi/modello.m`); la differenza tra le due sessioni è
+uno dei motivi per tenere un anello integrale sulla pressione (fase 4).
+
+- **Perdita del circuito:** circa 40 Pa al minuto a +3,6 kPa (1 novembre), cioè una costante di tempo di circa
+  **90 minuti**; il 5 novembre, in un'ora con tratti in pressione, la pressione a 36° è scesa di 0,28 kPa.
+- **Rientro delle pareti in depressione:** a 36° dopo una chiusura a 56° la pressione è risalita da 101,54 a 101,68 kPa
+  in 3 minuti (5 novembre): in depressione le pareti cedono più facilmente e lentamente.
+
+### Palombaro P1
+
+| Grandezza | Valore | Fonte |
+|---|---|---|
+| Pipetta tagliata | circa 6 cm, foro di 6–7 mm con ugello di 15 mm incollato | 19 ottobre |
+| Rame | 0,8 mm, 55 cm, **2,35 g** (0,26 ml) | 19 ottobre, bilancino |
+| Massa a secco | **3,05 g** prima dell'ugello | 19 ottobre, bilancino (±0,02 g) |
+| Volume interno | circa 2,3 ml | pesata pieno d'acqua, poco affidabile (esce acqua dal foro) |
+| Volume dei materiali V_s | circa 1,0 ml (stima: plastica, rame, nastro) | — |
+| Bolla all'equilibrio V_b | circa **2,1 ml** (stima) | proposta e taratura; le pesate con l'acqua dentro non erano affidabili |
+| Massa con l'acqua interna m = ρ(V_s + V_b) | circa **3,09 g** | condizione di equilibrio |
+| Spinta per kPa, b_p = ρ g V_b / p_b | **0,020 g per kPa** (1,98·10⁻⁷ N/Pa) | modello; la taratura del 19 ottobre stimava «circa 0,02 g per kPa» |
+| Pressione nella bolla all'equilibrio p_b* | **103,60 kPa** (soglia dal fondo 101,64 kPa + ρg × 0,20 m) | 5 novembre |
+| Deriva della soglia | da −0,2 kPa al giorno a galla fino a −0,2 kPa all'ora sul fondo in pressione | 28 ottobre – 5 novembre |
+
+**Nota sulle incertezze.** V_b e V_s non sono misurati direttamente; ma la loro incertezza pesa poco sul modello:
+la pendenza dell'equilibrio (ρg) non ne dipende, e nel polo instabile entra solo il rapporto b_p/m_eff, che la 3.4
+ricava direttamente dalle fughe.

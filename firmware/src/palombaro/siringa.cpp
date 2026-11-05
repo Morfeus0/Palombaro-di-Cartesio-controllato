@@ -9,7 +9,7 @@ namespace {
 constexpr int PIN_SERVO = 18;
 constexpr int US_A_0_GRADI = 500;
 constexpr int US_A_180_GRADI = 2400;
-constexpr int PASSO_DECIMI = 7;   // per ciclo da 10 ms
+int passoDecimi = VELOCITA_MANUALE;   // per ciclo da 10 ms
 
 Servo servo;
 bool attivoOra = false;
@@ -40,9 +40,11 @@ void ferma() { obiettivo = attuale; }
 void passo() {
   if (!attivoOra || attuale == obiettivo) return;
   const int differenza = obiettivo - attuale;
-  attuale += constrain(differenza, -PASSO_DECIMI, PASSO_DECIMI);
+  attuale += constrain(differenza, -passoDecimi, passoDecimi);
   scrivi(attuale);
 }
+
+void velocita(int decimiPerCiclo) { passoDecimi = constrain(decimiPerCiclo, 1, VELOCITA_CONTROLLO); }
 
 bool attivo() { return attivoOra; }
 

@@ -935,3 +935,31 @@ Preparati da Claude (circa 17:00) i passaggi per fissare il servo con le fascett
 **Ore:** circa **2 h 50** al banco (15:21–18:10), comprese le attese durante il lavoro di Claude. Per sottofase, circa: manutenzione di P1 (1.2) 0 h 45, 2.7 0 h 50, 3.2 0 h 25, 3.3 0 h 40, ripresa e chiusura 0 h 10.
 
 **Prossimo passo:** bozza del capitolo «Architettura, sensori e comunicazione» (Claude) e revisione settimanale (domenica 8). Prossima sessione al banco probabilmente lunedì 9: soglia di P1 dal vasetto (verifica del piano C). Poi 3.1 e 3.4 (identificazione dalle fughe registrate).
+
+**Sera (circa 19:30–20:55): lavoro di Claude al computer, banco smontato; Gabriele decide.** Orari dai file.
+
+| Orario | Durata | Attività |
+|---|---|---|
+| 19:30–19:58 | 28 min | 3.1: equazioni, linearizzazione, Routh; `analisi/modello.m` provato in MATLAB |
+| 19:58–20:05 | 7 min | 2.7: bozza del capitolo 3 (architettura, sensori, comunicazione) |
+| 20:05–20:20 | 15 min | 3.4: identificazione (tre metodi, l'ultimo buono); 3.2 seconda parte |
+| 20:20–20:30 | 10 min | 3.5: gemello in Simulink e verifica; capitolo 4 (modello) |
+| 20:30–20:53 | 23 min | 4.1 in simulazione; firmware 0.2 con i test; `pc/comanda.py`; protocollo; capitolo 5 (controllo) |
+
+**Fatto (sera):**
+- **3.1:** G(s) = −b_p/(m_eff s² + c s − k), con k/b_p = ρg; polo instabile **0,346 rad/s** con i parametri stimati; Routh: **K_p > ρg = 98 Pa/cm**, e con il ritardo della telecamera K_d < 3201 Pa·s/cm e (senza derivativo) K_p < 1332 Pa/cm.
+- **3.4:** dalle 12 fughe **λ = 0,326 rad/s** (0,29–0,36), **R² 0,981–0,999**. Il primo metodo (simulare il sistema instabile) divergeva; il secondo dava un attrito negativo; il terzo fissa il punto d'arrivo di ogni fuga con la fisica, (p − p0)/ρg, e funziona.
+- **3.2 (seconda parte):** siringa 0,16 ml/°; il circuito si comporta come circa 640 ml d'aria, di cui circa 200 veri: il resto lo fanno le pareti.
+- **3.5:** gemello `analisi/palombaro.slx`; ripete le fughe (10 su 12 con R² ≥ 0,83) e la pressione della prova 4 (R² 0,89).
+- **4.1 in simulazione:** cascata PI sulla pressione + equilibrio stimato + PID sulla quota (475 Pa/cm, 11,9 Pa/(cm·s), 400 Pa·s/cm). Nel gemello il PD tiene P1 entro 0,1 mm e cambia quota di 5 cm in 3,1 s; il PID resiste a un p0 sbagliato di 150 Pa (1,1 mm); la stretta di 2 ml la assorbe l'anello interno; il solo P oscilla (51 %); l'On-Off fa un ciclo limite di ±2 cm.
+- **4.2 (codice):** firmware 0.2 compilato, non caricato: CALIBRAZIONE (trova p0 da solo), HOLD, regole di SAFE; 30 test sul Mac. Un test ha trovato un errore numerico vero (la rampa in float a 32 bit perdeva 3 Pa ogni 1000 cicli).
+- **Capitoli:** bozze 03 (architettura), 04 (modello e identificazione) e 05 (controllo, parte senza banco).
+- **Test:** 119 in Python, 30 nel firmware.
+
+**Correzioni di Claude durante la sera:** la data scritta per errore «6 novembre» nei file nuovi, corretta in 5; il modello Simulink che all'apertura rimetteva i parametri predefiniti sopra quelli delle prove; la scelta del PD (prima «margine massimo», lento; poi «più veloce con almeno 45°»).
+
+**Decisioni (Gabriele):** **F3 chiusa e M3 raggiunta** (10 giorni prima); **fase 4 avviata per la parte senza banco**; aggiornare piano e bollettino e fare il commit solo alla chiusura. Da decidere: errore troppo grande → SAFE (proposta 6 cm per 5 s); telecamera muta dopo 200 o 300 ms; PID come controllore predefinito al banco (proposta di Claude).
+
+**Ore:** Gabriele circa 2 h 50 al banco (sopra); la sera è lavoro di Claude, non contato.
+
+**Prossimo passo:** domenica 8 revisione settimanale (fasi 2 e 3). Al banco (probabilmente lunedì 9): soglia di P1 dal vasetto (verifica del piano C), poi firmware 0.2: calibrazione, transizioni di sicurezza (4.2), gradini di pressione (4.4), On-Off (4.3), P e PID (4.5) verso **M4**.

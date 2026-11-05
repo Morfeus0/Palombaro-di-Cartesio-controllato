@@ -33,3 +33,6 @@ dati/**/telecamera/*.jpg
 dati/**/telecamera/stato.json
 dati/**/telecamera/comandi/
 dati/**/*.out
+
+# Simulink: cache del modello
+*.slxc

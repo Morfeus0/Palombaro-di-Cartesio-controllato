@@ -376,14 +376,15 @@ Sono le sottofasi che, se ritardano, fanno slittare la consegna. Le altre hanno 
 ### 2.7 · Prova completa e milestone M2
 - **Quando:** dom 8 nov · **Scadenza:** **dom 8 nov** · **Impegno:** ~2 h · **Prerequisiti:** 2.6
 - **Attività:**
-  - [ ] 3 prove registrate in modalità manuale.
-  - [ ] Video di M2.
-  - [ ] Bozza del capitolo "Architettura, sensori e comunicazione" (T4).
+  - [x] 3 prove registrate in modalità manuale.
+  - [x] Video di M2.
+  - [x] Bozza del capitolo "Architettura, sensori e comunicazione" (T4).
   - [ ] Revisione settimanale.
   - [ ] Eventuale aggiornamento al prof (T6).
 - **Fatto quando:** ✅ **M2 · quota e pressione registrate ad almeno 20 Hz.**
 - 🔶 **Preparata il 1 novembre (Claude, non ancora provata al banco):** «Registra 2 min» nella dashboard avvia insieme il video della telecamera e il file dell'esperimento del ponte (`esperimento.txt`, chiuso da solo dopo la stessa durata). Proposte per le 3 prove: salita e tenuta a metà bottiglia, su e giù tre volte, tenuta nel terzo superiore.
 - ✅ **5 novembre: 3 prove registrate (più una a 60 fps) e video di M2 fatti; M2 raggiunta** (decisione di Gabriele): prova 4 a 58,7 fps, quota più giovane di 50 ms per 119,3 s su 120 (pausa solo all'avvio del video), pressione a 100 Hz senza buchi. Video `media/2026-11-05_M2_quota-e-pressione-prova-04.mp4`. Restano la bozza del capitolo (T4), la revisione e l'eventuale aggiornamento al prof.
+- 🔶 **5 novembre, sera (Claude):** bozza del capitolo «Architettura, sensori e comunicazione» (`relazione/03-architettura-sensori-comunicazione.md`). Restano la revisione settimanale (domenica 8) e l'eventuale aggiornamento al prof.
 
 ---
 
@@ -393,24 +394,26 @@ Sono le sottofasi che, se ritardano, fanno slittare la consegna. Le altre hanno 
 - **Quando:** lun 9 → mar 10 nov · **Scadenza:** mar 10 nov · **Impegno:** ~3 h · **Prerequisiti:** nessuno (si può anticipare in qualunque momento)
 - **Obiettivo:** il modello matematico completo del sistema.
 - **Attività:**
-  - [ ] Scrivere le equazioni: Archimede, Boyle, Pascal, attrito, parte pneumatica (siringa e perdite).
-  - [ ] Trovare il punto di equilibrio.
-  - [ ] Linearizzare e ricavare G(s).
-  - [ ] Applicare Routh al controllore PD.
-  - [ ] Esprimere il polo instabile in funzione dei parametri.
+  - [x] Scrivere le equazioni: Archimede, Boyle, Pascal, attrito, parte pneumatica (siringa e perdite).
+  - [x] Trovare il punto di equilibrio.
+  - [x] Linearizzare e ricavare G(s).
+  - [x] Applicare Routh al controllore PD.
+  - [x] Esprimere il polo instabile in funzione dei parametri.
 - **Output:** `analisi/modello.m` e bozza del capitolo "Modello".
 - **Fatto quando:** G(s) è scritta in forma simbolica e il polo instabile ha un'espressione esplicita.
+- ✅ **Chiusa il 5 novembre, in anticipo (Claude, decisione di Gabriele di anticipare):** `analisi/modello.m` e `relazione/04-modello.md`. G(s) = −b_p/(m_eff s² + c s − k), k/b_p = ρg; polo instabile λ = (−c + √(c² + 4 m_eff k))/(2 m_eff) ≈ 0,346 rad/s con i parametri stimati. Routh per il PD: K_p > ρg = 98 Pa/cm; con il ritardo della telecamera K_d < 3201 Pa·s/cm e, senza derivativo, K_p < 1332 Pa/cm. Formule controllate con le derivate numeriche del modello non lineare (MATLAB di base, senza toolbox simbolico).
 
 ### 3.2 · Misura dei parametri statici
 - **Quando:** mar 10 → mer 11 nov · **Scadenza:** mer 11 nov · **Impegno:** ~2 h · **Prerequisiti:** M2
 - **Obiettivo:** misurare sul banco i parametri che non dipendono dal moto.
 - **Attività:**
-  - [ ] Riepilogo di massa, volumi e volume d'aria totale.
-  - [ ] Curva della pressione di equilibrio in funzione della quota, con almeno 4 punti.
-  - [ ] Confronto con la pendenza teorica ρg.
+  - [x] Riepilogo di massa, volumi e volume d'aria totale.
+  - [x] Curva della pressione di equilibrio in funzione della quota, con almeno 4 punti.
+  - [x] Confronto con la pendenza teorica ρg.
 - **Output:** tabella dei parametri in `analisi/parametri.md`.
 - **Fatto quando:** almeno 4 punti di equilibrio misurati e confrontati con la teoria.
 - 🔶 **Anticipata al 5 novembre (decisione di Gabriele):** 7 punti di equilibrio, pendenza **0,098 ± 0,010 kPa/cm** contro ρg = 0,0978 (`analisi/parametri.md`, `pc/equilibrio.py`). Mancano masse, volumi e volume d'aria del circuito.
+- ✅ **Chiusa il 5 novembre, sera:** completata la parte su siringa (0,16 ml/°), aria del circuito (volume efficace circa 640 ml contro circa 200 ml d'aria vera: le pareti valgono 250–450 ml) e palombaro (`analisi/parametri.md`).
 
 ### 3.3 · Esperimenti in anello aperto
 - **Quando:** mer 11 → gio 12 nov · **Scadenza:** gio 12 nov · **Impegno:** ~2 h · **Prerequisiti:** 3.2
@@ -426,29 +429,32 @@ Sono le sottofasi che, se ritardano, fanno slittare la consegna. Le altre hanno 
 - **Quando:** gio 12 → ven 13 nov · **Scadenza:** ven 13 nov · **Impegno:** ~3 h · **Prerequisiti:** 3.1, 3.3
 - **Obiettivo:** ricavare dai dati il polo instabile e i parametri dinamici.
 - **Attività:**
-  - [ ] Adattare le fughe con una curva esponenziale.
-  - [ ] Stimare il polo instabile, l'attrito c e il guadagno b.
-  - [ ] Confrontare con il modello teorico e con la stima della proposta (+0,33 rad/s).
+  - [x] Adattare le fughe con una curva esponenziale.
+  - [x] Stimare il polo instabile, l'attrito c e il guadagno b.
+  - [x] Confrontare con il modello teorico e con la stima della proposta (+0,33 rad/s).
 - **Output:** `analisi/identificazione.m`, parametri identificati, grafico di confronto.
 - **Fatto quando:** il modello riproduce le fughe misurate con R² ≥ 0,9.
+- ✅ **Chiusa il 5 novembre, in anticipo:** `analisi/identificazione.m`. Con la pressione costante la fuga è h = (p − p0)/ρg + A e^(λt) + B e^(−(λ+β)t); minimi quadrati separabili con p0 unico per le 12 prove. **λ = 0,326 rad/s** (compatibile 0,29–0,36; modello 0,346, proposta 0,33); **R² 0,981–0,999**. β (attrito) non separabile da queste prove: con k/m_eff del modello c ≈ 0,0044 N·s/m. Due metodi scartati e spiegati nel capitolo (simulazione del sistema instabile divergente; costante libera con attrito negativo).
 
 ### 3.5 · Gemello digitale in Simulink
 - **Quando:** ven 13 → sab 14 nov · **Scadenza:** sab 14 nov · **Impegno:** ~3 h · **Prerequisiti:** 3.4, 2.3
 - **Obiettivo:** un modello Simulink su cui progettare i controllori prima di provarli sul banco.
 - **Attività:**
-  - [ ] Modello non lineare del palombaro.
-  - [ ] Sensori con ritardo, rumore e quantizzazione.
-  - [ ] Servo con velocità massima e passi discreti.
-  - [ ] Perdita d'aria.
+  - [x] Modello non lineare del palombaro.
+  - [x] Sensori con ritardo, rumore e quantizzazione.
+  - [x] Servo con velocità massima e passi discreti.
+  - [x] Perdita d'aria.
 - **Output:** `analisi/palombaro.slx`.
 - **Fatto quando:** la simulazione in anello aperto si sovrappone ai dati della 3.3.
+- ✅ **Chiusa il 5 novembre, in anticipo:** `analisi/palombaro.slx` creato da `analisi/crea_gemello.m` (servo, siringa e aria, palombaro non lineare, sensore, telecamera), verificato con `analisi/verifica_gemello.m`: fughe della 3.3 con R² 0,83–0,99 in 10 prove su 12 (0,61 e 0,33 nelle due con la velocità iniziale stimata peggio); pressione con i comandi della prova 4 della 2.7: R² 0,89 (in depressione le pareti che rientrano non sono nel modello).
 
 ### 3.6 · Milestone M3 e revisione
 - **Quando:** dom 15 nov · **Scadenza:** **dom 15 nov** · **Impegno:** ~1 h · **Prerequisiti:** 3.5
 - **Attività:**
-  - [ ] Completare la bozza del capitolo "Modello e identificazione".
+  - [x] Completare la bozza del capitolo "Modello e identificazione".
   - [ ] Revisione settimanale.
 - **Fatto quando:** ✅ **M3 · G(s) validata sui dati.**
+- ✅ **M3 raggiunta il 5 novembre (decisione di Gabriele), 10 giorni prima della scadenza:** il polo identificato coincide con il modello entro l'incertezza e il gemello ripete le prove. Revisione settimanale con quella di domenica.
 
 ---
 
@@ -458,12 +464,13 @@ Sono le sottofasi che, se ritardano, fanno slittare la consegna. Le altre hanno 
 - **Quando:** lun 16 → mar 17 nov · **Scadenza:** mar 17 nov · **Impegno:** ~3 h · **Prerequisiti:** M3
 - **Obiettivo:** scegliere i guadagni in simulazione, non per tentativi sul banco.
 - **Attività:**
-  - [ ] Progettare On-Off con isteresi, P, PD, PID e PI sulla pressione.
-  - [ ] Analizzare con luogo delle radici e diagrammi di Bode, con i margini di stabilità.
-  - [ ] Scegliere i periodi di campionamento e discretizzare (Tustin).
-  - [ ] Prevedere anti-windup e filtro sul derivativo.
+  - [x] Progettare On-Off con isteresi, P, PD, PID e PI sulla pressione.
+  - [x] Analizzare con luogo delle radici e diagrammi di Bode, con i margini di stabilità.
+  - [x] Scegliere i periodi di campionamento e discretizzare (Tustin).
+  - [x] Prevedere anti-windup e filtro sul derivativo.
 - **Output:** `analisi/progetto_controllori.m` con i guadagni scelti.
 - **Fatto quando:** in simulazione, con ritardo e rumore realistici, il PD soddisfa i criteri di successo del foglio A4.
+- ✅ **Fatta il 5 novembre, in anticipo (lontano dal banco):** `analisi/progetto_controllori.m`, `relazione/05-controllo.md`. Cascata: PI sulla pressione (0,02 °/Pa, 0,4 °/(Pa·s): margine 78°, 0,32 s) e, sopra, equilibrio stimato p0 + ρg·h_rif più PID sulla quota (475 Pa/cm, 11,9 Pa/(cm·s), 400 Pa·s/cm, N = 10: margine di fase 49°, margine di ritardo 0,50 s). Nel gemello non lineare: PD RMS 0,1 mm, sovraelongazione 0,5 %, assestamento 3,1 s; PID 1,5 mm, 5 %, 2,7 s; con p0 sbagliato di 150 Pa il PID resta a 1,1 mm (il PD a 4,0 mm); una stretta di 2 ml la assorbe l'anello interno; solo P oscilla (51 %); l'On-Off ha un ciclo limite di circa ±2 cm (ampiezza 700 Pa: deve superare ρg × la distanza). **«Fatto quando» raggiunto in simulazione.**
 
 ### 4.2 · Macchina a stati di base e sicurezza nel firmware
 - **Quando:** mar 17 → mer 18 nov · **Scadenza:** mer 18 nov · **Impegno:** ~2 h · **Prerequisiti:** 2.5
@@ -475,6 +482,7 @@ Sono le sottofasi che, se ritardano, fanno slittare la consegna. Le altre hanno 
   - [ ] Comando di emergenza.
 - **Output:** firmware versione 0.2.
 - **Fatto quando:** ogni transizione è stata provata sul banco, ad esempio coprendo la telecamera si va in SAFE.
+- 🔶 **5 novembre, sera (Claude):** firmware 0.2 compilato (RAM 6,9 %, Flash 24,8 %) e non caricato: stati MANUALE, CALIBRAZIONE (trova p0 da solo), HOLD e SAFE; moduli `controllo`, `supervisore`, `calibrazione` con 30 test sul Mac (`pio test -e protocollo`); comandi `R` e `K`, riga `C` (`docs/protocollo.md`, sezione 10); `pc/comanda.py` per mandarli. **Da decidere (Gabriele):** errore troppo grande → SAFE (proposta 6 cm per 5 s); telecamera muta dopo 200 ms o 300 ms. Manca la prova di ogni transizione al banco.
 
 ### 4.3 · Controllo On-Off sul banco
 - **Quando:** mer 18 → gio 19 nov · **Scadenza:** gio 19 nov · **Impegno:** ~2 h · **Prerequisiti:** 4.1, 4.2
