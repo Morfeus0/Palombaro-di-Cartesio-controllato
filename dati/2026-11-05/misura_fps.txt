@@ -1,0 +1,12 @@
+16:49:15
+1920x1080 chiesto a 60 fps: 59.0 fps veri, intervallo mediano 16.7 ms, massimo 33 ms, 0 oltre 50 ms
+1280x720: solo 0 fotogrammi; ultime righe di ffmpeg:
+vfoundation @ 0x7ac7024000]   1760x1328@[15.000000 30.000000]fps
+[avfoundation @ 0x7ac7024000]   640x480@[15.000000 30.000000]fps
+[avfoundation @ 0x7ac7024000]   1328x1760@[15.000000 30.000000]fps
+[avfoundation @ 0x7ac7024000]   1552x1552@[15.000000 30.000000]fps
+[in#0 @ 0x7ac6c0c000] Error opening input: Input/output error
+Error opening input file 0.
+Error opening input files: Input/output error
+
+

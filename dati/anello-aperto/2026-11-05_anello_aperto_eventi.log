@@ -1,0 +1,24 @@
+17:38:30 inizio: non toccare la dashboard fino alla fine
+17:49:45 inizio: non toccare la dashboard fino alla fine
+17:52:28 soglia di distacco: 101.640 kPa
+17:53:17 prova 1 su, −0.10 kPa: non arrivato in 30 s
+17:54:24 prova 2 su, −0.20 kPa: non arrivato in 30 s
+17:55:11 prova 3 su, −0.30 kPa: arrivato in cima
+17:55:42 prova 4 giù, +0.20 kPa: arrivato sul fondo
+17:56:29 prova 5 su, −0.10 kPa: non arrivato in 30 s
+17:57:36 prova 6 su, −0.20 kPa: non arrivato in 30 s
+17:58:43 prova 7 su, −0.30 kPa: non arrivato in 30 s
+17:58:59 fine: 7 prove
+17:58:59 servo a 36: pressione vicino alla stanza
+17:59:15 inizio: non toccare la dashboard fino alla fine
+17:59:25 servo a 36: pressione vicino alla stanza
+18:01:31 inizio: non toccare la dashboard fino alla fine
+18:02:01 prova 8 su, −0.20 kPa: arrivato in cima
+18:02:16 prova 9 giù, +0.40 kPa: arrivato sul fondo
+18:02:41 prova 10 su, −0.20 kPa: arrivato in cima
+18:03:20 prova 11 giù, +0.20 kPa: non sceso in 30 s
+18:03:45 P1 non scende: colpetto sulla bottiglia, per favore
+18:06:09 prova 12 su, −0.20 kPa: arrivato in cima
+18:06:48 prova 13 giù, +0.40 kPa: non sceso in 30 s
+18:06:48 fine: 13 prove
+18:06:48 servo a 36: pressione vicino alla stanza

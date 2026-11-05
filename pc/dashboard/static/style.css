@@ -273,6 +273,35 @@ kbd { font-family: var(--font-numeri); font-size: 0.6875rem; padding: 0 0.3rem; 
 .evento[data-livello="comando"] .evento-tipo { color: var(--accento); }
 .evento-vuoto { color: var(--inchiostro-3); font-size: var(--t-piccolo); }
 
+/* 5 nov (richiesta di Gabriele): il cursore si usa trascinando sul trackpad e serve lungo.
+   Su schermo largo sta in una colonna a sinistra, alto quanto tutto il pannello; il resto gli sta accanto. */
+@media (min-width: 60rem) {
+  .griglia { grid-template-columns: minmax(22rem, 24rem) minmax(0, 1fr); }
+  .comando {
+    grid-template-columns: 6.5rem minmax(0, 1fr);
+    grid-template-rows: auto auto auto auto auto auto minmax(0, 1fr);
+    grid-template-areas: "occhiello occhiello" "titolo titolo" "corsa valore" "corsa passi" "corsa preset" "corsa esito" "corsa tasti";
+    align-items: start;
+  }
+  .comando > .occhiello { grid-area: occhiello; }
+  .comando > .comando-titolo { grid-area: titolo; }
+  .comando > .comando-valore { grid-area: valore; }
+  .comando > .corsa { grid-area: corsa; align-self: start; padding: 0; }
+  .comando > .passi { grid-area: passi; }
+  .comando > .preset { grid-area: preset; grid-template-columns: 1fr; }
+  .comando > .esito { grid-area: esito; }
+  .comando > .tasti { grid-area: tasti; }
+  /* 5 nov: 139 px troppo corto, 458 e poi 304 troppo lunghi (non si percorre con una sola passata del dito
+     sul trackpad): 224 px. */
+  .corsa-binario { height: 14rem; max-height: none; width: 5rem; }
+  .corsa-estremo { text-align: center; }
+  .corsa-estremo .mono { display: block; margin-left: 0; }
+  .corsa-centro { left: calc(50% + 1.5rem); }
+}
+@media (min-width: 75rem) {
+  .griglia { grid-template-columns: minmax(22rem, 24rem) minmax(0, 1.15fr) minmax(0, 1fr); }
+}
+
 @media (max-width: 60rem) {
   .griglia { grid-template-columns: 1fr; grid-template-areas: "comando" "telecamera" "dati"; }
   .comando { position: static; height: auto; }

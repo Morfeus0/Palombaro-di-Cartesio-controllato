@@ -881,3 +881,57 @@ Preparati da Claude (circa 17:00) i passaggi per fissare il servo con le fascett
 - **Ore della settimana (Gabriele):** 26: 0 · 27: 0 · 28: 2 h 45 · 29–31: 0 · 1: circa 3 h 15 registrate (il riequilibrio di P1 non è contato). **Totale circa 6 h.** Il 27 ha lavorato solo Claude (dashboard, 2.2, parte della 2.3, bozza della 2.4).
 - **Rischi:** R2 (tenuta) a posto dopo il collare; R4 (riconoscimento) nessuna perdita, salti ai bordi delle costole da filtrare; R5 (telecamera) 59 fps senza interruzioni, ma **ritardo 156 ms, oltre la soglia di 150 ms** (decisione di Gabriele sul piano B, webcam USB); R6 (palombaro) attivo: deriva di circa 0,2 kPa al giorno, riequilibrato il 1 novembre, Extra E4; R8 (elettronica) il sensore si è riavviato da solo, firmware aggiornato e da caricare. R9 (ritardo generale) scatta quando «una fase slitta di più di 3 giorni»: la 2.1 è finita 5 giorni dopo la sua scadenza, la fase F2 scade l'8 novembre. **Decisione di Gabriele.**
 - **Settimana prossima (dal piano):** 2.4, 2.5 e 2.6 già chiuse; resta la 2.7, prova completa e **M2** (dom 8). Poi F3 (dal 9 novembre): 3.1 modello fisico, 3.2 parametri statici. Le decisioni sul calendario sono di Gabriele.
+
+## 2026-11-02 → 2026-11-04 · nessuna attività
+
+## 2026-11-05 · P1 affondato e ritarato, 2.7 (prove e video, M2 raggiunta), 3.2 e 3.3 anticipate · circa 2 h 50
+
+**Orario:** dalle **15:21** (inizio della sessione) alle **18:10**. Divisione dal registro del ponte (`dati/2026-11-05/2026-11-05_bridge.log.gz`), dal registro della telecamera e dagli orari dei file.
+
+| Orario | Durata | Attività |
+|---|---|---|
+| 15:21–15:39 | 18 min | ripresa; ponte e dashboard avviati (Claude); P1 trovato sul fondo con la bottiglia aperta |
+| 15:39–15:44 | 5 min | USB collegato, sensore nell'aria della stanza: 101,61 kPa, 22,3 °C |
+| 15:44–15:51 | 7 min | gocce di soluzione, tappo, circuito chiuso a 146, tirata a passi fino a 36 (−2,8 kPa): P1 resta sul fondo |
+| 15:51–16:08 | 17 min | P1 estratto con la siringa da 10 ml usata come ventosa (tubo A sullo spiedino), ritarato togliendo 2 gocce d'acqua dall'interno, reinserito |
+| 16:08–16:15 | 7 min | circuito chiuso a 36; P1 va a fondo a 126 (+2,3 kPa), si stacca a 56 (+0,15 kPa) |
+| 16:15–16:32 | 17 min | telecamera; prove 1 e 2 della 2.7 (a mano, linguetta della dashboard); linguetta allungata (Claude) |
+| 16:32–16:55 | 23 min | prova 3; 30 fps: diagnosi con `pc/misura_fps.py`, iPhone ricollegato, di nuovo 59 fps; prova 4 (M2) |
+| 16:55–17:05 | 10 min | Claude: video di M2 (`pc/video_esperimento.py`) |
+| 17:05–17:16 | 11 min | 3.2: soglia dal fondo (58°, +0,19 kPa), 5 minuti di tenute a mano |
+| 17:16–17:38 | 22 min | Claude: analisi della 3.2 (`pc/equilibrio.py`), programma della 3.3, correzione del righello; Gabriele: telecamera riavviata |
+| 17:38–18:07 | 29 min | 3.3: prove automatiche (fermata e richiusura a 56, prima serie di 7 prove, richiusura a 66, seconda serie di 6) |
+| 18:07–18:10 | 3 min | chiusura |
+
+**Fatto:**
+- **P1 affondato (R6).** Dopo 4 giorni a galla con la bottiglia aperta P1 era sul fondo. Con il sensore nell'aria: stanza a **101,61 kPa** (100,70 il 1 novembre) e **22,3 °C** (23,2). Meteo e freddo spostano la soglia da +1,09 a circa −0,13 kPa: bastano a tenerlo sul fondo, non a farlo affondare dalla superficie. Con il circuito chiuso a 146 e tirato fino a 36 (**98,78 kPa, −2,8 kPa**) non si stacca: **ha perso almeno il 2,7 % dell'aria** (circa 0,05 ml), più di tre volte la deriva solita. Ipotesi: bollicine attaccate fuori dopo la ritaratura del 1 novembre (come dopo quella del 23 ottobre), un forellino in alto, aria uscita dall'ugello per una botta. La colla a caldo dell'ugello è in basso, dove dentro c'è acqua: non c'entra.
+- **Estrazione di P1 senza inclinarlo:** siringa da 10 ml con il tubo A legato allo spiedino, appoggiato sulla cima della tettarella e aspirato di 2–3 ml («ventosa»). **Ritaratura:** due gocce d'acqua tolte stringendo la tettarella fuori dall'acqua. Esito: va a fondo a 126 (+2,3 kPa) e si stacca dal fondo a 56 (+0,15 kPa, 101,79 kPa assoluti).
+- **2.7, quattro prove** (`2026-11-05_prova_01…04.csv.gz`, «Registra 2 min»): 100 righe al secondo, nessuna persa, P1 tra il fondo e 18,5 cm. Prove 1–3 a **30 fps**: pause dei fotogrammi di 51–63 ms. Nella 2 P1 «perso» per 7,8 s sul fondo, appoggiato alla parete con il marcatore quasi di taglio. **Prova 4 a 58,7 fps:** età della quota 10 ms mediana, 26 ms al 99 %; oltre 50 ms solo nei primi 0,65 s (avvio della scrittura del video). **M2 raggiunta** (decisione di Gabriele). Video: `media/2026-11-05_M2_quota-e-pressione-prova-04.mp4`.
+- **30 fps:** l'iPhone dichiara 1920 × 1080 a 60 fps e il programma li chiede; carica, risparmio energetico, effetti video e luce non cambiavano niente a telecamera aperta. `pc/misura_fps.py` (ffmpeg da solo) ha misurato **59,0 fps** dopo che l'iPhone si era ricollegato (indici delle telecamere cambiati). Regola: iPhone in carica e senza risparmio energetico prima di aprire la telecamera, e fps sopra 55 prima di registrare.
+- **Linguetta della dashboard:** da 139 px a 458, poi 304, poi **224 px** (richiesta di Gabriele: si comanda trascinando sul trackpad).
+- **3.2 anticipata (decisione di Gabriele):** pressione di equilibrio a 7 quote (soglia dal fondo e medie tra due passaggi verso l'alto alla stessa quota, nelle prove 1, 3, 4 e nelle tenute): **pendenza 0,098 ± 0,010 kPa/cm, teoria ρg 0,0978**. Le medie su finestre fisse di 4 s davano 0,129, falsate dall'oscillazione. `analisi/parametri.md`. Mancano masse e volumi.
+- **3.3 anticipata e chiusa (decisione di Gabriele: partenze automatiche dal fondo e dalla superficie, invece che a mano da quote diverse):** `pc/anello_aperto.py` regola la pressione dal Mac (circa 28° per kPa, 4 correzioni al secondo), trova la soglia (**101,64 kPa**), fa gradini sotto la soglia (P1 scappa in su) e sopra l'equilibrio in superficie (scappa in giù), un CSV per prova. **12 prove valide su 13** in `dati/anello-aperto/`: 8 in su (−0,12 e −0,26 kPa: P1 parte dopo 4,4–5,7 s e arriva in cima in 5–6 s), 4 in giù (in 3,5–5,2 s). La 7 non vale: la pressione non scendeva sotto la soglia. P1 mai perso.
+- **Righello corretto:** con P1 a galla per molti minuti i campioni sul fondo uscivano dalla memoria e la quota in superficie risultava 12,7 cm invece di circa 19. Ora i campioni sul fondo si tengono a parte (test nuovo, prima rosso). Le prove della 2.7 non ne sono toccate (P1 tornava spesso sul fondo).
+- **Programmi nuovi (Claude):** `pc/video_esperimento.py`, `pc/equilibrio.py`, `pc/anello_aperto.py`, `pc/misura_fps.py`. **123 test** passano.
+
+**Problemi (e cosa si è capito):**
+1. **Primo comando 86** due volte: il cursore della dashboard parte da 86 e il pulsante «Centro» manda 86. Nessun danno (tubo sfilato), ma il servo salta.
+2. **Passi della soglia troppo veloci** (2–10 s invece di 15): vicino alla soglia P1 «esita» anche 20 s prima di staccarsi. Le soglie misurate a mano sono un po' basse.
+3. **In depressione le pareti della bottiglia rientrano piano** e la pressione risale (da 101,54 a 101,68 kPa in 3 minuti a 36°): con la soglia vicina alla pressione della stanza la depressione disponibile si esaurisce. Rimedio: chiudere il circuito più in alto (56, poi 66).
+4. **P1 si appesantisce sul fondo in pressione:** soglia da 101,83 (17:08) a circa 101,64 kPa (17:52) dopo una decina di minuti a +3 kPa.
+5. **Il circuito a 36 era a −0,28 kPa** dopo un'ora: piccola perdita nei tratti in pressione (R2).
+6. Temperatura del sensore nella bottiglia 22,7–23,6 °C con la stanza a 22,3–22,6: sotto i 3 °C di allarme. Nessun «perso» o «ritrovato» per tutta la sessione.
+
+**Decisioni (Gabriele):**
+- P1 ritarato (2 gocce) invece di lavorare in depressione.
+- **M2 raggiunta** con la prova 4.
+- **3.2 e 3.3 anticipate** al 5 novembre; **3.3 con partenze automatiche** dal fondo e dalla superficie.
+- **Conservazione di P1 tra le sessioni: piano C** (fuori dall'acqua, dritto, in un vasetto chiuso con carta umida), da verificare alla prossima sessione con la soglia.
+- Linguetta della dashboard a 224 px.
+- Claude non chiede più se chiudere la giornata: lo dice Gabriele.
+
+**Stato a fine giornata (18:10):** ponte e dashboard fermati; telecamera da chiudere (Gabriele); circuito chiuso a 66, servo a 36; P1 da mettere nel vasetto. Ultima soglia di riferimento per il piano C: **101,64 kPa a 17:52, sensore a 23,2 °C**, stanza circa 101,66 kPa.
+
+**Ore:** circa **2 h 50** al banco (15:21–18:10), comprese le attese durante il lavoro di Claude. Per sottofase, circa: manutenzione di P1 (1.2) 0 h 45, 2.7 0 h 50, 3.2 0 h 25, 3.3 0 h 40, ripresa e chiusura 0 h 10.
+
+**Prossimo passo:** bozza del capitolo «Architettura, sensori e comunicazione» (Claude) e revisione settimanale (domenica 8). Prossima sessione al banco probabilmente lunedì 9: soglia di P1 dal vasetto (verifica del piano C). Poi 3.1 e 3.4 (identificazione dalle fughe registrate).

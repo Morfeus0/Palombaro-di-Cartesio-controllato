@@ -383,6 +383,7 @@ Sono le sottofasi che, se ritardano, fanno slittare la consegna. Le altre hanno 
   - [ ] Eventuale aggiornamento al prof (T6).
 - **Fatto quando:** ✅ **M2 · quota e pressione registrate ad almeno 20 Hz.**
 - 🔶 **Preparata il 1 novembre (Claude, non ancora provata al banco):** «Registra 2 min» nella dashboard avvia insieme il video della telecamera e il file dell'esperimento del ponte (`esperimento.txt`, chiuso da solo dopo la stessa durata). Proposte per le 3 prove: salita e tenuta a metà bottiglia, su e giù tre volte, tenuta nel terzo superiore.
+- ✅ **5 novembre: 3 prove registrate (più una a 60 fps) e video di M2 fatti; M2 raggiunta** (decisione di Gabriele): prova 4 a 58,7 fps, quota più giovane di 50 ms per 119,3 s su 120 (pausa solo all'avvio del video), pressione a 100 Hz senza buchi. Video `media/2026-11-05_M2_quota-e-pressione-prova-04.mp4`. Restano la bozza del capitolo (T4), la revisione e l'eventuale aggiornamento al prof.
 
 ---
 
@@ -409,6 +410,7 @@ Sono le sottofasi che, se ritardano, fanno slittare la consegna. Le altre hanno 
   - [ ] Confronto con la pendenza teorica ρg.
 - **Output:** tabella dei parametri in `analisi/parametri.md`.
 - **Fatto quando:** almeno 4 punti di equilibrio misurati e confrontati con la teoria.
+- 🔶 **Anticipata al 5 novembre (decisione di Gabriele):** 7 punti di equilibrio, pendenza **0,098 ± 0,010 kPa/cm** contro ρg = 0,0978 (`analisi/parametri.md`, `pc/equilibrio.py`). Mancano masse, volumi e volume d'aria del circuito.
 
 ### 3.3 · Esperimenti in anello aperto
 - **Quando:** mer 11 → gio 12 nov · **Scadenza:** gio 12 nov · **Impegno:** ~2 h · **Prerequisiti:** 3.2
@@ -418,6 +420,7 @@ Sono le sottofasi che, se ritardano, fanno slittare la consegna. Le altre hanno 
   - [ ] Stesse condizioni e stesso protocollo per tutte.
 - **Output:** 10 file CSV in `dati/anello-aperto/`.
 - **Fatto quando:** 10 prove valide, senza che il palombaro esca dall'inquadratura prima di 3 secondi.
+- ✅ **Chiusa il 5 novembre, in anticipo (decisione di Gabriele: partenze automatiche dal fondo e dalla superficie, comandate da `pc/anello_aperto.py`, invece che a mano da quote diverse).** 12 prove valide su 13 in `dati/anello-aperto/` (8 in su, 4 in giù), P1 mai perso.
 
 ### 3.4 · Identificazione dei parametri
 - **Quando:** gio 12 → ven 13 nov · **Scadenza:** ven 13 nov · **Impegno:** ~3 h · **Prerequisiti:** 3.1, 3.3

@@ -115,6 +115,16 @@ class TabellaSpiedino(unittest.TestCase):
         self.assertAlmostEqual(rig.quota_mm(960.0), 0.0)
         self.assertAlmostEqual(rig.quota_mm(830.0), 40.0)
 
+    def test_altezza_sul_fondo_ricordata_quando_p1_resta_a_lungo_in_cima(self):
+        # 5 novembre: P1 a galla per minuti, marcatore inclinato (80 px); i campioni del fondo escono dalla memoria
+        # e la quota si calcolava con l'altezza sbagliata (12,7 cm invece di circa 19)
+        rig = r.Righello(tabella=self.TAB)
+        for i in range(120):
+            rig.aggiorna(i / 60, 960.0, 60.0)
+        for i in range(r.CAMPIONI_MAX + 10):
+            rig.aggiorna(2 + i / 60, 700.0 + (i % 2), 80.0)
+        self.assertAlmostEqual(rig.quota_mm(830.0), 40.0)
+
     def test_tabella_vera_del_progetto(self):
         tab = r.carica_tabella()
         self.assertIsNotNone(tab)

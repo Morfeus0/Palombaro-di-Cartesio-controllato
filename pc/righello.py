@@ -30,6 +30,7 @@ SPOSTAMENTO_FERMO_PX = 2.0
 VICINO_AL_FONDO_PX = 6.0     # l'altezza del marcatore sul fondo si prende dai campioni entro questa distanza
 ESCURSIONE_MIN_PX = 200.0    # per stimare k servono campioni distribuiti su almeno tanti pixel di altezza
 CAMPIONI_MAX = 6000          # circa 100 s a 60 fotogrammi al secondo
+CAMPIONI_FONDO_MAX = 600     # gli ultimi 10 s di P1 sul fondo: l'altezza del marcatore lì non si perde
 RICALCOLO_SCALA_S = 0.5      # la scala si riadatta al più due volte al secondo (o subito, se cambia il fondo)
 
 
@@ -117,6 +118,9 @@ class Righello:
         self.t_ultimo = 0.0
         self._scala: Scala | None = None
         self._t_scala = float("-inf")
+        # 5 nov: i campioni sul fondo si tengono anche a parte, perché con P1 a galla per minuti escono da
+        # `campioni` e la scala adattata ai campioni in cima (marcatore inclinato) sbagliava la quota di 6 cm
+        self.campioni_fondo: deque[tuple[float, float]] = deque(maxlen=CAMPIONI_FONDO_MAX)
 
     def aggiorna(self, t: float, y: float, altezza_px: float) -> None:
         self.t_ultimo = t
@@ -130,6 +134,8 @@ class Righello:
             ferma = float(np.median(ys))
             if self.y_fondo is None or ferma > self.y_fondo:  # il fondo è la posizione ferma più bassa
                 self.y_fondo = ferma
+        if self.y_fondo is not None and abs(y - self.y_fondo) <= VICINO_AL_FONDO_PX:
+            self.campioni_fondo.append((y, altezza_px))
 
     def scala(self) -> Scala | None:
         if self.y_fondo is None:
@@ -146,6 +152,7 @@ class Righello:
             return None
         if self.tabella is None:
             return quota_mm(y, scala, self.altezza_mm)
-        h = np.array([c[1] for c in self.campioni if abs(c[0] - scala.y_fondo) <= VICINO_AL_FONDO_PX])
-        altezza_fondo = float(np.median(h)) if h.size else scala.altezza_px
+        sorgente = self.campioni_fondo or self.campioni
+        vicini = [c[1] for c in sorgente if abs(c[0] - scala.y_fondo) <= VICINO_AL_FONDO_PX]
+        altezza_fondo = float(np.median(vicini)) if vicini else scala.altezza_px
         return quota_da_tabella(y, scala.y_fondo, altezza_fondo, self.tabella)
