@@ -188,6 +188,8 @@ def main() -> None:
     parser.add_argument("--su", type=float, nargs="+", default=SU, help="gradini delle fughe verso l'alto, kPa")
     parser.add_argument("--giu", type=float, nargs="+", default=GIU, help="gradini delle fughe verso il basso, kPa")
     parser.add_argument("--primo", type=int, default=1, help="numero della prima prova (per continuare una serie)")
+    parser.add_argument("--solo-soglia", action="store_true",
+                        help="cerca la soglia e si ferma (verifica del piano C, 10 novembre: stesso metodo del 5)")
     a = parser.parse_args()
     # fermato da fuori (kill): si passa comunque dal finally, che chiude il file e rimette il servo a 36
     signal.signal(signal.SIGTERM, lambda *_: sys.exit("fermato da fuori"))
@@ -195,6 +197,9 @@ def main() -> None:
     banco.nota("inizio: non toccare la dashboard fino alla fine")
     try:
         soglia = a.soglia_kpa if a.soglia_nota else trova_soglia(banco, a.soglia_kpa)
+        if a.solo_soglia:
+            banco.nota(f"fine: solo la soglia, {soglia:.3f} kPa")
+            return
         n, giu = a.primo - 1, list(a.giu)
         for delta in a.su:
             n += 1

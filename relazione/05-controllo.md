@@ -74,15 +74,20 @@ Il **«Fatto quando» della 4.1** (il PD soddisfa i criteri del foglio A4 in sim
 
 ## 5.4 Firmware 0.2
 
-Moduli nuovi, scritti senza dipendenze dalla scheda e provati sul Mac con 30 test (`pio test -e protocollo`):
+Moduli nuovi, scritti senza dipendenze dalla scheda e provati sul Mac con 33 test (`pio test -e protocollo`):
 
 - `controllo`: PI della pressione, PID della quota (derivata filtrata **della misura**, così un cambio di riferimento
   non dà un colpo alla pressione), On-Off con isteresi.
-- `supervisore`: regole di SAFE (sensore, sovrapressione, Mac muto 500 ms, telecamera muta 200 ms, P1 perso, errore
-  oltre 6 cm per più di 5 s).
+- `supervisore`: regole di SAFE (sensore, sovrapressione, Mac muto 500 ms, telecamera muta 300 ms, P1 perso, errore
+  oltre 6 cm per più di 5 s). La soglia della telecamera era 200 ms: il 9 novembre è passata a 300 ms perché le pause
+  misurate arrivano a 184 ms (avvio della registrazione video) e 256 ms (Mac fermo); 300 ms al buio, con il polo
+  instabile a 0,33 rad/s, fanno crescere l'errore di circa il 10 %.
 - `calibrazione`: trova p0 portando P1 sul fondo e scendendo a 30 Pa/s finché si stacca. Un test ha trovato un errore
   numerico vero: togliendo 0,3 Pa a ogni ciclo da 101 640 Pa in virgola mobile a 32 bit (come sull'ESP32) la rampa
-  sbagliava di 3 Pa ogni 1000 cicli; ora la pressione si calcola dal tempo trascorso.
+  sbagliava di 3 Pa ogni 1000 cicli; ora la pressione si calcola dal tempo trascorso. Un secondo controllo (9 novembre)
+  riconosce una calibrazione avviata con la pressione troppo bassa: se P1 si stacca nei primi 3 s della discesa, la
+  rampa è partita già sotto la soglia e p0 uscirebbe troppo basso, quindi la calibrazione si annulla (SAFE,
+  `PARTENZA_BASSA`). Prima il firmware salvava quel p0 sbagliato senza accorgersene.
 
 Il programma principale aggiunge gli stati CALIBRAZIONE e HOLD, i comandi `R` (quota voluta) e `K` (guadagni ed
 equilibrio) e la riga di telemetria `C` con i tre termini del PID (`docs/protocollo.md`, sezione 10). Dal Mac i comandi

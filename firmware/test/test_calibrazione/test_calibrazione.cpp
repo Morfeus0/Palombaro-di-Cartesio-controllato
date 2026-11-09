@@ -72,8 +72,50 @@ void test_fallisce_se_p1_non_si_stacca() {
   TEST_ASSERT_TRUE(st.fase == Fase::FALLITA);
 }
 
+// 9 novembre (decisione di Gabriele): se la calibrazione parte con la pressione troppo bassa, la discesa comincia già
+// sotto la soglia e P1 si stacca subito; prima si salvava un p0 troppo basso senza accorgersene.
+void test_p1_che_si_stacca_subito_annulla_la_calibrazione() {
+  const Parametri par;
+  Stato st;
+  avvia(st, 100700.0f);                          // per esempio servo a 36, ben sotto la soglia
+  gira(st, par, 6000, 0.003f);
+  TEST_ASSERT_TRUE(st.fase == Fase::DISCESA);
+  gira(st, par, 1500, 0.003f);                   // P1 ancora sul fondo per 1,5 s...
+  gira(st, par, 500, 0.012f);                    // ... poi già a 1,2 cm prima dei 3 s: partenza troppo bassa
+  TEST_ASSERT_TRUE(st.fase == Fase::PARTENZA_BASSA);
+  const float p = st.pVoluta;
+  gira(st, par, 1000, 0.03f);                    // fase finale: niente più cambi e niente p0
+  TEST_ASSERT_TRUE(st.fase == Fase::PARTENZA_BASSA);
+  TEST_ASSERT_EQUAL_FLOAT(p, st.pVoluta);
+  TEST_ASSERT_EQUAL_FLOAT(0.0f, st.p0);
+}
+
+void test_p1_che_si_stacca_dopo_i_primi_secondi_va_bene() {
+  const Parametri par;
+  Stato st;
+  avvia(st, 101640.0f);
+  gira(st, par, 6000, 0.003f);
+  gira(st, par, par.fermoInizioDiscesaMs + 10, 0.003f);   // sul fondo per tutti i primi 3 s
+  gira(st, par, 500, 0.012f);                              // si stacca dopo: è una calibrazione normale
+  TEST_ASSERT_TRUE(st.fase == Fase::DISCESA);
+  passo(st, par, DT, true, 0.02f);
+  TEST_ASSERT_TRUE(st.fase == Fase::FATTA);
+}
+
+void test_un_buco_della_quota_all_inizio_non_annulla() {
+  const Parametri par;
+  Stato st;
+  avvia(st, 101640.0f);
+  gira(st, par, 6000, 0.003f);
+  passo(st, par, DT, false, 0.05f);              // quota non valida all'inizio della discesa: non conta
+  TEST_ASSERT_TRUE(st.fase == Fase::DISCESA);
+}
+
 int main() {
   UNITY_BEGIN();
+  RUN_TEST(test_p1_che_si_stacca_subito_annulla_la_calibrazione);
+  RUN_TEST(test_p1_che_si_stacca_dopo_i_primi_secondi_va_bene);
+  RUN_TEST(test_un_buco_della_quota_all_inizio_non_annulla);
   RUN_TEST(test_prima_porta_p1_sul_fondo);
   RUN_TEST(test_aspetta_p1_fermo_sul_fondo_prima_di_scendere);
   RUN_TEST(test_la_discesa_va_a_30_pa_al_secondo_e_trova_lo_stacco);

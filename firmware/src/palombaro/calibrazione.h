@@ -17,9 +17,14 @@ struct Parametri {
   float quotaStaccoM = 0.015f;           // sopra questa quota P1 si è staccato
   float ritardoStaccoS = 4.0f;           // quanto ci mette P1 da staccato ad arrivare a quotaStacco (3.3: 4,4–5,7 s)
   float discesaMaxPa = 3000.0f;          // se P1 non si stacca dopo tanta discesa, la calibrazione fallisce
+  // 9 nov: nei primi 3 s della discesa (90 Pa) P1 deve restare sotto quotaFondo. Se si stacca prima, la rampa è
+  // partita già sotto la soglia (calibrazione avviata con la pressione troppo bassa) e p0 uscirebbe troppo basso.
+  // Errori più piccoli di circa 100 Pa non li vede: per quelli resta la regola di partire poco sopra la soglia.
+  uint32_t fermoInizioDiscesaMs = 3000;
 };
 
-enum class Fase { FONDO, DISCESA, FATTA, FALLITA };
+// FALLITA: P1 non si stacca mai; PARTENZA_BASSA: si stacca subito (si riparte con la pressione più alta).
+enum class Fase { FONDO, DISCESA, FATTA, FALLITA, PARTENZA_BASSA };
 
 struct Stato {
   Fase fase = Fase::FONDO;

@@ -340,6 +340,10 @@ void controlla(uint32_t numero, uint32_t tMs) {
     } else if (statoCalibrazione.fase == calibrazione::Fase::FALLITA) {
       entraInSafe("CALIBRAZIONE");
       return;
+    } else if (statoCalibrazione.fase == calibrazione::Fase::PARTENZA_BASSA) {
+      Serial.println("# calibrazione annullata: P1 staccato subito, ripartire con la pressione poco sopra la soglia");
+      entraInSafe("PARTENZA_BASSA");
+      return;
     }
   }
   if (stato == Stato::HOLD && numero % CICLI_ANELLO_ESTERNO == 0) {

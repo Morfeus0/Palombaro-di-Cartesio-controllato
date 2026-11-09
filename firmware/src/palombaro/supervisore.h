@@ -10,7 +10,8 @@ enum class Stato { MANUALE, CALIBRAZIONE, HOLD, SAFE };
 
 struct Soglie {
   uint32_t macMutoMs = 500;         // nessuna riga valida dal Mac (né Z né B)
-  uint32_t quotaMutaMs = 200;       // nessuna quota nuova (telecamera ferma)
+  uint32_t quotaMutaMs = 300;       // nessuna quota nuova (telecamera ferma); 9 nov: pause misurate 184 e 256 ms
+  // erroreMaxM ed erroreLungoMs: decisione di Gabriele del 9 novembre (6 cm per più di 5 s)
   float pressioneMaxPa = 106500.0f; // decisione 9: +5 kPa sopra 101,5 kPa
   float erroreMaxM = 0.06f;         // errore di quota «grande» (proposta, piano 4.2)
   uint32_t erroreLungoMs = 5000;    // ... per più di 5 s

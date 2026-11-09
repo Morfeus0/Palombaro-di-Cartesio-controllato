@@ -50,7 +50,11 @@ void test_mac_muto_conta_solo_negli_stati_automatici() {
 void test_telecamera_muta_e_p1_perso() {
   const Soglie s;
   Ingressi in = tuttoBene(Stato::CALIBRAZIONE);
-  in.msDaQuota = 201;
+  in.msDaQuota = 184;                               // 5 nov: avvio della registrazione video
+  assertMotivo(nullptr, motivoSafe(in, s));
+  in.msDaQuota = 256;                               // 1 nov: Mac fermo (decisione 9 nov: soglia 300 ms)
+  assertMotivo(nullptr, motivoSafe(in, s));
+  in.msDaQuota = 301;
   assertMotivo("TELECAMERA_MUTA", motivoSafe(in, s));
   in = tuttoBene(Stato::HOLD);
   in.vista = 2;

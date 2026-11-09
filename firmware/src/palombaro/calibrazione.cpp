@@ -20,6 +20,10 @@ float passo(Stato& st, const Parametri& par, uint32_t dtMs, bool quotaValida, fl
       }
       break;
     case Fase::DISCESA:
+      if (quotaValida && quotaM >= par.quotaFondoM && st.msInFase < par.fermoInizioDiscesaMs) {
+        st.fase = Fase::PARTENZA_BASSA;          // staccato subito: la rampa è partita già sotto la soglia
+        break;
+      }
       if (quotaValida && quotaM > par.quotaStaccoM) {
         // P1 si è staccato già da un po': la pressione vera di stacco era più alta di quella di adesso
         st.p0 = st.pVoluta + par.rampaPaS * par.ritardoStaccoS;
@@ -37,6 +41,7 @@ float passo(Stato& st, const Parametri& par, uint32_t dtMs, bool quotaValida, fl
       break;
     case Fase::FATTA:
     case Fase::FALLITA:
+    case Fase::PARTENZA_BASSA:
       break;
   }
   return st.pVoluta;

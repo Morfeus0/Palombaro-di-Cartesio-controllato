@@ -42,11 +42,42 @@ class Esperimento(unittest.TestCase):
     def test_riga_csv_unisce_telemetria_e_ultima_quota(self):
         campi = ["7", "1200", "104285", "1460", "M", "0", "0.0", "0.0", "2392"]
         riga = br.riga_csv(50.5, campi, br.Quota(1523, 50.48, 0))
-        self.assertEqual(riga, "50.500,7,1200,104285,1460,M,1523,20,0")
+        self.assertEqual(riga, "50.500,7,1200,104285,1460,M,1523,20,0,0,")
 
     def test_riga_csv_senza_quota(self):
         campi = ["7", "1200", "104285", "1460", "M", "0", "0.0", "0.0", "2392"]
-        self.assertEqual(br.riga_csv(50.5, campi, None), "50.500,7,1200,104285,1460,M,,,")
+        self.assertEqual(br.riga_csv(50.5, campi, None), "50.500,7,1200,104285,1460,M,,,,0,")
+
+    def test_riga_csv_con_i_riferimenti_in_hold(self):
+        # firmware 0.2 (4.2–4.5): pressione voluta dalla T, quota voluta dall'ultima C, in fondo alle colonne di prima
+        campi = ["7", "1200", "104285", "1460", "H", "101920", "-3.1", "12.0", "2392"]
+        riga = br.riga_csv(50.5, campi, br.Quota(1523, 50.48, 0), quota_rif_dmm=500)
+        self.assertEqual(riga, "50.500,7,1200,104285,1460,H,1523,20,0,101920,500")
+        self.assertEqual(len(riga.split(",")), len(br.COLONNE.split(",")))
+
+    def test_riga_csv_di_una_t_corta(self):
+        # una T senza p_rif (firmware di prima): la colonna resta vuota invece di far fallire la registrazione
+        self.assertEqual(br.riga_csv(50.5, ["7", "1200", "104285", "1460", "M"], None), "50.500,7,1200,104285,1460,M,,,,,")
+
+    def test_versione_dalla_riga_v(self):
+        self.assertEqual(br.descrivi_firmware(["0.2", "1"]), "palombaro 0.2, protocollo 1")
+        self.assertEqual(br.descrivi_firmware(None), "non letta (mandare V prima della prova)")
+
+
+class Riferimenti(unittest.TestCase):
+    """Il ponte ricorda la quota voluta dalle righe C e la dimentica appena lo stato non è più HOLD."""
+
+    def test_quota_voluta_solo_in_hold(self):
+        r = br.Riferimenti()
+        r.leggi("C", ["301", "123460", "1523", "21", "1500", "-18.4", "2.2", "-5.0", "101420"])
+        self.assertEqual(r.quota_rif("H"), 1500)
+        self.assertIsNone(r.quota_rif("S"))
+        self.assertIsNone(r.quota_rif("H"))          # uscito da HOLD: serve una C nuova
+
+    def test_versione_dalla_v(self):
+        r = br.Riferimenti()
+        r.leggi("V", ["0.2", "1"])
+        self.assertEqual(r.firmware, ["0.2", "1"])
 
 
 class Durata(unittest.TestCase):

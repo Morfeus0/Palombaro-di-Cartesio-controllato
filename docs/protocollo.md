@@ -103,7 +103,7 @@ $TIPO,campo1,campo2,…*CC\n
 | Condizione | In MANUALE | In CALIBRAZIONE, HOLD, TRACKING |
 |---|---|---|
 | nessuna riga valida dal Mac da **500 ms** (né `Z` né `B`) | il servo resta dov'è | **SAFE** (`X,…,SAFE,MAC_MUTO`) |
-| nessuna `Z` nuova da **200 ms** (telecamera ferma, riconoscimento bloccato) | niente | **SAFE** (`TELECAMERA_MUTA`) |
+| nessuna `Z` nuova da **300 ms** (telecamera ferma, riconoscimento bloccato; 200 ms fino al 9 novembre) | niente | **SAFE** (`TELECAMERA_MUTA`) |
 | `Z` con `vista = 2` (perso) | niente | **SAFE** (`PERSO`): il riconoscimento ha già scavalcato i buchi fino a 0,25 s |
 | sovrapressione oltre **+3,5 kPa** o sensore senza risposta | servo fermo e avviso `#` | **SAFE** (`PRESSIONE` / `SENSORE`) |
 | `E` dal Mac | SAFE | SAFE |
@@ -180,7 +180,7 @@ Cosa aggiunge alla versione 1 del protocollo, senza cambiare il formato delle ri
 | `K,E` | `p0` [Pa, assoluta] tra 90 000 e 110 000 | equilibrio con P1 sul fondo, senza calibrare |
 | `T` | `p_rif` = pressione voluta [Pa], `pi_p` [°], `pi_i` [°] | prima valevano 0; in MANUALE e SAFE restano 0 |
 | `C` | seq, t_ms, quota_dmm, età_ms, quota_rif_dmm, pid_p, pid_i, pid_d [Pa], p_rif [Pa] | in HOLD, ogni 30 ms (anello esterno a circa 33 Hz) |
-| `X` | motivi nuovi: `CALIBRATO` (CALIBRAZIONE → HOLD), `CALIBRAZIONE` (fallita → SAFE), `MAC_MUTO`, `TELECAMERA_MUTA`, `PERSO`, `ERRORE` | |
+| `X` | motivi nuovi: `CALIBRATO` (CALIBRAZIONE → HOLD), `CALIBRAZIONE` (fallita: P1 non si stacca → SAFE), `PARTENZA_BASSA` (9 nov: P1 si stacca nei primi 3 s della discesa → SAFE), `MAC_MUTO`, `TELECAMERA_MUTA`, `PERSO`, `ERRORE` | |
 
 **Guadagni iniziali** (dal progetto in simulazione, `analisi/progetto_controllori.m`): PI 0,02 °/Pa e 0,4 °/(Pa·s);
 PID 475 Pa/cm, 11,9 Pa/(cm·s), 400 Pa·s/cm, N = 10; On-Off ±5 mm e ±700 Pa.
@@ -188,12 +188,18 @@ PID 475 Pa/cm, 11,9 Pa/(cm·s), 400 Pa·s/cm, N = 10; On-Off ±5 mm e ±700 Pa.
 **CALIBRAZIONE** (`firmware/src/palombaro/calibrazione.cpp`): +1,5 kPa finché P1 è fermo sul fondo da 3 s (almeno
 6 s), poi rampa a −30 Pa/s da +0,6 kPa sopra la pressione di partenza; quando P1 supera 1,5 cm, p0 = pressione voluta
 + 30 Pa/s × 4 s (il tempo che P1 impiega a salire fino a 1,5 cm); se la rampa scende di 3 kPa senza stacco → SAFE.
+**Controllo della partenza (9 novembre, decisione di Gabriele):** se P1 supera 1 cm nei primi 3 s della discesa, la
+rampa è partita già sotto la soglia (calibrazione avviata con la pressione troppo bassa) e p0 uscirebbe troppo basso:
+la calibrazione si annulla → SAFE (`PARTENZA_BASSA`). Si riparte con la pressione poco sopra la soglia.
 
 **Servo:** rampa di 0,7° per ciclo in MANUALE e SAFE (come la 0.1), 2,0° per ciclo (200 °/s) in CALIBRAZIONE e HOLD.
 
-**Da decidere (Gabriele):**
-1. **Errore troppo grande troppo a lungo → SAFE (`ERRORE`):** proposta 6 cm per più di 5 s (dalla simulazione della
-   proposta).
-2. **Telecamera muta dopo 200 ms (decisione già presa il 1 novembre):** il 5 novembre l'avvio della registrazione video
-   ha fermato i fotogrammi per 184 ms, e il 1 novembre c'è stata una pausa di 256 ms con il Mac fermo. Con 200 ms
-   quella del 1 novembre avrebbe portato in SAFE; con 300 ms nessuna delle due. La soglia è `supervisore::Soglie`.
+**Decisioni (Gabriele, 9 novembre):**
+1. **Errore troppo grande troppo a lungo → SAFE (`ERRORE`): 6 cm per più di 5 s.** Nel gemello il PID resta sotto
+   1 cm a regime e un cambio di quota di 5 cm si assesta in circa 3 s: la soglia scatta solo se qualcosa è rotto.
+2. **Telecamera muta dopo 300 ms** (era 200 ms, decisione del 1 novembre): il 5 novembre l'avvio della registrazione
+   video ha fermato i fotogrammi per 184 ms, e il 1 novembre c'è stata una pausa di 256 ms con il Mac fermo; con
+   300 ms nessuna delle due porta in SAFE. Con il polo instabile a 0,33 rad/s, 300 ms al buio fanno crescere l'errore
+   di circa il 10 %. La soglia è `supervisore::Soglie`; il test `test_telecamera_muta_e_p1_perso` prova 184, 256 e 301 ms.
+3. **PID come regolatore predefinito in HOLD** (già così nel firmware: `usaOnOff = false`). Il solo P e il PD della 4.5
+   si scelgono con `K,Z` (ki = 0, e kd = 0 per il solo P), l'On-Off con `K,O`.

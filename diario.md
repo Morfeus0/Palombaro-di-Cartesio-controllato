@@ -963,3 +963,46 @@ Preparati da Claude (circa 17:00) i passaggi per fissare il servo con le fascett
 **Ore:** Gabriele circa 2 h 50 al banco (sopra); la sera è lavoro di Claude, non contato.
 
 **Prossimo passo:** domenica 8 revisione settimanale (fasi 2 e 3). Al banco (probabilmente lunedì 9): soglia di P1 dal vasetto (verifica del piano C), poi firmware 0.2: calibrazione, transizioni di sicurezza (4.2), gradini di pressione (4.4), On-Off (4.3), P e PID (4.5) verso **M4**.
+
+## 2026-11-06 → 2026-11-08 · nessuna attività
+
+### Revisione settimanale (T5), 2–8 novembre (scritta lunedì 9 novembre)
+- **Milestone:** **M2 raggiunta il 5 novembre** (scadenza domenica 8, tre giorni prima): quota e pressione registrate a 100 righe al secondo, nessuna persa, età della quota 10 ms mediana a 58,7 fps. **M3 raggiunta lo stesso giorno** (scadenza domenica 15, dieci giorni prima), decisione di Gabriele.
+- **Sottofasi:** 2.7 chiusa il 5 novembre (scadenza 8). Tutta F3 (dal piano: 9–15 novembre) chiusa il 5 novembre: 3.2 e 3.3 al banco, 3.1, 3.4 e 3.5 la sera al computer. In anticipo dalla F4 (dal piano: 16–22 novembre): **4.1 fatta in simulazione** (scadenza 17); **4.2 in corso**, firmware 0.2 compilato e provato sul Mac, manca la prova delle transizioni al banco.
+- **Ore della settimana (Gabriele):** 2–4: 0 · 5: circa 2 h 50 · 6–8: 0. **Totale circa 2 h 50**, contro le circa 14 h della stima (2 h al giorno). Il lavoro al computer della sera del 5 è di Claude e non è contato. Le ore sono poche ma il calendario è avanti: una sessione al banco ben preparata ha chiuso una milestone e mezza fase.
+- **Rischi:** R2 (tenuta) piccola perdita nei tratti in pressione (−0,28 kPa in un'ora a 36); in depressione le pareti rientrano e la pressione risale: si chiude il circuito più in alto. R4 (riconoscimento) un «perso» di 7,8 s con P1 fermo contro la parete, mai in movimento; righello della superficie corretto. R5 (telecamera) i 30 fps sono stati risolti con la regola «iPhone in carica, niente risparmio energetico, oltre 55 fps prima di registrare»; il **ritardo di 156 ms resta oltre la soglia di 150 ms** e il piano B (webcam USB) resta da decidere (Gabriele); nel progetto dei controllori il ritardo è già dentro (margine di ritardo 0,50 s). R6 (palombaro) **attivo**: P1 affondato dopo 4 giorni a galla (almeno il 2,7 % dell'aria persa), ritarato; tra le sessioni piano C (vasetto), da verificare il 10 novembre. R8 (elettronica) nessun «perso» o «ritrovato» del sensore, temperatura sotto i 3 °C di allarme. **R9 non scatta:** nessuna fase in ritardo, F2 finita in tempo e F3 in anticipo.
+- **Settimana prossima:** dal piano, 9–15 novembre sarebbe F3, già chiusa. Sessione al banco martedì 10 con la scaletta `docs/scaletta-10-novembre.md`: soglia di P1 (piano C), firmware 0.2 e transizioni di sicurezza (4.2), gradini di pressione (4.4), On-Off (4.3), solo P, PD e PID (4.5) fino al primo tentativo di **M4** (dal piano: domenica 22). Anticipare la F4 è una decisione di Gabriele presa il 5 novembre («fase 4 avviata per la parte senza banco»); le date della parte al banco le decide Gabriele.
+- **T6:** il messaggio al professore con il video di M2 (previsto intorno all'8 novembre) non è ancora partito: bozza preparata il 9 novembre (`docs/messaggio-M2.md`), lo manda Gabriele.
+
+## 2026-11-09 · lavoro di Claude: decisioni della 4.2, analisi della fase 4, scaletta del 10 · 0 h di Gabriele al banco
+
+**Orario:** circa **19:35–20:40**, dagli orari dei file. Banco rimandato a martedì 10 (Gabriele non poteva andarci): tutto il lavoro al computer è di Claude, su richiesta di Gabriele, che ha preso le decisioni a parole. Non è contato nelle ore.
+
+| Orario | Durata | Attività |
+|---|---|---|
+| 19:35–19:45 | 10 min | ripresa: stato dal diario e dal piano; le tre decisioni della 4.2 |
+| 19:45–19:50 | 5 min | 4.2: telecamera muta a 300 ms nel firmware (test prima rosso), protocollo; ponte con i riferimenti nel CSV |
+| 19:50–20:06 | 16 min | `pc/analisi_f4.py` con i test; prove della fase 4 nel gemello (`analisi/esporta_gemello_f4.m`) e correzioni trovate con quelle |
+| 20:06–20:12 | 6 min | scaletta del 10 novembre, revisione settimanale, bozza del messaggio di M2 |
+| 20:12–20:30 | 18 min | spiegazioni a Gabriele (controllo della calibrazione, video di M2) |
+| 20:30–20:40 | 10 min | 4.2: controllo della partenza della CALIBRAZIONE (test prima rossi), protocollo, scaletta, capitolo 5 |
+
+**Fatto:**
+- **Decisioni della 4.2 nel firmware:** SAFE per errore di quota oltre **6 cm per più di 5 s**; **PID** come regolatore predefinito in HOLD (già così); **telecamera muta dopo 300 ms** invece di 200. Correzione di Claude prima della scelta: aveva scritto che le pause più lunghe dei fotogrammi erano di 63 ms, ma nel protocollo ce ne sono di **184 ms** (avvio della registrazione video, 5 novembre) e **256 ms** (Mac fermo, 1 novembre). Con 200 ms la seconda avrebbe portato in SAFE. Il test del supervisore ora prova 184, 256 e 301 ms.
+- **Controllo della partenza della CALIBRAZIONE** (decisione di Gabriele: «meglio controllare la calibrazione che già ci ha causato parecchi problemi»). Rileggendo il codice: la rampa parte 0,6 kPa sopra la pressione del momento in cui si avvia la calibrazione; se si parte più in basso (per esempio servo a 36), P1 si stacca subito e il firmware salvava un p0 troppo basso senza accorgersene. Ora, se P1 supera 1 cm nei primi 3 s della discesa, la calibrazione si annulla e si va in SAFE con il motivo nuovo `PARTENZA_BASSA`. 3 test nuovi (prima rossi), **33 test del firmware**, compilato (Flash 24,9 %), non caricato.
+- **Ponte:** il CSV di ogni prova ha due colonne in più in fondo, `p_rif_pa` (pressione voluta) e `quota_rif_dmm` (quota voluta, solo in HOLD); la riga `# firmware:` viene dalla riga V invece di essere scritta fissa «0.1».
+- **`pc/analisi_f4.py`:** dà il verdetto dei «Fatto quando» appena finita una prova (`--prova 4.3`, `4.4` o `4.5`): assestamento dei gradini di pressione (fascia ±50 Pa, circa un passo e mezzo del servo), tenuta della pressione con la deriva del servo, ampiezza e periodo del ciclo limite dell'On-Off, gradini di quota e tenuta di **M4** (il tratto continuo più lungo entro ±1 cm). 23 test.
+- **Gemello:** le prove della scaletta fatte girare in Simulink e salvate come CSV del ponte (`analisi/gemello-f4/`, compressi). Verdetti: gradini di ±391 Pa assestati in **0,22–0,28 s**; On-Off ±5 mm a 5 cm **±2,2 cm, 6,1 s** (±10 mm: ±3,0 cm, 7,9 s); PD e PID superano M4 (RMS 0,9 e 1,4 mm); solo P sovraelongazione 53 %. Serviranno anche per il confronto della 4.6.
+- **Tre cose trovate con il gemello:** (1) un gradino arrivato in due righe consecutive era contato due volte; (2) nel PD un picco su e giù nello stesso istante dava una divisione per zero, e faceva cadere anche l'analisi delle altre prove; entrambi corretti con i loro test. (3) **L'On-Off a 10 cm non parte dal fondo:** l'equilibrio a 10 cm è p0 + 978 Pa e l'On-Off toglie solo 700 Pa, quindi P1 resta sul fondo (90 s nel gemello). Al banco si prova a 5 cm.
+- **Soglia di P1 per il piano C:** `pc/anello_aperto.py --solo-soglia`, lo stesso metodo del 5 novembre (gradini di 0,03 kPa ogni 12 s). Da confrontare correggendo per la temperatura (circa 0,34 kPa per grado).
+- **Scaletta del 10 novembre** (`docs/scaletta-10-novembre.md`): accensione, P1 dal vasetto, angolo di chiusura del circuito in base alla soglia attesa, soglia, transizioni della 4.2 (dalla a alla h), 4.4 con l'anello esterno spento (`K,Z,0,0,0,10` e un equilibrio finto 500 Pa più alto, così P1 resta sul fondo), 4.3, 4.5 e M4.
+- **Revisione settimanale** (2–8 novembre) e **bozza del messaggio di M2** (`docs/messaggio-M2.md`, lo manda Gabriele se vuole: gli aggiornamenti al prof non sono stati concordati).
+- **Test:** 147 in Python, 33 nel firmware.
+
+**Problema (di metodo):** il primo comando MATLAB è rimasto «appeso» 6 minuti: MATLAB aveva finito, ma un suo servizio (MathWorksServiceHost) teneva aperta la pipe verso `tail`. Ora MATLAB si lancia scrivendo su un file.
+
+**Decisioni (Gabriele):** errore → SAFE a 6 cm per 5 s; telecamera muta a 300 ms (dopo la correzione); PID predefinito; controllo della partenza della calibrazione nel firmware; sessione al banco spostata a martedì 10.
+
+**Ore:** Gabriele 0 h al banco; il lavoro della sera è di Claude, non contato.
+
+**Prossimo passo:** martedì 10 al banco con la scaletta: soglia di P1 (piano C), firmware 0.2 caricato, transizioni della 4.2 (compresa `PARTENZA_BASSA`), 4.4, 4.3, 4.5 e primo tentativo di **M4**. Da decidere (Gabriele): se mandare il messaggio di M2; se le transizioni `PRESSIONE` e `SENSORE`, provate solo sul Mac, bastano per il «Fatto quando» della 4.2.

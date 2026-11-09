@@ -31,7 +31,9 @@ PORTA_SERIALE = "/dev/cu.usbserial-0001"
 BAUD = 460800
 PERIODO_BATTITO_S = 0.2
 PERIODO_COMANDI_S = 0.1
-COLONNE = "t_mac,seq,t_esp_ms,p_pa,u_decimi,stato,quota_dmm,eta_quota_ms,vista"
+# Le ultime due (firmware 0.2, 9 novembre) sono in fondo, così chi legge le colonne di prima per posizione non cambia:
+# p_rif_pa = pressione voluta dalla T (0 in MANUALE e SAFE), quota_rif_dmm = quota voluta dall'ultima C (solo in HOLD).
+COLONNE = "t_mac,seq,t_esp_ms,p_pa,u_decimi,stato,quota_dmm,eta_quota_ms,vista,p_rif_pa,quota_rif_dmm"
 # «Fatto quando» della 2.6: quota, pressione e comando insieme ad almeno 20 Hz per 5 minuti, senza buchi.
 INTERVALLO_MAX_S = 1 / 20
 DURATA_MIN_S = 5 * 60
@@ -74,10 +76,42 @@ def nome_esperimento(cartella: Path, giorno: str, esperimento: str) -> Path:
     return percorso
 
 
-def riga_csv(adesso: float, campi_t: list[str], q: Quota | None) -> str:
+def riga_csv(adesso: float, campi_t: list[str], q: Quota | None, quota_rif_dmm: int | None = None) -> str:
     seq, t_esp, p, u, stato = campi_t[:5]
     quota = ",," if q is None else f"{q.dmm},{max(0, round((adesso - q.t) * 1000))},{q.vista}"
-    return f"{adesso:.3f},{seq},{t_esp},{p},{u},{stato},{quota}"
+    p_rif = campi_t[5] if len(campi_t) > 5 else ""
+    q_rif = "" if quota_rif_dmm is None else str(quota_rif_dmm)
+    return f"{adesso:.3f},{seq},{t_esp},{p},{u},{stato},{quota},{p_rif},{q_rif}"
+
+
+def descrivi_firmware(campi_v: list[str] | None) -> str:
+    """La riga «# firmware:» dell'intestazione, dall'ultima V arrivata (prima era scritta fissa «0.1»)."""
+    if not campi_v or len(campi_v) < 2:
+        return "non letta (mandare V prima della prova)"
+    return f"palombaro {campi_v[0]}, protocollo {campi_v[1]}"
+
+
+class Riferimenti:
+    """Quello che il ponte ricorda delle righe C e V per scriverlo accanto a ogni T."""
+
+    def __init__(self) -> None:
+        self.ultima_quota_rif: int | None = None
+        self.firmware: list[str] | None = None
+
+    def leggi(self, tipo: str, campi: list[str]) -> None:
+        if tipo == "C" and len(campi) > 4:
+            try:
+                self.ultima_quota_rif = int(campi[4])
+            except ValueError:
+                pass
+        elif tipo == "V":
+            self.firmware = campi
+
+    def quota_rif(self, stato: str) -> int | None:
+        """La quota voluta solo in HOLD; fuori da HOLD la dimentica (al rientro aspetta una C nuova)."""
+        if stato != "H":
+            self.ultima_quota_rif = None
+        return self.ultima_quota_rif
 
 
 def verifica(righe) -> dict:
@@ -115,6 +149,7 @@ class Ponte:
         self.udp.bind(("127.0.0.1", PORTA_QUOTA))
         self.udp.setblocking(False)
         self.quota: Quota | None = None
+        self.riferimenti = Riferimenti()
         self.seq_z = self.seq_b = 0
         self.csv = None
         self.fine_esperimento: float | None = None
@@ -156,7 +191,8 @@ class Ponte:
         percorso = nome_esperimento(self.registro.parent, giorno, nome)
         self.csv = percorso.open("w", encoding="utf-8")
         for chiave, valore in (("esperimento", nome), ("data", time.strftime("%Y-%m-%d %H:%M:%S")),
-                               ("parametri", parametri), ("firmware", "palombaro 0.1, protocollo 1"),
+                               ("parametri", parametri),
+                               ("firmware", descrivi_firmware(self.riferimenti.firmware)),
                                ("quota", "decimi di mm sopra P1 fermo sul fondo; età dal fotogramma, ms")):
             self.csv.write(f"# {chiave}: {valore}\n")
         self.csv.write(COLONNE + "\n")
@@ -200,8 +236,14 @@ class Ponte:
         for grezza in righe:
             riga = grezza.decode("utf-8", errors="replace").rstrip("\r")
             self.log.write(f"{orario(adesso)} {riga}\n")
-            if self.csv and (analizzata := analizza(riga)) and analizzata[0] == "T":
-                self.csv.write(riga_csv(adesso, analizzata[1], self.quota) + "\n")
+            analizzata = analizza(riga)
+            if analizzata is None:
+                continue
+            tipo, campi = analizzata
+            self.riferimenti.leggi(tipo, campi)
+            if self.csv and tipo == "T" and len(campi) >= 5:
+                q_rif = self.riferimenti.quota_rif(campi[4])
+                self.csv.write(riga_csv(adesso, campi, self.quota, q_rif) + "\n")
         self.log.flush()
 
     def passo(self) -> None:
