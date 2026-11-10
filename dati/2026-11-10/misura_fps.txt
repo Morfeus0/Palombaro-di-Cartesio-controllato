@@ -1,0 +1,8 @@
+18:11:21
+1920x1080 chiesto a 60 fps: 30.0 fps veri, intervallo mediano 33.3 ms, massimo 33 ms, 0 oltre 50 ms
+1280x720 chiesto a 60 fps: 58.4 fps veri, intervallo mediano 16.7 ms, massimo 33 ms, 0 oltre 50 ms
+
+18:13:01
+1920x1080 chiesto a 60 fps: 56.6 fps veri, intervallo mediano 16.7 ms, massimo 33 ms, 0 oltre 50 ms
+1280x720 chiesto a 60 fps: 59.2 fps veri, intervallo mediano 16.7 ms, massimo 33 ms, 0 oltre 50 ms
+

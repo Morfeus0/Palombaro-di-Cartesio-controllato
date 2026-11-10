@@ -1,0 +1,97 @@
+<template>
+  <style>
+    #root {
+      position: absolute;
+      inset: 0;
+      font-family: "Inter", sans-serif;
+      color: #161616;
+      font-variant-numeric: tabular-nums;
+    }
+    #ch-testo {
+      position: absolute;
+      left: 120px;
+      top: 230px;
+      width: 1150px;
+    }
+    #ch-sopra {
+      font-size: 34px;
+      font-weight: 700;
+      color: #6b6b6b;
+    }
+    #ch-numero {
+      font-size: 220px;
+      font-weight: 900;
+      letter-spacing: -0.03em;
+      line-height: 1;
+      color: #d0282e;
+      margin-top: 12px;
+    }
+    #ch-numero small {
+      font-size: 96px;
+      margin-left: 12px;
+    }
+    #ch-frase {
+      font-size: 48px;
+      font-weight: 900;
+      letter-spacing: -0.01em;
+      margin-top: 16px;
+    }
+    #ch-dettaglio {
+      font-size: 34px;
+      font-weight: 400;
+      margin-top: 36px;
+    }
+    #ch-fonte {
+      font-size: 28px;
+      font-weight: 400;
+      color: #6b6b6b;
+      margin-top: 44px;
+    }
+    #ch-bottiglia {
+      position: absolute;
+      left: 1397px;
+      top: 72px;
+      width: 451px;
+      height: 936px;
+      object-fit: cover;
+    }
+  </style>
+  <div id="root" data-composition-id="chiusura" data-width="1920" data-height="1080">
+    <video
+      id="ch-bottiglia"
+      class="clip"
+      src="assets/banco.mp4"
+      data-start="0"
+      data-duration="6.5"
+      data-media-start="130"
+      data-track-index="1"
+      muted
+      playsinline
+    ></video>
+    <div id="ch-testo">
+      <div id="ch-sopra">Traguardo M4 · criterio: 60 s entro ±1 cm</div>
+      <div id="ch-numero"><span id="ch-valore">0,0</span><small>s</small></div>
+      <div id="ch-frase">di fila entro ±1 cm dalla quota voluta di 10 cm</div>
+      <div id="ch-dettaglio">Negli ultimi 60 s: errore massimo 7,9 mm · RMS 3,4 mm</div>
+      <div id="ch-fonte">Dati: prova 2026-11-10_4-5-pid-m4_04 · PID in cascata</div>
+    </div>
+  </div>
+  <script>
+    const tl = gsap.timeline({ paused: true });
+    const conteggio = { v: 0 };
+    tl.fromTo("#ch-sopra", { opacity: 0, y: 24 }, { opacity: 1, y: 0, duration: 0.5, ease: "power3.out" }, 0.1);
+    tl.fromTo("#ch-numero", { opacity: 0, y: 24 }, { opacity: 1, y: 0, duration: 0.5, ease: "power3.out" }, 0.27);
+    tl.to(conteggio, {
+      v: 81.9,
+      duration: 1.4,
+      ease: "power2.out",
+      onUpdate: () => {
+        document.getElementById("ch-valore").textContent = conteggio.v.toFixed(1).replace(".", ",");
+      },
+    }, 0.3);
+    tl.fromTo("#ch-frase", { opacity: 0, y: 24 }, { opacity: 1, y: 0, duration: 0.5, ease: "power3.out" }, 0.44);
+    tl.fromTo("#ch-dettaglio", { opacity: 0, y: 24 }, { opacity: 1, y: 0, duration: 0.5, ease: "power3.out" }, 1.0);
+    tl.fromTo("#ch-fonte", { opacity: 0, y: 24 }, { opacity: 1, y: 0, duration: 0.5, ease: "power3.out" }, 1.17);
+    window.__timelines["chiusura"] = tl;
+  </script>
+</template>

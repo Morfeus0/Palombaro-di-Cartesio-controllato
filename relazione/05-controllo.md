@@ -78,8 +78,9 @@ Moduli nuovi, scritti senza dipendenze dalla scheda e provati sul Mac con 33 tes
 
 - `controllo`: PI della pressione, PID della quota (derivata filtrata **della misura**, così un cambio di riferimento
   non dà un colpo alla pressione), On-Off con isteresi.
-- `supervisore`: regole di SAFE (sensore, sovrapressione, Mac muto 500 ms, telecamera muta 300 ms, P1 perso, errore
-  oltre 6 cm per più di 5 s). La soglia della telecamera era 200 ms: il 9 novembre è passata a 300 ms perché le pause
+- `supervisore`: regole di SAFE (sensore, sovrapressione, Mac muto 2 s, telecamera muta 2,5 s, P1 perso, errore
+  oltre 6 cm per più di 5 s; le due soglie del Mac e della telecamera sono state allargate al banco il 10 novembre, vedi
+  5.5). La soglia della telecamera era 200 ms: il 9 novembre è passata a 300 ms perché le pause
   misurate arrivano a 184 ms (avvio della registrazione video) e 256 ms (Mac fermo); 300 ms al buio, con il polo
   instabile a 0,33 rad/s, fanno crescere l'errore di circa il 10 %.
 - `calibrazione`: trova p0 portando P1 sul fondo e scendendo a 30 Pa/s finché si stacca. Un test ha trovato un errore
@@ -93,10 +94,81 @@ Il programma principale aggiunge gli stati CALIBRAZIONE e HOLD, i comandi `R` (q
 equilibrio) e la riga di telemetria `C` con i tre termini del PID (`docs/protocollo.md`, sezione 10). Dal Mac i comandi
 si mandano con `pc/comanda.py`.
 
-## 5.5 Da fare al banco
+## 5.5 Prove al banco (10 novembre)
 
-1. **4.2:** caricare il firmware 0.2 e provare ogni passaggio di stato (CALIBRAZIONE → HOLD, telecamera coperta → SAFE
-   `PERSO`, ponte fermato → SAFE `MAC_MUTO`, emergenza).
-2. **4.4:** gradini di pressione con il solo anello interno (assestamento < 0,5 s, compensazione della perdita).
-3. **4.3:** On-Off con due isteresi, ciclo limite da confrontare con la tabella qui sopra.
-4. **4.5:** solo P, poi PD/PID; tenuta di 60 s entro ±1 cm (**M4**) e video.
+Condizioni: P1 riempito di nuovo (si era svuotato nel vasetto), più pesante del previsto: soglia **99,12 kPa** con la
+stanza a 100,64, quindi circuito chiuso a **116°** e lavoro in leggera depressione; iPhone collegato con il cavo.
+Verdetti di `pc/analisi_f4.py` sui CSV del ponte (`dati/2026-11-10/`).
+
+**Stati e sicurezza (4.2).** Provate al banco tutte le transizioni provocabili: rifiuti di HOLD senza p0
+(`NO,M,EQUILIBRIO`) e di CALIBRAZIONE senza quota (`NO,M,QUOTA`); CALIBRAZIONE → HOLD due volte, con **p0 = 99 168 e
+99 174 Pa** contro i 99 120 della soglia misurata a mano (48 e 54 Pa, ripetibilità 6 Pa); SAFE per `PERSO` (0,23 s
+dopo aver coperto P1), `TELECAMERA_MUTA`, `MAC_MUTO` (ponte sospeso), `ERRORE` (oltre 6 cm per 5 s), `EMERGENZA` e,
+per caso all'avvio, `SENSORE`. Non provocabili: `PRESSIONE` (oltre la corsa del servo) e `PARTENZA_BASSA` (con questo
+P1 la depressione disponibile è troppo poca), provate solo sul Mac. Le soglie del Mac e della telecamera, partite a
+500 e 300 ms, sono finite a **2 s e 2,5 s**: l'avvio della registrazione video ferma il Mac fino a 1,15 s e l'iPhone ha
+pause fino a 1,9 s; in una pausa il PI della pressione tiene l'ultima pressione voluta e P1 deriva lentamente.
+Due difetti trovati e corretti: SAFE accendeva il servo a 146 senza rampa se non aveva mai ricevuto un comando, e
+`telecamera.py` si chiudeva invece di riaprire l'iPhone bloccato.
+
+**Gioco del servo.** Misurato con gradini del servo in MANUALE: **circa 22°** a ogni inversione (il 23 ottobre 10°),
+cioè circa 550 Pa di comando senza effetto; nello stesso verso circa 25 Pa/°. Il video esterno mostra tre cause:
+l'asta agganciata allo stantuffo con un gancio che prima ruota, il braccio del servo incollato che cede, il servo che
+si solleva.
+
+**Anello interno (4.4).** Gradini di ±391 Pa con l'anello esterno spento (`K,Z,0,0,0,10`, `K,E` = p0 + 500 Pa):
+
+| PI (kp °/Pa, ki °/(Pa·s)) | Sovraelongazione | Assestamento (±50 Pa) |
+|---|---|---|
+| 0,02 · 0,4 (progetto) | 50–60 % | 1,4 s |
+| 0,02 · 0,05 | 0–8 % | 1,9–2,1 s |
+| **0,02 · 0,1 (scelto)** | **2–5 %** | **0,9–1,1 s** |
+| 0,04 · 0,1 | 3–5 % | 1,1–1,3 s |
+
+La perdita d'aria è compensata (errore medio 0,3 Pa in 60 s); il «Fatto quando» (< 0,5 s) **non è raggiunto**: con
+22° di gioco l'integrale si carica mentre lo stantuffo non si muove.
+
+**On-Off (4.3).** A 5 cm con ±700 Pa l'oscillazione **cresce** fino alla superficie (SAFE `ERRORE`): la spinta
+massima vale l'equilibrio a 12,1 cm e P1, che arriva in ritardo, lo supera. Con ±1000 Pa il ciclo è stabile:
+**±4,6 cm intorno a 5,3 cm, 11,3 s** (isteresi ±5 mm) e **±4,7 cm, 11,8 s** (±10 mm). La «tirata» va a fine corsa
+(36°) e arriva solo a circa 100 Pa sotto p0: è lei a dettare il periodo, l'isteresi conta poco.
+
+**Anello esterno (4.5) e M4.** P1 a 5 cm, gradino a 10 cm, 90 s fermi:
+
+| Regolatore | Gradino 5 → 10 cm | A 10 cm |
+|---|---|---|
+| solo P | sovraelongazione 119 %, non si assesta | oscilla di ±5,4 cm, periodo 9,7 s |
+| PD | 38 %, non si assesta entro ±5 mm | entro ±1 cm per 89,7 s, RMS 6,0 mm |
+| **PID** | 23–25 %, 16 s | **entro ±1 cm per 88,7 e 81,9 s; ultimi 60 s: errore max 6,0 e 7,9 mm, RMS 3,4–3,5 mm** |
+
+Il criterio di **M4** (60 s entro ±1 cm) è superato due volte con il PID, la seconda con il video
+(`media/2026-11-10_M4_quota-tenuta-entro-1-cm.mp4`). A 10 cm il PID ondeggia di circa ±4 mm ogni 4 s: è l'impronta
+del gioco. A 5 cm, dopo la calibrazione e prima di ogni gradino, la tenuta era più stretta (RMS 0,6 mm).
+
+## 5.6 Confronto con il gemello (4.6)
+
+Le stesse prove sono state rifatte nel gemello con le condizioni misurate: gioco di 22°, circuito chiuso a 116° con
+p0 1,5 kPa sotto la stanza, PI tarato (`analisi/confronto_f4.m`); i CSV escono nel formato del ponte e li giudica lo
+stesso programma. Figura: `analisi/figure/confronto_f4.png`.
+
+| Prova | Banco | Gemello aggiornato | Gemello di progetto |
+|---|---|---|---|
+| PI 0,02/0,4, gradino 391 Pa | 1,4 s, 50–60 % | 0,35 s, 2–6 % | 0,25 s, 5 % |
+| PI 0,02/0,1 | 0,9–1,1 s, 2–5 % | 1,5 s, 2–5 % | — |
+| On-Off ±700 Pa | diverge | ±3,5 cm, 9,8 s | ±2,2 cm, 6,1 s |
+| On-Off ±1000 Pa | ±4,6 cm, 11,3 s | ±3,7 cm, 8,6 s | — |
+| solo P a 10 cm | ±5,4 cm, 9,7 s | ±3,1 cm, 6,3 s | ±2,5 mm, 4,8 s |
+| PD a 10 cm | RMS 6,0 mm | RMS 1,9 mm | RMS 0,9 mm |
+| PID a 10 cm | RMS 3,4–4,0 mm, ±4,4 mm ogni 3,8–4,6 s, 16 s | RMS 2,2 mm, ±3,1 mm ogni 4,3 s, 18 s | RMS 1,4 mm, 2,9 s |
+
+Con il gioco e la depressione misurati il gemello passa dalle prestazioni del progetto a **quasi quelle del banco**:
+stesso ondeggiamento del PID, stesso assestamento lento del gradino, stessa risposta del PI tarato. Restano due
+differenze, e indicano cosa manca nel modello:
+1. **Il picco del PI di progetto** (190 Pa al banco, nessuno nel gemello): lo stantuffo che si incolla e parte di colpo
+   (attrito statico), non modellato.
+2. **L'On-Off ±700 Pa divergente al banco e stabile nel gemello:** al banco la depressione utile era minore (le pareti
+   della bottiglia rientrano piano, già visto nella 3.5) e P1 più pesante del previsto.
+
+**Conclusione per il controllo di base:** il progetto in frequenza regge, il limite è meccanico. Con il gioco ridotto
+(fissaggio di asta, braccio e servo, rischio R3) ci si aspetta di tornare verso le prestazioni del gemello di progetto;
+in alternativa, una compensazione del gioco nel firmware.

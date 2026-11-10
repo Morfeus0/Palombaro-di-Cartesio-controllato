@@ -9,8 +9,13 @@ namespace supervisore {
 enum class Stato { MANUALE, CALIBRAZIONE, HOLD, SAFE };
 
 struct Soglie {
-  uint32_t macMutoMs = 500;         // nessuna riga valida dal Mac (né Z né B)
-  uint32_t quotaMutaMs = 300;       // nessuna quota nuova (telecamera ferma); 9 nov: pause misurate 184 e 256 ms
+  // 10 nov sera (Gabriele: «sii più chill»): l'avvio del video ferma il Mac fino a 1,15 s e la telecamera fino a 1,9 s;
+  // in una pausa il PI della pressione tiene l'ultima pressione voluta e P1 deriva piano (costante di tempo circa 3 s)
+  uint32_t macMutoMs = 2000;        // nessuna riga valida dal Mac (né Z né B); era 500 ms
+  uint32_t quotaMutaMs = 2500;      // nessuna quota nuova (telecamera ferma); 9 nov: 300 ms (pause di 184 e 256 ms);
+                                    // 10 nov: una pausa di oltre 300 ms in HOLD; poi 600 ms, sopra macMutoMs: la quota
+                                    // si conta dal fotogramma (qualche ms prima dell'arrivo), quindi con soglie uguali
+                                    // un Mac fermo risultava sempre TELECAMERA_MUTA e MAC_MUTO non compariva (decisione)
   // erroreMaxM ed erroreLungoMs: decisione di Gabriele del 9 novembre (6 cm per più di 5 s)
   float pressioneMaxPa = 106500.0f; // decisione 9: +5 kPa sopra 101,5 kPa
   float erroreMaxM = 0.06f;         // errore di quota «grande» (proposta, piano 4.2)

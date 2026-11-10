@@ -41,7 +41,9 @@ void test_tutto_bene_nessun_motivo() {
 void test_mac_muto_conta_solo_negli_stati_automatici() {
   const Soglie s;
   Ingressi in = tuttoBene(Stato::HOLD);
-  in.msDaRigaMac = 501;
+  in.msDaRigaMac = 1150;                            // 10 nov: ponte fermo 1,15 s all'avvio del video (decisione: 2 s)
+  assertMotivo(nullptr, motivoSafe(in, s));
+  in.msDaRigaMac = 2001;
   assertMotivo("MAC_MUTO", motivoSafe(in, s));
   in.stato = Stato::MANUALE;
   assertMotivo(nullptr, motivoSafe(in, s));        // in MANUALE il servo resta dov'è
@@ -52,10 +54,20 @@ void test_telecamera_muta_e_p1_perso() {
   Ingressi in = tuttoBene(Stato::CALIBRAZIONE);
   in.msDaQuota = 184;                               // 5 nov: avvio della registrazione video
   assertMotivo(nullptr, motivoSafe(in, s));
-  in.msDaQuota = 256;                               // 1 nov: Mac fermo (decisione 9 nov: soglia 300 ms)
+  in.msDaQuota = 256;                               // 1 nov: Mac fermo
   assertMotivo(nullptr, motivoSafe(in, s));
-  in.msDaQuota = 301;
+  in.msDaQuota = 400;                               // 10 nov: pausa di oltre 300 ms in HOLD
+  assertMotivo(nullptr, motivoSafe(in, s));
+  in.msDaQuota = 1900;                              // 10 nov: pausa più lunga della telecamera (decisione: 2,5 s)
+  assertMotivo(nullptr, motivoSafe(in, s));
+  in.msDaQuota = 2501;
   assertMotivo("TELECAMERA_MUTA", motivoSafe(in, s));
+  // 10 nov, prova «e»: con il Mac fermo si fermano anche le quote, contate dal fotogramma (qualche ms prima):
+  // deve vincere MAC_MUTO, non TELECAMERA_MUTA
+  in = tuttoBene(Stato::HOLD);
+  in.msDaRigaMac = 2001;
+  in.msDaQuota = 2020;
+  assertMotivo("MAC_MUTO", motivoSafe(in, s));
   in = tuttoBene(Stato::HOLD);
   in.vista = 2;
   assertMotivo("PERSO", motivoSafe(in, s));

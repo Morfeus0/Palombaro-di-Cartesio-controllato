@@ -1,0 +1,251 @@
+<template>
+  <style>
+    #root {
+      position: absolute;
+      inset: 0;
+      font-family: "Inter", sans-serif;
+      color: #161616;
+      font-variant-numeric: tabular-nums;
+    }
+    .pr-banco {
+      position: absolute;
+      left: 72px;
+      top: 72px;
+      width: 451px;
+      height: 936px;
+      object-fit: cover;
+    }
+    .pr-esterno {
+      position: absolute;
+      left: 563px;
+      top: 72px;
+      width: 760px;
+      height: 428px;
+      object-fit: cover;
+    }
+    .pr-titolo {
+      position: absolute;
+      left: 1363px;
+      top: 64px;
+      width: 485px;
+    }
+    .pr-titolo b {
+      display: block;
+      white-space: nowrap;
+      font-size: 40px;
+      font-weight: 900;
+      letter-spacing: -0.01em;
+      line-height: 1.1;
+    }
+    .pr-titolo i {
+      display: block;
+      font-style: normal;
+      margin-top: 8px;
+      font-size: 30px;
+      font-weight: 700;
+      color: #6b6b6b;
+    }
+    #pr-numeri {
+      position: absolute;
+      left: 1363px;
+      top: 176px;
+      width: 485px;
+    }
+    .pr-etichetta {
+      font-size: 28px;
+      font-weight: 700;
+      color: #6b6b6b;
+    }
+    #pr-quota {
+      font-size: 120px;
+      font-weight: 900;
+      letter-spacing: -0.02em;
+      line-height: 1;
+      color: #d0282e;
+    }
+    #pr-quota small {
+      font-size: 48px;
+      font-weight: 700;
+      margin-left: 8px;
+    }
+    .pr-riga {
+      margin-top: 14px;
+      font-size: 32px;
+      font-weight: 400;
+    }
+    .pr-riga strong {
+      font-weight: 700;
+    }
+    #pr-grafico-quota {
+      position: absolute;
+      left: 563px;
+      top: 540px;
+      width: 1285px;
+      height: 300px;
+    }
+    #pr-grafico-pressione {
+      position: absolute;
+      left: 563px;
+      top: 870px;
+      width: 1285px;
+      height: 138px;
+    }
+    svg text {
+      font-family: "Inter", sans-serif;
+      font-size: 28px;
+      fill: #6b6b6b;
+    }
+    #pr-contatore {
+      position: absolute;
+      left: 663px;
+      top: 552px;
+      font-size: 40px;
+      font-weight: 900;
+      color: #d0282e;
+      background: #efefec;
+      padding: 0 12px;
+    }
+  </style>
+  <div id="root" data-composition-id="prova" data-width="1920" data-height="1080">
+    <!-- tempo 1: 20:11:00-20:11:16, tempo reale -->
+    <video id="pr-banco-1" class="clip pr-banco" src="assets/banco.mp4" data-start="0" data-duration="16"
+      data-media-start="5" data-track-index="1" muted playsinline></video>
+    <video id="pr-esterno-1" class="clip pr-esterno" src="assets/esterno.mp4" data-start="0" data-duration="16"
+      data-media-start="5" data-track-index="2" data-has-audio="true" data-volume="1" playsinline></video>
+    <!-- tempo 2: 20:11:37-20:11:55, tempo reale -->
+    <video id="pr-banco-2" class="clip pr-banco" src="assets/banco.mp4" data-start="16" data-duration="18"
+      data-media-start="42" data-track-index="1" muted playsinline></video>
+    <video id="pr-esterno-2" class="clip pr-esterno" src="assets/esterno.mp4" data-start="16" data-duration="18"
+      data-media-start="42" data-track-index="2" data-has-audio="true" data-volume="1" playsinline></video>
+    <!-- tempo 3: 20:11:55-20:13:11 a velocità ×4 -->
+    <video id="pr-banco-3" class="clip pr-banco" src="assets/banco.mp4" data-start="34" data-duration="19"
+      data-media-start="60" data-playback-rate="4" data-track-index="1" muted playsinline></video>
+    <video id="pr-esterno-3" class="clip pr-esterno" src="assets/esterno.mp4" data-start="34" data-duration="19"
+      data-media-start="60" data-playback-rate="4" data-track-index="2" muted playsinline></video>
+
+    <div id="pr-titolo-1" class="clip pr-titolo" data-start="0" data-duration="16" data-track-index="3">
+      <b id="pr-titolo-1-b">1 · Calibrato, P1 a 5 cm</b><i id="pr-titolo-1-i">tempo reale</i>
+    </div>
+    <div id="pr-titolo-2" class="clip pr-titolo" data-start="16" data-duration="18" data-track-index="3">
+      <b id="pr-titolo-2-b">2 · Gradino a 10 cm</b><i id="pr-titolo-2-i">tempo reale, suono del servo</i>
+    </div>
+    <div id="pr-titolo-3" class="clip pr-titolo" data-start="34" data-duration="19" data-track-index="3">
+      <b id="pr-titolo-3-b">3 · Un minuto a 10 cm</b><i id="pr-titolo-3-i">velocità ×4</i>
+    </div>
+
+    <div id="pr-numeri">
+      <div class="pr-etichetta">quota di P1</div>
+      <div id="pr-quota"><span id="pr-quota-val">0,0</span><small>cm</small></div>
+      <div class="pr-riga">voluta <strong id="pr-voluta">–</strong></div>
+      <div class="pr-riga">pressione <strong id="pr-pressione">–</strong></div>
+      <div class="pr-riga">servo <strong id="pr-servo">–</strong> · <span id="pr-ora">20:11:00</span></div>
+    </div>
+
+    <svg id="pr-grafico-quota" viewBox="0 0 1285 300">
+      <path id="pr-fascia" d="" fill="#d0282e" fill-opacity="0.14"></path>
+      <line x1="80" y1="10" x2="80" y2="290" stroke="#161616" stroke-width="2"></line>
+      <line x1="80" y1="290" x2="1285" y2="290" stroke="#161616" stroke-width="2"></line>
+      <text x="0" y="294">0</text>
+      <text x="0" y="207">5</text>
+      <text x="0" y="120">10</text>
+      <text x="0" y="33">15</text>
+      <text x="1110" y="33">quota, cm</text>
+      <path id="pr-voluta-linea" d="" fill="none" stroke="#161616" stroke-width="2" stroke-dasharray="10 8"></path>
+      <path id="pr-quota-linea" d="" fill="none" stroke="#d0282e" stroke-width="4" stroke-linejoin="round"></path>
+    </svg>
+    <svg id="pr-grafico-pressione" viewBox="0 0 1285 138">
+      <line x1="80" y1="128" x2="1285" y2="128" stroke="#161616" stroke-width="2"></line>
+      <text x="0" y="40">102</text>
+      <text x="0" y="128">99</text>
+      <text x="1050" y="30">pressione, kPa</text>
+      <path id="pr-pressione-voluta" d="" fill="none" stroke="#6b6b6b" stroke-width="2" stroke-dasharray="8 8"></path>
+      <path id="pr-pressione-linea" d="" fill="none" stroke="#161616" stroke-width="3" stroke-linejoin="round"></path>
+    </svg>
+
+    <div id="pr-contatore" class="clip" data-start="34" data-duration="19" data-track-index="4">
+      <span id="pr-contatore-testo">entro ±1 cm da 0 s</span>
+    </div>
+  </div>
+  <script>
+    const D = window.DATI_M4;
+    const C = D.campioni;
+    const FPS = D.fps;
+    // tempo locale della scena -> secondi dopo le 20:10:55
+    const TEMPI = [
+      { ini: 0, dur: 16, reale: 5, vel: 1 },
+      { ini: 16, dur: 18, reale: 42, vel: 1 },
+      { ini: 34, dur: 19, reale: 60, vel: 4 },
+    ];
+    // da quanti campioni la quota è entro ±1 cm dalla voluta, di fila
+    const dentroDa = new Array(C.length).fill(-1);
+    for (let i = 0; i < C.length; i++) {
+      const [q, r] = C[i];
+      const dentro = q !== null && r !== null && Math.abs(q - r) <= 1.0;
+      dentroDa[i] = dentro ? (i > 0 && dentroDa[i - 1] >= 0 ? dentroDa[i - 1] : i) : -1;
+    }
+    const virgola = (v, cifre) => v.toFixed(cifre).replace(".", ",");
+    const W = 1285, X0 = 80;
+    // dentro il riquadro del grafico: la pressione voluta all'ingresso in HOLD scende per un attimo a 97,7 kPa
+    const dentro = (y, alto, basso) => Math.min(basso, Math.max(alto, y));
+    const yQuota = (cm) => dentro(290 - (cm / 16) * 280, 6, 290);          // 0-16 cm
+    const yPress = (kpa) => dentro(120 - ((kpa - 98.9) / 3.2) * 110, 4, 126); // 98,9-102,1 kPa
+
+    function percorso(i0, i1, passo, x, y, valore) {
+      let d = "", su = false;
+      for (let i = i0; i <= i1; i += passo) {
+        const v = valore(C[i]);
+        if (v === null) { su = false; continue; }
+        d += (su ? "L" : "M") + x(i).toFixed(1) + " " + y(v).toFixed(1);
+        su = true;
+      }
+      return d;
+    }
+
+    function disegna(L) {
+      const s = L < 16 ? TEMPI[0] : L < 34 ? TEMPI[1] : TEMPI[2];
+      const reale = s.reale + s.vel * (L - s.ini);
+      const i0 = Math.round(s.reale * FPS);
+      const iFine = Math.min(C.length - 1, Math.round((s.reale + s.vel * s.dur) * FPS));
+      const i1 = Math.min(iFine, Math.round(reale * FPS));
+      const x = (i) => X0 + ((i - i0) / (iFine - i0)) * (W - X0);
+      const passo = s.vel;
+      // prima il riferimento (la fascia ±1 cm e la quota voluta per tutto il tempo), poi i dati fino a ora
+      let alto = "", basso = "";
+      for (let i = i0; i <= iFine; i += passo) {
+        const r = C[i][1];
+        if (r === null) continue;
+        alto += (alto ? "L" : "M") + x(i).toFixed(1) + " " + yQuota(r + 1).toFixed(1);
+        basso = "L" + x(i).toFixed(1) + " " + yQuota(r - 1).toFixed(1) + basso;
+      }
+      document.getElementById("pr-fascia").setAttribute("d", alto ? alto + basso + "Z" : "");
+      document.getElementById("pr-voluta-linea").setAttribute("d", percorso(i0, iFine, passo, x, yQuota, (c) => c[1]));
+      document.getElementById("pr-quota-linea").setAttribute("d", percorso(i0, i1, passo, x, yQuota, (c) => c[0]));
+      document.getElementById("pr-pressione-voluta").setAttribute("d", percorso(i0, i1, passo, x, yPress, (c) => c[3]));
+      document.getElementById("pr-pressione-linea").setAttribute("d", percorso(i0, i1, passo, x, yPress, (c) => c[2]));
+      const c = C[i1];
+      document.getElementById("pr-quota-val").textContent = c[0] === null ? "–" : virgola(c[0], 1);
+      document.getElementById("pr-voluta").textContent = c[1] === null ? "–" : virgola(c[1], 1) + " cm";
+      document.getElementById("pr-pressione").textContent = virgola(c[2], 2) + " kPa";
+      document.getElementById("pr-servo").textContent = Math.round(c[4]) + "°";
+      const tot = 20 * 3600 + 10 * 60 + 55 + Math.floor(reale);
+      const hh = Math.floor(tot / 3600), mm = Math.floor((tot % 3600) / 60), ss = tot % 60;
+      document.getElementById("pr-ora").textContent =
+        String(hh).padStart(2, "0") + ":" + String(mm).padStart(2, "0") + ":" + String(ss).padStart(2, "0");
+      const da = dentroDa[i1];
+      document.getElementById("pr-contatore-testo").textContent =
+        da < 0 ? "fuori dalla fascia ±1 cm" : "entro ±1 cm da " + Math.floor((i1 - da) / FPS) + " s";
+    }
+
+    const tl = gsap.timeline({ paused: true });
+    const orologio = { L: 0 };
+    tl.to(orologio, { L: 53, duration: 53, ease: "none", onUpdate: () => disegna(orologio.L) }, 0);
+    [1, 2, 3].forEach((n, k) => {
+      const t = TEMPI[k].ini;
+      tl.fromTo("#pr-titolo-" + n + "-b", { opacity: 0, y: 24 }, { opacity: 1, y: 0, duration: 0.5, ease: "power3.out" }, t + 0.05);
+      tl.fromTo("#pr-titolo-" + n + "-i", { opacity: 0, y: 24 }, { opacity: 1, y: 0, duration: 0.5, ease: "power3.out" }, t + 0.22);
+    });
+    tl.fromTo("#pr-contatore-testo", { opacity: 0 }, { opacity: 1, duration: 0.4, ease: "power3.out" }, 34.3);
+    disegna(0);
+    window.__timelines["prova"] = tl;
+  </script>
+</template>

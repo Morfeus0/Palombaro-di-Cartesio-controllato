@@ -138,7 +138,10 @@ void cambiaStato(Stato nuovo, const char* motivo) {
 // SAFE (decisioni 3 e 9): stantuffo spinto e P1 a fondo; per sovrapressione invece il servo si ferma dov'è.
 void entraInSafe(const char* motivo) {
   cambiaStato(Stato::SAFE, motivo);
-  if (strcmp(motivo, "PRESSIONE") == 0) siringa::ferma(); else siringa::vaiA(siringa::DECIMI_SAFE);
+  // 10 nov: se il servo non ha mai ricevuto un comando resta spento (decisione 11): prima SAFE lo accendeva
+  // direttamente a 146 senza rampa, e collegando l'alimentatore sarebbe scattato da dov'era (SAFE SENSORE all'avvio).
+  if (strcmp(motivo, "PRESSIONE") == 0 || !siringa::attivo()) siringa::ferma();
+  else siringa::vaiA(siringa::DECIMI_SAFE);
 }
 
 bool quotaFresca(uint32_t adessoMs) {

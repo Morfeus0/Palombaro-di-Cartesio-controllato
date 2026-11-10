@@ -1006,3 +1006,44 @@ Preparati da Claude (circa 17:00) i passaggi per fissare il servo con le fascett
 **Ore:** Gabriele 0 h al banco; il lavoro della sera è di Claude, non contato.
 
 **Prossimo passo:** martedì 10 al banco con la scaletta: soglia di P1 (piano C), firmware 0.2 caricato, transizioni della 4.2 (compresa `PARTENZA_BASSA`), 4.4, 4.3, 4.5 e primo tentativo di **M4**. Da decidere (Gabriele): se mandare il messaggio di M2; se le transizioni `PRESSIONE` e `SENSORE`, provate solo sul Mac, bastano per il «Fatto quando» della 4.2.
+
+## 2026-11-10 · firmware 0.2 al banco: 4.2, 4.4, 4.3, 4.5 e criterio di M4 superato; video di M4; 4.6 · circa 2 h 45
+
+| Orario | Durata | Attività |
+|---|---|---|
+| 17:33–17:55 | 22 min | accensione, firmware 0.2 caricato; SAFE `SENSORE` all'avvio e difetto del servo in SAFE corretto; P1 trovato vuoto nel vasetto e riempito di nuovo (1.2) |
+| 17:55–18:16 | 21 min | soglia di P1 (99,12 kPa), chiusura a 116°, telecamera di nuovo a 60 fps, zero del righello rifatto con P1 sul fondo |
+| 18:16–18:50 | 34 min | 4.2: rifiuti, due calibrazioni, SAFE per `PERSO`, `TELECAMERA_MUTA`, `MAC_MUTO`, `ERRORE`, `EMERGENZA`; pause della telecamera e soglie; iPhone collegato con il cavo |
+| 18:50–19:16 | 26 min | 4.4: gradini di pressione, misura del gioco del servo (22°), video del gioco (Gabriele), taratura del PI |
+| 19:16–19:23 | 7 min | 4.3: On-Off ±700 Pa (diverge) e ±1000 Pa con due isteresi |
+| 19:23–20:15 | 52 min | 4.5: solo P, PD, PID; tre prove interrotte (colonna ridisegnata, ponte fermo all'avvio del video, P1 contro la parete); prova di M4 con il video del banco e quello esterno di Gabriele |
+
+Sera (circa 20:15–22:40, Claude al computer, non contato): video di M4 con HyperFrames, 4.6 (gemello rifatto con le condizioni del banco), capitolo 5, chiusura.
+
+**Fatto:**
+- **Firmware 0.2 caricato.** All'avvio il sensore ha smesso di rispondere per un attimo (17:37:04, SAFE `SENSORE`, poi tornato da solo). Lì si è visto un **difetto**: SAFE comandava il servo a 146 anche se non aveva mai ricevuto un comando, cioè lo accendeva di colpo senza rampa (collegando l'alimentatore sarebbe scattato da 36 a 146). Corretto: senza un comando SAFE lo lascia spento; provato subito con `E` a servo spento.
+- **Piano C fallito:** P1 nel vasetto, dritto con l'ugello appoggiato sulla carta umida, era **quasi vuoto d'acqua** e il fondo del vasetto bagnato: la carta ha fatto da stoppino. Riempito di nuovo da Gabriele. Soglia misurata con lo stesso metodo del 5 novembre (`pc/anello_aperto.py --solo-soglia`): **99,12 kPa**, cioè 1,52 kPa sotto la stanza (100,64): P1 è pesante. Decisione di Gabriele: **niente gocce da togliere**, si lavora con la chiusura più alta (116°: soglia intorno a 60°, circa 2,5 kPa di corsa sopra). In depressione un grado vale circa 26 Pa invece di 36.
+- **Telecamera:** a 1080p l'iPhone mandava 30 fps anche a ffmpeg da solo (`pc/misura_fps.py`: 30,0 fps a 1080p, 58,4 a 720p); tornato a 60 dopo averlo fatto ricollegare. Il righello aveva preso lo zero con P1 in superficie (all'avvio P1 era in cima): riavviato con P1 sul fondo. Con P1 pesante, alla pressione della stanza P1 resta dov'è (sul fondo resta sul fondo, in cima galleggia).
+- **4.2 · stati e sicurezza**, tutte le transizioni provocabili: rifiuti `NO,M,EQUILIBRIO` e `NO,M,QUOTA`; CALIBRAZIONE → HOLD due volte, **p0 = 99 168 e 99 174 Pa** (soglia a mano 99 120: 48 e 54 Pa; ripetibilità 6 Pa), e subito dopo P1 tenuto a 5 cm (ultimi 60 s: RMS 0,6 mm); SAFE `PERSO` con la striscia di carta (0,23 s), `TELECAMERA_MUTA` (Ctrl+C, quota vecchia 503 ms), `MAC_MUTO` (ponte sospeso), `ERRORE` (`K,Z,0,0,0,10` e `R,1100`: 5 s oltre 6 cm), `EMERGENZA` (servo spento e acceso). `PARTENZA_BASSA` non si può provocare con questo P1 (la depressione disponibile è troppo poca); `PRESSIONE` è oltre la corsa del servo.
+- **Soglie del Mac e della telecamera** (4 caricamenti del firmware): la telecamera da 300 a 500, poi 600 ms (con soglie uguali un Mac fermo risultava sempre `TELECAMERA_MUTA`, perché la quota si conta dal fotogramma); poi, su richiesta di Gabriele («sii più chill»), **Mac 2 s e telecamera 2,5 s**: in una pausa il PI della pressione tiene l'ultima pressione voluta e P1 deriva piano. Test del supervisore aggiornati ogni volta (prima rossi).
+- **Pause della telecamera:** senza cavo 4 pause lunghe in 45 minuti (fino a 0,8 s); con l'iPhone collegato al Mac 5 minuti puliti (massimo 185 ms), poi di nuovo pause fino a 1,9 s, e l'iPhone che si è bloccato del tutto alle 19:45 (13,5 s). In quel caso `telecamera.py` si chiudeva da solo: **difetto corretto** (ffmpeg che non risponde si chiude con la forza e la telecamera si riapre; test prima rosso). **L'avvio della registrazione video ferma tutto il Mac per circa 1 s** (il ponte stesso si è fermato 1,15 s alle 19:29:48: SAFE `MAC_MUTO`).
+- **Gioco del servo (R3):** gradini di 10° avanti e indietro tra 90 e 100: la pressione non si muove; scendendo da 100 a passi di 2° la pressione resta ferma fino a 78°: **circa 22° di gioco** (il 23 ottobre 10°), circa 550 Pa a vuoto; nello stesso verso circa 25 Pa/°. Video di Gabriele: l'asta agganciata allo stantuffo sale e scende prima di spingere, il braccio del servo con l'epossidica fa gioco, il servo si solleva nonostante le 5 fascette.
+- **4.4 · PI della pressione:** gradini di ±391 Pa con P1 sul fondo (`K,E,p0+500`, `K,Z,0,0,0,10`). Progetto 0,02/0,4: sovraelongazione 50–60 %, 1,4 s. Provati 0,02/0,05 (2 s), **0,02/0,1 (0,9–1,1 s, 2–5 %, scelto)**, 0,04/0,1 (1,1–1,3 s). Tenuta: errore medio 0,3 Pa con la perdita compensata. **«Fatto quando» (< 0,5 s) non raggiunto** per il gioco.
+- **4.3 · On-Off** a 5 cm: con ±700 Pa l'oscillazione cresce fino alla superficie (SAFE `ERRORE`: la spinta massima vale l'equilibrio a 12,1 cm); con **±1000 Pa** (decisione di Gabriele) ciclo limite **±4,6 cm, 11,3 s** (isteresi ±5 mm) e **±4,7 cm, 11,8 s** (±10 mm). La «tirata» va a fine corsa e arriva solo a circa 100 Pa sotto p0. **«Fatto quando» raggiunto.**
+- **4.5:** solo P oscilla (±5,4 cm, 9,7 s); PD entro ±1 cm per 89,7 s ma RMS 6 mm; **PID: entro ±1 cm per 88,7 s (19:53) e 81,9 s (20:11), ultimi 60 s errore massimo 6,0 e 7,9 mm, RMS 3,4–3,5 mm.** **Criterio di M4 superato due volte**, la seconda con il video del banco e quello esterno di servo e siringa (Gabriele). A 10 cm il PID ondeggia di circa ±4 mm ogni 4 s (il gioco).
+- **Video di M4** (Claude, HyperFrames, `media/m4-video/`): 64 s con la bottiglia, il video di Gabriele sincronizzato (inizio alle 20:10:42,1, trovato sul movimento del servo all'ingresso in HOLD e controllato sul gradino), i grafici di quota e pressione dai dati veri e il suono del servo; `media/2026-11-10_M4_quota-tenuta-entro-1-cm.mp4`.
+- **4.6 · confronto con il gemello** (`analisi/confronto_f4.m`, `analisi/confronto_f4.py`, figura `analisi/figure/confronto_f4.png`): con gioco 22°, chiusura a 116° e P1 pesante il gemello riproduce l'ondeggiamento del PID (±3,1 mm ogni 4,3 s contro ±4,4 mm ogni 4 s), l'assestamento lento (18 s contro 16) e il PI tarato (1,5 s contro 1). Non riproduce il picco del PI di progetto (stantuffo che si incolla, non modellato) né l'On-Off ±700 divergente (depressione utile minore al banco). Capitolo 5: sezioni 5.5 (prove al banco) e 5.6 (confronto).
+- **Webcam:** cercata (Logitech C922 circa 80–90 €, ELP con zoom circa 95 €); **decisione di Gabriele: niente spesa**; l'iPad non può fare da Fotocamera Continuity.
+- **Test:** 148 in Python, 33 nel firmware.
+
+**Problemi (e cosa si è capito):**
+1. Una sequenza di Claude ha dato per scontato P1 sul fondo prima di una prova: P1 era salito in superficie e HOLD è stato rifiutato. Ora ogni prova parte mandando P1 sul fondo.
+2. Ridisegnare la colonna durante una prova ferma le quote (SAFE): durante le prove la dashboard non si tocca.
+3. P1 contro la parete della bottiglia: il marcatore sul bordo si vede e non si vede (due `PERSO` di fila); risolto con un colpetto alla bottiglia.
+4. Lo zero del righello si prende dalla posizione ferma più bassa: con P1 inclinato sul fondo sotto pressione è circa 6 mm più in basso che con P1 dritto.
+
+**Decisioni (Gabriele):** P1 riempito senza togliere gocce, chiusura a 116°; iPhone sul cavo; niente webcam (niente spesa); soglie del Mac e della telecamera a 2 e 2,5 s; meccanica (R3) alla prossima sessione, oggi solo software; PI a 0,02/0,1; On-Off a ±1000 Pa; video di M4 con il video esterno; controllo della calibrazione (`PARTENZA_BASSA`) caricato.
+
+**Ore:** Gabriele circa **2 h 45** al banco (17:33–20:15, stimato dal registro). Per sottofase, circa: 1.2 (P1) 0 h 20, 4.2 1 h 00, 4.4 0 h 25, 4.3 0 h 10, 4.5 0 h 50. La sera è lavoro di Claude, non contato.
+
+**Questioni aperte (da riprendere alla prossima sessione, Claude le richiede):** vedi `docs/prompt-ripresa-11-novembre.md`.

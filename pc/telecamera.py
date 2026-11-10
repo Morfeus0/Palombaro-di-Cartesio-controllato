@@ -107,7 +107,13 @@ class SorgenteIphone:
     def chiudi(self) -> None:
         if self.processo and self.processo.poll() is None:
             self.processo.terminate()
-            self.processo.wait(timeout=5)
+            try:
+                self.processo.wait(timeout=5)
+            except subprocess.TimeoutExpired:
+                # 10 nov: con l'iPhone bloccato ffmpeg ignora terminate() e il programma si chiudeva qui
+                log.warning("ffmpeg non si ferma: lo chiudo con la forza")
+                self.processo.kill()
+                self.processo.wait(timeout=5)
 
 
 class SorgenteVideo:

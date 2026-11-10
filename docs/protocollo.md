@@ -102,8 +102,8 @@ $TIPO,campo1,campo2,…*CC\n
 
 | Condizione | In MANUALE | In CALIBRAZIONE, HOLD, TRACKING |
 |---|---|---|
-| nessuna riga valida dal Mac da **500 ms** (né `Z` né `B`) | il servo resta dov'è | **SAFE** (`X,…,SAFE,MAC_MUTO`) |
-| nessuna `Z` nuova da **300 ms** (telecamera ferma, riconoscimento bloccato; 200 ms fino al 9 novembre) | niente | **SAFE** (`TELECAMERA_MUTA`) |
+| nessuna riga valida dal Mac da **2 s** (né `Z` né `B`; 500 ms fino al 10 novembre) | il servo resta dov'è | **SAFE** (`X,…,SAFE,MAC_MUTO`) |
+| nessuna `Z` nuova da **2,5 s** (telecamera ferma, riconoscimento bloccato; 200 ms fino al 9 novembre, poi 300, 500 e 600 ms il 10) | niente | **SAFE** (`TELECAMERA_MUTA`) |
 | `Z` con `vista = 2` (perso) | niente | **SAFE** (`PERSO`): il riconoscimento ha già scavalcato i buchi fino a 0,25 s |
 | sovrapressione oltre **+3,5 kPa** o sensore senza risposta | servo fermo e avviso `#` | **SAFE** (`PRESSIONE` / `SENSORE`) |
 | `E` dal Mac | SAFE | SAFE |
@@ -197,7 +197,13 @@ la calibrazione si annulla → SAFE (`PARTENZA_BASSA`). Si riparte con la pressi
 **Decisioni (Gabriele, 9 novembre):**
 1. **Errore troppo grande troppo a lungo → SAFE (`ERRORE`): 6 cm per più di 5 s.** Nel gemello il PID resta sotto
    1 cm a regime e un cambio di quota di 5 cm si assesta in circa 3 s: la soglia scatta solo se qualcosa è rotto.
-2. **Telecamera muta dopo 300 ms** (era 200 ms, decisione del 1 novembre): il 5 novembre l'avvio della registrazione
+2. **Aggiornamento del 10 novembre (decisione di Gabriele, «sii più chill»): Mac muto dopo 2 s, telecamera muta dopo
+   2,5 s.** Al banco l'avvio della registrazione video ha fermato il ponte per 1,15 s e l'iPhone ha avuto pause fino a
+   1,9 s; in una pausa il PI della pressione tiene l'ultima pressione voluta e P1 deriva piano (costante di tempo circa
+   3 s). La telecamera resta sopra il Mac perché la quota si conta dal fotogramma, qualche ms prima dell'arrivo: con
+   soglie uguali un Mac fermo risultava sempre `TELECAMERA_MUTA`. Lo stesso giorno: SAFE non accende più il servo se non
+   ha mai ricevuto un comando (prima andava a 146 senza rampa). Storia della soglia della telecamera, prima del 10:
+   **Telecamera muta dopo 300 ms** (era 200 ms, decisione del 1 novembre): il 5 novembre l'avvio della registrazione
    video ha fermato i fotogrammi per 184 ms, e il 1 novembre c'è stata una pausa di 256 ms con il Mac fermo; con
    300 ms nessuna delle due porta in SAFE. Con il polo instabile a 0,33 rad/s, 300 ms al buio fanno crescere l'errore
    di circa il 10 %. La soglia è `supervisore::Soglie`; il test `test_telecamera_muta_e_p1_perso` prova 184, 256 e 301 ms.
