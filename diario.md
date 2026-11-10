@@ -1046,4 +1046,6 @@ Sera (circa 20:15–22:40, Claude al computer, non contato): video di M4 con Hyp
 
 **Ore:** Gabriele circa **2 h 45** al banco (17:33–20:15, stimato dal registro). Per sottofase, circa: 1.2 (P1) 0 h 20, 4.2 1 h 00, 4.4 0 h 25, 4.3 0 h 10, 4.5 0 h 50. La sera è lavoro di Claude, non contato.
 
+**Fine sessione (decisione di Gabriele):** P1 conservato **sospeso nel vasetto** (appeso per la tettarella a un foro nel cartoncino, punta dell'ugello lontana dalla carta umida); da verificare alla prossima sessione.
+
 **Questioni aperte (da riprendere alla prossima sessione, Claude le richiede):** vedi `docs/prompt-ripresa-11-novembre.md`.
