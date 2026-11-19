@@ -394,3 +394,4 @@ kbd { font-family: var(--font-numeri); font-size: 0.6875rem; padding: 0 0.3rem; 
 .bottone-emergenza:hover { filter: brightness(1.08); }
 .bottone-emergenza:active { transform: translateY(1px); }
 .controllo .grafico canvas { height: 10rem; }
+.controllo .grafici-titolo .unita { font-size: 0.8em; color: var(--inchiostro-2); } /* nota del titolo: almeno 12 px, contrasto pieno */
