@@ -37,7 +37,8 @@ class RegistroNuovo(unittest.TestCase):
     def test_riga_t_diventa_una_misura(self):
         riga = "20:30:00.123 " + pr.componi("T,7,1200,104285,1455,M,0,0.0,0.0,2392")
         self.assertEqual(analizza_riga(riga),
-                         {"tipo": "misura", "t": "20:30:00.123", "p": 104.285, "T": 23.92, "servo": 146})
+                         {"tipo": "misura", "t": "20:30:00.123", "p": 104.285, "T": 23.92, "servo": 146,
+                          "stato": "M"})   # 5.5: lo stato serve al pannello di controllo
 
     def test_servo_non_ancora_attivo(self):
         riga = "20:30:00.123 " + pr.componi("T,7,1200,104285,-1,M,0,0.0,0.0,2392")

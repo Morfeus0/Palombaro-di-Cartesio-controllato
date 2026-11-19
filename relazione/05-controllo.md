@@ -172,3 +172,32 @@ differenze, e indicano cosa manca nel modello:
 **Conclusione per il controllo di base:** il progetto in frequenza regge, il limite è meccanico. Con il gioco ridotto
 (fissaggio di asta, braccio e servo, rischio R3) ci si aspetta di tornare verso le prestazioni del gemello di progetto;
 in alternativa, una compensazione del gioco nel firmware.
+
+## 5.7 Quanto conta il gioco? (gemello, 19 novembre)
+
+Prima del montaggio del supporto stampato si è chiesto al gemello quale gioco basti per la 4.4 (gradini di pressione assestati in meno di 0,5 s). Stessa prova del banco, con il gioco da 0 a 22° e i due PI della pressione (`analisi/soglia_gioco.m`, giudizio con `pc/soglia_gioco.py`, stessi criteri del banco):
+
+| PI della pressione | gioco 0° | gioco 10° | gioco 22° |
+|---|---:|---:|---:|
+| progetto (0,02 °/Pa, 0,4 °/(Pa·s)) | 0,27 s | 0,31 s | 0,38 s |
+| tarato al banco il 10 novembre (0,02, 0,1) | 1,21 s | 1,25 s | 1,52 s |
+
+Nel gemello il gioco da solo quasi non rallenta l'anello: la lentezza misurata al banco (1 s) viene soprattutto dal PI ammorbidito. Il PI era stato ammorbidito perché al banco quello di progetto sovraelongava del 50–60 %, un comportamento che il gemello non riproduce: manca l'attrito statico dello stantuffo, che insieme al gioco produce il «salto» dopo ogni inversione. Il gemello quindi non dà una soglia sul gioco; dà un'indicazione per la 4.4 dopo il montaggio: riprovare per primo il PI di progetto.
+
+## 5.8 Verso il controllo avanzato (lavoro preparatorio, 19 novembre)
+
+**Filtro α-β sulla quota (5.3).** Provato sui dati registrati il 10 novembre (`pc/filtro_ab.py`): rumore sulla velocità con P1 fermo sul fondo e ritardo rispetto a una velocità di riferimento non causale sul gradino 5 → 10 cm della prova di M4. β = α²/(2 − α) (Benedict–Bordner).
+
+| stima della velocità | rumore [mm/s] | riduzione | ritardo [ms] |
+|---|---:|---:|---:|
+| differenza fra fotogrammi | 1,93 | 1× | 10 |
+| derivata filtrata del firmware 0.2 (N = 10, 30 ms) | 0,24 | 7,9× | 85 |
+| α-β, α = 0,4 | 0,26 | 7,3× | 70 |
+| α-β, α = 0,5 | 0,38 | 5,0× | 50 |
+| α-β, α = 0,2 | 0,10 | 18,7× | 150 |
+
+Il criterio della 5.3 (rumore ridotto almeno di 5 volte) lo rispettava già la derivata filtrata del firmware; l'α-β con α = 0,4–0,5 dà la stessa riduzione con 15–35 ms di ritardo in meno, cioè circa il 5 % del margine di ritardo dell'anello esterno (0,50 s). Proposta: eseguirlo sull'ESP32 a ogni fotogramma nuovo, perché lì gira il controllore e lì si conosce l'età della quota: la stima si può portare all'istante attuale (x + v · età), un piccolo recupero della latenza della telecamera. Da decidere con Gabriele e provare al banco.
+
+**Profili di riferimento (5.4, in simulazione).** Cascata con i guadagni di progetto nel gemello con le condizioni del 10 novembre (`analisi/tracking_5_4.m`): onda 7 ± 3 cm con periodo 40 s, errore RMS **1,9 mm** (massimo 4,0 mm); con periodo 20 s, **3,7 mm** (massimo 7,2 mm). Con gioco 5° invece di 22° i numeri cambiano di un decimo di millimetro, per il motivo visto in 5.7. Il criterio del foglio A4 (RMS < 5 mm) è rispettato nel gemello per entrambe le onde.
+
+**Supervisore (5.7).** Capitolo 6.

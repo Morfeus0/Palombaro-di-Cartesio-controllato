@@ -1049,3 +1049,55 @@ Sera (circa 20:15–22:40, Claude al computer, non contato): video di M4 con Hyp
 **Fine sessione (decisione di Gabriele):** P1 conservato **sospeso nel vasetto** (appeso per la tettarella a un foro nel cartoncino, punta dell'ugello lontana dalla carta umida); da verificare alla prossima sessione.
 
 **Questioni aperte (da riprendere alla prossima sessione, Claude le richiede):** vedi `docs/prompt-ripresa-11-novembre.md`.
+
+## 2026-11-12 · ripresa: dichiarazione di M4 rimandata alla sistemazione del servo
+
+**Verifica al computer:** rieseguito `pc/analisi_f4.py --prova 4.5` sui CSV `2026-11-10_4-5-pid_03.csv` e `2026-11-10_4-5-pid-m4_04.csv`: confermati rispettivamente **88,7 e 81,9 s consecutivi entro ±1 cm**, quindi il criterio sperimentale di M4 resta superato due volte. Questi risultati riguardano le prove del 10 novembre, non nuove prove al banco.
+
+**Decisione (Gabriele): opzione 2, rimandare la dichiarazione di M4 fino alla sistemazione del servo.** M4 resta non dichiarata; nessuna modifica al criterio di 60 s entro ±1 cm.
+
+**Prossimo intervento al banco:** meccanica del servo (R3: corpo che si solleva, prolunga che cede, gancio allo stantuffo), poi rimisurare il gioco a passi di 2° e ripetere la 4.4 (assestamento della pressione < 0,5 s). Riprendere quindi la decisione su M4. Gli altri punti del promemoria restano aperti.
+
+**Ore al banco:** nessuna nuova attività al banco documentata in questa ripresa.
+
+**Preparazione di R3, lontano dal banco:** Gabriele ha confermato cacciaviti, pinze, viti per legno, martello, chiodi, fascette e nastro; nessun trapano, ritagli di legno da verificare. Può comprare il materiale al brico. Possibile aiuto del padre il 28 novembre con trapano e attrezzi per lavorare il legno; nessuna scelta di rinviare l'intervento a quella data. Proposta di Gabriele: sede sagomata nel legno per il servo, da valutare mantenendo la libertà del braccio e il corretto allineamento della trasmissione.
+
+**Ripresa fornita:** `/Users/gabrielecaruso/Downloads/IMG_2485 2.MOV` (circa 29,72 s, del 10 novembre). Esaminati fotogrammi dell'attacco allo stantuffo, del corpo sul fianco e delle due squadrette della prolunga, con una sequenza più fitta delle inversioni. La ripresa non fornisce una nuova misura separata dei singoli giochi. Guida e due fotogrammi di riferimento salvati in `hardware/intervento-servo-r3.md` e `hardware/riscontri-r3-2026-11-12/`.
+
+**Soluzioni preparate, non ancora scelte o montate:** supporto già forato che trattiene le alette, oppure culla esterna rigida con fermo superiore; eventuali prefori nel legno con trivellino manuale. Compatibilità, dimensioni e lista definitiva di acquisto richiedono le misure del montaggio reale. Nessun acquisto o nuova prova al banco effettuato.
+
+**Nuova risorsa (Gabriele):** il professore ha offerto la progettazione e stampa 3D gratuita di componenti, oppure la stampa di un progetto preparato da noi. Prima proposta da valutare: culla su misura per il servo sul fianco, smontabile e fissata alla tavoletta; possibili interventi successivi su prolunga e attacco allo stantuffo. Requisiti aggiunti a `hardware/intervento-servo-r3.md`. Nessun CAD ancora realizzato e nessuna richiesta inviata al professore; scelta del pezzo e misure del montaggio da definire.
+
+**CAD e risposta del professore (aggiornamento successivo):** Gabriele ha chiesto una base comune con supporti di servo e siringa e coperchi rimovibili, partendo dalle quote note e riprendendo quelle mancanti una alla volta al millimetro. Prima misura richiesta: profondità della sola scatola del servo, fra la faccia dell'alberino e quella opposta (ancora in attesa). Il professore ha risposto alle domande: piatto **circolare Ø200 mm**, altezza **400 mm**, **PLA basic**, file **STL**, tolleranza suggerita **1 mm**, viti e dadi **M3** disponibili; prevedere **una settimana** per la stampa e consegna a lezione (due giorni solo come possibilità urgente). Il significato di 1 mm totale o per lato non è ancora specificato. Vincoli e rilievo salvati in `hardware/cad-base/requisiti-e-misure.md`. Da verificare la divisione della base in moduli che entrino nel piatto, conservando rigidità e allineamento; nessun CAD o STL ancora prodotto, nessuna data del calendario modificata.
+
+**Rilievo del servo e fonti:** Gabriele ha riferito altezza circa 40 mm e larghezza circa 20 mm, fornito due immagini quotate e proposto il servo in piedi con alberino verso l'alto. Poi ha chiesto di recuperare autonomamente le quote dalle fonti per accelerare il lavoro. Identificativi forniti: X002A2MD3B, A-SKU/MODEL A097, S/N 260718, marca HAXIHA. Verificata direttamente nel browser la scheda Amazon ASIN B0F892P2WQ: HAXIHA, modello e codice produttore A097, dimensioni dichiarate 40 × 19 × 43 mm. Lo schema completo fornisce anche alette 53 mm e quote verticali; salvato in `hardware/cad-base/riferimenti/`. Registro aggiornato distinguendo quote nominali e misure riferite; per il fissaggio si prevedono asole di regolazione. Nessun CAD/STL ancora prodotto.
+
+**Siringa e primo CAD (aggiornamento successivo):** Gabriele ha confermato Ø21 mm tramite circonferenza 66 mm, lunghezza 105 mm, flangia ovale **37,5 × 25 × 2 mm**, disco Ø28 mm, corsa 70 mm e distanza flangia–disco a 0 ml di 16 mm. La ricerca online non ha trovato un disegno esterno quotato della specifica siringa PIC: queste sono misure confermate dall’utente. Foto della flangia conservata nel registro CAD.
+
+**BOZZA 01 prodotta:** CAD parametrico JSCAD in `hardware/cad-base/modello.cjs`, base 295 × 86 mm con servo verticale, due moduli con linguette, piastra di giunzione, due coperchi delle selle e fermo flangia; sei STL preliminari. Ogni pezzo rientra singolarmente nel piatto Ø200 mm con margine di progetto; mesh chiuse a guscio unico verificate anche dopo float32. Corsa nominale 1,87–18,24 ml ai comandi 36–146°, con braccio35/biella110 mm. Ipotesi esplicite per interassi e alette servo, cavo, ganci L/Z e quote Z54/57/55 mm di braccio/biella/asse siringa. Nessun collaudo meccanico o strutturale. Corrette in revisione le interferenze dei riferimenti vicino al disco, alla nervatura e al braccio. La riparazione della prolunga resta separata.
+
+**Visualizzazione per Gabriele:** richiesto di spiegare l’apertura perché non ha mai usato un CAD. Preparati HTML autonomo `hardware/cad-base/bozza-01/APRI-IL-CAD.html`, immagini statiche e guida `README.md`. HTML esaminato nel codice/bundle; prova UI dell’agente non eseguibile poiché la superficie browser blocca URL `file:`. Nessun aggiramento effettuato. Non inviato nulla al professore, nessuna stampa o acquisto, nessuna nuova prova al banco; M4 resta non dichiarata e calendario invariato.
+
+**BOZZA 02, allineamento proposto da Gabriele:** chiarito che intende arretrare il servo, visto dall’alto, per avere l’asticella parallela allo scorrimento dello stantuffo. Servo traslato di19 mm, siringa alla stessa coordinata trasversale, braccio35 e biella110 mm conservati. Obliquità al centro:0° contro9,95° della prima bozza; il perno resta fuori asse di4 mm nella nervatura. Base297×86 mm; sei STL chiusi verificati entro il piatto, raggio massimo89,29 mm. Corsa nominale2,74–18,86 ml a36–146°, centro11 ml: non sono dati al banco. Esportatore verifica anche interferenze ogni grado prima delle scritture. Prima versione conservata con sorgente; nuovi file e anteprime in `hardware/cad-base/bozza-02/`.
+
+**Verifica fisica richiesta:** Gabriele ha chiesto come stabilire se il CAD è giusto. Sequenza spiegata: quote residue una alla volta, piccolo campione degli accoppiamenti con il professore, poi montaggio e prova effettiva del gioco e della4.4. Prima misura richiesta sul servo di riserva: interasse lungo dei fori sulle due alette opposte, da centro a centro, ipotizzato49 mm (53 mm è l’ingombro esterno dello schema). Risposta ancora in attesa. L’allineamento può ridurre la componente laterale della spinta al centro; non corregge da solo ganci, prolunga e ingranaggi. Nessun nuovo risultato sperimentale, stampa o dichiarazione M4.
+
+## 2026-11-19 · CAD inviato al prof; 4.7 aggiunta; trasmissione stampata, gemello e F5 anticipata (lontano dal banco)
+
+**Gabriele:** ha inoltrato ufficialmente al professore il CAD del supporto servo–siringa (revisione 03, sei STL della cartella `hardware/cad-base/da-stampare 2/`, uguali byte per byte a quelli dello zip). Stampa prevista in circa una settimana, consegna a lezione (probabilmente gio 26 novembre).
+
+**Decisioni (Gabriele):** aggiungere al piano la sottofase **4.7** (montaggio del supporto e ricalibrazione dell'attuatore) e anticipare, durante l'attesa, le parti della F5 che non dipendono dalla meccanica. Rifare da nuovo anche prolunga e collegamento allo stantuffo invece di riparare quelli vecchi.
+
+**Trapano:** non serve. Prefori delle 8 viti da legno con chiodo e martello (segnare il centro dei fori con la base appoggiata, togliere la base, chiodo per circa 1 cm), oppure con il padre il 28 novembre.
+
+**Trasmissione stampata T01 (Claude):** braccio avvitato su una squadretta originale nuova (la dentatura non si stampa), biella rigida da 90,15 mm con perni M3×20, pinza sul disco dello stantuffo con due viti di registro. Non cambia la base: la biella riproduce la corsa della revisione 03 (differenza massima 0,13 ml, margini 6,75 mm). Nessuna interferenza a ogni grado fra 36° e 146° (9102 coppie controllate). File in `hardware/cad-base/da-stampare-trasmissione/`, bozza del messaggio in `docs/messaggio-stampa-trasmissione.md`. **In attesa delle misure A–F di Gabriele** (squadretta, quota sotto la squadretta, viti dei forellini, spessore del disco) prima dell'invio.
+
+**Gemello (Claude):** il gioco da 0 a 22° quasi non cambia la 4.4 nel gemello (PI di progetto 0,24–0,38 s; PI tarato 1,2–1,5 s anche senza gioco). Il gemello non ha l'attrito statico dello stantuffo, quindi non dà una soglia sul gioco; indicazione: dopo il montaggio riprovare per primo il PI di progetto. Inseguimento in simulazione (5.4): onda 7 ± 3 cm, RMS 1,9 mm a 40 s e 3,7 mm a 20 s.
+
+**F5 anticipata (Claude):** 5.3 filtro α-β provato sui dati del 10 novembre (α = 0,5: rumore sulla velocità 5 volte più basso, 50 ms di ritardo; la derivata del firmware 7,9 volte con 85 ms); 5.7 supervisore come automa e rete di Petri, sette proprietà verificate anche con TRACKING (`relazione/06-supervisore.md`); 5.5 pannello «Controllo» nella dashboard, provato nel browser con un registro finto. Corretto un difetto della dashboard: il cursore del servo riscriveva il file dei comandi e poteva cancellare un comando non ancora letto dal ponte, anche un'emergenza. 160 test Python superati.
+
+**Relazione:** sezione 2.9 (supporto stampato), 5.7–5.8 (gioco nel gemello, filtro, profili), capitolo 6 (supervisore).
+
+**Non fatto:** nessuna prova al banco, nessun acquisto, nessun firmware nuovo caricato. M4 resta non dichiarata.
+
+**Ore di Gabriele:** invio del CAD; nessuna ora al banco registrata.

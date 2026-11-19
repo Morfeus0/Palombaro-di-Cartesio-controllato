@@ -17,11 +17,13 @@ import argparse
 import json
 import logging
 import sys
+import threading
 import time
 from datetime import date
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 from pathlib import Path
 
+from pannello import manda_comando, prepara_comando, riga_esperimento
 from registro import analizza_riga, scrivi_comando, valida_angolo
 
 RADICE = Path(__file__).resolve().parents[2]
@@ -35,6 +37,7 @@ FILE_STATICI = {  # solo questi file si possono chiedere: niente percorsi arbitr
     "/app.js": ("app.js", "text/javascript; charset=utf-8"),
     "/grafico.js": ("grafico.js", "text/javascript; charset=utf-8"),
     "/telecamera.js": ("telecamera.js", "text/javascript; charset=utf-8"),
+    "/pannello.js": ("pannello.js", "text/javascript; charset=utf-8"),
 }
 IMMAGINI_TELECAMERA = {"/api/telecamera/anteprima.jpg": "anteprima.jpg", "/api/telecamera/rosso.jpg": "rosso.jpg"}
 FILE_RIFERIMENTO = RADICE / "pc" / "config" / "postazione_riferimento.jpg"
@@ -44,6 +47,8 @@ LUNGHEZZA_MAX_CORPO = 300
 CONFIG = {"angoloMin": 36, "angoloMax": 146, "angoloCentro": 86}
 STORIA_BYTE = 600_000  # circa 2 minuti di registro a 50 letture al secondo
 PERIODO_LOTTO_S = 0.1
+# Cursore del servo e pannello (5.5) scrivono lo stesso file dei comandi: una scrittura alla volta.
+SCRITTURA_COMANDI = threading.Lock()
 CSP = (
     "default-src 'self'; style-src 'self' https://fonts.googleapis.com; "
     "font-src https://fonts.gstatic.com; connect-src 'self'; img-src 'self' data:; "
@@ -139,6 +144,12 @@ class Gestore(BaseHTTPRequestHandler):
         if self.path == "/api/telecamera/comando":
             self._comando_telecamera()
             return
+        if self.path == "/api/protocollo":
+            self._comando_protocollo()
+            return
+        if self.path == "/api/esperimento":
+            self._comando_esperimento()
+            return
         if self.path != "/api/servo":
             self._json(404, {"errore": "pagina non trovata"})
             return
@@ -148,13 +159,48 @@ class Gestore(BaseHTTPRequestHandler):
             self._json(400, {"errore": str(errore)})
             return
         try:
-            scrivi_comando(self.comandi, angolo)
+            with SCRITTURA_COMANDI:
+                scrivi_comando(self.comandi, angolo)
         except OSError as errore:
             log.error("comando %s non scritto in %s: %s", angolo, self.comandi, errore)
             self._json(500, {"errore": "impossibile scrivere il file dei comandi"})
             return
         log.info("comando servo: %s", angolo)
         self._json(200, {"angolo": angolo})
+
+    def _comando_protocollo(self) -> None:
+        """5.5: un comando del protocollo (stato, quota voluta, guadagni, emergenza) verso il ponte."""
+        try:
+            riga = prepara_comando(self._corpo_json().get("comando"))
+        except (ValueError, json.JSONDecodeError, AttributeError) as errore:
+            self._json(400, {"errore": str(errore)})
+            return
+        try:
+            with SCRITTURA_COMANDI:
+                manda_comando(self.comandi.parent, riga)
+        except OSError as errore:
+            log.error("comando %s non scritto in %s: %s", riga, self.comandi.parent, errore)
+            self._json(500, {"errore": "impossibile scrivere il file dei comandi"})
+            return
+        log.info("comando protocollo: %s", riga)
+        self._json(200, {"riga": riga})
+
+    def _comando_esperimento(self) -> None:
+        """5.5: avvia o ferma il file dell'esperimento del ponte."""
+        try:
+            corpo = self._corpo_json()
+            riga = riga_esperimento(corpo.get("azione"), corpo.get("nome"), corpo.get("durata"), corpo.get("note", ""))
+        except (ValueError, json.JSONDecodeError, AttributeError) as errore:
+            self._json(400, {"errore": str(errore)})
+            return
+        try:
+            postazione.scrivi_atomico(self.comandi.with_name("esperimento.txt"), (riga + "\n").encode("utf-8"))
+        except OSError as errore:
+            log.error("esperimento non scritto: %s", errore)
+            self._json(500, {"errore": "impossibile scrivere il file dell'esperimento"})
+            return
+        log.info("esperimento: %s", riga)
+        self._json(200, {"riga": riga})
 
     def _comando_telecamera(self) -> None:
         try:

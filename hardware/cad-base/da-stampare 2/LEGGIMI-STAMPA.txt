@@ -1,0 +1,33 @@
+SUPPORTO SERVO-SIRINGA DEL PALOMBARO - FILE PER LA STAMPA
+
+6 file STL in MILLIMETRI, da importare a SCALA 100 %.
+Sono già orientati per la stampa: non vanno ruotati.
+
+PEZZI (uno per file)
+  palombaro-base-siringa.stl       149,5 x 86 mm sul piatto, alto 73 mm
+  palombaro-base-servo.stl         141,5 x 86 mm sul piatto, alto 38,5 mm
+  palombaro-piastra-giunzione.stl  40 x 60 mm sul piatto, alta 8,5 mm
+  palombaro-coperchio-sella-1.stl  15 x 48 mm sul piatto, alto 14 mm
+  palombaro-coperchio-sella-2.stl  15 x 48 mm sul piatto, alto 14 mm
+  palombaro-fermo-flangia.stl      30,5 x 56 mm sul piatto, alto 5 mm
+
+Ogni pezzo sta nel piatto circolare da 200 mm: il più ingombrante
+arriva a 84 mm dal centro. Le due basi vanno su piatti separati.
+
+IMPOSTAZIONI PROPOSTE
+  - PLA, ugello 0,4 mm, strato 0,2 mm
+  - 3 pareti, 5 strati pieni sopra e sotto, riempimento 20 %
+  - NESSUN SUPPORTO: i pezzi sono disegnati per stamparsi senza
+  - brim di 5 mm sulle due basi, perché gli spigoli non si sollevino
+
+DA CONTROLLARE NELL'ANTEPRIMA DELLO SLICER
+  - Le cave dei dadi sono fessure larghe 5,8 mm e alte 3,2 mm:
+    devono restare vuote, senza supporti dentro.
+  - I fori passanti per le viti M3 sono da 3,4 mm.
+  - I quattro fori in cima ai pilastrini del servo sono volutamente da 2,6 mm:
+    le viti vi si filettano da sole. Non allargarli.
+  - Sotto le due basi ci sono quattro incassi esagonali profondi 4 mm:
+    il loro soffitto è un piccolo ponte di 6 mm.
+
+anteprima-assieme.png mostra il montaggio completo.
+Servo, siringa e viti non fanno parte degli STL.

@@ -1,0 +1,884 @@
+{
+  "revisione": "02",
+  "stato": "BOZZA DIMENSIONALE — NON INVIARE ANCORA IN STAMPA",
+  "quote": {
+    "revisione": "02",
+    "servo": {
+      "lunghezza": 40,
+      "larghezza": 20,
+      "altezza": 40,
+      "alette": 53,
+      "quota_alette": 26
+    },
+    "siringa": {
+      "diametro": 21,
+      "lunghezza": 105,
+      "flangia_larga": 37.5,
+      "flangia_alta": 25,
+      "flangia_spessa": 2,
+      "disco": 28,
+      "corsa": 70,
+      "asta_zero": 16
+    },
+    "cinematica": {
+      "raggio": 35,
+      "biella": 110,
+      "centro": 86,
+      "minimo": 36,
+      "massimo": 146,
+      "ml_centro": 11,
+      "ml_massimi": 20,
+      "allineata_al_centro": true
+    },
+    "base": {
+      "spessore": 8,
+      "larghezza": 86,
+      "y_centro": 17,
+      "asse_siringa_y": 12,
+      "margine": 10
+    },
+    "montaggio": {
+      "m3_passante": 4,
+      "margine_sede_totale": 1,
+      "dado_cava": 6.8,
+      "dado_altezza": 3.5,
+      "flangia_piastra": 5,
+      "sella_spessore": 14,
+      "sella_larga": 48
+    },
+    "stampa": {
+      "diametro": 200,
+      "margine_radiale": 5,
+      "altezza": 400
+    },
+    "ipotesi": {
+      "asse_servo_da_estremita": 10,
+      "alberino_sporge": 4,
+      "piano_braccio_sopra_alberino": 2,
+      "interasse_fori_lungo": 49,
+      "interasse_fori_corto": 10,
+      "asola_escursione": 2,
+      "spessore_alette_servo": 2,
+      "perno_da_disco": 3,
+      "perno_fuori_asse": 4,
+      "disassamento_biella": 16,
+      "cono_lungo": 12,
+      "disco_spessore": 3,
+      "stelo_largo": 14,
+      "stelo_lungo": 106,
+      "cavo_largo": 8,
+      "cavo_alto": 6,
+      "tacca_disco_larga": 4,
+      "tacca_disco_profonda": 12,
+      "rialzo_biella_su_braccio": 3,
+      "distacco_biella_nervatura": 2,
+      "gamba_gancio": 7
+    }
+  },
+  "coordinate": {
+    "z": 55,
+    "zBraccio": 54,
+    "zBiella": 57,
+    "yPerno": 16,
+    "ySiringa": 12,
+    "flangiaX": -161.5,
+    "servoX": -10,
+    "servoY": -19,
+    "baseY": -2,
+    "xMin": -277,
+    "xMax": 20,
+    "giuntoX": -128.5
+  },
+  "pezzi": [
+    {
+      "nome": "base-servo",
+      "ingombro_stampa_mm": [
+        149,
+        86,
+        34
+      ],
+      "raggio_stampa_mm": 86.01889327351289,
+      "volume_mm3": 115096.51579493009,
+      "mesh_verificata": true,
+      "triangoli": 8480,
+      "spigoli": 12720,
+      "gusci": 1
+    },
+    {
+      "nome": "base-siringa",
+      "ingombro_stampa_mm": [
+        156.5,
+        86,
+        71.5
+      ],
+      "raggio_stampa_mm": 89.28640714016888,
+      "volume_mm3": 171686.58020150542,
+      "mesh_verificata": true,
+      "triangoli": 10874,
+      "spigoli": 16311,
+      "gusci": 1
+    },
+    {
+      "nome": "piastra-giunzione",
+      "ingombro_stampa_mm": [
+        40,
+        66,
+        6
+      ],
+      "raggio_stampa_mm": 38.58756276314948,
+      "volume_mm3": 15539.645828534465,
+      "mesh_verificata": true,
+      "triangoli": 1824,
+      "spigoli": 2736,
+      "gusci": 1
+    },
+    {
+      "nome": "coperchio-sella-1",
+      "ingombro_stampa_mm": [
+        14,
+        48,
+        17.5
+      ],
+      "raggio_stampa_mm": 25,
+      "volume_mm3": 7065.983499946111,
+      "mesh_verificata": true,
+      "triangoli": 1216,
+      "spigoli": 1824,
+      "gusci": 1
+    },
+    {
+      "nome": "coperchio-sella-2",
+      "ingombro_stampa_mm": [
+        14,
+        48,
+        17.5
+      ],
+      "raggio_stampa_mm": 25,
+      "volume_mm3": 7065.983499946154,
+      "mesh_verificata": true,
+      "triangoli": 1216,
+      "spigoli": 1824,
+      "gusci": 1
+    },
+    {
+      "nome": "fermo-flangia",
+      "ingombro_stampa_mm": [
+        33,
+        56,
+        5
+      ],
+      "raggio_stampa_mm": 32.5,
+      "volume_mm3": 6871.145275280156,
+      "mesh_verificata": true,
+      "triangoli": 2558,
+      "spigoli": 3837,
+      "gusci": 1
+    }
+  ],
+  "cinematica": [
+    {
+      "comando": 36,
+      "corsa_mm": 66.02436892009965,
+      "ml": 18.864105405742755,
+      "obliquita_gradi": -6.526254733195063
+    },
+    {
+      "comando": 37,
+      "corsa_mm": 65.57550960398274,
+      "ml": 18.73585988685221,
+      "obliquita_gradi": -6.2827908396813585
+    },
+    {
+      "comando": 38,
+      "corsa_mm": 65.12134155049397,
+      "ml": 18.60609758585542,
+      "obliquita_gradi": -6.043104352971036
+    },
+    {
+      "comando": 39,
+      "corsa_mm": 64.66191079849642,
+      "ml": 18.474831656713263,
+      "obliquita_gradi": -5.8072589273660125
+    },
+    {
+      "comando": 40,
+      "corsa_mm": 64.19726500118213,
+      "ml": 18.342075714623466,
+      "obliquita_gradi": -5.575317444521749
+    },
+    {
+      "comando": 41,
+      "corsa_mm": 63.727453501779365,
+      "ml": 18.20784385765125,
+      "obliquita_gradi": -5.347341992492664
+    },
+    {
+      "comando": 42,
+      "corsa_mm": 63.25252740913896,
+      "ml": 18.07215068832542,
+      "obliquita_gradi": -5.123393844173706
+    },
+    {
+      "comando": 43,
+      "corsa_mm": 62.77253967310938,
+      "ml": 17.935011335174107,
+      "obliquita_gradi": -4.903533435168456
+    },
+    {
+      "comando": 44,
+      "corsa_mm": 62.28754515960625,
+      "ml": 17.796441474173214,
+      "obliquita_gradi": -4.687820341115851
+    },
+    {
+      "comando": 45,
+      "corsa_mm": 61.79760072527809,
+      "ml": 17.656457350079453,
+      "obliquita_gradi": -4.476313254509657
+    },
+    {
+      "comando": 46,
+      "corsa_mm": 61.302765291666105,
+      "ml": 17.515075797618888,
+      "obliquita_gradi": -4.269069961046662
+    },
+    {
+      "comando": 47,
+      "corsa_mm": 60.80309991875238,
+      "ml": 17.37231426250068,
+      "obliquita_gradi": -4.066147315541417
+    },
+    {
+      "comando": 48,
+      "corsa_mm": 60.29866787778681,
+      "ml": 17.228190822224803,
+      "obliquita_gradi": -3.8676012174471417
+    },
+    {
+      "comando": 49,
+      "corsa_mm": 59.789534723279786,
+      "ml": 17.082724206651367,
+      "obliquita_gradi": -3.673486586024171
+    },
+    {
+      "comando": 50,
+      "corsa_mm": 59.27576836404438,
+      "ml": 16.935933818298395,
+      "obliquita_gradi": -3.483857335199011
+    },
+    {
+      "comando": 51,
+      "corsa_mm": 58.75743913316809,
+      "ml": 16.78783975233374,
+      "obliquita_gradi": -3.298766348158717
+    },
+    {
+      "comando": 52,
+      "corsa_mm": 58.23461985679191,
+      "ml": 16.63846281622626,
+      "obliquita_gradi": -3.1182654517267903
+    },
+    {
+      "comando": 53,
+      "corsa_mm": 57.70738592157086,
+      "ml": 16.487824549020246,
+      "obliquita_gradi": -2.9424053905683323
+    },
+    {
+      "comando": 54,
+      "corsa_mm": 57.17581534068833,
+      "ml": 16.335947240196667,
+      "obliquita_gradi": -2.771235801273498
+    },
+    {
+      "comando": 55,
+      "corsa_mm": 56.6399888182936,
+      "ml": 16.182853948083885,
+      "obliquita_gradi": -2.6048051863696124
+    },
+    {
+      "comando": 56,
+      "corsa_mm": 56.09998981223033,
+      "ml": 16.028568517780094,
+      "obliquita_gradi": -2.443160888313345
+    },
+    {
+      "comando": 57,
+      "corsa_mm": 55.55590459492194,
+      "ml": 15.873115598549125,
+      "obliquita_gradi": -2.286349063515595
+    },
+    {
+      "comando": 58,
+      "corsa_mm": 55.00782231227794,
+      "ml": 15.71652066065084,
+      "obliquita_gradi": -2.1344146564523774
+    },
+    {
+      "comando": 59,
+      "corsa_mm": 54.45583504048531,
+      "ml": 15.558810011567232,
+      "obliquita_gradi": -1.9874013739159628
+    },
+    {
+      "comando": 60,
+      "corsa_mm": 53.90003784054687,
+      "ml": 15.40001081158482,
+      "obliquita_gradi": -1.8453516594610695
+    },
+    {
+      "comando": 61,
+      "corsa_mm": 53.340528810429205,
+      "ml": 15.24015108869406,
+      "obliquita_gradi": -1.7083066681014034
+    },
+    {
+      "comando": 62,
+      "corsa_mm": 52.777409134682586,
+      "ml": 15.079259752766454,
+      "obliquita_gradi": -1.576306241312102
+    },
+    {
+      "comando": 63,
+      "corsa_mm": 52.210783131395274,
+      "ml": 14.917366608970077,
+      "obliquita_gradi": -1.4493888823939016
+    },
+    {
+      "comando": 64,
+      "corsa_mm": 51.64075829634615,
+      "ml": 14.754502370384614,
+      "obliquita_gradi": -1.3275917322547075
+    },
+    {
+      "comando": 65,
+      "corsa_mm": 51.06744534422032,
+      "ml": 14.590698669777233,
+      "obliquita_gradi": -1.2109505456641454
+    },
+    {
+      "comando": 66,
+      "corsa_mm": 50.49095824675405,
+      "ml": 14.425988070501157,
+      "obliquita_gradi": -1.099499668036238
+    },
+    {
+      "comando": 67,
+      "corsa_mm": 49.911414267678026,
+      "ml": 14.260404076479436,
+      "obliquita_gradi": -0.9932720127948488
+    },
+    {
+      "comando": 68,
+      "corsa_mm": 49.328933994330214,
+      "ml": 14.093981141237204,
+      "obliquita_gradi": -0.892299039375773
+    },
+    {
+      "comando": 69,
+      "corsa_mm": 48.74364136581207,
+      "ml": 13.926754675946304,
+      "obliquita_gradi": -0.7966107319184506
+    },
+    {
+      "comando": 70,
+      "corsa_mm": 48.15566369756654,
+      "ml": 13.758761056447582,
+      "obliquita_gradi": -0.7062355786991251
+    },
+    {
+      "comando": 71,
+      "corsa_mm": 47.56513170225902,
+      "ml": 13.590037629216864,
+      "obliquita_gradi": -0.6212005523560402
+    },
+    {
+      "comando": 72,
+      "corsa_mm": 46.97217950684771,
+      "ml": 13.420622716242203,
+      "obliquita_gradi": -0.541531090955733
+    },
+    {
+      "comando": 73,
+      "corsa_mm": 46.376944665733674,
+      "ml": 13.25055561878105,
+      "obliquita_gradi": -0.4672510799478806
+    },
+    {
+      "comando": 74,
+      "corsa_mm": 45.77956816988751,
+      "ml": 13.07987661996786,
+      "obliquita_gradi": -0.398382835054233
+    },
+    {
+      "comando": 75,
+      "corsa_mm": 45.180194451853296,
+      "ml": 12.9086269862438,
+      "obliquita_gradi": -0.33494708613521434
+    },
+    {
+      "comando": 76,
+      "corsa_mm": 44.57897138653854,
+      "ml": 12.73684896758244,
+      "obliquita_gradi": -0.27696296207561505
+    },
+    {
+      "comando": 77,
+      "corsa_mm": 43.97605028770377,
+      "ml": 12.564585796486792,
+      "obliquita_gradi": -0.22444797672832112
+    },
+    {
+      "comando": 78,
+      "corsa_mm": 43.3715859000727,
+      "ml": 12.391881685735058,
+      "obliquita_gradi": -0.1774180159526872
+    },
+    {
+      "comando": 79,
+      "corsa_mm": 42.765736386991605,
+      "ml": 12.218781824854744,
+      "obliquita_gradi": -0.13588732578140283
+    },
+    {
+      "comando": 80,
+      "corsa_mm": 42.158663313572916,
+      "ml": 12.045332375306547,
+      "obliquita_gradi": -0.09986850174695512
+    },
+    {
+      "comando": 81,
+      "corsa_mm": 41.550531625266686,
+      "ml": 11.87158046436191,
+      "obliquita_gradi": -0.06937247939583766
+    },
+    {
+      "comando": 82,
+      "corsa_mm": 40.94150962181135,
+      "ml": 11.697574177660385,
+      "obliquita_gradi": -0.044408526015720685
+    },
+    {
+      "comando": 83,
+      "corsa_mm": 40.33176892652337,
+      "ml": 11.523362550435248,
+      "obliquita_gradi": -0.02498423359749952
+    },
+    {
+      "comando": 84,
+      "corsa_mm": 39.721484450893726,
+      "ml": 11.348995557398208,
+      "obliquita_gradi": -0.011105513051107593
+    },
+    {
+      "comando": 85,
+      "corsa_mm": 39.11083435446872,
+      "ml": 11.174524101276777,
+      "obliquita_gradi": -0.002776589690509513
+    },
+    {
+      "comando": 86,
+      "corsa_mm": 38.5,
+      "ml": 11,
+      "obliquita_gradi": 0
+    },
+    {
+      "comando": 87,
+      "corsa_mm": 37.88916590385888,
+      "ml": 10.825475972531109,
+      "obliquita_gradi": -0.002776589690509513
+    },
+    {
+      "comando": 88,
+      "corsa_mm": 37.27851968171866,
+      "ml": 10.651005623348189,
+      "obliquita_gradi": -0.011105513051107593
+    },
+    {
+      "comando": 89,
+      "corsa_mm": 36.6682519895173,
+      "ml": 10.476643425576373,
+      "obliquita_gradi": -0.02498423359749952
+    },
+    {
+      "comando": 90,
+      "corsa_mm": 36.05855645972258,
+      "ml": 10.30244470277788,
+      "obliquita_gradi": -0.044408526015720685
+    },
+    {
+      "comando": 91,
+      "corsa_mm": 35.44962963293061,
+      "ml": 10.128465609408746,
+      "obliquita_gradi": -0.06937247939583766
+    },
+    {
+      "comando": 92,
+      "corsa_mm": 34.84167088483717,
+      "ml": 9.954763109953477,
+      "obliquita_gradi": -0.09986850174695142
+    },
+    {
+      "comando": 93,
+      "corsa_mm": 34.23488234863129,
+      "ml": 9.781394956751797,
+      "obliquita_gradi": -0.13588732578139912
+    },
+    {
+      "comando": 94,
+      "corsa_mm": 33.62946883286813,
+      "ml": 9.60841966653375,
+      "obliquita_gradi": -0.17741801595268347
+    },
+    {
+      "comando": 95,
+      "corsa_mm": 33.025637734887596,
+      "ml": 9.43589649568217,
+      "obliquita_gradi": -0.22444797672832112
+    },
+    {
+      "comando": 96,
+      "corsa_mm": 32.423598949853414,
+      "ml": 9.263885414243832,
+      "obliquita_gradi": -0.27696296207561505
+    },
+    {
+      "comando": 97,
+      "corsa_mm": 31.823564775495157,
+      "ml": 9.092447078712901,
+      "obliquita_gradi": -0.33494708613521434
+    },
+    {
+      "comando": 98,
+      "corsa_mm": 31.225749812644366,
+      "ml": 8.921642803612675,
+      "obliquita_gradi": -0.3983828350542292
+    },
+    {
+      "comando": 99,
+      "corsa_mm": 30.630370861663124,
+      "ml": 8.751534531903749,
+      "obliquita_gradi": -0.46725107994788057
+    },
+    {
+      "comando": 100,
+      "corsa_mm": 30.037646814870953,
+      "ml": 8.582184804248843,
+      "obliquita_gradi": -0.541531090955733
+    },
+    {
+      "comando": 101,
+      "corsa_mm": 29.447798545082563,
+      "ml": 8.413656727166446,
+      "obliquita_gradi": -0.6212005523560402
+    },
+    {
+      "comando": 102,
+      "corsa_mm": 28.8610487903766,
+      "ml": 8.2460139401076,
+      "obliquita_gradi": -0.7062355786991251
+    },
+    {
+      "comando": 103,
+      "corsa_mm": 28.277622035220503,
+      "ml": 8.079320581491572,
+      "obliquita_gradi": -0.7966107319184469
+    },
+    {
+      "comando": 104,
+      "corsa_mm": 27.69774438808389,
+      "ml": 7.913641253738254,
+      "obliquita_gradi": -0.8922990393757694
+    },
+    {
+      "comando": 105,
+      "corsa_mm": 27.121643455677074,
+      "ml": 7.749040987336306,
+      "obliquita_gradi": -0.993272012794845
+    },
+    {
+      "comando": 106,
+      "corsa_mm": 26.549548213957223,
+      "ml": 7.585585203987778,
+      "obliquita_gradi": -1.0994996680362379
+    },
+    {
+      "comando": 107,
+      "corsa_mm": 25.981688876049304,
+      "ml": 7.42333967887123,
+      "obliquita_gradi": -1.2109505456641456
+    },
+    {
+      "comando": 108,
+      "corsa_mm": 25.418296757232312,
+      "ml": 7.262370502066375,
+      "obliquita_gradi": -1.3275917322547077
+    },
+    {
+      "comando": 109,
+      "corsa_mm": 24.859604137146107,
+      "ml": 7.102744039184602,
+      "obliquita_gradi": -1.4493888823938983
+    },
+    {
+      "comando": 110,
+      "corsa_mm": 24.305844119376573,
+      "ml": 6.94452689125045,
+      "obliquita_gradi": -1.5763062413120996
+    },
+    {
+      "comando": 111,
+      "corsa_mm": 23.757250488580254,
+      "ml": 6.787785853880073,
+      "obliquita_gradi": -1.7083066681014014
+    },
+    {
+      "comando": 112,
+      "corsa_mm": 23.21405756531145,
+      "ml": 6.632587875803271,
+      "obliquita_gradi": -1.8453516594610715
+    },
+    {
+      "comando": 113,
+      "corsa_mm": 22.67650005871704,
+      "ml": 6.479000016776297,
+      "obliquita_gradi": -1.9874013739159615
+    },
+    {
+      "comando": 114,
+      "corsa_mm": 22.144812917265583,
+      "ml": 6.327089404933024,
+      "obliquita_gradi": -2.1344146564523734
+    },
+    {
+      "comando": 115,
+      "corsa_mm": 21.619231177678344,
+      "ml": 6.176923193622384,
+      "obliquita_gradi": -2.286349063515593
+    },
+    {
+      "comando": 116,
+      "corsa_mm": 21.099989812230348,
+      "ml": 6.0285685177801,
+      "obliquita_gradi": -2.443160888313343
+    },
+    {
+      "comando": 117,
+      "corsa_mm": 20.58732357458979,
+      "ml": 5.882092449882796,
+      "obliquita_gradi": -2.6048051863696107
+    },
+    {
+      "comando": 118,
+      "corsa_mm": 20.081466844363973,
+      "ml": 5.7375619555325645,
+      "obliquita_gradi": -2.7712358012734977
+    },
+    {
+      "comando": 119,
+      "corsa_mm": 19.58265347051895,
+      "ml": 5.595043848719699,
+      "obliquita_gradi": -2.94240539056833
+    },
+    {
+      "comando": 120,
+      "corsa_mm": 19.09111661383963,
+      "ml": 5.454604746811324,
+      "obliquita_gradi": -3.1182654517267903
+    },
+    {
+      "comando": 121,
+      "corsa_mm": 18.607088588594877,
+      "ml": 5.316311025312822,
+      "obliquita_gradi": -3.2987663481587135
+    },
+    {
+      "comando": 122,
+      "corsa_mm": 18.130800703571254,
+      "ml": 5.180228772448929,
+      "obliquita_gradi": -3.483857335199011
+    },
+    {
+      "comando": 123,
+      "corsa_mm": 17.6624831026364,
+      "ml": 5.0464237436104,
+      "obliquita_gradi": -3.6734865860241728
+    },
+    {
+      "comando": 124,
+      "corsa_mm": 17.20236460499072,
+      "ml": 4.9149613157116345,
+      "obliquita_gradi": -3.8676012174471417
+    },
+    {
+      "comando": 125,
+      "corsa_mm": 16.750672545263768,
+      "ml": 4.785906441503934,
+      "obliquita_gradi": -4.066147315541414
+    },
+    {
+      "comando": 126,
+      "corsa_mm": 16.307632613608348,
+      "ml": 4.659323603888099,
+      "obliquita_gradi": -4.269069961046662
+    },
+    {
+      "comando": 127,
+      "corsa_mm": 15.873468695942563,
+      "ml": 4.535276770269304,
+      "obliquita_gradi": -4.47631325450966
+    },
+    {
+      "comando": 128,
+      "corsa_mm": 15.448402714486178,
+      "ml": 4.413829346996051,
+      "obliquita_gradi": -4.687820341115851
+    },
+    {
+      "comando": 129,
+      "corsa_mm": 15.032654468734478,
+      "ml": 4.2950441339241365,
+      "obliquita_gradi": -4.9035334351684545
+    },
+    {
+      "comando": 130,
+      "corsa_mm": 14.626441477009166,
+      "ml": 4.178983279145476,
+      "obliquita_gradi": -5.123393844173699
+    },
+    {
+      "comando": 131,
+      "corsa_mm": 14.229978818721037,
+      "ml": 4.065708233920296,
+      "obliquita_gradi": -5.3473419924926615
+    },
+    {
+      "comando": 132,
+      "corsa_mm": 13.843478977476536,
+      "ml": 3.9552797078504387,
+      "obliquita_gradi": -5.575317444521754
+    },
+    {
+      "comando": 133,
+      "corsa_mm": 13.467151685154477,
+      "ml": 3.8477576243298506,
+      "obliquita_gradi": -5.8072589273660125
+    },
+    {
+      "comando": 134,
+      "corsa_mm": 13.101203767076385,
+      "ml": 3.7432010763075385,
+      "obliquita_gradi": -6.043104352971034
+    },
+    {
+      "comando": 135,
+      "corsa_mm": 12.745838988388698,
+      "ml": 3.641668282396771,
+      "obliquita_gradi": -6.282790839681356
+    },
+    {
+      "comando": 136,
+      "corsa_mm": 12.401257901771203,
+      "ml": 3.543216543363201,
+      "obliquita_gradi": -6.526254733195061
+    },
+    {
+      "comando": 137,
+      "corsa_mm": 12.067657696580966,
+      "ml": 3.447902199023133,
+      "obliquita_gradi": -6.77343162688636
+    },
+    {
+      "comando": 138,
+      "corsa_mm": 11.745232049537663,
+      "ml": 3.355780585582189,
+      "obliquita_gradi": -7.02425638146972
+    },
+    {
+      "comando": 139,
+      "corsa_mm": 11.434170977050627,
+      "ml": 3.2669059934430362,
+      "obliquita_gradi": -7.278663143981199
+    },
+    {
+      "comando": 140,
+      "corsa_mm": 11.134660689284289,
+      "ml": 3.181331625509797,
+      "obliquita_gradi": -7.536585366054607
+    },
+    {
+      "comando": 141,
+      "corsa_mm": 10.846883446054363,
+      "ml": 3.0991095560155326,
+      "obliquita_gradi": -7.797955821471984
+    },
+    {
+      "comando": 142,
+      "corsa_mm": 10.57101741464217,
+      "ml": 3.020290689897763,
+      "obliquita_gradi": -8.062706622969896
+    },
+    {
+      "comando": 143,
+      "corsa_mm": 10.307236529610748,
+      "ml": 2.944924722745928,
+      "obliquita_gradi": -8.330769238284864
+    },
+    {
+      "comando": 144,
+      "corsa_mm": 10.055710354702711,
+      "ml": 2.873060101343632,
+      "obliquita_gradi": -8.60207450542343
+    },
+    {
+      "comando": 145,
+      "corsa_mm": 9.816603946894105,
+      "ml": 2.8047439848268874,
+      "obliquita_gradi": -8.876552647143868
+    },
+    {
+      "comando": 146,
+      "corsa_mm": 9.590077722677279,
+      "ml": 2.7400222064792223,
+      "obliquita_gradi": -9.154133284638734
+    }
+  ],
+  "assunzioni": {
+    "asse_servo_da_estremita": 10,
+    "alberino_sporge": 4,
+    "piano_braccio_sopra_alberino": 2,
+    "interasse_fori_lungo": 49,
+    "interasse_fori_corto": 10,
+    "asola_escursione": 2,
+    "spessore_alette_servo": 2,
+    "perno_da_disco": 3,
+    "perno_fuori_asse": 4,
+    "disassamento_biella": 16,
+    "cono_lungo": 12,
+    "disco_spessore": 3,
+    "stelo_largo": 14,
+    "stelo_lungo": 106,
+    "cavo_largo": 8,
+    "cavo_alto": 6,
+    "tacca_disco_larga": 4,
+    "tacca_disco_profonda": 12,
+    "rialzo_biella_su_braccio": 3,
+    "distacco_biella_nervatura": 2,
+    "gamba_gancio": 7
+  },
+  "collisioni": {
+    "posizioni": 111,
+    "intersezioni_calcolate": 640,
+    "tolleranza_volume_mm3": 0.01,
+    "esito": "Nessuna intersezione oltre soglia",
+    "oggetti": "Braccio, asticella con terminali e stantuffo contro supporti; asticella contro braccio e stantuffo."
+  },
+  "limiti": [
+    "Nessun collaudo meccanico o di resistenza del PLA effettuato.",
+    "Interassi delle alette, quota del braccio e posizione del perno sono ancora ipotesi di studio.",
+    "Le collisioni sono controllate ogni grado sui riferimenti semplificati; viti, dadi, tubo e geometria reale dei ganci non sono rappresentati.",
+    "Piano biella 3 mm sopra il braccio e 2 mm sopra la nervatura: ipotesi da confrontare con le pieghe L/Z reali.",
+    "Ritegni dei ganci e fissaggio rigido della prolunga del braccio ancora da definire.",
+    "Confermare gioco di montaggio totale/per lato e lunghezze della viteria M3 prima di stampare."
+  ]
+}

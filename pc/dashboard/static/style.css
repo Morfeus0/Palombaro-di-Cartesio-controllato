@@ -376,3 +376,21 @@ kbd { font-family: var(--font-numeri); font-size: 0.6875rem; padding: 0 0.3rem; 
 }
 .tc-mini-punto { width: 7px; height: 7px; border-radius: 50%; background: var(--stato-critico); }
 @media (max-width: 30rem) { .tc-mini { width: 55vw; } }
+
+/* Pannello di controllo (5.5) */
+.controllo { background: var(--pannello); border: 1px solid var(--filo); border-radius: calc(var(--raggio) * 2); padding: var(--spazio-4) var(--spazio-6) var(--spazio-6); display: grid; gap: var(--spazio-4); min-width: 0; }
+.controllo-stato { font-size: var(--t-piccolo); color: var(--inchiostro-2); }
+.controllo-stato strong { font-family: var(--font-numeri); font-weight: 600; color: var(--inchiostro); margin-left: var(--spazio-1); }
+.controllo-righe { display: grid; grid-template-columns: repeat(auto-fit, minmax(13rem, 1fr)); gap: var(--spazio-4); }
+.controllo-gruppo { display: grid; gap: var(--spazio-2); align-content: start; padding: var(--spazio-3); border: 1px solid var(--filo); border-radius: var(--raggio); background: var(--pannello-incassato); }
+.controllo-stati { grid-template-columns: repeat(2, 1fr); }
+.controllo-stati .preset-voce:nth-child(3) { border-left: 0; }
+.controllo-stati .preset-voce:nth-child(n + 3) { border-top: 1px solid var(--filo-forte); }
+.controllo-dettaglio { font-size: var(--t-piccolo); color: var(--inchiostro-2); }
+.campo { display: flex; justify-content: space-between; align-items: center; gap: var(--spazio-2); font-size: var(--t-piccolo); color: var(--inchiostro-2); }
+.campo input { width: 7.5rem; font-family: var(--font-numeri); font-size: var(--t-piccolo); padding: 0.3rem 0.45rem; border: 1px solid var(--filo-forte); border-radius: var(--raggio); background: var(--pannello); color: var(--inchiostro); }
+.campo input:focus-visible { outline: 2px solid var(--accento); outline-offset: 1px; }
+.bottone-emergenza { padding: 0.6rem; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; color: #fff; background: var(--stato-critico); border: 1px solid var(--stato-critico); border-radius: var(--raggio); }
+.bottone-emergenza:hover { filter: brightness(1.08); }
+.bottone-emergenza:active { transform: translateY(1px); }
+.controllo .grafico canvas { height: 10rem; }

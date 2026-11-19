@@ -29,7 +29,10 @@ def _da_protocollo(orario: str, tipo: str, campi: list[str]) -> dict | None:
         servo = int(campi[3])
         temperatura = int(campi[8]) / 100 if len(campi) > 8 else 0.0
         return {"tipo": "misura", "t": orario, "p": int(campi[2]) / 1000, "T": temperatura,
-                "servo": round(servo / 10) if servo >= 0 else None}
+                "servo": round(servo / 10) if servo >= 0 else None, "stato": campi[4]}
+    if tipo == "C" and len(campi) >= 5:
+        # 5.5: riga dell'anello esterno (firmware 0.2): quota misurata e quota voluta in decimi di mm → cm.
+        return {"tipo": "quota", "t": orario, "quota": int(campi[2]) / 100, "rif": int(campi[4]) / 100}
     if tipo == "X" and len(campi) == 3:
         return {"tipo": "evento", "t": orario, "testo": f"stato: {campi[0]} → {campi[1]} ({campi[2]})"}
     if tipo in ("OK", "NO", "V"):
@@ -74,6 +77,10 @@ def scrivi_comando(percorso: Path, angolo: int) -> None:
     Se arrivano due comandi prima che il registratore li legga, vince l'ultimo: per un servo che va
     comunque verso l'ultima posizione richiesta è il comportamento giusto.
     """
+    # 5.5: nello stesso file il pannello aggiunge righe del protocollo ($…): quelle non ancora lette dal ponte
+    # restano, e fra gli angoli resta solo l'ultimo.
+    vecchie = percorso.read_text(encoding="utf-8").splitlines() if percorso.exists() else []
+    tenute = [r for r in vecchie if r.strip() and not r.strip().isdigit()]
     temporaneo = percorso.with_name(percorso.name + ".tmp")
-    temporaneo.write_text(f"{angolo}\n", encoding="utf-8")
+    temporaneo.write_text("".join(r + "\n" for r in [*tenute, str(angolo)]), encoding="utf-8")
     os.replace(temporaneo, percorso)

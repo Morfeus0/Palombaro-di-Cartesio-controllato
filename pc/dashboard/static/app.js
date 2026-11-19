@@ -201,7 +201,7 @@ function preparaComandi() {
   el.cursore.addEventListener("change", () => { clearTimeout(inSospeso); invia(Number(el.cursore.value)); });
   for (const b of document.querySelectorAll(".comando .passo")) b.addEventListener("click", () => passo(Number(b.dataset.passo)));
   const fissi = { min: () => stato.config.angoloMin, centro: () => stato.config.angoloCentro, max: () => stato.config.angoloMax };
-  for (const b of document.querySelectorAll(".preset-voce")) b.addEventListener("click", () => invia(fissi[b.dataset.angolo]()));
+  for (const b of document.querySelectorAll(".comando .preset-voce")) b.addEventListener("click", () => invia(fissi[b.dataset.angolo]()));
   // Due pulsanti, stesso zero: uno vicino ai comandi, uno nelle letture.
   const azzera = () => {
     if (stato.ultima) { stato.riferimento = stato.ultima.p; mostraEsito(`Zero di Δp a ${numero(stato.riferimento, 3)} kPa.`); }

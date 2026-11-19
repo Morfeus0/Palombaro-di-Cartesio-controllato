@@ -10,6 +10,7 @@
   <link rel="stylesheet" href="/style.css">
   <script type="module" src="/app.js"></script>
   <script type="module" src="/telecamera.js"></script>
+  <script type="module" src="/pannello.js"></script>
 </head>
 <body>
   <header class="testata">
@@ -166,6 +167,70 @@
           </dl>
         </div>
         <ol class="tc-eventi" id="tc-eventi" aria-label="Eventi della telecamera"></ol>
+      </section>
+
+      <section class="controllo" aria-labelledby="titolo-controllo">
+        <div class="grafici-barra">
+          <h2 id="titolo-controllo" class="grafici-titolo">Controllo <span class="unita">firmware 0.2 · sottofase 5.5</span></h2>
+          <p class="controllo-stato">Stato <strong id="pannello-stato" class="mono">—</strong></p>
+        </div>
+
+        <div class="controllo-righe">
+          <div class="controllo-gruppo" role="group" aria-label="Stato del banco">
+            <p class="occhiello">Stato</p>
+            <div class="preset controllo-stati">
+              <button type="button" class="preset-voce voce-pannello" data-comando="M,MANUALE">Manuale</button>
+              <button type="button" class="preset-voce voce-pannello" data-comando="M,CALIBRAZIONE">Calibra</button>
+              <button type="button" class="preset-voce voce-pannello" data-comando="M,HOLD">Hold</button>
+              <button type="button" class="preset-voce voce-pannello" data-comando="M,SAFE">Safe</button>
+            </div>
+            <button type="button" class="bottone-emergenza" data-comando="E">Emergenza</button>
+          </div>
+
+          <form class="controllo-gruppo" id="form-quota">
+            <p class="occhiello">Quota voluta</p>
+            <label class="campo">cm <input id="quota-voluta" type="number" min="1" max="17" step="0.1" value="10" required></label>
+            <button type="submit" class="passo">Invia</button>
+            <p class="controllo-dettaglio">misurata <span id="quota-misurata" class="mono">—</span> cm · voluta <span id="quota-rif" class="mono">—</span> cm</p>
+          </form>
+
+          <form class="controllo-gruppo" id="form-pi">
+            <p class="occhiello">PI pressione</p>
+            <label class="campo">kp °/Pa <input name="kp" type="number" step="any" min="0" value="0.02" required></label>
+            <label class="campo">ki °/(Pa·s) <input name="ki" type="number" step="any" min="0" value="0.4" required></label>
+            <button type="submit" class="passo">Invia K,P</button>
+          </form>
+
+          <form class="controllo-gruppo" id="form-pid">
+            <p class="occhiello">PID quota</p>
+            <label class="campo">kp Pa/cm <input name="kp" type="number" step="any" min="0" value="475" required></label>
+            <label class="campo">ki Pa/(cm·s) <input name="ki" type="number" step="any" min="0" value="11.9" required></label>
+            <label class="campo">kd Pa·s/cm <input name="kd" type="number" step="any" min="0" value="400" required></label>
+            <label class="campo">N 1/s <input name="n" type="number" step="any" min="0.1" value="10" required></label>
+            <button type="submit" class="passo">Invia K,Z</button>
+          </form>
+
+          <form class="controllo-gruppo" id="form-onoff">
+            <p class="occhiello">On-Off</p>
+            <label class="campo">isteresi mm <input name="isteresi" type="number" step="any" min="0.1" value="5" required></label>
+            <label class="campo">ampiezza Pa <input name="ampiezza" type="number" step="any" min="0" value="1000" required></label>
+            <button type="submit" class="passo">Invia K,O</button>
+          </form>
+
+          <form class="controllo-gruppo" id="form-registra">
+            <p class="occhiello">Registrazione</p>
+            <label class="campo">nome <input name="nome" type="text" pattern="[a-z0-9][a-z0-9\-]{0,39}" value="prova" required></label>
+            <label class="campo">durata s <input name="durata" type="number" min="1" max="1800" step="1" value="120"></label>
+            <label class="campo">note <input name="note" type="text" maxlength="120"></label>
+            <div class="preset"><button type="submit" class="preset-voce voce-pannello">Avvia</button><button type="button" class="preset-voce voce-pannello" id="ferma-registrazione">Ferma</button></div>
+          </form>
+        </div>
+
+        <figure class="grafico">
+          <figcaption>Quota di P1 <span class="unita">cm, ultimo minuto</span></figcaption>
+          <canvas id="grafico-quota" role="img" aria-label="Quota misurata di P1 nel tempo"></canvas>
+        </figure>
+        <p class="esito" id="esito-pannello" role="status" aria-live="polite">I comandi passano dal ponte (pc/bridge.py).</p>
       </section>
 
       <section class="eventi" aria-labelledby="titolo-eventi">

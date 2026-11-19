@@ -79,3 +79,15 @@ Le grandezze misurate sono la pressione e la temperatura dell'aria sopra l'acqua
 - Misurare prima di provare: quando una prova fallisce due volte si cerca la causa con una misura (multimetro, registro, conto), non con un altro tentativo.
 - Le grandezze "di contorno" (cedimento delle pareti, tensione superficiale, meteo, temperatura) valgono quanto quelle di progetto: il margine della siringa era piccolo e ognuna bastava a farlo saltare.
 - Il punto di lavoro non è una costante del banco: il controllore dovrà ritrovarlo a ogni avvio (stato CALIBRAZIONE) e il palombaro non dovrà mai riemergere (il menisco è un'isteresi).
+
+## 2.9 Il supporto stampato (bozza, 19 novembre)
+
+**Perché.** Il 10 novembre il gioco a ogni inversione era salito a circa **22°** (550 Pa a vuoto). La ripresa del montaggio mostra tre cedimenti in serie: il corpo del servo che si solleva nonostante 5 fascette, la prolunga incollata con l'epossidica che flette, l'asticella di filo che ruota nel suo foro prima di trascinare lo stantuffo. Il professore ha offerto la stampa 3D di un componente; il progetto è stato fatto in CAD parametrico (JSCAD, `hardware/cad-base/`).
+
+**Requisiti** (da `hardware/cad-base/requisiti-e-misure.md`): servo e siringa fermi nei due versi di carico; asticella parallela allo scorrimento dello stantuffo a metà corsa; stessa corsa utile (36–146°); pezzi entro il piatto Ø200 mm, senza supporti di stampa; viteria tutta M3; montaggio smontabile senza attrezzi speciali.
+
+**Progetto.** Base di 283 × 86 mm in due moduli uniti da una piastra: il servo è verticale, appeso alle alette e arretrato di 19 mm perché l'asticella sia parallela allo scorrimento a 86°; la siringa sta in due selle a V con ponticelli, la flangia è stretta da una testata piena di 16 mm. La **trasmissione** (T01) sostituisce prolunga e asticella: braccio stampato avvitato su una squadretta originale (la dentatura sull'alberino non si stampa), biella rigida da 90,15 mm con perni a vite M3, pinza che abbraccia il disco dello stantuffo con due viti di registro che tolgono il gioco nei due versi.
+
+**Verifiche sul modello** (a ogni esportazione; un controllo fallito blocca la scrittura dei file): mesh chiuse; interferenze fra tutti i pezzi, la viteria e i componenti reali a ogni grado fra 36° e 146°; lunghezze delle viti nei giunti; tenuta agli errori di misura (ad esempio alette fra 28 e 32 mm dal fondo, cilindro fra 20,3 e 21,7 mm). La biella della T01 riproduce la corsa della base con una differenza massima di 0,13 ml e margini di 6,75 mm ai due fine corsa; l'obliquità della biella resta fra −8,6° e +2,5°.
+
+**Cosa la stampa non risolve.** Il gioco degli ingranaggi del servo resta. L'effetto reale si misura dopo il montaggio (sottofase 4.7) con la stessa prova a passi di 2° del 10 novembre, poi con i gradini di pressione della 4.4.

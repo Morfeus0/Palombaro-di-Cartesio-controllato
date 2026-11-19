@@ -1,0 +1,26 @@
+PALOMBARO - TRASMISSIONE SERVO-STANTUFFO (T01) - FILE PER LA STAMPA
+
+Tre pezzi piccoli che completano il supporto servo-siringa inviato prima.
+3 file STL in MILLIMETRI, da importare a SCALA 100 %, gia' orientati: non vanno ruotati.
+Se possibile, DUE COPIE di ciascun pezzo (sono pochi grammi): la seconda e' di scorta.
+
+PEZZI (uno per file)
+  palombaro-braccio.stl          62 x 16 mm sul piatto, alto 7 mm
+  palombaro-biella.stl           100 x 14 mm sul piatto, alta 5 mm
+  palombaro-pinza-stantuffo.stl  27 x 34 mm sul piatto, alta 41 mm
+
+IMPOSTAZIONI PROPOSTE
+  - PLA, ugello 0,4 mm, strato 0,2 mm
+  - 4 pareti, 5 strati pieni sopra e sotto, riempimento 40 %
+    (pezzi piccoli che lavorano a spinta e trazione: piu' pieni della base)
+  - NESSUN SUPPORTO
+  - brim facoltativo sulla biella (lunga e stretta)
+
+DA CONTROLLARE NELL'ANTEPRIMA DELLO SLICER
+  - Braccio: e' stampato capovolto, la tasca per la squadretta del servo
+    resta verso l'alto e deve restare vuota.
+  - Pinza: la sede del disco e l'apertura per lo stelo sono aperte verso il
+    piatto; sotto l'orecchia del perno c'e' uno svaso a 45 gradi e un foro
+    da 7 mm per la testa della vite: devono restare vuoti.
+  - Fori da 3,3-3,4 mm per i perni M3; fori da 2,6 mm (volutamente stretti)
+    per viti che si filettano da sole. Non allargarli.
