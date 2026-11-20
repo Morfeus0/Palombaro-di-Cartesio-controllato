@@ -11,13 +11,13 @@
    5. Aggiornare `sintesi`, `diario` (in cima la voce nuova), `prossimi` e `rischi`.
    Le date sono AAAA-MM-GG; `ore` è l'impegno stimato nel piano operativo e fa da peso. */
 window.PalombaroProgresso = Object.freeze({
-  aggiornato: '2026-11-10',
+  aggiornato: '2026-11-19',
   provvisorio: false, // true finché le stime non sono confrontate con il diario della sera
   consegna: '2026-12-13',
   scadenzaProf: '2026-12-31',
   oreAlGiorno: 2, // media dichiarata, tutti i giorni: base del prospetto di fine progetto
 
-  sintesi: 'Martedì al banco per circa tre ore: il nuovo programma della scheda ha tenuto il palombaro a 10 cm entro un centimetro per più di un minuto, due volte. È il criterio del traguardo M4 (livello Base), dodici giorni prima del previsto; montato anche il video del sistema completo. Tutte le regole di sicurezza provate sul banco. Trovato il limite di oggi: il motore gira a vuoto per 22 gradi a ogni cambio di verso, e per questo il controllo della pressione è più lento del previsto: la meccanica si sistema alla prossima sessione. In serata il banco simulato, rifatto con questo difetto, si comporta quasi come quello vero.',
+  sintesi: 'Niente banco questa settimana, ma un passo importante: il 19 novembre è partito per il professore il progetto al computer di un supporto stampato in 3D che tiene fermi motore e siringa, la causa principale del gioco di 22 gradi. La stampa arriva in circa una settimana. Preparati anche i tre pezzi che sostituiscono la prolunga incollata e l\'asta di filo, da mandare appena prese alcune misure. Nell\'attesa sono state anticipate le parti della fase 5 che non hanno bisogno del banco: filtro sulla misura, modello della logica di sicurezza, pannello di controllo, inseguimento al computer. Il traguardo M4 resta in sospeso finché la meccanica non è sistemata.',
 
   fasi: [
     {
@@ -82,8 +82,9 @@ window.PalombaroProgresso = Object.freeze({
         { id: '4.1', nome: 'Progetto dei controllori al computer', da: '2026-11-16', a: '2026-11-17', ore: 3, fatto: 100, nota: 'Fatta il 5 novembre, in anticipo: nel banco simulato il controllo tiene il palombaro entro un decimo di millimetro e cambia quota di 5 cm in 3 secondi; tutti i criteri della proposta sono rispettati.' },
         { id: '4.2', nome: 'Logica di sicurezza', da: '2026-11-17', a: '2026-11-18', ore: 2, fatto: 90, oreEffettive: 1.0, nota: 'Provate sul banco il 10 novembre tutte le situazioni di sicurezza che si possono provocare: palombaro nascosto, telecamera spenta, computer bloccato, errore troppo grande, emergenza. La calibrazione automatica trova la pressione giusta con 5 Pa di differenza tra due prove. Due situazioni si possono provare solo al computer: se bastano lo decide Gabriele.' },
         { id: '4.3', nome: 'Controllo On-Off', da: '2026-11-18', a: '2026-11-19', ore: 2, fatto: 100, oreEffettive: 0.17, nota: 'Chiusa il 10 novembre. Con la spinta prevista dal progetto le oscillazioni crescevano fino a far arrivare il palombaro in superficie; con una spinta più forte il palombaro sale e scende di circa 4,6 cm ogni 11 secondi, sempre uguale.' },
-        { id: '4.4', nome: 'Controllo della pressione', da: '2026-11-19', a: '2026-11-20', ore: 2, fatto: 70, oreEffettive: 0.42, nota: 'Provato il 10 novembre: tiene la pressione e compensa la perdita d\'aria, ma un salto di pressione si assesta in un secondo invece che in mezzo. La causa è misurata: il motore gira di 22 gradi a vuoto ogni volta che cambia verso (erano 10 a ottobre). Si rifà dopo aver sistemato la meccanica.' },
-        { id: '4.5', nome: 'Controllo della quota e video', da: '2026-11-20', a: '2026-11-22', ore: 3, fatto: 95, oreEffettive: 0.83, nota: 'Il 10 novembre il palombaro è stato tenuto a 10 cm entro un centimetro per 88 e 82 secondi di fila (ne servivano 60): criterio del traguardo M4 superato due volte, con il video del sistema completo. Il controllo più semplice oscilla, quello completo tiene. Manca solo la decisione di Gabriele sul traguardo.' },
+        { id: '4.4', nome: 'Controllo della pressione', da: '2026-11-19', a: '2026-11-20', ore: 2, fatto: 70, oreEffettive: 0.42, nota: 'Provato il 10 novembre: tiene la pressione e compensa la perdita d\'aria, ma un salto di pressione si assesta in un secondo invece che in mezzo. Il motore gira di 22 gradi a vuoto a ogni cambio di verso. Il 19 novembre il banco simulato ha mostrato che la lentezza viene anche dalla taratura prudente scelta quel giorno: dopo il montaggio del supporto si riprova con quella del progetto.' },
+        { id: '4.5', nome: 'Controllo della quota e video', da: '2026-11-20', a: '2026-11-22', ore: 3, fatto: 95, oreEffettive: 0.83, nota: 'Il 10 novembre il palombaro è stato tenuto a 10 cm entro un centimetro per 88 e 82 secondi di fila (ne servivano 60): criterio del traguardo M4 superato due volte, con il video del sistema completo. Il controllo più semplice oscilla, quello completo tiene. Il 12 novembre Gabriele ha deciso di dichiarare il traguardo solo dopo aver sistemato la meccanica: la prova si ripete con il supporto stampato.' },
+        { id: '4.7', nome: 'Montaggio del supporto stampato', da: '2026-11-26', a: '2026-11-28', ore: 4, fatto: 10, nota: 'Aggiunta il 19 novembre. Il progetto del supporto è dal professore per la stampa; preparati i tre pezzi della trasmissione e l\'elenco di viti e dadi. Quando arrivano i pezzi: montaggio, nuove misure del motore e della siringa, tenuta del circuito.' },
         { id: '4.6', nome: 'Confronto con la simulazione', da: '2026-11-22', a: '2026-11-22', ore: 1, fatto: 100, nota: 'Fatto il 10 novembre: rifatto il banco simulato con il gioco del motore e le condizioni misurate, ora si comporta quasi come quello vero; le due differenze rimaste dicono cosa manca nel modello. Scritto il capitolo sul controllo di base.' },
       ],
     },
@@ -94,11 +95,11 @@ window.PalombaroProgresso = Object.freeze({
       sottofasi: [
         { id: '5.1', nome: 'PID digitale completo', da: '2026-11-23', a: '2026-11-25', ore: 3, fatto: 0 },
         { id: '5.2', nome: 'Controllo in cascata', da: '2026-11-25', a: '2026-11-27', ore: 3, fatto: 0 },
-        { id: '5.3', nome: 'Filtro sulla misura della telecamera', da: '2026-11-27', a: '2026-11-28', ore: 2, fatto: 0 },
-        { id: '5.4', nome: 'Quote che cambiano nel tempo', da: '2026-11-29', a: '2026-11-30', ore: 2, fatto: 0 },
-        { id: '5.5', nome: 'Pannello di controllo', da: '2026-11-30', a: '2026-12-02', ore: 3, fatto: 0 },
+        { id: '5.3', nome: 'Filtro sulla misura della telecamera', da: '2026-11-27', a: '2026-11-28', ore: 2, fatto: 50, nota: 'Provato il 19 novembre sulle misure già registrate: stima la velocità del palombaro con un rumore cinque volte più basso e un ritardo di cinque centesimi di secondo, meno del filtro usato oggi. Da decidere dove farlo girare e da provare al banco.' },
+        { id: '5.4', nome: 'Quote che cambiano nel tempo', da: '2026-11-29', a: '2026-11-30', ore: 2, fatto: 25, nota: 'Al computer, il 19 novembre: nel banco simulato il palombaro segue un\'onda di ±3 cm con un errore medio di 2–4 mm. Manca la parte nel programma della scheda e la prova al banco.' },
+        { id: '5.5', nome: 'Pannello di controllo', da: '2026-11-30', a: '2026-12-02', ore: 3, fatto: 60, nota: 'Fatto il 19 novembre nella dashboard: modalità, emergenza, quota voluta, regolazioni, registrazione e grafico dal vivo. Provato con dati finti; manca una prova completa al banco.' },
         { id: '5.6', nome: 'Misure dei tempi reali', da: '2026-12-02', a: '2026-12-03', ore: 2, fatto: 0 },
-        { id: '5.7', nome: 'Modello della logica di supervisione', da: '2026-12-03', a: '2026-12-04', ore: 2, fatto: 0 },
+        { id: '5.7', nome: 'Modello della logica di supervisione', da: '2026-12-03', a: '2026-12-04', ore: 2, fatto: 90, nota: 'Fatto il 19 novembre: la logica di sicurezza è stata descritta con tre modelli matematici e un programma ha controllato che non si blocchi mai e che la sicurezza sia raggiungibile da ogni situazione. Da rileggere con Gabriele.' },
         { id: '5.8', nome: 'Taratura finale e video', da: '2026-12-05', a: '2026-12-06', ore: 3, fatto: 0 },
       ],
     },
@@ -137,9 +138,19 @@ window.PalombaroProgresso = Object.freeze({
     { data: '2026-11-01', fatto: 38.0 },
     { data: '2026-11-05', fatto: 56.3 },
     { data: '2026-11-09', fatto: 58.0 },
+    { data: '2026-11-10', fatto: 63.9 },
   ],
 
   diario: [
+    { data: '2026-11-19', testo: [
+      'Inviato al professore il progetto al computer del supporto che tiene fermi motore e siringa: sei pezzi in plastica da stampare, controllati al computer grado per grado perché nulla urti. La stampa arriva in circa una settimana.',
+      'Preparati altri tre pezzi da stampare che sostituiscono la prolunga incollata e l\'asta di filo, le altre due cause del gioco del motore: si mandano al professore appena prese alcune misure della squadretta del motore e dello stantuffo.',
+      'Il banco simulato dice che il gioco del motore, da solo, rallenta poco il controllo della pressione: conta di più la taratura prudente scelta il 10 novembre. Dopo il montaggio si riprova quella del progetto.',
+      'Anticipate le parti della fase 5 che non hanno bisogno del banco: un filtro che stima la velocità del palombaro con meno rumore, la verifica matematica della logica di sicurezza, il pannello di controllo nella dashboard e la prova al computer di un\'altezza che cambia nel tempo. Trovato e corretto un difetto della dashboard che poteva perdere un comando.',
+    ] },
+    { data: '2026-11-12', testo: [
+      'Deciso di dichiarare il traguardo M4 solo dopo aver sistemato la meccanica del motore. Il professore si è offerto di stampare in 3D un pezzo su misura: cominciato il progetto al computer del supporto.',
+    ] },
     { data: '2026-11-10', testo: [
       'Il palombaro, conservato fuori dall\'acqua in un vasetto, si era svuotato: la carta umida sotto la punta ha fatto da stoppino. Riempito di nuovo, ora è un po\' pesante: si compensa chiudendo il circuito più in alto.',
       'Caricato il nuovo programma della scheda. La calibrazione automatica trova da sola la pressione di equilibrio: due prove, 5 Pa di differenza, e subito dopo il palombaro tenuto a 5 cm con meno di un millimetro di errore medio.',
@@ -270,10 +281,10 @@ window.PalombaroProgresso = Object.freeze({
   ],
 
   prossimi: [
-    'Decidere se dichiarare raggiunto il traguardo M4 e se mandare il video al professore.',
-    'Sistemare la meccanica del motore (asta, braccio, fissaggio) e rimisurare il gioco; poi rifare la prova della pressione.',
-    'Decidere come conservare il palombaro tra le sessioni, ora che il vasetto lo svuota.',
-    'Dalla fase 5: inseguimento di una quota che cambia, controllo completo e analisi dei tempi.',
+    'Prendere le misure della squadretta e dello stantuffo e mandare al professore i tre pezzi della trasmissione.',
+    'Comprare viti, dadi e rondelle per il supporto e la trasmissione.',
+    'Quando arrivano i pezzi (circa il 26 novembre): montaggio, nuove misure del motore, poi di nuovo la prova della pressione e quella del traguardo M4.',
+    'Decidere come conservare il palombaro tra le sessioni.',
   ],
 
   rischi: [
@@ -282,7 +293,7 @@ window.PalombaroProgresso = Object.freeze({
     { titolo: 'La siringa cambia la pressione meno del necessario', livello: 'basso',
       nota: 'Con il motore montato la siringa dà 2,6 kPa (misurato il 23, dopo 50 ml d\'acqua in più nella bottiglia), sopra i 2,5 richiesti. Dal 1 novembre, senza la bottiglia piccola, circa 4 kPa.' },
     { titolo: 'Meccanica del motore imprecisa', livello: 'medio',
-      nota: 'Misurato il 23: la pressione torna allo stesso valore entro un centesimo di kPa, quindi il piano B (motore passo-passo con vite) non serve secondo il criterio del piano. Resta un gioco di circa 10 gradi a ogni cambio di direzione, da compensare nel programma. Il 24 sera la colla del motore ha ceduto: spingendo si solleva e la pressione non sale. Il 28 è stato fissato con due fascette e controllato: non si solleva più. Il 10 novembre il gioco è salito a 22 gradi: il controllo della pressione è più lento del previsto e il palombaro tenuto in quota ondeggia di circa 4 mm. Si sistema alla prossima sessione.' },
+      nota: 'Misurato il 23: la pressione torna allo stesso valore entro un centesimo di kPa, quindi il piano B (motore passo-passo con vite) non serve secondo il criterio del piano. Resta un gioco di circa 10 gradi a ogni cambio di direzione, da compensare nel programma. Il 24 sera la colla del motore ha ceduto: spingendo si solleva e la pressione non sale. Il 28 è stato fissato con due fascette e controllato: non si solleva più. Il 10 novembre il gioco è salito a 22 gradi: il controllo della pressione è più lento del previsto e il palombaro tenuto in quota ondeggia di circa 4 mm. Il 19 novembre inviato al professore un supporto stampato su misura; con altri tre pezzi stampati si sostituiscono anche prolunga e asta. Il gioco degli ingranaggi del motore resta: si rimisura dopo il montaggio.' },
     { titolo: 'Palombaro difficile da tarare', livello: 'medio',
       nota: 'Tarato e verificato con il motore il 23. Il suo punto di equilibrio però cambia di giorno in giorno (meteo, temperatura, aria che si scioglie nell\'acqua): il programma dovrà ritrovarlo a ogni avvio. Il 28 era molto più pesante del 23: per farlo risalire serve una pressione più bassa di quasi 2 kPa (temperatura più bassa e un po\' d\'aria sciolta nell\'acqua). Basta chiudere il circuito a un punto diverso. Il 1 novembre però non bastava più: ritarato cambiando l\'acqua al suo interno. Diventa più pesante di circa 0,2 kPa al giorno; trovare un palombaro che non vada riequilibrato è tra gli extra. Il 5 novembre, dopo quattro giorni a galla, era affondato: aveva perso molta più aria del solito. Ripescato e ritarato in mezz\'ora; da ora si conserva fuori dall\'acqua, dritto, in un vasetto chiuso con carta umida, per vedere se così la taratura resta. Il 10 novembre il vasetto lo aveva svuotato (la carta umida sotto la punta faceva da stoppino): riempito di nuovo, è un po\' pesante e si lavora chiudendo il circuito più in alto. Come conservarlo è ancora da decidere.' },
     { titolo: 'Umidità e contatti del sensore di pressione', livello: 'medio',
